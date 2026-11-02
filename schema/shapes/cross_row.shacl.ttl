@@ -1,0 +1,82 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xkos: <http://rdf-vocabulary.ddialliance.org/xkos#> .
+@prefix svv:  <http://example.org/vegvesen/vokabular/def#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# Hand-written rules that need more than one row. LinkML cannot express these;
+# they mirror the VT- rules of the Python checker (vocabtool/validate.py).
+# Unknown relation targets (VT-REF-DANGLING) are already caught by the generated
+# shapes (sh:class skos:Concept on broader / isPartOf / related).
+# Severity in SHACL belongs to the shape, so errors and warnings are two shapes.
+
+svv:CrossRowErrors
+    a sh:NodeShape ;
+    sh:targetClass skos:Concept ;
+    sh:severity sh:Violation ;
+
+    # VT-CYCLE-BROADER
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "VT-CYCLE-BROADER: cycle in skos:broader" ;
+        sh:prefixes svv:prefixes ;
+        sh:select "SELECT $this WHERE { $this skos:broader+ $this . }" ;
+    ] ;
+
+    # VT-CYCLE-PARTOF
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "VT-CYCLE-PARTOF: cycle in xkos:isPartOf" ;
+        sh:prefixes svv:prefixes ;
+        sh:select "SELECT $this WHERE { $this xkos:isPartOf+ $this . }" ;
+    ] ;
+
+    # VT-RELATED-CLASH (SKOS integrity condition S27); reported for both ends of the pair
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "VT-RELATED-CLASH: skos:related to a concept that is also on a broader/narrower path" ;
+        sh:prefixes svv:prefixes ;
+        sh:select """
+            SELECT $this ?value WHERE {
+              $this skos:related|^skos:related ?value .
+              { $this skos:broader+ ?value } UNION { ?value skos:broader+ $this }
+            }""" ;
+    ] .
+
+svv:CrossRowWarnings
+    a sh:NodeShape ;
+    sh:targetClass skos:Concept ;
+    sh:severity sh:Warning ;
+
+    # VT-T1-BROADER-NON-T1 (OWL rule O4); only targets that exist in the vocabulary
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "VT-T1-BROADER-NON-T1: Tier 1 concept has a broader concept that is not Tier 1" ;
+        sh:prefixes svv:prefixes ;
+        sh:select """
+            SELECT $this ?value WHERE {
+              $this svv:tier 1 ; skos:broader ?value .
+              ?value a skos:Concept .
+              FILTER NOT EXISTS { ?value svv:tier 1 }
+            }""" ;
+    ] ;
+
+    # VT-T1-ISOLATED; links to unknown targets do not count
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "VT-T1-ISOLATED: Tier 1 concept has no broader, isPartOf or related link (in or out)" ;
+        sh:prefixes svv:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+              $this svv:tier 1 .
+              FILTER NOT EXISTS {
+                $this skos:broader|xkos:isPartOf|skos:related|^skos:broader|^xkos:isPartOf|^skos:related ?x .
+                ?x a skos:Concept .
+              }
+            }""" ;
+    ] .
+
+svv:prefixes
+    sh:declare [ sh:prefix "skos" ; sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ] ,
+               [ sh:prefix "xkos" ; sh:namespace "http://rdf-vocabulary.ddialliance.org/xkos#"^^xsd:anyURI ] ,
+               [ sh:prefix "svv"  ; sh:namespace "http://example.org/vegvesen/vokabular/def#"^^xsd:anyURI ] .

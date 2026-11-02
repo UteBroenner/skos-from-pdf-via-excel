@@ -1,0 +1,5 @@
+openpyxl>=3.1
+linkml>=1.12
+rdflib>=7
+pyshacl>=0.30
+PyYAML>=6

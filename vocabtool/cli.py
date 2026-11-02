@@ -2,6 +2,7 @@
 
   check    <workbook.xlsx> [--out DIR]          validate; writes report (.md + .json) and graph (.html)
   migrate  <v7.xlsx> --template <v8.xlsx> --out <file.xlsx> [--kortnavn N101]
+  rdf      <v8.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
 """
 from __future__ import annotations
 
@@ -65,11 +66,53 @@ def cmd_migrate(a):
     return 0
 
 
+def cmd_rdf(a):
+    import logging
+    from collections import Counter
+    logging.disable(logging.WARNING)
+    from linkml.validator import validate as linkml_validate
+    from .linkml_rdf import (schemaview, workbook_to_data, data_to_graph, build_shapes, shacl_validate,
+                             write_yaml, SCHEMA, ROOT)
+    sv = schemaview()
+    v = read_workbook(a.workbook)
+    out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
+    stem = Path(a.workbook).stem
+    data = workbook_to_data(v, sv)
+    write_yaml(data, out / f"{stem}.yaml")
+    lres = linkml_validate(data, str(SCHEMA), "ConceptScheme").results
+    skipped = []
+    g = data_to_graph(data, sv, skipped)
+    g.serialize(out / f"{stem}.ttl", format="turtle")
+    shapes = build_shapes(ROOT / "schema" / "generated" / "svv_vokabular.shacl.ttl", sv)
+    conforms, sres = shacl_validate(g, shapes)
+    short = lambda u: u.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
+    lines = [f"# LinkML / SHACL report: {v.path.name}", "",
+             f"{len(data['concepts'])} concepts · {len(g)} triples · SHACL conforms: **{conforms}**", "",
+             f"## LinkML validation ({len(lres)} issues)", ""]
+    lines += [f"- {r.message}" for r in lres[:200]]
+    lines += ["", f"## Values not written to RDF ({len(skipped)}, not IRIs)", "", "| Concept | Slot | Value |", "| --- | --- | --- |"]
+    lines += [f"| {short(s_)} | {sl} | {val.replace('|', '/')} |" for s_, sl, val in skipped]
+    lines += ["", f"## SHACL results ({len(sres)})", "", "| Severity | Concept | Path | Value | Message |", "| --- | --- | --- | --- | --- |"]
+    for r in sorted(sres, key=lambda r: (r["severity"] != "Violation", r["focus"])):
+        lines.append(f"| {r['severity']} | {short(r['focus'])} | {short(r['path'])} | {short(r['value'])} | {r['message'][:120].replace('|', '/')} |")
+    (out / f"{stem}-shacl-report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"{v.path.name}: {len(data['concepts'])} concepts, {len(g)} triples")
+    print(f"  LinkML validation: {len(lres)} issues")
+    print(f"  not written to RDF (not IRIs): {len(skipped)}")
+    c = Counter((r["severity"], r["message"].split(":")[0][:60] if r["message"].startswith("VT-") else r["component"].replace("ConstraintComponent", "") + " " + short(r["path"])) for r in sres)
+    print(f"  SHACL conforms={conforms}, {len(sres)} results")
+    for (sev, k), n in sorted(c.items()):
+        print(f"    {sev:<10}{k:<45}{n:>5}")
+    print(f"  files: {out / (stem + '.ttl')}, {out / (stem + '.yaml')}, {out / (stem + '-shacl-report.md')}")
+    return 0 if conforms else 1
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="vocabtool")
     sub = p.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("check"); c.add_argument("workbook"); c.add_argument("--out", default="out"); c.set_defaults(fn=cmd_check)
     m = sub.add_parser("migrate"); m.add_argument("workbook"); m.add_argument("--template", required=True)
     m.add_argument("--out", required=True); m.add_argument("--kortnavn"); m.set_defaults(fn=cmd_migrate)
+    r = sub.add_parser("rdf"); r.add_argument("workbook"); r.add_argument("--out", default="out/rdf"); r.set_defaults(fn=cmd_rdf)
     a = p.parse_args(argv)
     return a.fn(a)

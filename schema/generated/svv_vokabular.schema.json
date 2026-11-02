@@ -1,0 +1,426 @@
+{
+    "$defs": {
+        "Concept": {
+            "additionalProperties": false,
+            "description": "One row in the vokabular sheet (row 23 onwards).",
+            "properties": {
+                "alt_label_en": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alt_label_nb": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alt_label_nn": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "audience": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "broader": {
+                    "items": {
+                        "format": "uri",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "close_match": {
+                    "items": {
+                        "format": "uri",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "contact_point": {
+                    "pattern": "^[^@\\s]+@vegvesen\\.no$",
+                    "type": "string"
+                },
+                "created": {
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "created_by": {
+                    "pattern": "^[^@\\s]+@vegvesen\\.no$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "data_structure_label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "definition_en": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "definition_nb": {
+                    "type": "string"
+                },
+                "definition_nn": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "editorial_note": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "end_date": {
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "exact_match": {
+                    "items": {
+                        "format": "uri",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "example": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "hidden_label": {
+                    "description": "Discouraged term, e.g. a common misspelling.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "identifier": {
+                    "description": "Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID.",
+                    "pattern": "^[A-Za-z0-9]{1,4}-\\d{4}$",
+                    "type": "string"
+                },
+                "in_scheme": {
+                    "description": "Set by the converter from the scheme URI.",
+                    "format": "uri",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "is_part_of": {
+                    "items": {
+                        "format": "uri",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "modified": {
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "modified_by": {
+                    "pattern": "^[^@\\s]+@vegvesen\\.no$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notation": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_en": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_nb": {
+                    "description": "Recommended term, bokm\u00e5l. Lowercase except acronyms (S05).",
+                    "type": "string"
+                },
+                "pref_label_nn": {
+                    "description": "Obligatory in the template, but left empty by extraction for the expert (S06).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "related": {
+                    "items": {
+                        "format": "uri",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "relation_role": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "relationship_with_source": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "scope_note": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "source": {
+                    "format": "uri",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "start_date": {
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "status": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ConceptStatus"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "subject": {
+                    "description": "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tier": {
+                    "description": "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.",
+                    "maximum": 3,
+                    "minimum": 1,
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "uri": {
+                    "description": "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).",
+                    "format": "uri",
+                    "type": "string"
+                },
+                "value_range": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "version_info": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "version_notes": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "uri",
+                "identifier",
+                "pref_label_nb",
+                "definition_nb",
+                "contact_point"
+            ],
+            "title": "Concept",
+            "type": "object"
+        },
+        "ConceptScheme": {
+            "additionalProperties": false,
+            "description": "One vocabulary = one Excel workbook (vokabular sheet, rows 1-16).",
+            "properties": {
+                "concepts": {
+                    "description": "Container slot for the data file only. Not written to RDF; the RDF writer emits skos:inScheme on each concept instead.",
+                    "items": {
+                        "$ref": "#/$defs/Concept"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "creator": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "issued": {
+                    "description": "System-generated at publication.",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "kortnavn": {
+                    "description": "Short name of the vocabulary, max 4 letters or digits (cell B12).",
+                    "pattern": "^[A-Za-z0-9]{1,4}$",
+                    "type": "string"
+                },
+                "publisher": {
+                    "description": "System-generated at publication.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uri": {
+                    "description": "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).",
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "uri",
+                "kortnavn",
+                "title"
+            ],
+            "title": "ConceptScheme",
+            "type": "object"
+        },
+        "ConceptStatus": {
+            "description": "Status values from the template's statusliste, mapped to the EU concept-status authority table.",
+            "enum": [
+                "kandidat",
+                "gjeldende",
+                "utdatert",
+                "forkastet"
+            ],
+            "title": "ConceptStatus",
+            "type": "string"
+        }
+    },
+    "$id": "http://example.org/vegvesen/vokabular/def/schema",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": false,
+    "description": "One vocabulary = one Excel workbook (vokabular sheet, rows 1-16).",
+    "metamodel_version": "1.12.0",
+    "properties": {
+        "concepts": {
+            "description": "Container slot for the data file only. Not written to RDF; the RDF writer emits skos:inScheme on each concept instead.",
+            "items": {
+                "$ref": "#/$defs/Concept"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "creator": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "issued": {
+            "description": "System-generated at publication.",
+            "format": "date",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "kortnavn": {
+            "description": "Short name of the vocabulary, max 4 letters or digits (cell B12).",
+            "pattern": "^[A-Za-z0-9]{1,4}$",
+            "type": "string"
+        },
+        "publisher": {
+            "description": "System-generated at publication.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "title": {
+            "type": "string"
+        },
+        "uri": {
+            "description": "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).",
+            "format": "uri",
+            "type": "string"
+        }
+    },
+    "required": [
+        "uri",
+        "kortnavn",
+        "title"
+    ],
+    "title": "svv_vokabular",
+    "type": "object",
+    "version": "0.1.0"
+}
+

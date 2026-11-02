@@ -4,7 +4,11 @@ Checks SKOS vocabulary workbooks (Excel template v8, also reads v7) and draws an
 interactive graph of `skos:broader`, `xkos:isPartOf` and `skos:related`.
 Code lists (`kodeverk` sheet) are ignored.
 
-Requires Python 3.10+ and `openpyxl`.
+Requires Python 3.10+. `check` and `migrate` need only `openpyxl`. The LinkML/RDF route needs `requirements.txt`:
+
+```bash
+python -m venv .venv && .venv/bin/pip install -r requirements.txt
+```
 
 ## Commands
 
@@ -25,6 +29,12 @@ python -m vocabtool migrate samples/N101-v7.xlsx --template templates/SKOS-Excel
 
 Relation targets that are not in the workbook (for example `vok:Veg`) are kept
 as written and listed, so they show up as `VT-REF-FORMAT` errors in v8.
+
+Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `schema/README.md`):
+
+```bash
+.venv/bin/python -m vocabtool rdf out/N101-v8.xlsx --out out/rdf
+```
 
 ## Conventions assumed for v8
 
@@ -71,6 +81,8 @@ vocabtool/validate.py        rules above
 vocabtool/migrate.py         v7 -> v8
 vocabtool/graph.py           graph data + page
 vocabtool/graph_template.html
+vocabtool/linkml_rdf.py       Excel -> LinkML data -> RDF, SHACL fixes
+schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   Excel template v8
 samples/                     N101 and V440 (v7)
 ```
