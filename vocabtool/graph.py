@@ -22,7 +22,11 @@ def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
     nodes, edges, dangling, seen = [], [], [], set()
     langs_seen: dict[str, int] = {}
     for c in v.concepts:
-        labels, alts = {}, {}
+        labels, alts, defs = {}, {}, {}
+        for fld, val in c.fields.items():
+            if fld.startswith("def_") and val:
+                tag = fld[4:].split("_")
+                defs["-".join([tag[0]] + [t.upper() for t in tag[1:]])] = val
         for fld, tag in label_fields(c.fields).items():
             if not c.get(fld):
                 continue
@@ -32,8 +36,8 @@ def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
                 alts[tag] = ", ".join(split_multi(c.get(fld)))
         for tag in labels:
             langs_seen[tag] = langs_seen.get(tag, 0) + 1
-        nodes.append({"id": c.key, "label": c.get("label_nb") or c.key, "tier": c.tier or "",
-                      "sheet": c.sheet, "def": c.get("def_nb") or "", "def_en": c.get("def_en") or "",
+        nodes.append({"id": c.key, "label": c.get(v.label_field) or c.key, "tier": c.tier or "",
+                      "sheet": c.sheet, "def": c.get(v.def_field) or "", "defs": defs,
                       "alt": "; ".join(f"{v} ({t})" for t, v in alts.items()),
                       "labels": labels, "alts": alts, "issues": issues.get(c.key, [])})
         for fld, typ in EDGE_TYPE.items():
@@ -49,7 +53,8 @@ def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
     return {
         "meta": {"title": v.title, "kortnavn": v.kortnavn, "version": v.version, "file": v.path.name,
                  "generated": date.today().isoformat(),
-                 "langs": sorted(langs_seen, key=lambda t: (t != "nb", t != "nn", t))},
+                 "main_lang": v.main_lang,
+                 "langs": sorted(langs_seen, key=lambda t: (t != v.main_lang, t != "nb", t != "nn", t))},
         "nodes": nodes, "edges": edges, "dangling": dangling,
     }
 

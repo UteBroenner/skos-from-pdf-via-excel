@@ -23,7 +23,8 @@ def lang_field(lang: str) -> str:
     return lang.lower().replace("-", "_")
 
 
-def extend_template(src: str | Path, dst: str | Path, langs: list[str]) -> list[str]:
+def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_langs: list[str] = (),
+                    main_lang: str | None = None) -> list[str]:
     wb = openpyxl.load_workbook(src)
     ws = wb["vokabular"]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
@@ -33,9 +34,10 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str]) -> list[
     style_src = ws.cell(hdr, 3)          # prefLabel@nb header as style model
     tech_src = ws.cell(tech, 3)
     added = []
-    for kind, prop, nb_prefix, sep in (("pref", "skos:prefLabel", "anbefalt_term", False),
-                                       ("alt", "skos:altLabel", "tillat_term", True)):
-        for lang in langs:
+    for kind, prop, nb_prefix, sep, kind_langs in (("pref", "skos:prefLabel", "anbefalt_term", False, langs),
+                                                   ("alt", "skos:altLabel", "tillat_term", True, langs),
+                                                   ("def", "skos:definition", "definisjon", False, def_langs)):
+        for lang in kind_langs:
             header = f"{prop}@{lang}" + (' (separator=",")' if sep else "")
             if normalise_header(header) in existing:
                 continue
@@ -43,13 +45,18 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str]) -> list[
             ws.cell(hdr, col).value = header
             ws.cell(tech, col).value = f"{nb_prefix}_{LANG_NAMES_NB.get(lang, lang_field(lang))}"
             ws.cell(req, col).value = "valgfri"
-            ws.cell(desc, col).value = "tillat term [0..n]" if sep else f"anbefalt term ({lang}), maks én"
+            ws.cell(desc, col).value = ("tillat term [0..n]" if sep else f"definisjon ({lang})" if kind == "def"
+                                        else f"anbefalt term ({lang}), maks én")
             for r, src_cell in ((hdr, style_src), (tech, tech_src)):
                 ws.cell(r, col)._style = copy.copy(src_cell._style)
             ws.column_dimensions[letter].width = ws.column_dimensions["C"].width or 22
             added.append(f"{letter}: {header}")
             col += 1
     last = get_column_letter(col - 1)
+    # main language row (scheme metadata, the empty row above the requirement row)
+    ws.cell(req - 1, 1).value = "hovedspråk"
+    ws.cell(req - 1, 2).value = main_lang or "nb"
+    ws.cell(req - 1, 4).value = "språk der alle begreper må ha anbefalt term og definisjon (BCP 47, f.eks. nb, en-US)"
     # extend the change hash (TEXTJOIN over A, C:AM) with the new columns
     for r in range(tech + 1, ws.max_row + 1):
         for c in ws[r]:

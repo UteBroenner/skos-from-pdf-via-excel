@@ -63,6 +63,8 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
         
       Concept : definition_en
         
+      Concept : definition_en_us
+        
       Concept : definition_nb
         
       Concept : definition_nn
@@ -177,11 +179,11 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | ---  | --- | --- | --- |
 | [uri](uri.md) | 1 <br/> [uri](uri.md) | Concept or scheme URI | direct |
 | [identifier](identifier.md) | 1 <br/> [String](String.md) | Internal ID <kortnavn>-NNNN | direct |
-| [pref_label_nb](pref_label_nb.md) | 1 <br/> [String](String.md) | Recommended term, bokmål | direct |
+| [pref_label_nb](pref_label_nb.md) | 0..1 <br/> [String](String.md) | Recommended term, bokmål | direct |
 | [pref_label_en](pref_label_en.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [pref_label_nn](pref_label_nn.md) | 0..1 <br/> [String](String.md) | Obligatory in the template, but left empty by extraction for the expert (S06) | direct |
 | [notation](notation.md) | 0..1 <br/> [String](String.md) |  | direct |
-| [definition_nb](definition_nb.md) | 1 <br/> [String](String.md) |  | direct |
+| [definition_nb](definition_nb.md) | 0..1 <br/> [String](String.md) | Required when the main language is nb (SHACL rule) | direct |
 | [definition_en](definition_en.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [definition_nn](definition_nn.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [alt_label_nb](alt_label_nb.md) | * <br/> [String](String.md) |  | direct |
@@ -222,6 +224,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [alt_label_en_gb](alt_label_en_gb.md) | * <br/> [String](String.md) |  | direct |
 | [alt_label_de](alt_label_de.md) | * <br/> [String](String.md) |  | direct |
 | [alt_label_es](alt_label_es.md) | * <br/> [String](String.md) |  | direct |
+| [definition_en_us](definition_en_us.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [in_scheme](in_scheme.md) | 0..1 <br/> [uri](uri.md) | Set by the converter from the scheme URI | direct |
 
 
@@ -333,6 +336,7 @@ slots:
 - alt_label_en_gb
 - alt_label_de
 - alt_label_es
+- definition_en_us
 - in_scheme
 class_uri: skos:Concept
 
@@ -401,7 +405,8 @@ attributes:
       requirement:
         tag: requirement
         value: obligatorisk
-    description: Recommended term, bokmål. Lowercase except acronyms (S05).
+    description: Recommended term, bokmål. Lowercase except acronyms (S05). Required
+      when the main language is nb (SHACL rule).
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: nb
     rank: 1000
@@ -410,7 +415,6 @@ attributes:
     domain_of:
     - Concept
     range: string
-    required: true
   pref_label_en:
     name: pref_label_en
     annotations:
@@ -484,6 +488,7 @@ attributes:
       requirement:
         tag: requirement
         value: obligatorisk
+    description: Required when the main language is nb (SHACL rule).
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: nb
     rank: 1000
@@ -492,7 +497,6 @@ attributes:
     domain_of:
     - Concept
     range: string
-    required: true
   definition_en:
     name: definition_en
     annotations:
@@ -1339,6 +1343,29 @@ attributes:
     - Concept
     range: string
     multivalued: true
+  definition_en_us:
+    name: definition_en_us
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AX
+      excel_name:
+        tag: excel_name
+        value: definisjon_engelsk_us
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: en-US
+    rank: 1000
+    slot_uri: skos:definition
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
   in_scheme:
     name: in_scheme
     description: Set by the converter from the scheme URI.

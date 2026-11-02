@@ -1,14 +1,16 @@
 # Heklemasker (HEKL): test dataset
 
-Multilingual vocabulary of crochet stitches and stitch patterns in nb, en-US, en-GB, de and es (Spain).
+Multilingual vocabulary of crochet stitches and stitch patterns. **Main language: en-US** (`hovedspråk`).
+Other languages are nb, en-GB, de and es (Spain), and definitions are in en-US and nb.
 
 - HEKL-0001 to 0036 are basic and special stitches.
 - HEKL-0037 to 0060 are stitches and 14 stitch patterns from
   [The Unraveled Mitten, 2022 Stash Busting Crochet Along](https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/),
   which uses US terms. Each stitch is linked to a pattern with `xkos:isPartOf` only if the pattern instructions name it.
-  Pattern names keep the designer's English names, and their definitions are paraphrases marked `[omskrivning]`.
+  Pattern names are the designer's English names. Their definitions are paraphrases marked `[omskrivning]`.
+  nb, de and es names are missing (`[mangler]`).
 It was drafted with Claude and needs expert review. Uncertain terms are marked `[usikker]`
-in `skos:editorialNote` and missing ones `[mangler]`. nn labels are left empty on purpose.
+in `skos:editorialNote` and missing ones `[mangler]`. nn is not used.
 
 The dataset tests these things:
 

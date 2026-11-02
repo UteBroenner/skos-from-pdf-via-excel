@@ -41,6 +41,8 @@ URI: [skos:ConceptScheme](http://www.w3.org/2004/02/skos/core#ConceptScheme)
         
       ConceptScheme : kortnavn
         
+      ConceptScheme : main_language
+        
       ConceptScheme : publisher
         
       ConceptScheme : title
@@ -70,6 +72,7 @@ URI: [skos:ConceptScheme](http://www.w3.org/2004/02/skos/core#ConceptScheme)
 | [uri](uri.md) | 1 <br/> [uri](uri.md) | Concept or scheme URI | direct |
 | [kortnavn](kortnavn.md) | 1 <br/> [String](String.md) | Short name of the vocabulary, max 4 letters or digits (cell B12) | direct |
 | [title](title.md) | 1 <br/> [String](String.md) |  | direct |
+| [main_language](main_language.md) | 0..1 <br/> [String](String.md) | BCP 47 tag of the language in which every concept must have a prefLabel and a... | direct |
 | [creator](creator.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [publisher](publisher.md) | 0..1 <br/> [String](String.md) | System-generated at publication | direct |
 | [issued](issued.md) | 0..1 <br/> [Date](Date.md) | System-generated at publication | direct |
@@ -130,6 +133,7 @@ slots:
 - uri
 - kortnavn
 - title
+- main_language
 - creator
 - publisher
 - issued
@@ -199,6 +203,21 @@ attributes:
     - ConceptScheme
     range: string
     required: true
+  main_language:
+    name: main_language
+    annotations:
+      excel_label:
+        tag: excel_label
+        value: hovedspråk
+    description: BCP 47 tag of the language in which every concept must have a prefLabel
+      and a definition (scheme row "hovedspråk"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl).
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    rank: 1000
+    slot_uri: svv:mainLanguage
+    owner: ConceptScheme
+    domain_of:
+    - ConceptScheme
+    range: string
   creator:
     name: creator
     annotations:

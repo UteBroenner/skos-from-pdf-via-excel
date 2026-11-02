@@ -41,6 +41,7 @@ classes:
       - uri
       - kortnavn
       - title
+      - main_language
       - creator
       - publisher
       - issued
@@ -97,6 +98,7 @@ classes:
       - alt_label_en_gb
       - alt_label_de
       - alt_label_es
+      - definition_en_us
       - in_scheme
 
 slots:
@@ -118,6 +120,12 @@ slots:
     in_language: nb
     required: true
     annotations: {excel_cell: B13}
+  main_language:
+    slot_uri: svv:mainLanguage
+    description: >-
+      BCP 47 tag of the language in which every concept must have a prefLabel and a definition
+      (scheme row "hovedspråk"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl).
+    annotations: {excel_label: hovedspråk}
   creator:
     slot_uri: dct:creator
     annotations: {excel_cell: B14}
@@ -154,8 +162,7 @@ slots:
   pref_label_nb:
     slot_uri: skos:prefLabel
     in_language: nb
-    required: true
-    description: Recommended term, bokmål. Lowercase except acronyms (S05).
+    description: Recommended term, bokmål. Lowercase except acronyms (S05). Required when the main language is nb (SHACL rule).
     annotations: {excel_column: C, excel_name: anbefalt_term_bokmål, requirement: obligatorisk}
   pref_label_en:
     slot_uri: skos:prefLabel
@@ -172,7 +179,7 @@ slots:
   definition_nb:
     slot_uri: skos:definition
     in_language: nb
-    required: true
+    description: Required when the main language is nb (SHACL rule).
     annotations: {excel_column: G, excel_name: definisjon_bokmål, requirement: obligatorisk}
   definition_en:
     slot_uri: skos:definition
@@ -240,6 +247,10 @@ slots:
     in_language: es
     multivalued: true
     annotations: {excel_column: AW, excel_name: tillat_term_spansk, requirement: valgfri, template: v8-lang-ext, separator: ","}
+  definition_en_us:
+    slot_uri: skos:definition
+    in_language: en-US
+    annotations: {excel_column: AX, excel_name: definisjon_engelsk_us, requirement: valgfri, template: v8-lang-ext}
 
   # ---------- documentation ----------
   audience:

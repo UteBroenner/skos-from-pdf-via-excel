@@ -49,6 +49,13 @@ Each item below was tested here. None of it is assumed from documentation.
 Negative test: a hand-made graph with duplicate nb labels, a German definition, a broader cycle,
 a bad ID, a non-vegvesen e-mail, status as text and tier 7 was checked, and every one of these errors was reported.
 
+## Main language
+
+`ConceptScheme.main_language` (`svv:mainLanguage`, Excel row `hovedspråk`) names the language in which every
+concept must have a prefLabel and a definition. LinkML cannot make "required" depend on another value, so
+`pref_label_nb` / `definition_nb` are no longer `required`. The rule is the SHACL shape
+`svv:MainLanguageShape` instead, which defaults to nb when the scheme declares no main language.
+
 ## Open modelling questions
 
 1. **exactMatch / closeMatch hold text, not IRIs** (N101: 228 values, e.g. `IFC4.3: IfcPavement`, `NS-EN 1317-7`).

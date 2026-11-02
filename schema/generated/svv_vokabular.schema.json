@@ -123,8 +123,18 @@
                         "null"
                     ]
                 },
+                "definition_en_us": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "definition_nb": {
-                    "type": "string"
+                    "description": "Required when the main language is nb (SHACL rule).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "definition_nn": {
                     "type": [
@@ -242,8 +252,11 @@
                     ]
                 },
                 "pref_label_nb": {
-                    "description": "Recommended term, bokm\u00e5l. Lowercase except acronyms (S05).",
-                    "type": "string"
+                    "description": "Recommended term, bokm\u00e5l. Lowercase except acronyms (S05). Required when the main language is nb (SHACL rule).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "pref_label_nn": {
                     "description": "Obligatory in the template, but left empty by extraction for the expert (S06).",
@@ -347,8 +360,6 @@
             "required": [
                 "uri",
                 "identifier",
-                "pref_label_nb",
-                "definition_nb",
                 "contact_point"
             ],
             "title": "Concept",
@@ -386,6 +397,13 @@
                     "description": "Short name of the vocabulary, max 4 letters or digits (cell B12).",
                     "pattern": "^[A-Za-z0-9]{1,4}$",
                     "type": "string"
+                },
+                "main_language": {
+                    "description": "BCP 47 tag of the language in which every concept must have a prefLabel and a definition (scheme row \"hovedspr\u00e5k\"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "publisher": {
                     "description": "System-generated at publication.",
@@ -457,6 +475,13 @@
             "description": "Short name of the vocabulary, max 4 letters or digits (cell B12).",
             "pattern": "^[A-Za-z0-9]{1,4}$",
             "type": "string"
+        },
+        "main_language": {
+            "description": "BCP 47 tag of the language in which every concept must have a prefLabel and a definition (scheme row \"hovedspr\u00e5k\"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl).",
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "publisher": {
             "description": "System-generated at publication.",

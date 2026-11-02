@@ -6,7 +6,7 @@ search:
 # Slot: pref_label_nb 
 
 
-_Recommended term, bokmål. Lowercase except acronyms (S05)._
+_Recommended term, bokmål. Lowercase except acronyms (S05). Required when the main language is nb (SHACL rule)._
 
 
 
@@ -41,13 +41,6 @@ URI: [skos:prefLabel](http://www.w3.org/2004/02/skos/core#prefLabel)
 | Range | [String](String.md) |
 | Domain Of | [Concept](Concept.md) |
 | Slot URI | [skos:prefLabel](http://www.w3.org/2004/02/skos/core#prefLabel) |
-### Cardinality and Requirements
-
-| Property | Value |
-| --- | --- |
-| Required | Yes |
-
-
 
 
 
@@ -106,7 +99,8 @@ annotations:
   requirement:
     tag: requirement
     value: obligatorisk
-description: Recommended term, bokmål. Lowercase except acronyms (S05).
+description: Recommended term, bokmål. Lowercase except acronyms (S05). Required when
+  the main language is nb (SHACL rule).
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 in_language: nb
 rank: 1000
@@ -114,7 +108,6 @@ slot_uri: skos:prefLabel
 domain_of:
 - Concept
 range: string
-required: true
 
 ```
 </details></div>

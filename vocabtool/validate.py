@@ -34,8 +34,8 @@ class Finding:
 RULES = {
     "VT-ID-FORMAT": ("error", "ID does not match <kortnavn>-NNNN", "template v8 col A"),
     "VT-ID-DUPLICATE": ("error", "ID used on more than one row", ""),
-    "VT-REQ-LABEL": ("error", "skos:prefLabel@nb missing", ""),
-    "VT-REQ-DEF": ("error", "skos:definition@nb missing", ""),
+    "VT-REQ-LABEL": ("error", "prefLabel in the main language missing", ""),
+    "VT-REQ-DEF": ("error", "definition in the main language missing", ""),
     "VT-REF-FORMAT": ("error", "relation value is not an ID (v8 relations must use IDs)", ""),
     "VT-REF-DANGLING": ("warning", "relation target not found in this workbook", ""),
     "VT-REF-SELF": ("error", "concept relates to itself", ""),
@@ -46,9 +46,9 @@ RULES = {
     "VT-TIER-EMPTY": ("info", "tier empty (expected only for source concepts)", "O0"),
     "VT-T1-ISOLATED": ("warning", "Tier 1 concept has no broader, isPartOf or related link (in or out)", ""),
     "VT-T1-BROADER-NON-T1": ("warning", "Tier 1 concept has a broader concept that is not Tier 1 (affects OWL subClassOf)", "O4"),
-    "VT-LABEL-DUPLICATE": ("warning", "same prefLabel@nb on more than one concept", "V11/V12"),
+    "VT-LABEL-DUPLICATE": ("warning", "same main-language prefLabel on more than one concept", "V11/V12"),
     "VT-LABEL-HOMONYM": ("warning", "same term (label or abbreviation) used for different concepts", "V11/V12"),
-    "VT-LABEL-CASE": ("warning", "prefLabel@nb starts with a capital letter (not an acronym)", "S05"),
+    "VT-LABEL-CASE": ("warning", "main-language prefLabel starts with a capital letter (not an acronym)", "S05"),
     "VT-LABEL-GROUPING": ("warning", "label lists several things and has narrower concepts; possibly a table heading, not a concept", ""),
     "VT-STATUS": ("warning", "status not in statusliste", ""),
     "VT-STATUS-LITERAL": ("warning", "status written as RDF literal; use the plain list value", ""),
@@ -106,6 +106,7 @@ def _ancestors(graph, start):
 def validate(v: Vocabulary) -> list[Finding]:
     F: list[Finding] = []
     concepts = v.concepts
+    LF, DF = v.label_field, v.def_field   # main-language label / definition
     keys = Counter(c.key for c in concepts)
     by_key = v.by_key()
     id_re = re.compile(rf"^{re.escape(v.kortnavn)}-\d{{4}}$") if (v.version == "v8" and v.kortnavn) else None
@@ -116,11 +117,11 @@ def validate(v: Vocabulary) -> list[Finding]:
             F.append(_f("VT-ID-DUPLICATE", c, c.key))
         if id_re and not id_re.match(c.key):
             F.append(_f("VT-ID-FORMAT", c, c.key))
-        if not c.get("label_nb"):
+        if not c.get(LF):
             F.append(_f("VT-REQ-LABEL", c))
-        if not c.get("def_nb"):
+        if not c.get(DF):
             F.append(_f("VT-REQ-DEF", c))
-        if not c.get("label_nn") or not c.get("def_nn"):
+        if v.main_lang == "nb" and (not c.get("label_nn") or not c.get("def_nn")):
             F.append(_f("VT-NN-MISSING", c))
         if not c.tier:
             F.append(_f("VT-TIER-EMPTY", c))
@@ -135,7 +136,7 @@ def validate(v: Vocabulary) -> list[Finding]:
             F.append(_f("VT-STATUS", c, st))
         if not c.get("contact_point"):
             F.append(_f("VT-CONTACT", c))
-        lab = c.get("label_nb") or ""
+        lab = c.get(LF) or ""
         first_tok = re.split(r"[\s\-/]", lab, maxsplit=1)[0] if lab else ""
         if lab and lab[0].isupper() and not (first_tok.isupper() or any(ch.isdigit() for ch in first_tok)):
             F.append(_f("VT-LABEL-CASE", c, lab))
@@ -148,9 +149,9 @@ def validate(v: Vocabulary) -> list[Finding]:
                 elif t not in by_key:
                     F.append(_f("VT-REF-DANGLING", c, f"{prop} -> {t}"))
 
-    labels = Counter((c.get("label_nb") or "").strip().lower() for c in concepts if c.get("label_nb"))
+    labels = Counter((c.get(LF) or "").strip().lower() for c in concepts if c.get(LF))
     for c in concepts:
-        lab = (c.get("label_nb") or "").strip().lower()
+        lab = (c.get(LF) or "").strip().lower()
         if lab and labels[lab] > 1:
             F.append(_f("VT-LABEL-DUPLICATE", c, lab))
 
@@ -163,7 +164,7 @@ def validate(v: Vocabulary) -> list[Finding]:
                 uses[val.strip().lower()].add((c.key, fld, tag))
     for term, occ in uses.items():
         keys = {k for k, _, _ in occ}
-        if len(keys) < 2 or all(f == "label_nb" for _, f, _ in occ):
+        if len(keys) < 2 or all(f == LF for _, f, _ in occ):
             continue   # nb prefLabel duplicates are VT-LABEL-DUPLICATE
         for c_key in sorted(keys):
             mine = sorted({f"{'alt' if f.startswith('alt_') else 'pref'}@{t}" for k, f, t in occ if k == c_key})
@@ -196,14 +197,14 @@ def validate(v: Vocabulary) -> list[Finding]:
     for c in concepts:
         if c.tier == "1":
             if c.key not in linked:
-                F.append(_f("VT-T1-ISOLATED", c, c.get("label_nb") or ""))
+                F.append(_f("VT-T1-ISOLATED", c, c.get(LF) or ""))
             for t in broader[c.key]:
                 if by_key[t].tier != "1":
                     F.append(_f("VT-T1-BROADER-NON-T1", c, f"{t} (tier {by_key[t].tier})"))
-        lab = (c.get("label_nb") or "").lower()
+        lab = (c.get(LF) or "").lower()
         n_parts = lab.count(",") + lab.count(" og ") + lab.count(" eller ")
         if n_parts >= 1 and " og " in lab and narrower_count[c.key] >= 2:
-            F.append(_f("VT-LABEL-GROUPING", c, f"{c.get('label_nb')} ({narrower_count[c.key]} narrower)"))
+            F.append(_f("VT-LABEL-GROUPING", c, f"{c.get(LF)} ({narrower_count[c.key]} narrower)"))
     return F
 
 

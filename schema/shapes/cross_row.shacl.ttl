@@ -80,3 +80,32 @@ svv:prefixes
     sh:declare [ sh:prefix "skos" ; sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ] ,
                [ sh:prefix "xkos" ; sh:namespace "http://rdf-vocabulary.ddialliance.org/xkos#"^^xsd:anyURI ] ,
                [ sh:prefix "svv"  ; sh:namespace "http://example.org/vegvesen/vokabular/def#"^^xsd:anyURI ] .
+
+# Main language: every concept has a prefLabel and a definition in the scheme's svv:mainLanguage
+# (default nb when the scheme declares none). Replaces "required" on pref_label_nb / definition_nb.
+svv:MainLanguageShape
+    a sh:NodeShape ;
+    sh:targetClass skos:Concept ;
+    sh:severity sh:Violation ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "VT-REQ-LABEL: no prefLabel in the main language" ;
+        sh:prefixes svv:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+              OPTIONAL { $this skos:inScheme/svv:mainLanguage ?ml }
+              BIND (LCASE(COALESCE(STR(?ml), "nb")) AS ?lang)
+              FILTER NOT EXISTS { $this skos:prefLabel ?l . FILTER (LCASE(LANG(?l)) = ?lang) }
+            }""" ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "VT-REQ-DEF: no definition in the main language" ;
+        sh:prefixes svv:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+              OPTIONAL { $this skos:inScheme/svv:mainLanguage ?ml }
+              BIND (LCASE(COALESCE(STR(?ml), "nb")) AS ?lang)
+              FILTER NOT EXISTS { $this skos:definition ?d . FILTER (LCASE(LANG(?d)) = ?lang) }
+            }""" ;
+    ] .

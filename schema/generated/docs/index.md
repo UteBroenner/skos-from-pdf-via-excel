@@ -38,7 +38,8 @@ Name: svv_vokabular
 | [creator](creator.md) |  |
 | [data_structure_label](data_structure_label.md) |  |
 | [definition_en](definition_en.md) |  |
-| [definition_nb](definition_nb.md) |  |
+| [definition_en_us](definition_en_us.md) |  |
+| [definition_nb](definition_nb.md) | Required when the main language is nb (SHACL rule) |
 | [definition_nn](definition_nn.md) |  |
 | [editorial_note](editorial_note.md) |  |
 | [end_date](end_date.md) |  |
@@ -50,6 +51,7 @@ Name: svv_vokabular
 | [is_part_of](is_part_of.md) |  |
 | [issued](issued.md) | System-generated at publication |
 | [kortnavn](kortnavn.md) | Short name of the vocabulary, max 4 letters or digits (cell B12) |
+| [main_language](main_language.md) | BCP 47 tag of the language in which every concept must have a prefLabel and a... |
 | [modified](modified.md) |  |
 | [modified_by](modified_by.md) |  |
 | [notation](notation.md) |  |

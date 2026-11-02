@@ -137,6 +137,9 @@ class ConceptScheme(ConfiguredBaseModel):
          'domain_of': ['ConceptScheme'],
          'in_language': 'nb',
          'slot_uri': 'dct:title'} })
+    main_language: Optional[str] = Field(default=None, description="""BCP 47 tag of the language in which every concept must have a prefLabel and a definition (scheme row \"hovedspråk\"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_label': {'tag': 'excel_label', 'value': 'hovedspråk'}},
+         'domain_of': ['ConceptScheme'],
+         'slot_uri': 'svv:mainLanguage'} })
     creator: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B14'}},
          'domain_of': ['ConceptScheme'],
          'slot_uri': 'dct:creator'} })
@@ -181,7 +184,7 @@ class Concept(ConfiguredBaseModel):
                                          'value': 'obligatorisk'}},
          'domain_of': ['Concept'],
          'slot_uri': 'dct:identifier'} })
-    pref_label_nb: str = Field(default=..., description="""Recommended term, bokmål. Lowercase except acronyms (S05).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'C'},
+    pref_label_nb: Optional[str] = Field(default=None, description="""Recommended term, bokmål. Lowercase except acronyms (S05). Required when the main language is nb (SHACL rule).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'C'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_bokmål'},
                          'requirement': {'tag': 'requirement',
@@ -210,7 +213,7 @@ class Concept(ConfiguredBaseModel):
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'}},
          'domain_of': ['Concept'],
          'slot_uri': 'skos:notation'} })
-    definition_nb: str = Field(default=..., json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'G'},
+    definition_nb: Optional[str] = Field(default=None, description="""Required when the main language is nb (SHACL rule).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'G'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'definisjon_bokmål'},
                          'requirement': {'tag': 'requirement',
@@ -475,6 +478,14 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'es',
          'slot_uri': 'skos:altLabel'} })
+    definition_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AX'},
+                         'excel_name': {'tag': 'excel_name',
+                                        'value': 'definisjon_engelsk_us'},
+                         'requirement': {'tag': 'requirement', 'value': 'valgfri'},
+                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+         'domain_of': ['Concept'],
+         'in_language': 'en-US',
+         'slot_uri': 'skos:definition'} })
     in_scheme: Optional[str] = Field(default=None, description="""Set by the converter from the scheme URI.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Concept'], 'slot_uri': 'skos:inScheme'} })
 
     @field_validator('identifier')

@@ -346,8 +346,8 @@ const DATA = /*__DATA__*/null;
     p.innerHTML = `<h2>${esc(lbl(n))}</h2>
       <div class="idline"><span>${esc(n.id)}</span><span class="chip${n.tier === '1' ? ' t1' : ''}">Tier ${esc(n.tier || '–')}</span>${sheets.length > 1 ? `<span>${esc(n.sheet)}</span>` : ''}</div>
       ${LANGS.length > 1 ? `<table class="langs">${langRows}</table>` : (n.alt ? `<div class="note" style="margin-top:6px">Also: ${esc(n.alt)}</div>` : '')}
-      <p class="def">${esc(n.def || '—')}</p>
-      ${n.def_en && LANG.startsWith('en') ? `<p class="def note">${esc(n.def_en)}</p>` : ''}
+      <p class="def">${esc((n.defs || {})[LANG] || n.def || '—')}</p>
+      ${Object.entries(n.defs || {}).filter(([t, d]) => d !== ((n.defs || {})[LANG] || n.def)).map(([t, d]) => `<p class="def note"><span class="chip">${esc(t)}</span> ${esc(d)}</p>`).join('')}
       ${relList('Broader', 'broader', [...out('broader'), ...dang('broader')])}
       ${relList('Narrower', 'broader', inn('broader'))}
       ${relList('Is part of', 'partof', [...out('isPartOf'), ...dang('isPartOf')])}

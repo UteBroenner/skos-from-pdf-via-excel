@@ -5,6 +5,11 @@ search:
 
 # Slot: definition_nb 
 
+
+_Required when the main language is nb (SHACL rule)._
+
+
+
 <div data-search-exclude markdown="1">
 
 
@@ -36,13 +41,6 @@ URI: [skos:definition](http://www.w3.org/2004/02/skos/core#definition)
 | Range | [String](String.md) |
 | Domain Of | [Concept](Concept.md) |
 | Slot URI | [skos:definition](http://www.w3.org/2004/02/skos/core#definition) |
-### Cardinality and Requirements
-
-| Property | Value |
-| --- | --- |
-| Required | Yes |
-
-
 
 
 
@@ -101,6 +99,7 @@ annotations:
   requirement:
     tag: requirement
     value: obligatorisk
+description: Required when the main language is nb (SHACL rule).
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 in_language: nb
 rank: 1000
@@ -108,7 +107,6 @@ slot_uri: skos:definition
 domain_of:
 - Concept
 range: string
-required: true
 
 ```
 </details></div>

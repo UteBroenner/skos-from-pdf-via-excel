@@ -73,6 +73,11 @@ def lang_column_field(header: str) -> str | None:
     return f"{_LANG_PREFIX[m.group(1)]}_{m.group(2).lower().replace('-', '_')}"
 
 
+def field_for(kind: str, lang: str) -> str:
+    """field_for("label", "en-US") -> "label_en_us"."""
+    return f"{kind}_{lang.lower().replace('-', '_')}"
+
+
 def label_fields(fields) -> dict[str, str]:
     """{field: language tag} for all prefLabel/altLabel fields present."""
     out = {}
@@ -134,6 +139,15 @@ class Vocabulary:
     concepts: list[Concept]
     columns: dict            # sheet -> {canonical field: column letter}
     unmapped_headers: dict   # sheet -> [header]
+    main_lang: str = "nb"    # scheme row "hovedspråk"; default nb (Vegvesen convention)
+
+    @property
+    def label_field(self) -> str:
+        return field_for("label", self.main_lang)
+
+    @property
+    def def_field(self) -> str:
+        return field_for("def", self.main_lang)
 
     def by_key(self) -> dict[str, Concept]:
         return {c.key: c for c in self.concepts}
@@ -158,6 +172,8 @@ def _scheme_meta(ws):
             meta["kortnavn"] = as_text(b)
         elif a == "dct:title":
             meta["title"] = as_text(b)
+        elif a.lower().startswith("hovedspr") or a.lower() in ("mainlanguage", "svv:mainlanguage"):
+            meta["main_lang"] = as_text(b)
     return meta
 
 
@@ -215,4 +231,5 @@ def read_workbook(path: str | Path) -> Vocabulary:
         kortnavn = str(meta["scheme_uri"]).rstrip("/").rsplit("/", 1)[-1]
     return Vocabulary(path=path, version=version or "unknown", kortnavn=kortnavn,
                       title=meta.get("title"), scheme_uri=as_text(meta.get("scheme_uri")),
+                      main_lang=meta.get("main_lang") or "nb",
                       concepts=concepts, columns=columns, unmapped_headers=unmapped)

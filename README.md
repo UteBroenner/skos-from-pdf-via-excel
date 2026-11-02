@@ -42,8 +42,12 @@ Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `
 Add language columns to the template (appended after column AO; existing columns keep their letters):
 
 ```bash
-.venv/bin/python -c "from vocabtool.template_ext import extend_template as e; print(e('templates/SKOS-Excel-mal-v8-for-import.xlsx', 'templates/SKOS-Excel-mal-v8-lang-ext.xlsx', ['en-US','en-GB','de','es']))"
+.venv/bin/python -c "from vocabtool.template_ext import extend_template as e; print(e('templates/SKOS-Excel-mal-v8-for-import.xlsx', 'templates/SKOS-Excel-mal-v8-lang-ext.xlsx', ['en-US','en-GB','de','es'], ['en-US']))"
 ```
+
+The extended template also has a scheme row `hovedspråk` (main language; default `nb`).
+Every concept needs a prefLabel and a definition in that language, and the label checks
+(duplicates, lowercase, grouping) use it. The nn check only applies when the main language is nb.
 
 Any column headed `skos:prefLabel@<tag>`, `skos:altLabel@<tag>` or `skos:definition@<tag>` is read automatically.
 The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, section "language extension").
@@ -60,7 +64,7 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 | --- | --- | --- |
 | VT-ID-FORMAT | error | ID matches `<kortnavn>-NNNN` (v8) |
 | VT-ID-DUPLICATE | error | ID unique |
-| VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel@nb and definition@nb present |
+| VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
 | VT-REF-FORMAT | error | relation values are IDs (v8) |
 | VT-REF-SELF | error | no relation to itself |
 | VT-CYCLE-BROADER / VT-CYCLE-PARTOF | error | no cycles |
