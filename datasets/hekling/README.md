@@ -9,6 +9,10 @@ Other languages are nb, en-GB, de and es (Spain), and definitions are in en-US a
   which uses US terms. Each stitch is linked to a pattern with `xkos:isPartOf` only if the pattern instructions name it.
   Pattern names are the designer's English names. Their definitions are paraphrases marked `[omskrivning]`.
   nb, de and es names are missing (`[mangler]`).
+- HEKL-0061 to 0077 are 4 stitches and 13 patterns from Parts 6–10 of the same crochet-along. They were extracted from
+  the saved pages, and each concept links to its part.
+  Sections named exactly like an existing stitch (Spike Stitch, Popcorn Stitch, Cluster V-Stitch) are not separate pattern
+  concepts. A note on the stitch records them instead.
 It was drafted with Claude and needs expert review. Uncertain terms are marked `[usikker]`
 in `skos:editorialNote` and missing ones `[mangler]`. nn is not used.
 
