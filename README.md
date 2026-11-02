@@ -74,6 +74,7 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 | VT-T1-BROADER-NON-T1 | warning | broader of a Tier 1 concept is Tier 1 (OWL rule O4) |
 | VT-LABEL-DUPLICATE | warning | prefLabel@nb unique |
 | VT-LABEL-HOMONYM | warning | same term (any label or abbreviation, any language) on different concepts, e.g. US/UK *double crochet* |
+| VT-LABEL-VARIANT | info | same term means different concepts in two regional variants (en-US vs en-GB); this is the difference the vocabulary documents |
 | VT-LABEL-CASE | warning | prefLabel@nb lowercase, except acronyms (S05) |
 | VT-LABEL-GROUPING | warning | heuristic: label lists several items ("… og …") and has ≥2 narrower concepts, so it is probably a table heading |
 | VT-STATUS / VT-STATUS-LITERAL | warning | status is one of kandidat, gjeldende, utdatert, forkastet, written as a plain value |

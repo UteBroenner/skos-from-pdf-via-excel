@@ -203,7 +203,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [relation_role](relation_role.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [exact_match](exact_match.md) | * <br/> [uri](uri.md) |  | direct |
 | [close_match](close_match.md) | * <br/> [uri](uri.md) |  | direct |
-| [contact_point](contact_point.md) | 1 <br/> [String](String.md) |  | direct |
+| [contact_point](contact_point.md) | 1 <br/> [String](String.md) | E-mail address or web address | direct |
 | [created](created.md) | 0..1 <br/> [Date](Date.md) |  | direct |
 | [created_by](created_by.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [modified](modified.md) | 0..1 <br/> [Date](Date.md) |  | direct |
@@ -905,6 +905,8 @@ attributes:
       requirement:
         tag: requirement
         value: obligatorisk
+    description: E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no
+      (fixed value in the field instructions); the schema accepts any address.
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: dcat:contactPoint
@@ -913,7 +915,7 @@ attributes:
     - Concept
     range: string
     required: true
-    pattern: ^[^@\s]+@vegvesen\.no$
+    pattern: ^([^@\s]+@[^@\s]+\.[A-Za-z]{2,}|https?://\S+)$
   created:
     name: created
     annotations:

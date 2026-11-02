@@ -314,7 +314,10 @@ slots:
   contact_point:
     slot_uri: dcat:contactPoint
     required: true
-    pattern: "^[^@\\s]+@vegvesen\\.no$"
+    description: >-
+      E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no
+      (fixed value in the field instructions); the schema accepts any address.
+    pattern: "^([^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}|https?://\\S+)$"
     annotations: {excel_column: AA, excel_name: kontaktpunkt, requirement: obligatorisk}
   created:
     slot_uri: dct:created

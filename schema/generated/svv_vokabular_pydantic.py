@@ -341,7 +341,7 @@ class Concept(ConfiguredBaseModel):
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'}},
          'domain_of': ['Concept'],
          'slot_uri': 'skos:closeMatch'} })
-    contact_point: str = Field(default=..., json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AA'},
+    contact_point: str = Field(default=..., description="""E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no (fixed value in the field instructions); the schema accepts any address.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AA'},
                          'excel_name': {'tag': 'excel_name', 'value': 'kontaktpunkt'},
                          'requirement': {'tag': 'requirement',
                                          'value': 'obligatorisk'}},
@@ -503,7 +503,7 @@ class Concept(ConfiguredBaseModel):
 
     @field_validator('contact_point')
     def pattern_contact_point(cls, v):
-        pattern=re.compile(r"^[^@\s]+@vegvesen\.no$")
+        pattern=re.compile(r"^([^@\s]+@[^@\s]+\.[A-Za-z]{2,}|https?://\S+)$")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):

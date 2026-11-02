@@ -96,17 +96,17 @@ skos:ConceptScheme a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path svv:mainLanguage ],
+        [ sh:description "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path svv:uri ],
         [ sh:datatype xsd:date ;
             sh:description "System-generated at publication." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 6 ;
             sh:path dct:issued ],
-        [ sh:description "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula)." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path svv:uri ],
         [ sh:datatype xsd:string ;
             sh:description "System-generated at publication." ;
             sh:maxCount 1 ;
@@ -144,92 +144,80 @@ skos:Concept a sh:NodeShape ;
     rdfs:comment "One row in the vokabular sheet (row 23 onwards)." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:name "pref_label_nn" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
-        [ sh:name "created_by" ;
-            sh:path dct:contributor ;
-            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
-        [ sh:name "pref_label_en_gb" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
-        [ sh:name "alt_label_es" ;
-            sh:path skos:altLabel ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:prefLabel ],
-        [ sh:name "modified_by" ;
-            sh:path dct:contributor ;
-            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
-        [ sh:name "pref_label_en" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
-                    sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
-        [ sh:name "definition_nb" ;
+    sh:property [ sh:name "definition_nb" ;
             sh:path skos:definition ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "alt_label_en_gb" ;
-            sh:path skos:altLabel ],
-        [ sh:name "alt_label_en_us" ;
-            sh:path skos:altLabel ],
         [ sh:name "alt_label_de" ;
             sh:path skos:altLabel ],
+        [ sh:name "pref_label_es" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
+        [ sh:name "alt_label_es" ;
+            sh:path skos:altLabel ],
+        [ sh:name "pref_label_nn" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
         [ sh:name "definition_en_us" ;
             sh:path skos:definition ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:name "alt_label_en" ;
-            sh:path skos:altLabel ],
-        [ sh:name "pref_label_nb" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
         [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:altLabel ],
-        [ sh:name "definition_nn" ;
-            sh:path skos:definition ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
+            sh:path skos:prefLabel ],
         [ sh:name "pref_label_en_us" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" ) ;
+            sh:path skos:definition ],
         [ sh:name "definition_en" ;
             sh:path skos:definition ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
                     sh:not [ sh:languageIn ( "en-US" ) ] ] ],
+        [ sh:name "pref_label_en" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
+                    sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
+        [ sh:name "alt_label_nb" ;
+            sh:path skos:altLabel ],
+        [ sh:name "pref_label_nb" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
+        [ sh:name "alt_label_en_gb" ;
+            sh:path skos:altLabel ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:altLabel ],
+        [ sh:name "alt_label_en_us" ;
+            sh:path skos:altLabel ],
+        [ sh:name "definition_nn" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
+        [ sh:name "modified_by" ;
+            sh:path dct:contributor ;
+            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
+        [ sh:name "alt_label_nn" ;
+            sh:path skos:altLabel ],
         [ sh:name "pref_label_de" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
-        [ sh:name "alt_label_nb" ;
-            sh:path skos:altLabel ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" ) ;
-            sh:path skos:definition ],
-        [ sh:name "pref_label_es" ;
+        [ sh:name "pref_label_en_gb" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
+            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
+        [ sh:name "alt_label_en" ;
+            sh:path skos:altLabel ],
+        [ sh:name "created_by" ;
+            sh:path dct:contributor ;
+            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
         [ sh:maxCount 2 ;
             sh:path dct:contributor ],
-        [ sh:name "alt_label_nn" ;
-            sh:path skos:altLabel ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 32 ;
-            sh:path adms:versionNotes ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 26 ;
-            sh:path dcat:contactPoint ;
-            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
         [ sh:datatype xsd:date ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -266,13 +254,6 @@ skos:Concept a sh:NodeShape ;
             sh:order 35 ;
             sh:path euvoc:endDate ],
         [ sh:datatype rdf:langString ;
-            sh:description "Discouraged term, e.g. a common misspelling."@nb ;
-            sh:languageIn ( "nb" ) ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 19 ;
-            sh:path skos:hiddenLabel ],
-        [ sh:datatype rdf:langString ;
             sh:languageIn ( "nb" ) ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -282,6 +263,13 @@ skos:Concept a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 20 ;
             sh:path skos:broader ],
+        [ sh:datatype rdf:langString ;
+            sh:description "Discouraged term, e.g. a common misspelling."@nb ;
+            sh:languageIn ( "nb" ) ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 19 ;
+            sh:path skos:hiddenLabel ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -299,23 +287,29 @@ skos:Concept a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 13 ;
             sh:path dct:source ],
-        [ sh:datatype rdf:langString ;
-            sh:description "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now."@nb ;
-            sh:languageIn ( "nb" ) ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 18 ;
-            sh:path dct:subject ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 37 ;
             sh:path skosno:valueRange ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 34 ;
+            sh:path euvoc:startDate ],
         [ sh:description "Set by the converter from the scheme URI." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 48 ;
             sh:path skos:inScheme ],
+        [ sh:datatype xsd:string ;
+            sh:description "E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no (fixed value in the field instructions); the schema accepts any address." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 26 ;
+            sh:path dcat:contactPoint ;
+            sh:pattern "^([^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}|https?://\\S+)$" ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -325,24 +319,19 @@ skos:Concept a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 33 ;
             sh:path euvoc:status ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 12 ;
-            sh:path dct:audience ],
         [ sh:datatype xsd:date ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 27 ;
             sh:path dct:created ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path dct:audience ],
         [ sh:nodeKind sh:IRI ;
             sh:order 25 ;
             sh:path skos:closeMatch ],
-        [ sh:datatype xsd:date ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 34 ;
-            sh:path euvoc:startDate ],
         [ sh:datatype xsd:integer ;
             sh:description "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes." ;
             sh:maxCount 1 ;
@@ -355,6 +344,13 @@ skos:Concept a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 22 ;
             sh:path skos:related ],
+        [ sh:datatype rdf:langString ;
+            sh:description "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now."@nb ;
+            sh:languageIn ( "nb" ) ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 18 ;
+            sh:path dct:subject ],
         [ sh:datatype xsd:string ;
             sh:description "Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID." ;
             sh:maxCount 1 ;
@@ -367,6 +363,11 @@ skos:Concept a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 14 ;
-            sh:path skosno:relationshipWithSource ] ;
+            sh:path skosno:relationshipWithSource ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 32 ;
+            sh:path adms:versionNotes ] ;
     sh:targetClass skos:Concept .
 

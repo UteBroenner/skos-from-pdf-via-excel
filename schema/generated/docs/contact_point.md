@@ -5,6 +5,11 @@ search:
 
 # Slot: contact_point 
 
+
+_E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no (fixed value in the field instructions); the schema accepts any address._
+
+
+
 <div data-search-exclude markdown="1">
 
 
@@ -47,7 +52,7 @@ URI: [dcat:contactPoint](http://www.w3.org/ns/dcat#contactPoint)
 
 | Property | Value |
 | --- | --- |
-| Regex Pattern | `^[^@\s]+@vegvesen\.no$` |
+| Regex Pattern | `^([^@\s]+@[^@\s]+\.[A-Za-z]{2,}|https?://\S+)$` |
 
 
 
@@ -108,6 +113,8 @@ annotations:
   requirement:
     tag: requirement
     value: obligatorisk
+description: E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no
+  (fixed value in the field instructions); the schema accepts any address.
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: dcat:contactPoint
@@ -115,7 +122,7 @@ domain_of:
 - Concept
 range: string
 required: true
-pattern: ^[^@\s]+@vegvesen\.no$
+pattern: ^([^@\s]+@[^@\s]+\.[A-Za-z]{2,}|https?://\S+)$
 
 ```
 </details></div>

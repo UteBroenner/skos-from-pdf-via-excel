@@ -32,7 +32,7 @@ Name: svv_vokabular
 | [broader](broader.md) |  |
 | [close_match](close_match.md) |  |
 | [concepts](concepts.md) | Container slot for the data file only |
-| [contact_point](contact_point.md) |  |
+| [contact_point](contact_point.md) | E-mail address or web address |
 | [created](created.md) |  |
 | [created_by](created_by.md) |  |
 | [creator](creator.md) |  |
