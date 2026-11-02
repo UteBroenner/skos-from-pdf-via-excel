@@ -43,7 +43,7 @@ FIELD_TO_SLOT = {
     # language extension (v8-lang-ext)
     "label_en_us": "pref_label_en_us", "label_en_gb": "pref_label_en_gb", "label_de": "pref_label_de",
     "label_es": "pref_label_es", "alt_en_us": "alt_label_en_us", "alt_en_gb": "alt_label_en_gb",
-    "alt_de": "alt_label_de", "alt_es": "alt_label_es", "def_en_us": "definition_en_us",
+    "alt_de": "alt_label_de", "alt_es": "alt_label_es", "def_en_us": "definition_en_us", "scope_note_en_us": "scope_note_en_us",
 }
 RELATION_SLOTS = {"broader", "is_part_of", "related"}
 BASE = "http://example.org/vegvesen/vokabular/"

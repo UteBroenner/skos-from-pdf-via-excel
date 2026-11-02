@@ -24,7 +24,11 @@ The dataset tests these things:
 - **Polyhierarchy:** relief stitches have two broader concepts.
 - **Part-whole relations:** stitches are part of shells, V-stitches, rows and granny squares.
 
-`dcat:contactPoint` is empty, because the template requires a `@vegvesen.no` address.
+`dcat:contactPoint` is https://github.com/UteBroenner.
+
+Every label clash has a draft en-US scope note (column AY) that warns about it and names the other concept's ID.
+There are 19 concepts with notes, covering the US/UK cross-overs, Norwegian versus English `st`, Spanish *punto* and *vuelta*,
+and the crossed double crochet stitch versus pattern.
 
 ```bash
 .venv/bin/python -m vocabtool check datasets/hekling/HEKL-v8.xlsx --out datasets/hekling/out

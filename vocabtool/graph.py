@@ -39,7 +39,8 @@ def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
         nodes.append({"id": c.key, "label": c.get(v.label_field) or c.key, "tier": c.tier or "",
                       "sheet": c.sheet, "def": c.get(v.def_field) or "", "defs": defs,
                       "alt": "; ".join(f"{v} ({t})" for t, v in alts.items()),
-                      "labels": labels, "alts": alts, "issues": issues.get(c.key, [])})
+                      "labels": labels, "alts": alts,
+                      "notes": [v for f, v in c.fields.items() if f.startswith("scope_note") and v], "issues": issues.get(c.key, [])})
         for fld, typ in EDGE_TYPE.items():
             for t in c.relations.get(fld, []):
                 if t in by_key and t != c.key:

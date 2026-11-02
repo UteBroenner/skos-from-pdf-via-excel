@@ -49,7 +49,11 @@ The extended template also has a scheme row `hovedspråk` (main language; defaul
 Every concept needs a prefLabel and a definition in that language, and the label checks
 (duplicates, lowercase, grouping) use it. The nn check only applies when the main language is nb.
 
-Any column headed `skos:prefLabel@<tag>`, `skos:altLabel@<tag>` or `skos:definition@<tag>` is read automatically.
+Any column headed `skos:prefLabel@<tag>`, `skos:altLabel@<tag>`, `skos:definition@<tag>` or `skos:scopeNote@<tag>` is read automatically.
+
+`vocabtool/clash_notes.py` drafts English scope notes for label clashes, for example
+"Caution: 'dc' is the UK abbreviation of this concept and the US abbreviation of HEKL-0009 (double crochet)."
+Once a scope note names the other concept's ID, the checker reports the clash as `VT-LABEL-NOTED` (info).
 The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, section "language extension").
 
 ## Conventions assumed for v8
@@ -74,6 +78,7 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 | VT-T1-BROADER-NON-T1 | warning | broader of a Tier 1 concept is Tier 1 (OWL rule O4) |
 | VT-LABEL-DUPLICATE | warning | prefLabel@nb unique |
 | VT-LABEL-HOMONYM | warning | same term (any label or abbreviation, any language) on different concepts, e.g. US/UK *double crochet* |
+| VT-LABEL-NOTED | info | a label clash (homonym, variant or duplicate) that the concept's scope note documents by naming the other concept's ID |
 | VT-LABEL-VARIANT | info | same term means different concepts in two regional variants (en-US vs en-GB); this is the difference the vocabulary documents |
 | VT-LABEL-CASE | warning | prefLabel@nb lowercase, except acronyms (S05) |
 | VT-LABEL-GROUPING | warning | heuristic: label lists several items ("… og …") and has ≥2 narrower concepts, so it is probably a table heading |

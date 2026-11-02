@@ -486,6 +486,14 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:definition'} })
+    scope_note_en_us: Optional[str] = Field(default=None, description="""Usage note in US English, e.g. a warning that a term means another concept elsewhere.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AY'},
+                         'excel_name': {'tag': 'excel_name',
+                                        'value': 'merknad_engelsk_us'},
+                         'requirement': {'tag': 'requirement', 'value': 'valgfri'},
+                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+         'domain_of': ['Concept'],
+         'in_language': 'en-US',
+         'slot_uri': 'skos:scopeNote'} })
     in_scheme: Optional[str] = Field(default=None, description="""Set by the converter from the scheme URI.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Concept'], 'slot_uri': 'skos:inScheme'} })
 
     @field_validator('identifier')

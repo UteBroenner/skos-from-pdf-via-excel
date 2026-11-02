@@ -71,6 +71,7 @@ aside .note { color: var(--muted); font-size: 12.5px; }
 .issue.error { border-color: var(--err); } .issue.warning { border-color: var(--warn); }
 .issue code { font: 11px var(--font-mono); color: var(--muted); }
 .empty { color: var(--muted); }
+.scope { margin: 10px 0; padding: 6px 10px; border-left: 3px solid var(--accent); background: var(--bg); font-size: 13px; max-width: 65ch; }
 table.langs { border-collapse: collapse; margin-top: 10px; font-size: 13px; width: 100%; }
 table.langs th { font: 500 11px var(--font-mono); color: var(--muted); text-align: left; padding: 3px 10px 3px 0; vertical-align: top; white-space: nowrap; }
 table.langs td { padding: 3px 8px 3px 0; vertical-align: top; border-top: 1px solid var(--line); }
@@ -348,6 +349,7 @@ const DATA = /*__DATA__*/null;
       ${LANGS.length > 1 ? `<table class="langs">${langRows}</table>` : (n.alt ? `<div class="note" style="margin-top:6px">Also: ${esc(n.alt)}</div>` : '')}
       <p class="def">${esc((n.defs || {})[LANG] || n.def || '—')}</p>
       ${Object.entries(n.defs || {}).filter(([t, d]) => d !== ((n.defs || {})[LANG] || n.def)).map(([t, d]) => `<p class="def note"><span class="chip">${esc(t)}</span> ${esc(d)}</p>`).join('')}
+      ${(n.notes || []).map(t => `<p class="scope">${esc(t)}</p>`).join('')}
       ${relList('Broader', 'broader', [...out('broader'), ...dang('broader')])}
       ${relList('Narrower', 'broader', inn('broader'))}
       ${relList('Is part of', 'partof', [...out('isPartOf'), ...dang('isPartOf')])}

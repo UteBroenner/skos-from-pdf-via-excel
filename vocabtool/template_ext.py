@@ -24,7 +24,7 @@ def lang_field(lang: str) -> str:
 
 
 def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_langs: list[str] = (),
-                    main_lang: str | None = None) -> list[str]:
+                    main_lang: str | None = None, scope_langs: list[str] = ()) -> list[str]:
     wb = openpyxl.load_workbook(src)
     ws = wb["vokabular"]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
@@ -36,7 +36,8 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
     added = []
     for kind, prop, nb_prefix, sep, kind_langs in (("pref", "skos:prefLabel", "anbefalt_term", False, langs),
                                                    ("alt", "skos:altLabel", "tillat_term", True, langs),
-                                                   ("def", "skos:definition", "definisjon", False, def_langs)):
+                                                   ("def", "skos:definition", "definisjon", False, def_langs),
+                                                   ("scope", "skos:scopeNote", "merknad", False, scope_langs)):
         for lang in kind_langs:
             header = f"{prop}@{lang}" + (' (separator=",")' if sep else "")
             if normalise_header(header) in existing:
@@ -46,6 +47,7 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
             ws.cell(tech, col).value = f"{nb_prefix}_{LANG_NAMES_NB.get(lang, lang_field(lang))}"
             ws.cell(req, col).value = "valgfri"
             ws.cell(desc, col).value = ("tillat term [0..n]" if sep else f"definisjon ({lang})" if kind == "def"
+                                        else f"merknad om bruk ({lang})" if kind == "scope"
                                         else f"anbefalt term ({lang}), maks én")
             for r, src_cell in ((hdr, style_src), (tech, tech_src)):
                 ws.cell(r, col)._style = copy.copy(src_cell._style)

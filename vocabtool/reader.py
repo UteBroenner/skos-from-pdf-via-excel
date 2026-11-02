@@ -60,8 +60,8 @@ RELATION_FIELDS = {"broader": "skos:broader", "is_part_of": "xkos:isPartOf", "re
 EXCLUDED_SHEETS = {"kodeverk", "lister"}
 
 
-_LANG_COL = re.compile(r"^skos:(prefLabel|altLabel|definition)@([A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*)$")
-_LANG_PREFIX = {"prefLabel": "label", "altLabel": "alt", "definition": "def"}
+_LANG_COL = re.compile(r"^skos:(prefLabel|altLabel|definition|scopeNote)@([A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*)$")
+_LANG_PREFIX = {"prefLabel": "label", "altLabel": "alt", "definition": "def", "scopeNote": "scope_note"}
 
 
 def lang_column_field(header: str) -> str | None:

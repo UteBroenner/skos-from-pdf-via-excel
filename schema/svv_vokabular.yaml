@@ -99,6 +99,7 @@ classes:
       - alt_label_de
       - alt_label_es
       - definition_en_us
+      - scope_note_en_us
       - in_scheme
 
 slots:
@@ -251,6 +252,11 @@ slots:
     slot_uri: skos:definition
     in_language: en-US
     annotations: {excel_column: AX, excel_name: definisjon_engelsk_us, requirement: valgfri, template: v8-lang-ext}
+  scope_note_en_us:
+    slot_uri: skos:scopeNote
+    in_language: en-US
+    description: Usage note in US English, e.g. a warning that a term means another concept elsewhere.
+    annotations: {excel_column: AY, excel_name: merknad_engelsk_us, requirement: valgfri, template: v8-lang-ext}
 
   # ---------- documentation ----------
   audience:

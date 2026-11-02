@@ -67,6 +67,7 @@ Name: svv_vokabular
 | [relation_role](relation_role.md) |  |
 | [relationship_with_source](relationship_with_source.md) |  |
 | [scope_note](scope_note.md) |  |
+| [scope_note_en_us](scope_note_en_us.md) | Usage note in US English, e |
 | [source](source.md) |  |
 | [start_date](start_date.md) |  |
 | [status](status.md) |  |

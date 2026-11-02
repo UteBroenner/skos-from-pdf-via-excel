@@ -131,6 +131,8 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
         
       Concept : scope_note
         
+      Concept : scope_note_en_us
+        
       Concept : source
         
       Concept : start_date
@@ -225,6 +227,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [alt_label_de](alt_label_de.md) | * <br/> [String](String.md) |  | direct |
 | [alt_label_es](alt_label_es.md) | * <br/> [String](String.md) |  | direct |
 | [definition_en_us](definition_en_us.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [scope_note_en_us](scope_note_en_us.md) | 0..1 <br/> [String](String.md) | Usage note in US English, e | direct |
 | [in_scheme](in_scheme.md) | 0..1 <br/> [uri](uri.md) | Set by the converter from the scheme URI | direct |
 
 
@@ -337,6 +340,7 @@ slots:
 - alt_label_de
 - alt_label_es
 - definition_en_us
+- scope_note_en_us
 - in_scheme
 class_uri: skos:Concept
 
@@ -1364,6 +1368,31 @@ attributes:
     in_language: en-US
     rank: 1000
     slot_uri: skos:definition
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+  scope_note_en_us:
+    name: scope_note_en_us
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AY
+      excel_name:
+        tag: excel_name
+        value: merknad_engelsk_us
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+    description: Usage note in US English, e.g. a warning that a term means another
+      concept elsewhere.
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: en-US
+    rank: 1000
+    slot_uri: skos:scopeNote
     owner: Concept
     domain_of:
     - Concept

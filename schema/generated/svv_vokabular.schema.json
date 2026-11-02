@@ -294,6 +294,13 @@
                         "null"
                     ]
                 },
+                "scope_note_en_us": {
+                    "description": "Usage note in US English, e.g. a warning that a term means another concept elsewhere.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "source": {
                     "format": "uri",
                     "type": [

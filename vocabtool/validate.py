@@ -48,6 +48,7 @@ RULES = {
     "VT-T1-BROADER-NON-T1": ("warning", "Tier 1 concept has a broader concept that is not Tier 1 (affects OWL subClassOf)", "O4"),
     "VT-LABEL-DUPLICATE": ("warning", "same main-language prefLabel on more than one concept", "V11/V12"),
     "VT-LABEL-HOMONYM": ("warning", "same term (label or abbreviation) used for different concepts", "V11/V12"),
+    "VT-LABEL-NOTED": ("info", "label clash documented in a scope note that names the other concept", ""),
     "VT-LABEL-VARIANT": ("info", "term means a different concept in another regional variant of the language (e.g. en-US vs en-GB)", ""),
     "VT-LABEL-CASE": ("warning", "main-language prefLabel starts with a capital letter (not an acronym)", "S05"),
     "VT-LABEL-GROUPING": ("warning", "label lists several things and has narrower concepts; possibly a table heading, not a concept", ""),
@@ -102,6 +103,12 @@ def _ancestors(graph, start):
         out.add(n)
         todo.extend(graph.get(n, []))
     return out
+
+
+def _noted(c, other_keys: set) -> bool:
+    """True if the concept's scope notes (any language) name every other concept by its ID."""
+    notes = " ".join(str(v) for f, v in c.fields.items() if f.startswith("scope_note") and v)
+    return bool(notes) and all(k in notes for k in other_keys)
 
 
 def _is_variant_pair(a: str, b: str) -> bool:
@@ -160,7 +167,8 @@ def validate(v: Vocabulary) -> list[Finding]:
     for c in concepts:
         lab = (c.get(LF) or "").strip().lower()
         if lab and labels[lab] > 1:
-            F.append(_f("VT-LABEL-DUPLICATE", c, lab))
+            others = {o.key for o in concepts if o.key != c.key and (o.get(LF) or "").strip().lower() == lab}
+            F.append(_f("VT-LABEL-NOTED" if _noted(c, others) else "VT-LABEL-DUPLICATE", c, lab))
 
     # homonyms across all label columns and languages (e.g. US "double crochet" vs UK "double crochet")
     uses = defaultdict(set)   # term -> {(concept key, field, tag)}
@@ -180,8 +188,9 @@ def validate(v: Vocabulary) -> list[Finding]:
             others = sorted({f"{k} ({'alt' if f.startswith('alt_') else 'pref'}@{t})" for k, f, t in occ if k != c_key})
             # regional variants of one language (en-US / en-GB): the clash is the documented difference -> info
             variant = all(_is_variant_pair(a, b) for a in mine_t for _, b in other_t)
-            F.append(_f("VT-LABEL-VARIANT" if variant else "VT-LABEL-HOMONYM", by_key[c_key],
-                        f"'{term}' as {', '.join(mine)}; also {', '.join(others)}"))
+            rule = ("VT-LABEL-NOTED" if _noted(by_key[c_key], {k for k, _ in other_t})
+                    else "VT-LABEL-VARIANT" if variant else "VT-LABEL-HOMONYM")
+            F.append(_f(rule, by_key[c_key], f"'{term}' as {', '.join(mine)}; also {', '.join(others)}"))
 
     broader = {c.key: [t for t in c.relations["broader"] if t in by_key] for c in concepts}
     partof = {c.key: [t for t in c.relations["is_part_of"] if t in by_key] for c in concepts}
