@@ -4,6 +4,9 @@ Checks SKOS vocabulary workbooks (Excel template v8, also reads v7) and draws an
 interactive graph of `skos:broader`, `xkos:isPartOf` and `skos:related`.
 Code lists (`kodeverk` sheet) are ignored.
 
+Vocabulary data is not part of this repository. Put workbooks in `samples/`;
+outputs are written to `out/`. Both folders are ignored by git.
+
 Requires Python 3.10+. `check` and `migrate` need only `openpyxl`. The LinkML/RDF route needs `requirements.txt`:
 
 ```bash
@@ -84,5 +87,6 @@ vocabtool/graph_template.html
 vocabtool/linkml_rdf.py       Excel -> LinkML data -> RDF, SHACL fixes
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   Excel template v8
-samples/                     N101 and V440 (v7)
+samples/                     your workbooks (not in git)
+out/                         generated output (not in git)
 ```
