@@ -11,7 +11,7 @@ import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
 
-from .reader import Vocabulary, RELATION_FIELDS
+from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi
 
 STATUS_VALUES = {"kandidat", "gjeldende", "utdatert", "forkastet"}
 TIERS = {"1", "2", "3"}
@@ -47,6 +47,7 @@ RULES = {
     "VT-T1-ISOLATED": ("warning", "Tier 1 concept has no broader, isPartOf or related link (in or out)", ""),
     "VT-T1-BROADER-NON-T1": ("warning", "Tier 1 concept has a broader concept that is not Tier 1 (affects OWL subClassOf)", "O4"),
     "VT-LABEL-DUPLICATE": ("warning", "same prefLabel@nb on more than one concept", "V11/V12"),
+    "VT-LABEL-HOMONYM": ("warning", "same term (label or abbreviation) used for different concepts", "V11/V12"),
     "VT-LABEL-CASE": ("warning", "prefLabel@nb starts with a capital letter (not an acronym)", "S05"),
     "VT-LABEL-GROUPING": ("warning", "label lists several things and has narrower concepts; possibly a table heading, not a concept", ""),
     "VT-STATUS": ("warning", "status not in statusliste", ""),
@@ -152,6 +153,22 @@ def validate(v: Vocabulary) -> list[Finding]:
         lab = (c.get("label_nb") or "").strip().lower()
         if lab and labels[lab] > 1:
             F.append(_f("VT-LABEL-DUPLICATE", c, lab))
+
+    # homonyms across all label columns and languages (e.g. US "double crochet" vs UK "double crochet")
+    uses = defaultdict(set)   # term -> {(concept key, field, tag)}
+    for c in concepts:
+        for fld, tag in label_fields(c.fields).items():
+            vals = split_multi(c.get(fld)) if fld.startswith("alt_") else [c.get(fld)] if c.get(fld) else []
+            for val in vals:
+                uses[val.strip().lower()].add((c.key, fld, tag))
+    for term, occ in uses.items():
+        keys = {k for k, _, _ in occ}
+        if len(keys) < 2 or all(f == "label_nb" for _, f, _ in occ):
+            continue   # nb prefLabel duplicates are VT-LABEL-DUPLICATE
+        for c_key in sorted(keys):
+            mine = sorted({f"{'alt' if f.startswith('alt_') else 'pref'}@{t}" for k, f, t in occ if k == c_key})
+            others = sorted({f"{k} ({'alt' if f.startswith('alt_') else 'pref'}@{t})" for k, f, t in occ if k != c_key})
+            F.append(_f("VT-LABEL-HOMONYM", by_key[c_key], f"'{term}' as {', '.join(mine)}; also {', '.join(others)}"))
 
     broader = {c.key: [t for t in c.relations["broader"] if t in by_key] for c in concepts}
     partof = {c.key: [t for t in c.relations["is_part_of"] if t in by_key] for c in concepts}

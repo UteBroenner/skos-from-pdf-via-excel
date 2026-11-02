@@ -60,6 +60,30 @@ RELATION_FIELDS = {"broader": "skos:broader", "is_part_of": "xkos:isPartOf", "re
 EXCLUDED_SHEETS = {"kodeverk", "lister"}
 
 
+_LANG_COL = re.compile(r"^skos:(prefLabel|altLabel|definition)@([A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*)$")
+_LANG_PREFIX = {"prefLabel": "label", "altLabel": "alt", "definition": "def"}
+
+
+def lang_column_field(header: str) -> str | None:
+    """Field name for a language-tagged label/definition column not in PROPERTY_MAP,
+    e.g. skos:prefLabel@en-US -> label_en_us."""
+    m = _LANG_COL.match(header)
+    if not m:
+        return None
+    return f"{_LANG_PREFIX[m.group(1)]}_{m.group(2).lower().replace('-', '_')}"
+
+
+def label_fields(fields) -> dict[str, str]:
+    """{field: language tag} for all prefLabel/altLabel fields present."""
+    out = {}
+    for f in fields:
+        for kind in ("label_", "alt_"):
+            if f.startswith(kind):
+                tag = f[len(kind):].split("_")
+                out[f] = "-".join([tag[0]] + [t.upper() for t in tag[1:]])
+    return out
+
+
 def normalise_header(value) -> str:
     s = re.sub(r"\s+", "", str(value or ""))
     return s.split("(")[0]
@@ -168,6 +192,8 @@ def read_workbook(path: str | Path) -> Vocabulary:
                 contrib += 1
             elif h in PROPERTY_MAP:
                 colmap.setdefault(PROPERTY_MAP[h], idx)
+            elif lang_column_field(h):
+                colmap.setdefault(lang_column_field(h), idx)
             else:
                 skipped.append(h)
         columns[ws.title] = {k: openpyxl.utils.get_column_letter(i + 1) for k, i in colmap.items()}

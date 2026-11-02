@@ -4,7 +4,43 @@
             "additionalProperties": false,
             "description": "One row in the vokabular sheet (row 23 onwards).",
             "properties": {
+                "alt_label_de": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "alt_label_en": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alt_label_en_gb": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alt_label_en_us": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alt_label_es": {
                     "items": {
                         "type": "string"
                     },
@@ -175,7 +211,31 @@
                         "null"
                     ]
                 },
+                "pref_label_de": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "pref_label_en": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_en_gb": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_en_us": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_es": {
                     "type": [
                         "string",
                         "null"

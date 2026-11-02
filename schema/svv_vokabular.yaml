@@ -89,6 +89,14 @@ classes:
       - data_structure_label
       - value_range
       - tier
+      - pref_label_en_us
+      - pref_label_en_gb
+      - pref_label_de
+      - pref_label_es
+      - alt_label_en_us
+      - alt_label_en_gb
+      - alt_label_de
+      - alt_label_es
       - in_scheme
 
 slots:
@@ -194,6 +202,44 @@ slots:
     in_language: nb
     description: Discouraged term, e.g. a common misspelling.
     annotations: {excel_column: T, excel_name: frarådd_term, requirement: valgfri}
+
+  # ---------- language extension (template v8-lang-ext, columns AP-AW) ----------
+  pref_label_en_us:
+    slot_uri: skos:prefLabel
+    in_language: en-US
+    annotations: {excel_column: AP, excel_name: anbefalt_term_engelsk_us, requirement: valgfri, template: v8-lang-ext}
+  pref_label_en_gb:
+    slot_uri: skos:prefLabel
+    in_language: en-GB
+    annotations: {excel_column: AQ, excel_name: anbefalt_term_engelsk_gb, requirement: valgfri, template: v8-lang-ext}
+  pref_label_de:
+    slot_uri: skos:prefLabel
+    in_language: de
+    annotations: {excel_column: AR, excel_name: anbefalt_term_tysk, requirement: valgfri, template: v8-lang-ext}
+  pref_label_es:
+    slot_uri: skos:prefLabel
+    in_language: es
+    annotations: {excel_column: AS, excel_name: anbefalt_term_spansk, requirement: valgfri, template: v8-lang-ext}
+  alt_label_en_us:
+    slot_uri: skos:altLabel
+    in_language: en-US
+    multivalued: true
+    annotations: {excel_column: AT, excel_name: tillat_term_engelsk_us, requirement: valgfri, template: v8-lang-ext, separator: ","}
+  alt_label_en_gb:
+    slot_uri: skos:altLabel
+    in_language: en-GB
+    multivalued: true
+    annotations: {excel_column: AU, excel_name: tillat_term_engelsk_gb, requirement: valgfri, template: v8-lang-ext, separator: ","}
+  alt_label_de:
+    slot_uri: skos:altLabel
+    in_language: de
+    multivalued: true
+    annotations: {excel_column: AV, excel_name: tillat_term_tysk, requirement: valgfri, template: v8-lang-ext, separator: ","}
+  alt_label_es:
+    slot_uri: skos:altLabel
+    in_language: es
+    multivalued: true
+    annotations: {excel_column: AW, excel_name: tillat_term_spansk, requirement: valgfri, template: v8-lang-ext, separator: ","}
 
   # ---------- documentation ----------
   audience:

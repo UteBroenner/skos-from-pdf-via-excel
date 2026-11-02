@@ -44,6 +44,7 @@ Each item below was tested here. None of it is assumed from documentation.
 | SHACL generator sets `sh:datatype xsd:string` on language slots | every `"…"@nb` value fails | Replaced by `rdf:langString` + `sh:languageIn` |
 | SHACL generator: container slot `concepts` | none; the RDF writer emits `skos:inScheme` instead | `rdf_skip` annotation |
 | Cross-row rules (cycles, S27, Tier 1 isolated) | not expressible in LinkML | Hand-written SHACL-SPARQL in `shapes/cross_row.shacl.ttl` |
+| `sh:languageIn ("en")` also matches `en-US` / `en-GB` (language-range matching) | "max one English label" fails when US and UK labels exist | qualified shape for `en` excludes the more specific tags (`sh:not [sh:languageIn ("en-US" "en-GB")]`) |
 
 Negative test: a hand-made graph with duplicate nb labels, a German definition, a broader cycle,
 a bad ID, a non-vegvesen e-mail, status as text and tier 7 was checked, and every one of these errors was reported.

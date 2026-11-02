@@ -21,7 +21,11 @@ Name: svv_vokabular
 
 | Slot | Description |
 | --- | --- |
+| [alt_label_de](alt_label_de.md) |  |
 | [alt_label_en](alt_label_en.md) |  |
+| [alt_label_en_gb](alt_label_en_gb.md) |  |
+| [alt_label_en_us](alt_label_en_us.md) |  |
+| [alt_label_es](alt_label_es.md) |  |
 | [alt_label_nb](alt_label_nb.md) |  |
 | [alt_label_nn](alt_label_nn.md) |  |
 | [audience](audience.md) |  |
@@ -49,7 +53,11 @@ Name: svv_vokabular
 | [modified](modified.md) |  |
 | [modified_by](modified_by.md) |  |
 | [notation](notation.md) |  |
+| [pref_label_de](pref_label_de.md) |  |
 | [pref_label_en](pref_label_en.md) |  |
+| [pref_label_en_gb](pref_label_en_gb.md) |  |
+| [pref_label_en_us](pref_label_en_us.md) |  |
+| [pref_label_es](pref_label_es.md) |  |
 | [pref_label_nb](pref_label_nb.md) | Recommended term, bokmål |
 | [pref_label_nn](pref_label_nn.md) | Obligatory in the template, but left empty by extraction for the expert (S06) |
 | [publisher](publisher.md) | System-generated at publication |

@@ -39,6 +39,15 @@ Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `
 .venv/bin/python -m vocabtool rdf out/N101-v8.xlsx --out out/rdf
 ```
 
+Add language columns to the template (appended after column AO; existing columns keep their letters):
+
+```bash
+.venv/bin/python -c "from vocabtool.template_ext import extend_template as e; print(e('templates/SKOS-Excel-mal-v8-for-import.xlsx', 'templates/SKOS-Excel-mal-v8-lang-ext.xlsx', ['en-US','en-GB','de','es']))"
+```
+
+Any column headed `skos:prefLabel@<tag>`, `skos:altLabel@<tag>` or `skos:definition@<tag>` is read automatically.
+The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, section "language extension").
+
 ## Conventions assumed for v8
 
 - Column A `dct:identifier` holds the row key `<kortnavn>-NNNN` (kortnavn: max 4 letters or digits).
@@ -60,6 +69,7 @@ Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `
 | VT-T1-ISOLATED | warning | Tier 1 concept has at least one link |
 | VT-T1-BROADER-NON-T1 | warning | broader of a Tier 1 concept is Tier 1 (OWL rule O4) |
 | VT-LABEL-DUPLICATE | warning | prefLabel@nb unique |
+| VT-LABEL-HOMONYM | warning | same term (any label or abbreviation, any language) on different concepts, e.g. US/UK *double crochet* |
 | VT-LABEL-CASE | warning | prefLabel@nb lowercase, except acronyms (S05) |
 | VT-LABEL-GROUPING | warning | heuristic: label lists several items ("… og …") and has ≥2 narrower concepts, so it is probably a table heading |
 | VT-STATUS / VT-STATUS-LITERAL | warning | status is one of kandidat, gjeldende, utdatert, forkastet, written as a plain value |
@@ -86,7 +96,9 @@ vocabtool/graph.py           graph data + page
 vocabtool/graph_template.html
 vocabtool/linkml_rdf.py       Excel -> LinkML data -> RDF, SHACL fixes
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
-templates/                   Excel template v8
+vocabtool/template_ext.py    add language columns to the template
+templates/                   Excel template v8 and v8 with language extension
+datasets/hekling/            test dataset: crochet stitches in nb, en-US, en-GB, de, es
 samples/                     your workbooks (not in git)
 out/                         generated output (not in git)
 ```

@@ -24,7 +24,15 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
  classDiagram
     class Concept
     click Concept href "../Concept/"
+      Concept : alt_label_de
+        
       Concept : alt_label_en
+        
+      Concept : alt_label_en_gb
+        
+      Concept : alt_label_en_us
+        
+      Concept : alt_label_es
         
       Concept : alt_label_nb
         
@@ -90,7 +98,15 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
         
       Concept : notation
         
+      Concept : pref_label_de
+        
       Concept : pref_label_en
+        
+      Concept : pref_label_en_gb
+        
+      Concept : pref_label_en_us
+        
+      Concept : pref_label_es
         
       Concept : pref_label_nb
         
@@ -198,6 +214,14 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [data_structure_label](data_structure_label.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [value_range](value_range.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [tier](tier.md) | 0..1 <br/> [Integer](Integer.md) | 1 = physical objects, spatial concepts, measurable properties; 2 = processes ... | direct |
+| [pref_label_en_us](pref_label_en_us.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [pref_label_en_gb](pref_label_en_gb.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [pref_label_de](pref_label_de.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [pref_label_es](pref_label_es.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [alt_label_en_us](alt_label_en_us.md) | * <br/> [String](String.md) |  | direct |
+| [alt_label_en_gb](alt_label_en_gb.md) | * <br/> [String](String.md) |  | direct |
+| [alt_label_de](alt_label_de.md) | * <br/> [String](String.md) |  | direct |
+| [alt_label_es](alt_label_es.md) | * <br/> [String](String.md) |  | direct |
 | [in_scheme](in_scheme.md) | 0..1 <br/> [uri](uri.md) | Set by the converter from the scheme URI | direct |
 
 
@@ -301,6 +325,14 @@ slots:
 - data_structure_label
 - value_range
 - tier
+- pref_label_en_us
+- pref_label_en_gb
+- pref_label_de
+- pref_label_es
+- alt_label_en_us
+- alt_label_en_gb
+- alt_label_de
+- alt_label_es
 - in_scheme
 class_uri: skos:Concept
 
@@ -1107,6 +1139,206 @@ attributes:
     range: integer
     minimum_value: 1
     maximum_value: 3
+  pref_label_en_us:
+    name: pref_label_en_us
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AP
+      excel_name:
+        tag: excel_name
+        value: anbefalt_term_engelsk_us
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: en-US
+    rank: 1000
+    slot_uri: skos:prefLabel
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+  pref_label_en_gb:
+    name: pref_label_en_gb
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AQ
+      excel_name:
+        tag: excel_name
+        value: anbefalt_term_engelsk_gb
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: en-GB
+    rank: 1000
+    slot_uri: skos:prefLabel
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+  pref_label_de:
+    name: pref_label_de
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AR
+      excel_name:
+        tag: excel_name
+        value: anbefalt_term_tysk
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: de
+    rank: 1000
+    slot_uri: skos:prefLabel
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+  pref_label_es:
+    name: pref_label_es
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AS
+      excel_name:
+        tag: excel_name
+        value: anbefalt_term_spansk
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: es
+    rank: 1000
+    slot_uri: skos:prefLabel
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+  alt_label_en_us:
+    name: alt_label_en_us
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AT
+      excel_name:
+        tag: excel_name
+        value: tillat_term_engelsk_us
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+      separator:
+        tag: separator
+        value: ','
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: en-US
+    rank: 1000
+    slot_uri: skos:altLabel
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+    multivalued: true
+  alt_label_en_gb:
+    name: alt_label_en_gb
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AU
+      excel_name:
+        tag: excel_name
+        value: tillat_term_engelsk_gb
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+      separator:
+        tag: separator
+        value: ','
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: en-GB
+    rank: 1000
+    slot_uri: skos:altLabel
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+    multivalued: true
+  alt_label_de:
+    name: alt_label_de
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AV
+      excel_name:
+        tag: excel_name
+        value: tillat_term_tysk
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+      separator:
+        tag: separator
+        value: ','
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: de
+    rank: 1000
+    slot_uri: skos:altLabel
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+    multivalued: true
+  alt_label_es:
+    name: alt_label_es
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AW
+      excel_name:
+        tag: excel_name
+        value: tillat_term_spansk
+      requirement:
+        tag: requirement
+        value: valgfri
+      template:
+        tag: template
+        value: v8-lang-ext
+      separator:
+        tag: separator
+        value: ','
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    in_language: es
+    rank: 1000
+    slot_uri: skos:altLabel
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
+    multivalued: true
   in_scheme:
     name: in_scheme
     description: Set by the converter from the scheme URI.

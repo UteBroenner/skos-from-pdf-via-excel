@@ -21,6 +21,7 @@
   --bg: #111816; --surface: #19221f; --ink: #e2eae8; --muted: #93a39f; --line: #2b3633;
   --accent: #63b8a6; --broader: #6fa8ea; --partof: #e3a54a; --related: #b4a5d8;
   --t1: #63b8a6; --t2: #6d7d79; --t3: #4a5653; --t0: #38423f; --err: #ef6f5f; --warn: #e9b44c; color-scheme: dark }
+[hidden] { display: none !important; }
 html, body { height: 100%; }
 body { background: var(--bg); color: var(--ink); font: 14px/1.45 var(--font-body); display: flex; flex-direction: column; }
 .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
@@ -70,6 +71,10 @@ aside .note { color: var(--muted); font-size: 12.5px; }
 .issue.error { border-color: var(--err); } .issue.warning { border-color: var(--warn); }
 .issue code { font: 11px var(--font-mono); color: var(--muted); }
 .empty { color: var(--muted); }
+table.langs { border-collapse: collapse; margin-top: 10px; font-size: 13px; width: 100%; }
+table.langs th { font: 500 11px var(--font-mono); color: var(--muted); text-align: left; padding: 3px 10px 3px 0; vertical-align: top; white-space: nowrap; }
+table.langs td { padding: 3px 8px 3px 0; vertical-align: top; border-top: 1px solid var(--line); }
+table.langs tr:first-child td { border-top: 0; }
 .empty ol { padding-left: 18px; }
 @media (max-width: 760px) {
   main { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(360px, 60vh) auto; }
@@ -108,6 +113,10 @@ aside .note { color: var(--muted); font-size: 12.5px; }
     <label class="tg"><input type="checkbox" id="o-issues" checked>mark issues</label>
     <label class="tg" id="o-tab-wrap"><input type="checkbox" id="o-tab">colour by tab</label>
   </div>
+  <div class="group" id="lang-wrap">
+    <label class="tg" for="lang">Labels</label>
+    <select id="lang"></select>
+  </div>
   <div class="group">
     <label class="tg" for="focus">Neighbourhood</label>
     <select id="focus"><option value="0">whole graph</option><option value="1" selected>1 step</option><option value="2">2 steps</option><option value="3">3 steps</option></select>
@@ -134,6 +143,12 @@ const DATA = /*__DATA__*/null;
   const dangling = DATA.dangling || [];
   const sheets = [...new Set(nodes.map(n => n.sheet))];
   const TYPES = { broader: 'r-broader', isPartOf: 'r-partof', related: 'r-related' };
+  const LANGS = (DATA.meta.langs && DATA.meta.langs.length) ? DATA.meta.langs : ['nb'];
+  let LANG = LANGS[0];
+  const lbl = n => (n.labels && n.labels[LANG]) || (LANG === LANGS[0] ? n.label : n.label + ' ·');
+  $('lang').innerHTML = LANGS.map(t => `<option value="${t}">${t}</option>`).join('');
+  try { const saved = localStorage.getItem('vg-lang'); if (saved && LANGS.includes(saved)) { LANG = saved; $('lang').value = saved; } } catch (e) {}
+  if (LANGS.length < 2) $('lang-wrap').hidden = true;
 
   // ---------- header ----------
   $('title').textContent = DATA.meta.title || DATA.meta.kortnavn || 'Vocabulary';
@@ -264,8 +279,8 @@ const DATA = /*__DATA__*/null;
     for (const [n, x, y, r] of labelled) {
       const strong = n === st.sel || n === st.hover;
       ctx.font = `${strong ? 600 : 400} ${strong ? 13 : 11.5}px ${getComputedStyle(document.body).fontFamily}`;
-      ctx.lineWidth = 3.5; ctx.strokeStyle = C.bg; ctx.strokeText(n.label, x + r + 4, y);
-      ctx.fillStyle = strong ? C.ink : C.muted; ctx.fillText(n.label, x + r + 4, y);
+      ctx.lineWidth = 3.5; ctx.strokeStyle = C.bg; ctx.strokeText(lbl(n), x + r + 4, y);
+      ctx.fillStyle = strong ? C.ink : C.muted; ctx.fillText(lbl(n), x + r + 4, y);
     }
   }
 
@@ -308,7 +323,7 @@ const DATA = /*__DATA__*/null;
   function relList(title, sw, items) {
     if (!items.length) return '';
     return `<h3><span class="sw ${sw}"></span>${title} <span>(${items.length})</span></h3><ul>` + items.map(it =>
-      it.node ? `<li><a class="rel" data-id="${esc(it.node.id)}">${esc(it.node.label)}</a> <span class="chip${it.node.tier === '1' ? ' t1' : ''}">T${esc(it.node.tier || '–')}</span></li>`
+      it.node ? `<li><a class="rel" data-id="${esc(it.node.id)}">${esc(lbl(it.node))}</a> <span class="chip${it.node.tier === '1' ? ' t1' : ''}">T${esc(it.node.tier || '–')}</span></li>`
               : `<li class="missing">${esc(it.id)} · not in this workbook</li>`).join('') + '</ul>';
   }
   function renderPanel() {
@@ -316,7 +331,7 @@ const DATA = /*__DATA__*/null;
     if (!n) {
       const top = [...nodes].filter(x => x.tier === '1').sort((a, b) => b.degAll - a.degAll).slice(0, 8);
       p.innerHTML = `<div class="empty"><h2>Select a concept</h2><p>Click a node or search above. The panel shows its definition, all relations (also those hidden by filters) and validation findings.</p>
-        <h3>Most connected Tier 1 concepts</h3><ul>${top.map(x => `<li><a class="rel" data-id="${esc(x.id)}">${esc(x.label)}</a> <span class="note">${x.degAll} links</span></li>`).join('')}</ul>
+        <h3>Most connected Tier 1 concepts</h3><ul>${top.map(x => `<li><a class="rel" data-id="${esc(x.id)}">${esc(lbl(x))}</a> <span class="note">${x.degAll} links</span></li>`).join('')}</ul>
         <h3>Reading the graph</h3><ul class="note"><li>Arrow points to the broader concept or the whole.</li><li>Ring: <span style="color:var(--err)">error</span> or <span style="color:var(--warn)">warning</span> from validation.</li></ul></div>`;
       return;
     }
@@ -326,10 +341,13 @@ const DATA = /*__DATA__*/null;
     const rel = [...out('related'), ...inn('related')];
     const issues = n.issues.filter(i => i[0] !== 'info');
     const info = n.issues.filter(i => i[0] === 'info');
-    p.innerHTML = `<h2>${esc(n.label)}</h2>
+    const langRows = LANGS.filter(t => (n.labels && n.labels[t]) || (n.alts && n.alts[t])).map(t =>
+      `<tr><th>${esc(t)}</th><td>${esc((n.labels || {})[t] || '—')}</td><td class="note">${esc((n.alts || {})[t] || '')}</td></tr>`).join('');
+    p.innerHTML = `<h2>${esc(lbl(n))}</h2>
       <div class="idline"><span>${esc(n.id)}</span><span class="chip${n.tier === '1' ? ' t1' : ''}">Tier ${esc(n.tier || '–')}</span>${sheets.length > 1 ? `<span>${esc(n.sheet)}</span>` : ''}</div>
-      ${n.alt ? `<div class="note" style="margin-top:6px">Also: ${esc(n.alt)}</div>` : ''}
+      ${LANGS.length > 1 ? `<table class="langs">${langRows}</table>` : (n.alt ? `<div class="note" style="margin-top:6px">Also: ${esc(n.alt)}</div>` : '')}
       <p class="def">${esc(n.def || '—')}</p>
+      ${n.def_en && LANG.startsWith('en') ? `<p class="def note">${esc(n.def_en)}</p>` : ''}
       ${relList('Broader', 'broader', [...out('broader'), ...dang('broader')])}
       ${relList('Narrower', 'broader', inn('broader'))}
       ${relList('Is part of', 'partof', [...out('isPartOf'), ...dang('isPartOf')])}
@@ -347,10 +365,11 @@ const DATA = /*__DATA__*/null;
   const norm = s => (s || '').toLowerCase();
   function showHits() {
     const s = norm(q.value.trim()); if (!s) { hits.hidden = true; return; }
-    hitList = nodes.filter(n => norm(n.label).includes(s) || norm(n.id).includes(s) || norm(n.alt).includes(s))
-      .sort((a, b) => (norm(a.label).startsWith(s) ? 0 : 1) - (norm(b.label).startsWith(s) ? 0 : 1) || a.label.localeCompare(b.label)).slice(0, 10);
+    const hay = n => [n.id, n.label, n.alt, ...Object.values(n.labels || {}), ...Object.values(n.alts || {})].map(norm).join(' | ');
+    hitList = nodes.filter(n => hay(n).includes(s))
+      .sort((a, b) => (norm(lbl(a)).startsWith(s) ? 0 : 1) - (norm(lbl(b)).startsWith(s) ? 0 : 1) || lbl(a).localeCompare(lbl(b))).slice(0, 10);
     hi = 0; hits.hidden = !hitList.length;
-    hits.innerHTML = hitList.map((n, i) => `<li data-i="${i}" class="${i === hi ? 'on' : ''}">${esc(n.label)}<span class="id">${esc(n.id)} · T${esc(n.tier || '–')}</span></li>`).join('');
+    hits.innerHTML = hitList.map((n, i) => `<li data-i="${i}" class="${i === hi ? 'on' : ''}">${esc(lbl(n))}<span class="id">${esc(n.id)} · T${esc(n.tier || '–')}</span></li>`).join('');
   }
   const choose = i => { const n = hitList[i]; if (!n) return; if (!O.tiers[n.tier || '']) $('t-' + (n.tier || '0')).checked = true; q.value = ''; hits.hidden = true; select(n); };
   q.addEventListener('input', showHits);
@@ -362,6 +381,7 @@ const DATA = /*__DATA__*/null;
     $(id).addEventListener('change', () => { computeVisible(); reheat(.5); setTimeout(fit, 500); });
   for (const id of ['o-issues', 'o-tab']) $(id).addEventListener('change', () => { O = opt(); draw(); });
   $('fit').addEventListener('click', fit);
+  $('lang').addEventListener('change', () => { LANG = $('lang').value; try { localStorage.setItem('vg-lang', LANG); } catch (e) {} draw(); renderPanel(); });
   $('relayout').addEventListener('click', () => { seed(); computeVisible(); run(); setTimeout(fit, 700); setTimeout(fit, 1800); });
 
   // ---------- start ----------

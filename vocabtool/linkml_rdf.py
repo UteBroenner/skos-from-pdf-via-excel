@@ -40,6 +40,10 @@ FIELD_TO_SLOT = {
     "version_info": "version_info", "version_notes": "version_notes", "status": "status",
     "start_date": "start_date", "end_date": "end_date", "data_structure_label": "data_structure_label",
     "value_range": "value_range", "tier": "tier",
+    # language extension (v8-lang-ext)
+    "label_en_us": "pref_label_en_us", "label_en_gb": "pref_label_en_gb", "label_de": "pref_label_de",
+    "label_es": "pref_label_es", "alt_en_us": "alt_label_en_us", "alt_en_gb": "alt_label_en_gb",
+    "alt_de": "alt_label_de", "alt_es": "alt_label_es",
 }
 RELATION_SLOTS = {"broader", "is_part_of", "related"}
 BASE = "http://example.org/vegvesen/vokabular/"
@@ -174,6 +178,14 @@ def build_shapes(generated_shacl: str | Path, sv: SchemaView | None = None) -> G
                     lst = BNode()
                     Collection(g, lst, [Literal(s.in_language)])
                     g.add((q, SH.languageIn, lst))
+                    # sh:languageIn uses language-range matching: "en" also matches "en-US".
+                    # Exclude more specific tags that have their own slot.
+                    narrower = [x for x in langs if x.lower().startswith(s.in_language.lower() + "-")]
+                    if narrower:
+                        nshape, nlst = BNode(), BNode()
+                        Collection(g, nlst, [Literal(x) for x in narrower])
+                        g.add((nshape, SH.languageIn, nlst))
+                        g.add((q, SH["not"], nshape))
                     g.add((p, SH.qualifiedValueShape, q))
                     if not s.multivalued:
                         g.add((p, SH.qualifiedMaxCount, Literal(1)))
