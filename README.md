@@ -44,8 +44,8 @@ python -m vocabtool check path/to/workbook.xlsx --out out
 
 The exit code is 1 if there are errors, so the command can be used as a gate.
 
-Migrate a v7 workbook into the v8 template. This assigns IDs `<kortnavn>-0001…` and
-rewrites relations from `vok:X` to IDs:
+Migrate a v7 workbook into the v8 template. This assigns IDs `<kortnavn>-0001…`,
+keeps the v7 concept name in column B (`vok:Rekkverk` → `Rekkverk`) and rewrites relations from `vok:X` to IDs:
 
 ```bash
 python -m vocabtool migrate samples/N101-v7.xlsx --template templates/SKOS-Excel-mal-v8-for-import.xlsx --out out/N101-v8.xlsx
@@ -53,6 +53,16 @@ python -m vocabtool migrate samples/N101-v7.xlsx --template templates/SKOS-Excel
 
 Relation targets that are not in the workbook are kept
 as written and listed, so they show up as `VT-REF-FORMAT` errors in v8.
+
+Fill empty concept names (column B) from the main-language term, in CamelCase
+(`rekkverk` → `Rekkverk`, `brystningshøyde` → `Brystningshoyde`, `single crochet` → `SingleCrochet`):
+
+```bash
+python -m vocabtool uri path/to/workbook.xlsx
+```
+
+Existing names are kept, and `--overwrite` regenerates all of them. If two concepts would get the same name,
+the second gets a number (`Name2`) and the command lists it, so you can choose a better name.
 
 Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `schema/README.md`):
 
@@ -80,6 +90,11 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 ## Conventions assumed for v8
 
 - Column A `dct:identifier` holds the row key `<kortnavn>-NNNN` (kortnavn: max 4 letters or digits).
+- Column B holds only the concept name in CamelCase (letters and digits), e.g. `Rekkverk`.
+  The tools build the URI from it: ConceptScheme URI (cell B1, `…/vokabular/<kortnavn>`) + `/` + name,
+  e.g. `http://example.org/vegvesen/vokabular/N101/Rekkverk`. The vocabulary segment keeps equal names
+  in different vocabularies apart.
+- The change hash (column AN) covers columns A–AM, including the concept name.
 - `skos:broader`, `xkos:isPartOf` and `skos:related` contain **IDs**, separated by commas.
 - Header row = the row with `skos:prefLabel@nb`. In v8 the following row holds the technical names.
 - Code lists (`kodeverk` sheet) are not read.
@@ -90,6 +105,8 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 | --- | --- | --- |
 | VT-ID-FORMAT | error | ID matches `<kortnavn>-NNNN` (v8) |
 | VT-ID-DUPLICATE | error | ID unique |
+| VT-URI-MISSING / VT-URI-FORMAT / VT-URI-DUPLICATE | error | concept name in column B present, CamelCase letters and digits only, unique (S03) |
+| VT-URI-LABEL | info | concept name differs from the CamelCase form of the main-language term |
 | VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
 | VT-REF-FORMAT | error | relation values are IDs (v8) |
 | VT-REF-SELF | error | no relation to itself |
@@ -131,6 +148,7 @@ vocabtool/graph_template.html
 vocabtool/linkml_rdf.py      Excel -> LinkML data -> RDF, SHACL fixes
 vocabtool/template_ext.py    add language columns to the template
 vocabtool/clash_notes.py     draft scope notes for label clashes
+vocabtool/uri.py             concept names (CamelCase) and URIs
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   Excel template v8 and v8 with language extension
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)

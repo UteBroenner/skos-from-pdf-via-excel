@@ -56,6 +56,7 @@ PROPERTY_MAP = {
 # dct:contributor appears twice in v8 (created by / modified by), once in v7.
 CONTRIBUTOR_FIELDS = ["created_by", "modified_by"]
 
+SCHEME_BASE = "http://example.org/vegvesen/vokabular/"   # template v8 cell B1: CONCAT(SCHEME_BASE, kortnavn)
 RELATION_FIELDS = {"broader": "skos:broader", "is_part_of": "xkos:isPartOf", "related": "skos:related"}
 EXCLUDED_SHEETS = {"kodeverk", "lister"}
 
@@ -229,7 +230,11 @@ def read_workbook(path: str | Path) -> Vocabulary:
         kortnavn = None
     if not kortnavn and meta.get("scheme_uri") and not str(meta["scheme_uri"]).startswith("="):
         kortnavn = str(meta["scheme_uri"]).rstrip("/").rsplit("/", 1)[-1]
+    scheme_uri = as_text(meta.get("scheme_uri"))
+    # v8 B1 is a formula; a missing or stale cached value (e.g. ".../<kortnavn>") is rebuilt from kortnavn
+    if kortnavn and (not scheme_uri or scheme_uri.startswith("=") or not scheme_uri.rstrip("/").endswith("/" + kortnavn)):
+        scheme_uri = SCHEME_BASE + kortnavn
     return Vocabulary(path=path, version=version or "unknown", kortnavn=kortnavn,
-                      title=meta.get("title"), scheme_uri=as_text(meta.get("scheme_uri")),
+                      title=meta.get("title"), scheme_uri=scheme_uri,
                       main_lang=meta.get("main_lang") or "nb",
                       concepts=concepts, columns=columns, unmapped_headers=unmapped)

@@ -108,8 +108,10 @@ slots:
   uri:
     identifier: true
     range: uri
-    description: Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).
-    annotations: {excel_column: B, excel_name: begreps_URI}
+    description: >-
+      Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the
+      workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.
+    annotations: {excel_column: B, excel_name: begreps_URI, excel_value: CamelCase concept name only}
   kortnavn:
     slot_uri: svv:kortnavn
     required: true

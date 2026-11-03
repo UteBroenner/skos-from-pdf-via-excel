@@ -6,17 +6,32 @@
  "summary": {
   "errors": 0,
   "warnings": 0,
-  "info": 46,
+  "info": 47,
   "by_rule": [
    {
     "severity": "info",
     "rule": "VT-LABEL-NOTED",
     "count": 46,
     "description": "label clash documented in a scope note that names the other concept"
+   },
+   {
+    "severity": "info",
+    "rule": "VT-URI-LABEL",
+    "count": 1,
+    "description": "concept name in column B differs from the CamelCase form of the main-language term (fine if the term was changed on purpose)"
    }
   ]
  },
  "findings": [
+  {
+   "rule": "VT-URI-LABEL",
+   "severity": "info",
+   "key": "HEKL-0057",
+   "sheet": "vokabular",
+   "row": 79,
+   "message": "concept name in column B differs from the CamelCase form of the main-language term (fine if the term was changed on purpose): CrossedDoubleCrochet2 vs CrossedDoubleCrochet",
+   "ref": "S03"
+  },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",

@@ -29,6 +29,10 @@ The dataset tests these things:
 
 `dcat:contactPoint` is https://github.com/UteBroenner.
 
+Concept names (column B) are generated from the en-US term, e.g. `SingleCrochet`, which gives the URI
+`http://example.org/vegvesen/vokabular/HEKL/SingleCrochet`. The pattern HEKL-0057 is `CrossedDoubleCrochet2`,
+because the stitch HEKL-0028 already has `CrossedDoubleCrochet`. This is part of the open stitch-versus-pattern decision.
+
 Every label clash has a draft en-US scope note (column AY) that warns about it and names the other concept's ID.
 There are 19 concepts with notes, covering the US/UK cross-overs, Norwegian versus English `st`, Spanish *punto* and *vuelta*,
 and the crossed double crochet stitch versus pattern.

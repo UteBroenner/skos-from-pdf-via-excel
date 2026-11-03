@@ -345,7 +345,7 @@ const DATA = /*__DATA__*/null;
     const langRows = LANGS.filter(t => (n.labels && n.labels[t]) || (n.alts && n.alts[t])).map(t =>
       `<tr><th>${esc(t)}</th><td>${esc((n.labels || {})[t] || '—')}</td><td class="note">${esc((n.alts || {})[t] || '')}</td></tr>`).join('');
     p.innerHTML = `<h2>${esc(lbl(n))}</h2>
-      <div class="idline"><span>${esc(n.id)}</span><span class="chip${n.tier === '1' ? ' t1' : ''}">Tier ${esc(n.tier || '–')}</span>${sheets.length > 1 ? `<span>${esc(n.sheet)}</span>` : ''}</div>
+      <div class="idline"><span>${esc(n.id)}</span>${n.name ? `<span title="URI: ConceptScheme URI / name">/${esc(n.name)}</span>` : ''}<span class="chip${n.tier === '1' ? ' t1' : ''}">Tier ${esc(n.tier || '–')}</span>${sheets.length > 1 ? `<span>${esc(n.sheet)}</span>` : ''}</div>
       ${LANGS.length > 1 ? `<table class="langs">${langRows}</table>` : (n.alt ? `<div class="note" style="margin-top:6px">Also: ${esc(n.alt)}</div>` : '')}
       <p class="def">${esc((n.defs || {})[LANG] || n.def || '—')}</p>
       ${Object.entries(n.defs || {}).filter(([t, d]) => d !== ((n.defs || {})[LANG] || n.def)).map(([t, d]) => `<p class="def note"><span class="chip">${esc(t)}</span> ${esc(d)}</p>`).join('')}

@@ -3,7 +3,7 @@ kortnavn: HEKL
 title: Heklemasker – flerspråklig vokabular (testdatasett)
 main_language: en-US
 concepts:
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+- uri: http://example.org/vegvesen/vokabular/HEKL/Stitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0001
   pref_label_nb: maske
@@ -12,8 +12,8 @@ concepts:
   - m
   subject: hekling
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0031
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0032
+  - http://example.org/vegvesen/vokabular/HEKL/Row
+  - http://example.org/vegvesen/vokabular/HEKL/Round
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -34,7 +34,7 @@ concepts:
   scope_note_en_us: 'Caution: ''punto'' is the Spanish name of this concept and the Spanish alternative name of HEKL-0046
     (stitch pattern). ''st'' is the UK and US abbreviation of this concept and the Norwegian abbreviation of HEKL-0009 (double
     crochet).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0002
+- uri: http://example.org/vegvesen/vokabular/HEKL/Chain
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0002
   pref_label_nb: luftmaske
@@ -43,23 +43,23 @@ concepts:
   - lm
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0005
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0027
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0030
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0035
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0050
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0051
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0053
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0054
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0055
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0056
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0060
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0070
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0074
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0077
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0064
+  - http://example.org/vegvesen/vokabular/HEKL/FoundationChain
+  - http://example.org/vegvesen/vokabular/HEKL/VStitch
+  - http://example.org/vegvesen/vokabular/HEKL/Picot
+  - http://example.org/vegvesen/vokabular/HEKL/MossStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ArcadeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/WattleStitch
+  - http://example.org/vegvesen/vokabular/HEKL/TrinityStitch
+  - http://example.org/vegvesen/vokabular/HEKL/IrisStitch
+  - http://example.org/vegvesen/vokabular/HEKL/HappyHearts
+  - http://example.org/vegvesen/vokabular/HEKL/ZigZagLozengeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/SlantedSpikeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/PikeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/MiniButterflyStitch
+  - http://example.org/vegvesen/vokabular/HEKL/OffsetVStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ClusterVStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -77,7 +77,7 @@ concepts:
   alt_label_es:
   - cad
   definition_en_us: stitch made by drawing the yarn through the loop on the hook without inserting the hook into the work
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0003
+- uri: http://example.org/vegvesen/vokabular/HEKL/SlipStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0003
   pref_label_nb: kjedemaske
@@ -88,12 +88,12 @@ concepts:
   editorial_note: '[usikker] es: både «punto raso» og «punto enano» er i bruk; kontroller hva som er vanligst i Spania'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0030
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0047
+  - http://example.org/vegvesen/vokabular/HEKL/Picot
+  - http://example.org/vegvesen/vokabular/HEKL/FloretStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0032
+  - http://example.org/vegvesen/vokabular/HEKL/Round
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -113,14 +113,14 @@ concepts:
   - punto enano
   definition_en_us: stitch in which the hook is inserted into the work and the yarn is drawn through both the work and the
     loop on the hook in one movement; adds almost no height
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0004
+- uri: http://example.org/vegvesen/vokabular/HEKL/MagicRing
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0004
   pref_label_nb: magisk ring
   definition_nb: justerbar løkke av garn som første omgang hekles rundt, og som strammes til slik at midten lukkes
   subject: hekling
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0032
+  - http://example.org/vegvesen/vokabular/HEKL/Round
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -138,7 +138,7 @@ concepts:
   - magischer Ring
   definition_en_us: adjustable loop of yarn around which the first round is worked and which is then pulled tight to close
     the centre
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0005
+- uri: http://example.org/vegvesen/vokabular/HEKL/FoundationChain
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0005
   pref_label_nb: luftmaskekjede
@@ -146,7 +146,7 @@ concepts:
   editorial_note: '[usikker] nb: «luftmaskekjede» eller «luftmaskerad»; es: «cadeneta base» ikke verifisert'
   subject: hekling
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0031
+  - http://example.org/vegvesen/vokabular/HEKL/Row
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -158,7 +158,7 @@ concepts:
   alt_label_de:
   - Luftmaschenanschlag
   definition_en_us: line of chain stitches that forms the starting edge of a piece worked in rows
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0006
+- uri: http://example.org/vegvesen/vokabular/HEKL/TurningChain
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0006
   pref_label_nb: vendeluftmaske
@@ -166,11 +166,11 @@ concepts:
   editorial_note: '[usikker] nb: «vendeluftmaske» eller «snuluftmaske»; es: «cadeneta de subida» ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0002
+  - http://example.org/vegvesen/vokabular/HEKL/Chain
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0031
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0050
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0066
+  - http://example.org/vegvesen/vokabular/HEKL/Row
+  - http://example.org/vegvesen/vokabular/HEKL/ArcadeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ThistleStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -188,7 +188,7 @@ concepts:
   - Wende-Lm
   definition_en_us: one or more chains worked at the beginning of a row or round to bring the work up to the height of its
     stitches
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0007
+- uri: http://example.org/vegvesen/vokabular/HEKL/SingleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0007
   pref_label_nb: fastmaske
@@ -198,28 +198,28 @@ concepts:
   - fm
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0035
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0048
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0049
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0050
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0051
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0053
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0055
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0057
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0058
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0060
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0065
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0067
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0068
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0071
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0072
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0073
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0074
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0075
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0076
+  - http://example.org/vegvesen/vokabular/HEKL/MossStitch
+  - http://example.org/vegvesen/vokabular/HEKL/SedgeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/BlackberrySaladStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ArcadeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/WattleStitch
+  - http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
+  - http://example.org/vegvesen/vokabular/HEKL/TrinityStitch
+  - http://example.org/vegvesen/vokabular/HEKL/HappyHearts
+  - http://example.org/vegvesen/vokabular/HEKL/CrossedDoubleCrochet2
+  - http://example.org/vegvesen/vokabular/HEKL/NubbyCrochetStitch
+  - http://example.org/vegvesen/vokabular/HEKL/SlantedSpikeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ForkedClusterStitch
+  - http://example.org/vegvesen/vokabular/HEKL/SiltStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ModifiedSiltStitch
+  - http://example.org/vegvesen/vokabular/HEKL/BoxedBeadStitch
+  - http://example.org/vegvesen/vokabular/HEKL/LazyWaveStitch
+  - http://example.org/vegvesen/vokabular/HEKL/AlpineStitch
+  - http://example.org/vegvesen/vokabular/HEKL/MiniButterflyStitch
+  - http://example.org/vegvesen/vokabular/HEKL/GritStitch
+  - http://example.org/vegvesen/vokabular/HEKL/CrossedCableStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -241,7 +241,7 @@ concepts:
     drawn through both loops at once
   scope_note_en_us: 'Caution: ''dc'' is the UK abbreviation of this concept and the US abbreviation of HEKL-0009 (double crochet).
     ''double crochet'' is the UK name of this concept and the US name of HEKL-0009.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0008
+- uri: http://example.org/vegvesen/vokabular/HEKL/HalfDoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0008
   pref_label_nb: halvstav
@@ -252,13 +252,13 @@ concepts:
   editorial_note: '[usikker] es: «punto medio alto» (Spania?) og «media vareta» (Latin-Amerika?)'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0056
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0059
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0069
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0072
+  - http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
+  - http://example.org/vegvesen/vokabular/HEKL/ZigZagLozengeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/RaisedHerringbone
+  - http://example.org/vegvesen/vokabular/HEKL/BraidedCrochetStitch
+  - http://example.org/vegvesen/vokabular/HEKL/LazyWaveStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -278,7 +278,7 @@ concepts:
   - media vareta
   definition_en_us: stitch made with one yarn over before inserting the hook; the yarn is pulled up (three loops on the hook)
     and drawn through all three at once
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0009
+- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0009
   pref_label_nb: stav
@@ -288,33 +288,33 @@ concepts:
   - st
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0026
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0027
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0033
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0047
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0048
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0049
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0050
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0051
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0054
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0055
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0057
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0058
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0065
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0066
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0067
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0068
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0069
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0071
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0072
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0073
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0074
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0075
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0076
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0077
+  - http://example.org/vegvesen/vokabular/HEKL/Shell
+  - http://example.org/vegvesen/vokabular/HEKL/VStitch
+  - http://example.org/vegvesen/vokabular/HEKL/GrannySquare
+  - http://example.org/vegvesen/vokabular/HEKL/FloretStitch
+  - http://example.org/vegvesen/vokabular/HEKL/SedgeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/BlackberrySaladStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ArcadeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/WattleStitch
+  - http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
+  - http://example.org/vegvesen/vokabular/HEKL/IrisStitch
+  - http://example.org/vegvesen/vokabular/HEKL/HappyHearts
+  - http://example.org/vegvesen/vokabular/HEKL/CrossedDoubleCrochet2
+  - http://example.org/vegvesen/vokabular/HEKL/NubbyCrochetStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ForkedClusterStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ThistleStitch
+  - http://example.org/vegvesen/vokabular/HEKL/SiltStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ModifiedSiltStitch
+  - http://example.org/vegvesen/vokabular/HEKL/BraidedCrochetStitch
+  - http://example.org/vegvesen/vokabular/HEKL/BoxedBeadStitch
+  - http://example.org/vegvesen/vokabular/HEKL/LazyWaveStitch
+  - http://example.org/vegvesen/vokabular/HEKL/AlpineStitch
+  - http://example.org/vegvesen/vokabular/HEKL/MiniButterflyStitch
+  - http://example.org/vegvesen/vokabular/HEKL/GritStitch
+  - http://example.org/vegvesen/vokabular/HEKL/CrossedCableStitch
+  - http://example.org/vegvesen/vokabular/HEKL/OffsetVStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -339,7 +339,7 @@ concepts:
     abbreviation of this concept and the UK and US abbreviation of HEKL-0001 (stitch). ''tr'' is the UK abbreviation of this
     concept and the US abbreviation of HEKL-0010 (treble crochet). ''treble crochet'' is the UK name of this concept and the
     US name of HEKL-0010.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0010
+- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0010
   pref_label_nb: dobbelstav
@@ -351,11 +351,11 @@ concepts:
   editorial_note: '[usikker] es: forkortelse «pad»'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0058
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0072
+  - http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
+  - http://example.org/vegvesen/vokabular/HEKL/NubbyCrochetStitch
+  - http://example.org/vegvesen/vokabular/HEKL/LazyWaveStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -379,7 +379,7 @@ concepts:
     is the UK abbreviation of this concept and the US abbreviation of HEKL-0011 (double treble crochet). ''tr'' is the US
     abbreviation of this concept and the UK abbreviation of HEKL-0009 (double crochet). ''treble crochet'' is the US name
     of this concept and the UK name of HEKL-0009 (double crochet).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0011
+- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleTrebleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0011
   pref_label_nb: trippelstav
@@ -390,7 +390,7 @@ concepts:
   editorial_note: '[usikker] nb: «trippelstav»/«tst»; de: forkortelse mangler; es: «pat»'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -410,7 +410,7 @@ concepts:
     loops at a time, four times
   scope_note_en_us: 'Caution: ''double treble crochet'' is the US name of this concept and the UK name of HEKL-0010 (treble
     crochet). ''dtr'' is the US abbreviation of this concept and the UK abbreviation of HEKL-0010 (treble crochet).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0012
+- uri: http://example.org/vegvesen/vokabular/HEKL/PostStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0012
   pref_label_nb: reliefmaske
@@ -419,7 +419,7 @@ concepts:
   editorial_note: '[usikker] nb, de, es: samlebegrep ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -432,7 +432,7 @@ concepts:
   - post stitch
   definition_en_us: stitch worked around the post (body) of a stitch in the row below instead of through its top loops, so
     that it stands out in relief
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0013
+- uri: http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0013
   pref_label_nb: reliefstav forfra
@@ -441,10 +441,10 @@ concepts:
   editorial_note: '[usikker] nb, de, es: termer ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0012
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0009
+  - http://example.org/vegvesen/vokabular/HEKL/PostStitch
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0014
+  - http://example.org/vegvesen/vokabular/HEKL/BackPostDoubleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -461,7 +461,7 @@ concepts:
     so that the stitch lies on the front of the work
   scope_note_en_us: 'Caution: ''FPtr'' is the UK abbreviation of this concept and the US abbreviation of HEKL-0063 (front
     post treble crochet). ''front post treble crochet'' is the UK name of this concept and the US name of HEKL-0063.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0014
+- uri: http://example.org/vegvesen/vokabular/HEKL/BackPostDoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0014
   pref_label_nb: reliefstav bakfra
@@ -470,12 +470,12 @@ concepts:
   editorial_note: '[usikker] nb, de, es: termer ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0012
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0009
+  - http://example.org/vegvesen/vokabular/HEKL/PostStitch
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0055
+  - http://example.org/vegvesen/vokabular/HEKL/HappyHearts
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0013
+  - http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -490,7 +490,7 @@ concepts:
   - BPtr
   definition_en_us: double crochet worked around the post of a stitch in the row below, inserting the hook from the back,
     so that the stitch lies on the back of the work
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0015
+- uri: http://example.org/vegvesen/vokabular/HEKL/BackLoopOnly
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0015
   pref_label_nb: kun bakre maskeledd
@@ -498,10 +498,10 @@ concepts:
   editorial_note: '[usikker] nb, es: termer ikke verifisert'
   subject: hekling
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0068
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0069
+  - http://example.org/vegvesen/vokabular/HEKL/ModifiedSiltStitch
+  - http://example.org/vegvesen/vokabular/HEKL/BraidedCrochetStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0016
+  - http://example.org/vegvesen/vokabular/HEKL/FrontLoopOnly
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -515,7 +515,7 @@ concepts:
   alt_label_en_gb:
   - BLO
   definition_en_us: working method in which the hook is inserted under the back one only of the two top loops of a stitch
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0016
+- uri: http://example.org/vegvesen/vokabular/HEKL/FrontLoopOnly
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0016
   pref_label_nb: kun fremre maskeledd
@@ -523,7 +523,7 @@ concepts:
   editorial_note: '[usikker] nb, es: termer ikke verifisert'
   subject: hekling
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0015
+  - http://example.org/vegvesen/vokabular/HEKL/BackLoopOnly
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -537,14 +537,14 @@ concepts:
   alt_label_en_gb:
   - FLO
   definition_en_us: working method in which the hook is inserted under the front one only of the two top loops of a stitch
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0017
+- uri: http://example.org/vegvesen/vokabular/HEKL/Increase
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0017
   pref_label_nb: økning
   definition_nb: det å hekle to eller flere masker i samme maske i raden eller omgangen under, slik at maskeantallet øker
   subject: hekling
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
+  - http://example.org/vegvesen/vokabular/HEKL/Decrease
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -561,14 +561,14 @@ concepts:
   - aum
   definition_en_us: working two or more stitches into the same stitch of the previous row or round, so that the stitch count
     increases
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
+- uri: http://example.org/vegvesen/vokabular/HEKL/Decrease
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0018
   pref_label_nb: felling
   definition_nb: det å slå sammen to eller flere masker til én, slik at maskeantallet minker
   subject: hekling
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0017
+  - http://example.org/vegvesen/vokabular/HEKL/Increase
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -584,7 +584,7 @@ concepts:
   alt_label_es:
   - dism
   definition_en_us: joining two or more stitches into one, so that the stitch count decreases
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0019
+- uri: http://example.org/vegvesen/vokabular/HEKL/SingleCrochetTwoTogether
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0019
   pref_label_nb: 2 fastmasker sammen
@@ -592,12 +592,12 @@ concepts:
     i ett trekk
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0076
+  - http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
+  - http://example.org/vegvesen/vokabular/HEKL/CrossedCableStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
+  - http://example.org/vegvesen/vokabular/HEKL/Decrease
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -614,7 +614,7 @@ concepts:
     loops on the hook at once
   scope_note_en_us: 'Caution: ''dc2tog'' is the UK abbreviation of this concept and the US abbreviation of HEKL-0020 (double
     crochet two together). ''double crochet two together'' is the UK name of this concept and the US name of HEKL-0020.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0020
+- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0020
   pref_label_nb: 2 staver sammen
@@ -622,12 +622,12 @@ concepts:
     trekk
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0056
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0064
+  - http://example.org/vegvesen/vokabular/HEKL/ZigZagLozengeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ClusterVStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
+  - http://example.org/vegvesen/vokabular/HEKL/Decrease
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -646,7 +646,7 @@ concepts:
     crochet two together). ''double crochet two together'' is the US name of this concept and the UK name of HEKL-0019 (single
     crochet two together). ''tr2tog'' is the UK abbreviation of this concept and the US abbreviation of HEKL-0040 (treble
     crochet two together). ''treble crochet two together'' is the UK name of this concept and the US name of HEKL-0040.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0021
+- uri: http://example.org/vegvesen/vokabular/HEKL/InvisibleDecrease
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0021
   pref_label_nb: usynlig felling
@@ -654,10 +654,10 @@ concepts:
     usynlig; mye brukt i amigurumi
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
+  - http://example.org/vegvesen/vokabular/HEKL/Decrease
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0016
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0019
+  - http://example.org/vegvesen/vokabular/HEKL/FrontLoopOnly
+  - http://example.org/vegvesen/vokabular/HEKL/SingleCrochetTwoTogether
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -670,7 +670,7 @@ concepts:
   - invdec
   definition_en_us: decrease in which two single crochets are worked together through the front loops only, so that the decrease
     is almost invisible; common in amigurumi
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0022
+- uri: http://example.org/vegvesen/vokabular/HEKL/Cluster
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0022
   pref_label_nb: klynge
@@ -678,7 +678,7 @@ concepts:
   editorial_note: '[usikker] nb: «klynge»; de: «Büschelmasche» brukes også om puffmaske; [mangler] es'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -691,7 +691,7 @@ concepts:
   alt_label_en_gb:
   - cl
   definition_en_us: stitch in which several incomplete stitches are worked and then finished together at the top in one movement
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0023
+- uri: http://example.org/vegvesen/vokabular/HEKL/Bobble
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0023
   pref_label_nb: boble
@@ -701,12 +701,12 @@ concepts:
     «dc5tog (bobble)» om en boble på fem staver i samme maske.'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0022
+  - http://example.org/vegvesen/vokabular/HEKL/Cluster
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0049
+  - http://example.org/vegvesen/vokabular/HEKL/BlackberrySaladStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0024
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0025
+  - http://example.org/vegvesen/vokabular/HEKL/PuffStitch
+  - http://example.org/vegvesen/vokabular/HEKL/PopcornStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -717,7 +717,7 @@ concepts:
   pref_label_es: punto garbanzo
   definition_en_us: cluster of several incomplete double crochets worked into the same stitch and finished together, forming
     a raised bump
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0024
+- uri: http://example.org/vegvesen/vokabular/HEKL/PuffStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0024
   pref_label_nb: puffmaske
@@ -726,9 +726,9 @@ concepts:
   editorial_note: '[usikker] nb, de; es: «punto piña» brukes også om andre klynger'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0022
+  - http://example.org/vegvesen/vokabular/HEKL/Cluster
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0023
+  - http://example.org/vegvesen/vokabular/HEKL/Bobble
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -741,7 +741,7 @@ concepts:
   - punto piña
   definition_en_us: stitch in which several loops are pulled up from the same stitch and elongated before all loops are finished
     together, giving a soft, puffy stitch
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0025
+- uri: http://example.org/vegvesen/vokabular/HEKL/PopcornStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0025
   pref_label_nb: popcornmaske
@@ -750,9 +750,9 @@ concepts:
   editorial_note: Kilden (Part 9) har et mønsteravsnitt «Popcorn Stitch» med popcornmasker mellom halvstaver; ikke eget mønsterbegrep
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0023
+  - http://example.org/vegvesen/vokabular/HEKL/Bobble
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -767,7 +767,7 @@ concepts:
   - pc
   definition_en_us: stitch in which several complete double crochets are worked into the same stitch, after which the hook
     is drawn through the first of them so that the group folds together and closes
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0026
+- uri: http://example.org/vegvesen/vokabular/HEKL/Shell
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0026
   pref_label_nb: vifte
@@ -775,10 +775,10 @@ concepts:
   editorial_note: '[usikker] de: «Fächer» eller «Muschel»'
   subject: hekling
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0050
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0066
+  - http://example.org/vegvesen/vokabular/HEKL/ArcadeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/ThistleStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0027
+  - http://example.org/vegvesen/vokabular/HEKL/VStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -791,7 +791,7 @@ concepts:
   - Muschel
   definition_en_us: group of several double crochets, usually three to seven, worked into the same stitch so that they fan
     out
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0027
+- uri: http://example.org/vegvesen/vokabular/HEKL/VStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0027
   pref_label_nb: V-maske
@@ -799,9 +799,9 @@ concepts:
   editorial_note: '[usikker] nb, es: termer ikke verifisert'
   subject: hekling
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0077
+  - http://example.org/vegvesen/vokabular/HEKL/OffsetVStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0026
+  - http://example.org/vegvesen/vokabular/HEKL/Shell
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -813,7 +813,7 @@ concepts:
   alt_label_es:
   - punto uve
   definition_en_us: two double crochets with one chain between them, worked into the same stitch so that they form a V
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0028
+- uri: http://example.org/vegvesen/vokabular/HEKL/CrossedDoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0028
   pref_label_nb: krysset stav
@@ -822,9 +822,9 @@ concepts:
   editorial_note: '[usikker] de, es: termer ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0009
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0057
+  - http://example.org/vegvesen/vokabular/HEKL/CrossedDoubleCrochet2
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -837,7 +837,7 @@ concepts:
     so that they cross
   scope_note_en_us: 'Caution: ''crossed double crochet'' is the US name of this concept and the US name of HEKL-0057. ''crossed
     treble crochet'' is the UK name of this concept and the UK name of HEKL-0057 (crossed double crochet).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0029
+- uri: http://example.org/vegvesen/vokabular/HEKL/ReverseSingleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0029
   pref_label_nb: krepsemaske
@@ -847,7 +847,7 @@ concepts:
   editorial_note: '[usikker] nb: «krepsemaske» eller «krabbemaske»'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0007
+  - http://example.org/vegvesen/vokabular/HEKL/SingleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -862,7 +862,7 @@ concepts:
   alt_label_en_gb:
   - reverse double crochet
   definition_en_us: single crochet worked backwards, from left to right for right-handed crocheters, producing a corded edge
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0030
+- uri: http://example.org/vegvesen/vokabular/HEKL/Picot
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0030
   pref_label_nb: picot
@@ -879,7 +879,7 @@ concepts:
   alt_label_es:
   - picot
   definition_en_us: small decorative loop of chains closed with a slip stitch or single crochet into the base stitch
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0031
+- uri: http://example.org/vegvesen/vokabular/HEKL/Row
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0031
   pref_label_nb: rad
@@ -899,7 +899,7 @@ concepts:
   definition_en_us: line of stitches worked from one edge of the piece to the other before the work is turned
   scope_note_en_us: 'Caution: ''vuelta'' is the Spanish alternative name of this concept and the Spanish name of HEKL-0032
     (round).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0032
+- uri: http://example.org/vegvesen/vokabular/HEKL/Round
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0032
   pref_label_nb: omgang
@@ -907,7 +907,7 @@ concepts:
   editorial_note: '[usikker] es: «vuelta» brukes både om rad og omgang'
   subject: hekling
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0033
+  - http://example.org/vegvesen/vokabular/HEKL/GrannySquare
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -927,7 +927,7 @@ concepts:
   definition_en_us: circuit of stitches worked in a circle or spiral without turning the work
   scope_note_en_us: 'Caution: ''vuelta'' is the Spanish name of this concept and the Spanish alternative name of HEKL-0031
     (row).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0033
+- uri: http://example.org/vegvesen/vokabular/HEKL/GrannySquare
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0033
   pref_label_nb: bestemorrute
@@ -947,7 +947,7 @@ concepts:
   - granny
   definition_en_us: square motif worked in rounds from the centre outwards, typically built from groups of three double crochets
     separated by chains
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0034
+- uri: http://example.org/vegvesen/vokabular/HEKL/YarnOver
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0034
   pref_label_nb: kast
@@ -958,9 +958,9 @@ concepts:
   editorial_note: '[usikker] nb: «kast» eller «omslag»'
   subject: hekling
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0008
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0009
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0010
+  - http://example.org/vegvesen/vokabular/HEKL/HalfDoubleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -979,7 +979,7 @@ concepts:
   - U
   definition_en_us: wrapping the yarn over the hook from back to front, either to draw a loop through or to prepare a taller
     stitch
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0035
+- uri: http://example.org/vegvesen/vokabular/HEKL/MossStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0035
   pref_label_nb: mosemaske
@@ -1001,7 +1001,7 @@ concepts:
   - linen stitch
   definition_en_us: pattern of alternating single crochets and chains in which the single crochets are worked into the chain
     spaces of the row below, producing a dense, woven-looking fabric
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0036
+- uri: http://example.org/vegvesen/vokabular/HEKL/SpikeStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0036
   pref_label_nb: spikemaske
@@ -1011,9 +1011,9 @@ concepts:
     crochet».; Kilden (Part 7) har et mønsteravsnitt «Spike Stitch» med fastmasker 1, 2 og 3 rader ned; ikke eget mønsterbegrep'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0007
+  - http://example.org/vegvesen/vokabular/HEKL/SingleCrochet
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0060
+  - http://example.org/vegvesen/vokabular/HEKL/SlantedSpikeStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1024,7 +1024,7 @@ concepts:
   - elongated single crochet
   definition_en_us: single crochet worked into a stitch one or more rows below, creating a long visible strand across the
     fabric
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0037
+- uri: http://example.org/vegvesen/vokabular/HEKL/ExtendedSingleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0037
   pref_label_nb: forlenget fastmaske
@@ -1034,10 +1034,10 @@ concepts:
   editorial_note: '[usikker] nb, de, es: termer ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0007
+  - http://example.org/vegvesen/vokabular/HEKL/SingleCrochet
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0070
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0071
+  - http://example.org/vegvesen/vokabular/HEKL/PikeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/BoxedBeadStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1052,7 +1052,7 @@ concepts:
   - edc
   definition_en_us: single crochet in which one chain is made after the yarn is pulled up, before the yarn is drawn through
     both loops on the hook
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0038
+- uri: http://example.org/vegvesen/vokabular/HEKL/ExtendedHalfDoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0038
   pref_label_nb: forlenget halvstav
@@ -1062,7 +1062,7 @@ concepts:
   editorial_note: '[usikker] nb, de, es: termer ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0008
+  - http://example.org/vegvesen/vokabular/HEKL/HalfDoubleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1077,7 +1077,7 @@ concepts:
   - ehtr
   definition_en_us: half double crochet in which one chain is made after the yarn is pulled up, before the yarn is drawn through
     all three loops on the hook
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0039
+- uri: http://example.org/vegvesen/vokabular/HEKL/SingleCrochetThreeTogether
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0039
   pref_label_nb: 3 fastmasker sammen
@@ -1086,13 +1086,13 @@ concepts:
   source: https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0053
+  - http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
+  - http://example.org/vegvesen/vokabular/HEKL/TrinityStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0022
+  - http://example.org/vegvesen/vokabular/HEKL/Decrease
+  - http://example.org/vegvesen/vokabular/HEKL/Cluster
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1109,7 +1109,7 @@ concepts:
     loops on the hook at once
   scope_note_en_us: 'Caution: ''dc3tog'' is the UK abbreviation of this concept and the US abbreviation of HEKL-0042 (double
     crochet three together). ''double crochet three together'' is the UK name of this concept and the US name of HEKL-0042.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0040
+- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochetTwoTogether
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0040
   pref_label_nb: 2 dobbelstaver sammen
@@ -1119,11 +1119,11 @@ concepts:
   editorial_note: '[usikker] de, es'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
+  - http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
+  - http://example.org/vegvesen/vokabular/HEKL/Decrease
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1141,7 +1141,7 @@ concepts:
   scope_note_en_us: 'Caution: ''tr2tog'' is the US abbreviation of this concept and the UK abbreviation of HEKL-0020 (double
     crochet two together). ''treble crochet two together'' is the US name of this concept and the UK name of HEKL-0020 (double
     crochet two together).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0041
+- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochetThreeTogether
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0041
   pref_label_nb: 3 dobbelstaver sammen
@@ -1151,11 +1151,11 @@ concepts:
   editorial_note: '[usikker] de, es'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
+  - http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
+  - http://example.org/vegvesen/vokabular/HEKL/Decrease
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1173,7 +1173,7 @@ concepts:
   scope_note_en_us: 'Caution: ''tr3tog'' is the US abbreviation of this concept and the UK abbreviation of HEKL-0042 (double
     crochet three together). ''treble crochet three together'' is the US name of this concept and the UK name of HEKL-0042
     (double crochet three together).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0042
+- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetThreeTogether
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0042
   pref_label_nb: 3 staver sammen
@@ -1183,11 +1183,11 @@ concepts:
     over tre masker
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0022
+  - http://example.org/vegvesen/vokabular/HEKL/Cluster
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0056
+  - http://example.org/vegvesen/vokabular/HEKL/ZigZagLozengeStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0020
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1206,7 +1206,7 @@ concepts:
     crochet three together). ''double crochet three together'' is the US name of this concept and the UK name of HEKL-0039
     (single crochet three together). ''tr3tog'' is the UK abbreviation of this concept and the US abbreviation of HEKL-0041
     (treble crochet three together). ''treble crochet three together'' is the UK name of this concept and the US name of HEKL-0041.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0043
+- uri: http://example.org/vegvesen/vokabular/HEKL/HalfDoubleCrochetTwoTogether
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0043
   pref_label_nb: 2 halvstaver sammen
@@ -1216,11 +1216,11 @@ concepts:
   editorial_note: '[usikker] de, es'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0001
+  - http://example.org/vegvesen/vokabular/HEKL/Stitch
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0059
+  - http://example.org/vegvesen/vokabular/HEKL/RaisedHerringbone
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0018
+  - http://example.org/vegvesen/vokabular/HEKL/Decrease
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1235,7 +1235,7 @@ concepts:
   - htr2tog
   definition_en_us: decrease in which two incomplete half double crochets are finished together by drawing the yarn through
     all loops on the hook at once
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0044
+- uri: http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleTrebleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0044
   pref_label_nb: relieftrippelstav forfra
@@ -1245,12 +1245,12 @@ concepts:
   editorial_note: '[usikker] nb; [mangler] de, es'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0012
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0011
+  - http://example.org/vegvesen/vokabular/HEKL/PostStitch
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleTrebleCrochet
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0059
+  - http://example.org/vegvesen/vokabular/HEKL/RaisedHerringbone
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0013
+  - http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1266,7 +1266,7 @@ concepts:
   scope_note_en_us: 'Caution: ''FPdtr'' is the US abbreviation of this concept and the UK abbreviation of HEKL-0063 (front
     post treble crochet). ''front post double treble crochet'' is the US name of this concept and the UK name of HEKL-0063
     (front post treble crochet).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0045
+- uri: http://example.org/vegvesen/vokabular/HEKL/ChainSpace
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0045
   pref_label_nb: luftmaskebue
@@ -1277,16 +1277,16 @@ concepts:
   editorial_note: '[usikker] es'
   subject: hekling
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0050
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0051
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0053
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0054
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0055
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0056
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0060
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0074
+  - http://example.org/vegvesen/vokabular/HEKL/ArcadeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/WattleStitch
+  - http://example.org/vegvesen/vokabular/HEKL/TrinityStitch
+  - http://example.org/vegvesen/vokabular/HEKL/IrisStitch
+  - http://example.org/vegvesen/vokabular/HEKL/HappyHearts
+  - http://example.org/vegvesen/vokabular/HEKL/ZigZagLozengeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/SlantedSpikeStitch
+  - http://example.org/vegvesen/vokabular/HEKL/MiniButterflyStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0002
+  - http://example.org/vegvesen/vokabular/HEKL/Chain
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1305,7 +1305,7 @@ concepts:
   alt_label_es:
   - espacio de cadenetas
   definition_en_us: opening beneath one or more chains of the previous row, worked into instead of into a stitch
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+- uri: http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0046
   pref_label_nb: mønster
@@ -1331,7 +1331,7 @@ concepts:
     or appearance
   scope_note_en_us: 'Caution: ''punto'' is the Spanish alternative name of this concept and the Spanish name of HEKL-0001
     (stitch).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0047
+- uri: http://example.org/vegvesen/vokabular/HEKL/FloretStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0047
   definition_nb: mønster der rader med vekselvis stav og kjedemaske veksler med rader med bare staver
@@ -1340,7 +1340,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1349,7 +1349,7 @@ concepts:
   pref_label_en_gb: floret stitch
   definition_en_us: stitch pattern in which rows of alternating double crochets and slip stitches alternate with rows of double
     crochets only
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0048
+- uri: http://example.org/vegvesen/vokabular/HEKL/SedgeStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0048
   definition_nb: mønster der én fastmaske og to staver hekles i samme maske, med to masker hoppet over mellom gruppene
@@ -1358,7 +1358,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1367,7 +1367,7 @@ concepts:
   pref_label_en_gb: sedge stitch
   definition_en_us: stitch pattern in which one single crochet and two double crochets are worked into the same stitch, skipping
     two stitches between groups
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0049
+- uri: http://example.org/vegvesen/vokabular/HEKL/BlackberrySaladStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0049
   definition_nb: mønster der rader med staver veksler med rader med fastmasker med en boble i hver fjerde maske
@@ -1376,7 +1376,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1385,7 +1385,7 @@ concepts:
   pref_label_en_gb: blackberry salad stitch
   definition_en_us: stitch pattern in which rows of double crochets alternate with rows of single crochets with a bobble in
     every fourth stitch
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0050
+- uri: http://example.org/vegvesen/vokabular/HEKL/ArcadeStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0050
   definition_nb: mønster av fastmasker og buer på tre luftmasker der det i neste rad hekles en vifte på fem staver i hver
@@ -1395,7 +1395,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1404,7 +1404,7 @@ concepts:
   pref_label_en_gb: arcade stitch
   definition_en_us: stitch pattern of single crochets and three-chain spaces in which a shell of five double crochets is worked
     into each space in the following row, forming arches
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0051
+- uri: http://example.org/vegvesen/vokabular/HEKL/WattleStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0051
   definition_nb: mønster der én fastmaske, én luftmaske og én stav hekles i samme maske eller luftmaskebue i hver gruppe
@@ -1413,7 +1413,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1422,7 +1422,7 @@ concepts:
   pref_label_en_gb: wattle stitch
   definition_en_us: stitch pattern in which one single crochet, one chain and one double crochet are worked into the same
     stitch or chain space for each group
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0052
+- uri: http://example.org/vegvesen/vokabular/HEKL/WaveAndChevron
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0052
   definition_nb: mønster i to farger der rader med masker i stigende og synkende høyde danner bølger, og rader med fastmasker
@@ -1432,7 +1432,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1441,7 +1441,7 @@ concepts:
   pref_label_en_gb: wave and chevron
   definition_en_us: two-colour stitch pattern in which rows of stitches of rising and falling height form waves, and rows
     of single crochets with increases and decreases form chevrons
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0053
+- uri: http://example.org/vegvesen/vokabular/HEKL/TrinityStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0053
   definition_nb: mønster av klynger på tre fastmasker sammen, der hver klynge begynner i samme maske som siste ledd av forrige
@@ -1451,7 +1451,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1460,7 +1460,7 @@ concepts:
   pref_label_en_gb: trinity stitch
   definition_en_us: stitch pattern of single crochet three together clusters, each starting in the same stitch as the last
     leg of the previous cluster, separated by one chain
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0054
+- uri: http://example.org/vegvesen/vokabular/HEKL/IrisStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0054
   definition_nb: mønster der grupper på to staver, én luftmaske og to staver hekles i luftmaskebuen i gruppen i raden under
@@ -1469,7 +1469,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1478,7 +1478,7 @@ concepts:
   pref_label_en_gb: iris stitch
   definition_en_us: stitch pattern in which groups of two double crochets, one chain and two double crochets are worked into
     the chain space of the group in the row below
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0055
+- uri: http://example.org/vegvesen/vokabular/HEKL/HappyHearts
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0055
   definition_nb: mønster i to farger der grupper på fem staver og reliefstaver bakfra rundt staver to rader lenger ned danner
@@ -1488,7 +1488,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1497,7 +1497,7 @@ concepts:
   pref_label_en_gb: happy hearts
   definition_en_us: two-colour stitch pattern in which groups of five double crochets and back post double crochets around
     stitches two rows below form heart shapes
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0056
+- uri: http://example.org/vegvesen/vokabular/HEKL/ZigZagLozengeStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0056
   definition_nb: mønster i to farger der rader med par av halvstaver skilt av én luftmaske veksler med rader med klynger på
@@ -1507,7 +1507,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1516,7 +1516,7 @@ concepts:
   pref_label_en_gb: zig zag lozenge stitch
   definition_en_us: two-colour stitch pattern in which rows of paired half double crochets separated by one chain alternate
     with rows of double crochet three together clusters in the chain spaces
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0057
+- uri: http://example.org/vegvesen/vokabular/HEKL/CrossedDoubleCrochet2
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0057
   pref_label_nb: mønster med kryssede staver
@@ -1526,7 +1526,7 @@ concepts:
     som på masken HEKL-0028; [usikker] nb, en-GB; [mangler] de, es'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1536,7 +1536,7 @@ concepts:
   definition_en_us: stitch pattern in which rows of crossed double crochets alternate with rows of single crochets
   scope_note_en_us: 'Caution: ''crossed double crochet'' is the US name of this concept and the US name of HEKL-0028. ''crossed
     treble crochet'' is the UK name of this concept and the UK name of HEKL-0028 (crossed double crochet).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0058
+- uri: http://example.org/vegvesen/vokabular/HEKL/NubbyCrochetStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0058
   definition_nb: mønster der rader med vekselvis fastmaske og dobbelstav, som danner knuter, veksler med rader med staver
@@ -1545,7 +1545,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1554,7 +1554,7 @@ concepts:
   pref_label_en_gb: nubby crochet stitch
   definition_en_us: stitch pattern in which rows of alternating single crochets and treble crochets, which form nubs, alternate
     with rows of double crochets
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0059
+- uri: http://example.org/vegvesen/vokabular/HEKL/RaisedHerringbone
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0059
   definition_nb: mønster av halvstaver der par av relieftrippelstaver forfra rundt masker to rader lenger ned danner et fiskebeinsmønster
@@ -1564,7 +1564,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1573,7 +1573,7 @@ concepts:
   pref_label_en_gb: raised herringbone
   definition_en_us: stitch pattern of half double crochets in which pairs of front post double treble crochets around stitches
     two rows below form a raised herringbone
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0060
+- uri: http://example.org/vegvesen/vokabular/HEKL/SlantedSpikeStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0060
   definition_nb: mønster av fastmasker der spikemasker hekles ned i luftmaskebuer tre rader lenger ned, slik at det dannes
@@ -1583,7 +1583,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1592,7 +1592,7 @@ concepts:
   pref_label_en_gb: slanted spike stitch
   definition_en_us: stitch pattern of single crochets in which elongated single crochets are worked into chain spaces three
     rows below, forming long slanted stitches
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0061
+- uri: http://example.org/vegvesen/vokabular/HEKL/ForkedCluster
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0061
   definition_nb: klynge over to masker der det lages ett kast og hentes opp en løkke i samme maske som siste ledd i forrige
@@ -1601,11 +1601,11 @@ concepts:
   editorial_note: Kilden beskriver masken som en variant av dc2tog; [mangler] nb, de, es
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0022
+  - http://example.org/vegvesen/vokabular/HEKL/Cluster
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0065
+  - http://example.org/vegvesen/vokabular/HEKL/ForkedClusterStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0020
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1617,7 +1617,7 @@ concepts:
   definition_en_us: cluster worked over two stitches in which a yarn over and a loop are pulled up in the same stitch as the
     last leg of the previous forked cluster and then in the next stitch, after which the loops are closed by drawing the yarn
     through three loops twice
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0062
+- uri: http://example.org/vegvesen/vokabular/HEKL/SlantingCluster
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0062
   definition_nb: klynge heklet rundt stolpen på forrige stav, der det tre ganger lages et kast og hentes opp en løkke rundt
@@ -1626,9 +1626,9 @@ concepts:
   editorial_note: '[mangler] nb, de, es'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0022
+  - http://example.org/vegvesen/vokabular/HEKL/Cluster
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0071
+  - http://example.org/vegvesen/vokabular/HEKL/BoxedBeadStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1639,7 +1639,7 @@ concepts:
   - slcl
   definition_en_us: cluster worked around the post of the previous double crochet, in which a yarn over and a loop are pulled
     up three times around the same post, after which the yarn is drawn through six loops and then through the last two
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0063
+- uri: http://example.org/vegvesen/vokabular/HEKL/FrontPostTrebleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0063
   pref_label_nb: reliefdobbelstav forfra
@@ -1649,13 +1649,13 @@ concepts:
   editorial_note: '[usikker] nb; [mangler] de, es'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0012
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0010
+  - http://example.org/vegvesen/vokabular/HEKL/PostStitch
+  - http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet
   is_part_of:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0073
+  - http://example.org/vegvesen/vokabular/HEKL/AlpineStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0013
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0044
+  - http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleTrebleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1672,7 +1672,7 @@ concepts:
     post double treble crochet). ''FPtr'' is the US abbreviation of this concept and the UK abbreviation of HEKL-0013 (front
     post double crochet). ''front post double treble crochet'' is the UK name of this concept and the US name of HEKL-0044.
     ''front post treble crochet'' is the US name of this concept and the UK name of HEKL-0013 (front post double crochet).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0064
+- uri: http://example.org/vegvesen/vokabular/HEKL/ClusterVStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0064
   definition_nb: 'V-maske der hver stav er erstattet av to staver sammen: to staver sammen, én luftmaske og to staver sammen
@@ -1682,7 +1682,7 @@ concepts:
     [mangler] nb, de, es
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0027
+  - http://example.org/vegvesen/vokabular/HEKL/VStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1691,7 +1691,7 @@ concepts:
   pref_label_en_gb: cluster V-stitch
   definition_en_us: 'V-stitch in which each double crochet is replaced by a double crochet two together: dc2tog, chain 1,
     dc2tog worked into the same stitch or space'
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0065
+- uri: http://example.org/vegvesen/vokabular/HEKL/ForkedClusterStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0065
   definition_nb: mønster der rader med forked clusters veksler med rader med fastmasker
@@ -1700,7 +1700,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1708,7 +1708,7 @@ concepts:
   pref_label_en_us: forked cluster stitch
   pref_label_en_gb: forked cluster stitch
   definition_en_us: stitch pattern in which rows of forked clusters alternate with rows of single crochets
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0066
+- uri: http://example.org/vegvesen/vokabular/HEKL/ThistleStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0066
   definition_nb: mønster der vifter på fem staver og par av staver hekles i mellomrommene mellom maskene i raden under, slik
@@ -1718,7 +1718,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1727,7 +1727,7 @@ concepts:
   pref_label_en_gb: thistle stitch
   definition_en_us: stitch pattern in which shells of five double crochets and pairs of double crochets are worked into the
     spaces between the stitches of the row below, so that the shells look like thistle flowers
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0067
+- uri: http://example.org/vegvesen/vokabular/HEKL/SiltStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0067
   definition_nb: mønster der en rad med grupper av én fastmaske og to staver ligger mellom rader med staver
@@ -1737,7 +1737,7 @@ concepts:
     hoppet over hekles som i sedge stitch (HEKL-0048), mulig samme mønster med to navn'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1746,7 +1746,7 @@ concepts:
   pref_label_en_gb: silt stitch
   definition_en_us: stitch pattern in which a row of groups of one single crochet and two double crochets lies between rows
     of double crochets
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0068
+- uri: http://example.org/vegvesen/vokabular/HEKL/ModifiedSiltStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0068
   definition_nb: silt stitch der radene med staver hekles kun i bakre maskeledd
@@ -1755,7 +1755,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0067
+  - http://example.org/vegvesen/vokabular/HEKL/SiltStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1763,7 +1763,7 @@ concepts:
   pref_label_en_us: modified silt stitch
   pref_label_en_gb: modified silt stitch
   definition_en_us: silt stitch in which the double crochet rows are worked in the back loop only
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0069
+- uri: http://example.org/vegvesen/vokabular/HEKL/BraidedCrochetStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0069
   definition_nb: mønster der rader med halvstaver veksler med rader med staver heklet i bakre maskeledd, slik at halvstavene
@@ -1773,7 +1773,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1782,7 +1782,7 @@ concepts:
   pref_label_en_gb: braided crochet stitch
   definition_en_us: stitch pattern in which rows of half double crochets alternate with rows of double crochets worked in
     the back loop only, giving the half double crochets a braided look
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0070
+- uri: http://example.org/vegvesen/vokabular/HEKL/PikeStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0070
   definition_nb: mønster av vekselvis forlenget fastmaske og luftmaske, der de forlengede fastmaskene hekles i maskene i raden
@@ -1792,9 +1792,9 @@ concepts:
     term kjent; Kilden sier mønsteret ligner linen stitch (HEKL-0035), men hekles i maskene i stedet for i luftmaskebuene'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0035
+  - http://example.org/vegvesen/vokabular/HEKL/MossStitch
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1803,7 +1803,7 @@ concepts:
   pref_label_en_gb: pike stitch
   definition_en_us: stitch pattern of alternating extended single crochets and chains in which the extended single crochets
     are worked into the stitches of the row below, giving a loose mesh
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0071
+- uri: http://example.org/vegvesen/vokabular/HEKL/BoxedBeadStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0071
   definition_nb: mønster der forlengede fastmasker, fastmasker, staver og skrå klynger rundt stolpen på staven ved siden av
@@ -1813,7 +1813,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1822,7 +1822,7 @@ concepts:
   pref_label_en_gb: boxed bead stitch
   definition_en_us: stitch pattern in which extended single crochets, single crochets, double crochets and slanting clusters
     around the post of the neighbouring double crochet form small boxes
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0072
+- uri: http://example.org/vegvesen/vokabular/HEKL/LazyWaveStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0072
   definition_nb: mønster der grunnmaskene hekles i stigende og synkende høyde etter hverandre langs raden, slik at det dannes
@@ -1832,7 +1832,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1841,7 +1841,7 @@ concepts:
   pref_label_en_gb: lazy wave stitch
   definition_en_us: stitch pattern in which basic stitches are worked in rising and falling height one after the other across
     the row, forming waves
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0073
+- uri: http://example.org/vegvesen/vokabular/HEKL/AlpineStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0073
   definition_nb: mønster der rader med vekselvis stav og reliefdobbelstav forfra rundt staver to rader lenger ned veksler
@@ -1851,7 +1851,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1860,7 +1860,7 @@ concepts:
   pref_label_en_gb: alpine stitch
   definition_en_us: stitch pattern in which rows of alternating double crochets and front post treble crochets around double
     crochets two rows below alternate with rows of single crochets
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0074
+- uri: http://example.org/vegvesen/vokabular/HEKL/MiniButterflyStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0074
   definition_nb: mønster der buer av luftmasker samles på midten med en fastmaske i en rad lenger opp, slik at det dannes
@@ -1870,7 +1870,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1879,7 +1879,7 @@ concepts:
   pref_label_en_gb: mini butterfly stitch
   definition_en_us: stitch pattern in which chain loops are gathered in the middle by a single crochet worked from a later
     row, forming small butterfly shapes between groups of single crochets and double crochets
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0075
+- uri: http://example.org/vegvesen/vokabular/HEKL/GritStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0075
   definition_nb: mønster der én fastmaske og én stav hekles i samme maske, med én maske hoppet over mellom gruppene
@@ -1888,7 +1888,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1897,7 +1897,7 @@ concepts:
   pref_label_en_gb: grit stitch
   definition_en_us: stitch pattern in which one single crochet and one double crochet are worked into the same stitch, skipping
     one stitch between groups
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0076
+- uri: http://example.org/vegvesen/vokabular/HEKL/CrossedCableStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0076
   definition_nb: mønster der en lang stav hekles i en maske som er hoppet over, foran tre staver, slik at det dannes kryssede
@@ -1908,9 +1908,9 @@ concepts:
     ikke laget som eget begrep'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0028
+  - http://example.org/vegvesen/vokabular/HEKL/CrossedDoubleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1919,7 +1919,7 @@ concepts:
   pref_label_en_gb: crossed cable stitch
   definition_en_us: stitch pattern in which a long double crochet is worked into a skipped stitch across the front of three
     double crochets, forming crossed cables, with rows of single crochets in between
-- uri: http://example.org/vegvesen/vokabular/HEKL/HEKL-0077
+- uri: http://example.org/vegvesen/vokabular/HEKL/OffsetVStitch
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0077
   definition_nb: mønster av V-masker der hver V-maske hekles i en stav i raden under i stedet for i luftmaskebuen, slik at
@@ -1929,7 +1929,7 @@ concepts:
     term kjent'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/HEKL-0046
+  - http://example.org/vegvesen/vokabular/HEKL/StitchPattern
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat

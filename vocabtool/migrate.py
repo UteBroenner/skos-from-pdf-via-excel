@@ -1,6 +1,8 @@
 """Migrate a v7 workbook into the v8 template.
 
 - Assigns IDs <kortnavn>-0001.. in reading order (sheet by sheet, row by row).
+- Keeps the v7 concept name: vok:Rekkverk -> "Rekkverk" in column B (a value, not a formula).
+  The full URI is then <ConceptScheme URI>/Rekkverk, e.g. …/vokabular/N101/Rekkverk.
 - Rewrites broader / isPartOf / related from v7 prefixed URIs (vok:X) to IDs.
   Targets not found in the workbook are kept unchanged and reported.
 - Code lists are not migrated.
@@ -17,6 +19,7 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 
 from .reader import read_workbook, normalise_header, PROPERTY_MAP, CONTRIBUTOR_FIELDS, RELATION_FIELDS
+from .template_ext import uri_as_value
 
 DATE_FIELDS = {"created", "modified", "start_date", "end_date"}
 # v7 fields without a v8 column, and where they go
@@ -46,12 +49,13 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
         raise ValueError(f"kortnavn must be 1-4 letters/digits, got {kortnavn!r}; pass --kortnavn")
 
     wb = openpyxl.load_workbook(template)
+    uri_as_value(wb)          # column B holds the URI as a value; hash covers A:AM
     ws = wb["vokabular"]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
     first = hdr + 2
     cols = _v8_columns(ws, hdr)
     last_template_row = max(r for r in range(first, ws.max_row + 1)
-                            if isinstance(ws.cell(r, 2).value, str) and ws.cell(r, 2).value.startswith("="))
+                            if any(isinstance(c.value, str) and c.value.startswith("=") for c in ws[r]))
 
     # scheme metadata
     for r in range(1, hdr):
@@ -69,8 +73,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
     # clear example rows
     for r in range(first, last_template_row + 1):
         for f, col in cols.items():
-            if f != "uri":
-                ws.cell(r, col).value = None
+            ws.cell(r, col).value = None
 
     for i, c in enumerate(v7.concepts):
         r = first + i
@@ -81,6 +84,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
                 rec[f8] = f"{rec[f8]} | {extra}" if rec.get(f8) else extra
                 fallback_used += 1
         rec["identifier"] = id_of[c.key]
+        rec["uri"] = c.key.split(":", 1)[-1]   # vok:Rekkverk -> Rekkverk (column B holds the name only)
         for fld in RELATION_FIELDS:
             new = []
             for t in c.relations[fld]:
@@ -96,7 +100,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
         if c.tier:
             rec["tier"] = int(c.tier) if c.tier.isdigit() else c.tier
         for f, val in rec.items():
-            if f == "uri" or val is None:
+            if val is None:
                 continue
             if f not in cols:
                 dropped.add(f)
@@ -114,10 +118,9 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
     n_last = first + len(v7.concepts) - 1
     hash_col = next((c.column for c in ws[hdr + 1] if normalise_header(c.value) == "endringshash"), None)
     for r in range(last_template_row + 1, n_last + 1):
-        ws.cell(r, 2).value = f'=IF(ISBLANK(vokabular!$A{r}),"",$B$1&"/"&vokabular!$A{r})'
         if hash_col:
             ws.cell(r, hash_col).value = (f'=IF(ISBLANK(vokabular!$A{r}),"",_xlfn.TEXTJOIN("|",FALSE,'
-                                          f'vokabular!$A{r},vokabular!$C{r}:$AM{r}))')
+                                          f'vokabular!$A{r}:$AM{r}))')
     if n_last > last_template_row:
         for dv in ws.data_validations.dataValidation:
             new_ranges = []

@@ -9,34 +9,194 @@
 @prefix xkos: <http://rdf-vocabulary.ddialliance.org/xkos#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-vokdata:HEKL-0003 a skos:Concept ;
+vokdata:ChainSpace a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0003" ;
+    dct:identifier "HEKL-0045" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0030,
-        vokdata:HEKL-0047 ;
-    skos:altLabel "Km"@de,
-        "ss"@en-GB,
-        "sl st"@en-US,
-        "pr"@es,
-        "punto enano"@es,
-        "kjm"@nb ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "stitch in which the hook is inserted into the work and the yarn is drawn through both the work and the loop on the hook in one movement; adds almost no height"@en-US,
-        "maske der nålen stikkes inn i arbeidet og garnet trekkes gjennom både arbeidet og løkken på nålen i ett trekk; gir nesten ingen høyde"@nb ;
-    skos:editorialNote "[usikker] es: både «punto raso» og «punto enano» er i bruk; kontroller hva som er vanligst i Spania" ;
+    xkos:isPartOf vokdata:ArcadeStitch,
+        vokdata:HappyHearts,
+        vokdata:IrisStitch,
+        vokdata:MiniButterflyStitch,
+        vokdata:SlantedSpikeStitch,
+        vokdata:TrinityStitch,
+        vokdata:WattleStitch,
+        vokdata:ZigZagLozengeStitch ;
+    skos:altLabel "Lm-Bogen"@de,
+        "ch-sp"@en-GB,
+        "ch sp"@en-US,
+        "ch-sp"@en-US,
+        "espacio de cadenetas"@es,
+        "lm-bue"@nb ;
+    skos:definition "opening beneath one or more chains of the previous row, worked into instead of into a stitch"@en-US,
+        "åpning under én eller flere luftmasker i raden under, som det hekles inn i i stedet for i en maske"@nb ;
+    skos:editorialNote "[usikker] es" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "Kettmasche"@de,
-        "slip stitch"@en-GB,
-        "slip stitch"@en-US,
-        "punto raso"@es,
-        "kjedemaske"@nb ;
-    skos:related vokdata:HEKL-0032 ;
+    skos:prefLabel "Luftmaschenbogen"@de,
+        "chain space"@en-GB,
+        "chain space"@en-US,
+        "arco de cadenetas"@es,
+        "luftmaskebue"@nb ;
+    skos:related vokdata:Chain ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0004 a skos:Concept ;
+vokdata:DoubleCrochetThreeTogether a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0042" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:ZigZagLozengeStitch ;
+    skos:altLabel "tr3tog"@en-GB,
+        "dc3tog"@en-US ;
+    skos:broader vokdata:Cluster ;
+    skos:definition "cluster in which three incomplete double crochets are worked into the same stitch or chain space and finished together in one movement"@en-US,
+        "klynge der tre ufullførte staver hekles i samme maske eller luftmaskebue og avsluttes sammen i ett trekk"@nb ;
+    skos:editorialNote "Kilden kaller masken «Cluster Stitch» og hekler alle tre i samme bue; brukes andre steder også som felling over tre masker" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "3 Stäbchen zusammen abmaschen"@de,
+        "treble crochet three together"@en-GB,
+        "double crochet three together"@en-US,
+        "3 puntos altos juntos"@es,
+        "3 staver sammen"@nb ;
+    skos:related vokdata:DoubleCrochetTwoTogether ;
+    skos:scopeNote "Caution: 'dc3tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0039 (single crochet three together). 'double crochet three together' is the US name of this concept and the UK name of HEKL-0039 (single crochet three together). 'tr3tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0041 (treble crochet three together). 'treble crochet three together' is the UK name of this concept and the US name of HEKL-0041."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:ExtendedHalfDoubleCrochet a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0038" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:altLabel "ehtr"@en-GB,
+        "ehdc"@en-US ;
+    skos:broader vokdata:HalfDoubleCrochet ;
+    skos:definition "half double crochet in which one chain is made after the yarn is pulled up, before the yarn is drawn through all three loops on the hook"@en-US,
+        "halvstav der det hekles én luftmaske etter at garnet er hentet opp, før garnet trekkes gjennom alle tre løkkene på nålen"@nb ;
+    skos:editorialNote "[usikker] nb, de, es: termer ikke verifisert" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "verlängertes halbes Stäbchen"@de,
+        "extended half treble crochet"@en-GB,
+        "extended half double crochet"@en-US,
+        "punto medio alto extendido"@es,
+        "forlenget halvstav"@nb ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:ExtendedSingleCrochet a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0037" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:BoxedBeadStitch,
+        vokdata:PikeStitch ;
+    skos:altLabel "edc"@en-GB,
+        "esc"@en-US ;
+    skos:broader vokdata:SingleCrochet ;
+    skos:definition "single crochet in which one chain is made after the yarn is pulled up, before the yarn is drawn through both loops on the hook"@en-US,
+        "fastmaske der det hekles én luftmaske etter at garnet er hentet opp, før garnet trekkes gjennom begge løkkene på nålen"@nb ;
+    skos:editorialNote "[usikker] nb, de, es: termer ikke verifisert" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "verlängerte feste Masche"@de,
+        "extended double crochet"@en-GB,
+        "extended single crochet"@en-US,
+        "punto bajo extendido"@es,
+        "forlenget fastmaske"@nb ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:ForkedCluster a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0061" ;
+    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:ForkedClusterStitch ;
+    skos:altLabel "FC"@en-US ;
+    skos:broader vokdata:Cluster ;
+    skos:definition "cluster worked over two stitches in which a yarn over and a loop are pulled up in the same stitch as the last leg of the previous forked cluster and then in the next stitch, after which the loops are closed by drawing the yarn through three loops twice"@en-US,
+        "klynge over to masker der det lages ett kast og hentes opp en løkke i samme maske som siste ledd i forrige klynge og deretter i neste maske, før løkkene lukkes ved å trekke garnet gjennom tre løkker to ganger"@nb ;
+    skos:editorialNote "Kilden beskriver masken som en variant av dc2tog; [mangler] nb, de, es" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "forked cluster"@en-GB,
+        "forked cluster"@en-US ;
+    skos:related vokdata:DoubleCrochetTwoTogether ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:FrontPostTrebleCrochet a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0063" ;
+    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:AlpineStitch ;
+    skos:altLabel "FPdtr"@en-GB,
+        "FPtr"@en-US ;
+    skos:broader vokdata:PostStitch,
+        vokdata:TrebleCrochet ;
+    skos:definition "treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
+        "dobbelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
+    skos:editorialNote "[usikker] nb; [mangler] de, es" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "front post double treble crochet"@en-GB,
+        "front post treble crochet"@en-US,
+        "reliefdobbelstav forfra"@nb ;
+    skos:related vokdata:FrontPostDoubleCrochet,
+        vokdata:FrontPostDoubleTrebleCrochet ;
+    skos:scopeNote "Caution: 'FPdtr' is the UK abbreviation of this concept and the US abbreviation of HEKL-0044 (front post double treble crochet). 'FPtr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0013 (front post double crochet). 'front post double treble crochet' is the UK name of this concept and the US name of HEKL-0044. 'front post treble crochet' is the US name of this concept and the UK name of HEKL-0013 (front post double crochet)."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:HalfDoubleCrochetTwoTogether a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0043" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:RaisedHerringbone ;
+    skos:altLabel "htr2tog"@en-GB,
+        "hdc2tog"@en-US ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "decrease in which two incomplete half double crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
+        "felling der to ufullførte halvstaver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
+    skos:editorialNote "[usikker] de, es" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "2 halbe Stäbchen zusammen abmaschen"@de,
+        "half treble crochet two together"@en-GB,
+        "half double crochet two together"@en-US,
+        "2 puntos medios altos juntos"@es,
+        "2 halvstaver sammen"@nb ;
+    skos:related vokdata:Decrease ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:InvisibleDecrease a skos:Concept ;
+    svv:tier 2 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0021" ;
+    dct:subject "hekling"@nb ;
+    skos:altLabel "invdec"@en-US ;
+    skos:broader vokdata:Decrease ;
+    skos:definition "decrease in which two single crochets are worked together through the front loops only, so that the decrease is almost invisible; common in amigurumi"@en-US,
+        "felling der to fastmasker hekles sammen gjennom bare de fremre maskeleddene, slik at fellingen blir nesten usynlig; mye brukt i amigurumi"@nb ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "unsichtbare Abnahme"@de,
+        "invisible decrease"@en-GB,
+        "invisible decrease"@en-US,
+        "disminución invisible"@es,
+        "usynlig felling"@nb ;
+    skos:related vokdata:FrontLoopOnly,
+        vokdata:SingleCrochetTwoTogether ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:MagicRing a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -54,55 +214,10 @@ vokdata:HEKL-0004 a skos:Concept ;
         "magic ring"@en-US,
         "anillo mágico"@es,
         "magisk ring"@nb ;
-    skos:related vokdata:HEKL-0032 ;
+    skos:related vokdata:Round ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0006 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0006" ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0031,
-        vokdata:HEKL-0050,
-        vokdata:HEKL-0066 ;
-    skos:altLabel "Wende-Lm"@de,
-        "t-ch"@en-GB,
-        "t-ch"@en-US,
-        "tch"@en-US ;
-    skos:broader vokdata:HEKL-0002 ;
-    skos:definition "one or more chains worked at the beginning of a row or round to bring the work up to the height of its stitches"@en-US,
-        "én eller flere luftmasker heklet i begynnelsen av en rad eller omgang for å nå høyden av maskene i den"@nb ;
-    skos:editorialNote "[usikker] nb: «vendeluftmaske» eller «snuluftmaske»; es: «cadeneta de subida» ikke verifisert" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "Wendeluftmasche"@de,
-        "turning chain"@en-GB,
-        "turning chain"@en-US,
-        "cadeneta de subida"@es,
-        "vendeluftmaske"@nb ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0021 a skos:Concept ;
-    svv:tier 2 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0021" ;
-    dct:subject "hekling"@nb ;
-    skos:altLabel "invdec"@en-US ;
-    skos:broader vokdata:HEKL-0018 ;
-    skos:definition "decrease in which two single crochets are worked together through the front loops only, so that the decrease is almost invisible; common in amigurumi"@en-US,
-        "felling der to fastmasker hekles sammen gjennom bare de fremre maskeleddene, slik at fellingen blir nesten usynlig; mye brukt i amigurumi"@nb ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "unsichtbare Abnahme"@de,
-        "invisible decrease"@en-GB,
-        "invisible decrease"@en-US,
-        "disminución invisible"@es,
-        "usynlig felling"@nb ;
-    skos:related vokdata:HEKL-0016,
-        vokdata:HEKL-0019 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0029 a skos:Concept ;
+vokdata:ReverseSingleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -112,7 +227,7 @@ vokdata:HEKL-0029 a skos:Concept ;
         "crab stitch"@en-US,
         "rsc"@en-US,
         "krabbemaske"@nb ;
-    skos:broader vokdata:HEKL-0007 ;
+    skos:broader vokdata:SingleCrochet ;
     skos:definition "single crochet worked backwards, from left to right for right-handed crocheters, producing a corded edge"@en-US,
         "fastmaske heklet baklengs, fra venstre mot høyre for høyrehendte, som gir en snoet kant"@nb ;
     skos:editorialNote "[usikker] nb: «krepsemaske» eller «krabbemaske»" ;
@@ -124,7 +239,168 @@ vokdata:HEKL-0029 a skos:Concept ;
         "krepsemaske"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0034 a skos:Concept ;
+vokdata:SingleCrochetThreeTogether a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0039" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:TrinityStitch,
+        vokdata:WaveAndChevron ;
+    skos:altLabel "dc3tog"@en-GB,
+        "sc3tog"@en-US ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "decrease in which three incomplete single crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
+        "felling der tre ufullførte fastmasker avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "3 feste Maschen zusammen abmaschen"@de,
+        "double crochet three together"@en-GB,
+        "single crochet three together"@en-US,
+        "3 puntos bajos juntos"@es,
+        "3 fastmasker sammen"@nb ;
+    skos:related vokdata:Cluster,
+        vokdata:Decrease ;
+    skos:scopeNote "Caution: 'dc3tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0042 (double crochet three together). 'double crochet three together' is the UK name of this concept and the US name of HEKL-0042."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:SlantingCluster a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0062" ;
+    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:BoxedBeadStitch ;
+    skos:altLabel "slcl"@en-US ;
+    skos:broader vokdata:Cluster ;
+    skos:definition "cluster worked around the post of the previous double crochet, in which a yarn over and a loop are pulled up three times around the same post, after which the yarn is drawn through six loops and then through the last two"@en-US,
+        "klynge heklet rundt stolpen på forrige stav, der det tre ganger lages et kast og hentes opp en løkke rundt samme stolpe, før garnet trekkes gjennom seks løkker og deretter gjennom de to siste"@nb ;
+    skos:editorialNote "[mangler] nb, de, es" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "slanting cluster"@en-GB,
+        "slanting cluster"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:SlipStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0003" ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:FloretStitch,
+        vokdata:Picot ;
+    skos:altLabel "Km"@de,
+        "ss"@en-GB,
+        "sl st"@en-US,
+        "pr"@es,
+        "punto enano"@es,
+        "kjm"@nb ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "stitch in which the hook is inserted into the work and the yarn is drawn through both the work and the loop on the hook in one movement; adds almost no height"@en-US,
+        "maske der nålen stikkes inn i arbeidet og garnet trekkes gjennom både arbeidet og løkken på nålen i ett trekk; gir nesten ingen høyde"@nb ;
+    skos:editorialNote "[usikker] es: både «punto raso» og «punto enano» er i bruk; kontroller hva som er vanligst i Spania" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "Kettmasche"@de,
+        "slip stitch"@en-GB,
+        "slip stitch"@en-US,
+        "punto raso"@es,
+        "kjedemaske"@nb ;
+    skos:related vokdata:Round ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:SpikeStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0036" ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:SlantedSpikeStitch ;
+    skos:altLabel "elongated single crochet"@en-US ;
+    skos:broader vokdata:SingleCrochet ;
+    skos:definition "single crochet worked into a stitch one or more rows below, creating a long visible strand across the fabric"@en-US,
+        "fastmaske heklet ned i en maske én eller flere rader lenger ned, slik at det dannes en lang, synlig tråd over flaten"@nb ;
+    skos:editorialNote "[usikker] nb: «spikemaske»; [mangler] de, es; Kilden (Unraveled Mitten) kaller masken «elongated single crochet».; Kilden (Part 7) har et mønsteravsnitt «Spike Stitch» med fastmasker 1, 2 og 3 rader ned; ikke eget mønsterbegrep" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "spike stitch"@en-GB,
+        "spike stitch"@en-US,
+        "spikemaske"@nb ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:TrebleCrochetThreeTogether a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0041" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:WaveAndChevron ;
+    skos:altLabel "dtr3tog"@en-GB,
+        "tr3tog"@en-US ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "decrease in which three incomplete treble crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
+        "felling der tre ufullførte dobbelstaver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
+    skos:editorialNote "[usikker] de, es" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "3 Doppelstäbchen zusammen abmaschen"@de,
+        "double treble crochet three together"@en-GB,
+        "treble crochet three together"@en-US,
+        "3 puntos altos dobles juntos"@es,
+        "3 dobbelstaver sammen"@nb ;
+    skos:related vokdata:Decrease ;
+    skos:scopeNote "Caution: 'tr3tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0042 (double crochet three together). 'treble crochet three together' is the US name of this concept and the UK name of HEKL-0042 (double crochet three together)."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:TrebleCrochetTwoTogether a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0040" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:WaveAndChevron ;
+    skos:altLabel "dtr2tog"@en-GB,
+        "tr2tog"@en-US ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "decrease in which two incomplete treble crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
+        "felling der to ufullførte dobbelstaver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
+    skos:editorialNote "[usikker] de, es" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "2 Doppelstäbchen zusammen abmaschen"@de,
+        "double treble crochet two together"@en-GB,
+        "treble crochet two together"@en-US,
+        "2 puntos altos dobles juntos"@es,
+        "2 dobbelstaver sammen"@nb ;
+    skos:related vokdata:Decrease ;
+    skos:scopeNote "Caution: 'tr2tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0020 (double crochet two together). 'treble crochet two together' is the US name of this concept and the UK name of HEKL-0020 (double crochet two together)."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:TurningChain a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0006" ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:ArcadeStitch,
+        vokdata:Row,
+        vokdata:ThistleStitch ;
+    skos:altLabel "Wende-Lm"@de,
+        "t-ch"@en-GB,
+        "t-ch"@en-US,
+        "tch"@en-US ;
+    skos:broader vokdata:Chain ;
+    skos:definition "one or more chains worked at the beginning of a row or round to bring the work up to the height of its stitches"@en-US,
+        "én eller flere luftmasker heklet i begynnelsen av en rad eller omgang for å nå høyden av maskene i den"@nb ;
+    skos:editorialNote "[usikker] nb: «vendeluftmaske» eller «snuluftmaske»; es: «cadeneta de subida» ikke verifisert" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "Wendeluftmasche"@de,
+        "turning chain"@en-GB,
+        "turning chain"@en-US,
+        "cadeneta de subida"@es,
+        "vendeluftmaske"@nb ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:YarnOver a skos:Concept ;
     svv:tier 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -145,288 +421,101 @@ vokdata:HEKL-0034 a skos:Concept ;
         "yarn over"@en-US,
         "lazada"@es,
         "kast"@nb ;
-    skos:related vokdata:HEKL-0008,
-        vokdata:HEKL-0009,
-        vokdata:HEKL-0010 ;
+    skos:related vokdata:DoubleCrochet,
+        vokdata:HalfDoubleCrochet,
+        vokdata:TrebleCrochet ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0036 a skos:Concept ;
-    svv:tier 1 ;
+vokdata:BackLoopOnly a skos:Concept ;
+    svv:tier 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0036" ;
+    dct:identifier "HEKL-0015" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0060 ;
-    skos:altLabel "elongated single crochet"@en-US ;
-    skos:broader vokdata:HEKL-0007 ;
-    skos:definition "single crochet worked into a stitch one or more rows below, creating a long visible strand across the fabric"@en-US,
-        "fastmaske heklet ned i en maske én eller flere rader lenger ned, slik at det dannes en lang, synlig tråd over flaten"@nb ;
-    skos:editorialNote "[usikker] nb: «spikemaske»; [mangler] de, es; Kilden (Unraveled Mitten) kaller masken «elongated single crochet».; Kilden (Part 7) har et mønsteravsnitt «Spike Stitch» med fastmasker 1, 2 og 3 rader ned; ikke eget mønsterbegrep" ;
+    xkos:isPartOf vokdata:BraidedCrochetStitch,
+        vokdata:ModifiedSiltStitch ;
+    skos:altLabel "BLO"@en-GB,
+        "BLO"@en-US ;
+    skos:definition "working method in which the hook is inserted under the back one only of the two top loops of a stitch"@en-US,
+        "arbeidsmåte der nålen stikkes inn bare under det bakre av de to maskeleddene øverst på masken"@nb ;
+    skos:editorialNote "[usikker] nb, es: termer ikke verifisert" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "spike stitch"@en-GB,
-        "spike stitch"@en-US,
-        "spikemaske"@nb ;
+    skos:prefLabel "nur ins hintere Maschenglied"@de,
+        "back loop only"@en-GB,
+        "back loop only"@en-US,
+        "solo por la hebra trasera"@es,
+        "kun bakre maskeledd"@nb ;
+    skos:related vokdata:FrontLoopOnly ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0037 a skos:Concept ;
+vokdata:BackPostDoubleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0037" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:identifier "HEKL-0014" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0070,
-        vokdata:HEKL-0071 ;
-    skos:altLabel "edc"@en-GB,
-        "esc"@en-US ;
-    skos:broader vokdata:HEKL-0007 ;
-    skos:definition "single crochet in which one chain is made after the yarn is pulled up, before the yarn is drawn through both loops on the hook"@en-US,
-        "fastmaske der det hekles én luftmaske etter at garnet er hentet opp, før garnet trekkes gjennom begge løkkene på nålen"@nb ;
+    xkos:isPartOf vokdata:HappyHearts ;
+    skos:altLabel "BPtr"@en-GB,
+        "BPdc"@en-US ;
+    skos:broader vokdata:DoubleCrochet,
+        vokdata:PostStitch ;
+    skos:definition "double crochet worked around the post of a stitch in the row below, inserting the hook from the back, so that the stitch lies on the back of the work"@en-US,
+        "stav heklet rundt stolpen på en maske i raden under med nålen stukket inn bakfra, slik at masken legger seg på baksiden av arbeidet"@nb ;
     skos:editorialNote "[usikker] nb, de, es: termer ikke verifisert" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "verlängerte feste Masche"@de,
-        "extended double crochet"@en-GB,
-        "extended single crochet"@en-US,
-        "punto bajo extendido"@es,
-        "forlenget fastmaske"@nb ;
+    skos:prefLabel "Reliefstäbchen von hinten"@de,
+        "back post treble crochet"@en-GB,
+        "back post double crochet"@en-US,
+        "punto alto en relieve por detrás"@es,
+        "reliefstav bakfra"@nb ;
+    skos:related vokdata:FrontPostDoubleCrochet ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0038 a skos:Concept ;
+vokdata:CrossedDoubleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0038" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:identifier "HEKL-0028" ;
     dct:subject "hekling"@nb ;
-    skos:altLabel "ehtr"@en-GB,
-        "ehdc"@en-US ;
-    skos:broader vokdata:HEKL-0008 ;
-    skos:definition "half double crochet in which one chain is made after the yarn is pulled up, before the yarn is drawn through all three loops on the hook"@en-US,
-        "halvstav der det hekles én luftmaske etter at garnet er hentet opp, før garnet trekkes gjennom alle tre løkkene på nålen"@nb ;
-    skos:editorialNote "[usikker] nb, de, es: termer ikke verifisert" ;
+    xkos:isPartOf vokdata:CrossedDoubleCrochet2 ;
+    skos:broader vokdata:DoubleCrochet ;
+    skos:definition "pair of double crochets in which the second is worked in front of or behind the first into a skipped stitch, so that they cross"@en-US,
+        "par av staver der den andre hekles foran eller bak den første i en maske som er hoppet over, slik at stavene krysser hverandre"@nb ;
+    skos:editorialNote "[usikker] de, es: termer ikke verifisert" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "verlängertes halbes Stäbchen"@de,
-        "extended half treble crochet"@en-GB,
-        "extended half double crochet"@en-US,
-        "punto medio alto extendido"@es,
-        "forlenget halvstav"@nb ;
+    skos:prefLabel "gekreuztes Stäbchen"@de,
+        "crossed treble crochet"@en-GB,
+        "crossed double crochet"@en-US,
+        "punto alto cruzado"@es,
+        "krysset stav"@nb ;
+    skos:scopeNote "Caution: 'crossed double crochet' is the US name of this concept and the US name of HEKL-0057. 'crossed treble crochet' is the UK name of this concept and the UK name of HEKL-0057 (crossed double crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0039 a skos:Concept ;
+vokdata:DoubleTrebleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0039" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:identifier "HEKL-0011" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0052,
-        vokdata:HEKL-0053 ;
-    skos:altLabel "dc3tog"@en-GB,
-        "sc3tog"@en-US ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "decrease in which three incomplete single crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
-        "felling der tre ufullførte fastmasker avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
+    skos:altLabel "trtr"@en-GB,
+        "ttr"@en-GB,
+        "dtr"@en-US,
+        "pat"@es,
+        "tst"@nb ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "stitch made with three yarn overs before inserting the hook; the yarn is pulled up and drawn through two loops at a time, four times"@en-US,
+        "maske der det lages tre kast før nålen stikkes inn i arbeidet; garnet hentes opp og trekkes gjennom to og to løkker, fire ganger"@nb ;
+    skos:editorialNote "[usikker] nb: «trippelstav»/«tst»; de: forkortelse mangler; es: «pat»" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "3 feste Maschen zusammen abmaschen"@de,
-        "double crochet three together"@en-GB,
-        "single crochet three together"@en-US,
-        "3 puntos bajos juntos"@es,
-        "3 fastmasker sammen"@nb ;
-    skos:related vokdata:HEKL-0018,
-        vokdata:HEKL-0022 ;
-    skos:scopeNote "Caution: 'dc3tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0042 (double crochet three together). 'double crochet three together' is the UK name of this concept and the US name of HEKL-0042."@en-US ;
+    skos:prefLabel "dreifaches Stäbchen"@de,
+        "triple treble crochet"@en-GB,
+        "double treble crochet"@en-US,
+        "punto alto triple"@es,
+        "trippelstav"@nb ;
+    skos:scopeNote "Caution: 'double treble crochet' is the US name of this concept and the UK name of HEKL-0010 (treble crochet). 'dtr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0010 (treble crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0040 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0040" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0052 ;
-    skos:altLabel "dtr2tog"@en-GB,
-        "tr2tog"@en-US ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "decrease in which two incomplete treble crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
-        "felling der to ufullførte dobbelstaver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
-    skos:editorialNote "[usikker] de, es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "2 Doppelstäbchen zusammen abmaschen"@de,
-        "double treble crochet two together"@en-GB,
-        "treble crochet two together"@en-US,
-        "2 puntos altos dobles juntos"@es,
-        "2 dobbelstaver sammen"@nb ;
-    skos:related vokdata:HEKL-0018 ;
-    skos:scopeNote "Caution: 'tr2tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0020 (double crochet two together). 'treble crochet two together' is the US name of this concept and the UK name of HEKL-0020 (double crochet two together)."@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0041 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0041" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0052 ;
-    skos:altLabel "dtr3tog"@en-GB,
-        "tr3tog"@en-US ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "decrease in which three incomplete treble crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
-        "felling der tre ufullførte dobbelstaver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
-    skos:editorialNote "[usikker] de, es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "3 Doppelstäbchen zusammen abmaschen"@de,
-        "double treble crochet three together"@en-GB,
-        "treble crochet three together"@en-US,
-        "3 puntos altos dobles juntos"@es,
-        "3 dobbelstaver sammen"@nb ;
-    skos:related vokdata:HEKL-0018 ;
-    skos:scopeNote "Caution: 'tr3tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0042 (double crochet three together). 'treble crochet three together' is the US name of this concept and the UK name of HEKL-0042 (double crochet three together)."@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0042 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0042" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0056 ;
-    skos:altLabel "tr3tog"@en-GB,
-        "dc3tog"@en-US ;
-    skos:broader vokdata:HEKL-0022 ;
-    skos:definition "cluster in which three incomplete double crochets are worked into the same stitch or chain space and finished together in one movement"@en-US,
-        "klynge der tre ufullførte staver hekles i samme maske eller luftmaskebue og avsluttes sammen i ett trekk"@nb ;
-    skos:editorialNote "Kilden kaller masken «Cluster Stitch» og hekler alle tre i samme bue; brukes andre steder også som felling over tre masker" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "3 Stäbchen zusammen abmaschen"@de,
-        "treble crochet three together"@en-GB,
-        "double crochet three together"@en-US,
-        "3 puntos altos juntos"@es,
-        "3 staver sammen"@nb ;
-    skos:related vokdata:HEKL-0020 ;
-    skos:scopeNote "Caution: 'dc3tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0039 (single crochet three together). 'double crochet three together' is the US name of this concept and the UK name of HEKL-0039 (single crochet three together). 'tr3tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0041 (treble crochet three together). 'treble crochet three together' is the UK name of this concept and the US name of HEKL-0041."@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0043 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0043" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0059 ;
-    skos:altLabel "htr2tog"@en-GB,
-        "hdc2tog"@en-US ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "decrease in which two incomplete half double crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
-        "felling der to ufullførte halvstaver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
-    skos:editorialNote "[usikker] de, es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "2 halbe Stäbchen zusammen abmaschen"@de,
-        "half treble crochet two together"@en-GB,
-        "half double crochet two together"@en-US,
-        "2 puntos medios altos juntos"@es,
-        "2 halvstaver sammen"@nb ;
-    skos:related vokdata:HEKL-0018 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0045 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0045" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0050,
-        vokdata:HEKL-0051,
-        vokdata:HEKL-0053,
-        vokdata:HEKL-0054,
-        vokdata:HEKL-0055,
-        vokdata:HEKL-0056,
-        vokdata:HEKL-0060,
-        vokdata:HEKL-0074 ;
-    skos:altLabel "Lm-Bogen"@de,
-        "ch-sp"@en-GB,
-        "ch sp"@en-US,
-        "ch-sp"@en-US,
-        "espacio de cadenetas"@es,
-        "lm-bue"@nb ;
-    skos:definition "opening beneath one or more chains of the previous row, worked into instead of into a stitch"@en-US,
-        "åpning under én eller flere luftmasker i raden under, som det hekles inn i i stedet for i en maske"@nb ;
-    skos:editorialNote "[usikker] es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "Luftmaschenbogen"@de,
-        "chain space"@en-GB,
-        "chain space"@en-US,
-        "arco de cadenetas"@es,
-        "luftmaskebue"@nb ;
-    skos:related vokdata:HEKL-0002 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0061 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0061" ;
-    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0065 ;
-    skos:altLabel "FC"@en-US ;
-    skos:broader vokdata:HEKL-0022 ;
-    skos:definition "cluster worked over two stitches in which a yarn over and a loop are pulled up in the same stitch as the last leg of the previous forked cluster and then in the next stitch, after which the loops are closed by drawing the yarn through three loops twice"@en-US,
-        "klynge over to masker der det lages ett kast og hentes opp en løkke i samme maske som siste ledd i forrige klynge og deretter i neste maske, før løkkene lukkes ved å trekke garnet gjennom tre løkker to ganger"@nb ;
-    skos:editorialNote "Kilden beskriver masken som en variant av dc2tog; [mangler] nb, de, es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "forked cluster"@en-GB,
-        "forked cluster"@en-US ;
-    skos:related vokdata:HEKL-0020 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0062 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0062" ;
-    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0071 ;
-    skos:altLabel "slcl"@en-US ;
-    skos:broader vokdata:HEKL-0022 ;
-    skos:definition "cluster worked around the post of the previous double crochet, in which a yarn over and a loop are pulled up three times around the same post, after which the yarn is drawn through six loops and then through the last two"@en-US,
-        "klynge heklet rundt stolpen på forrige stav, der det tre ganger lages et kast og hentes opp en løkke rundt samme stolpe, før garnet trekkes gjennom seks løkker og deretter gjennom de to siste"@nb ;
-    skos:editorialNote "[mangler] nb, de, es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "slanting cluster"@en-GB,
-        "slanting cluster"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0063 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0063" ;
-    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0073 ;
-    skos:altLabel "FPdtr"@en-GB,
-        "FPtr"@en-US ;
-    skos:broader vokdata:HEKL-0010,
-        vokdata:HEKL-0012 ;
-    skos:definition "treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
-        "dobbelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
-    skos:editorialNote "[usikker] nb; [mangler] de, es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "front post double treble crochet"@en-GB,
-        "front post treble crochet"@en-US,
-        "reliefdobbelstav forfra"@nb ;
-    skos:related vokdata:HEKL-0013,
-        vokdata:HEKL-0044 ;
-    skos:scopeNote "Caution: 'FPdtr' is the UK abbreviation of this concept and the US abbreviation of HEKL-0044 (front post double treble crochet). 'FPtr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0013 (front post double crochet). 'front post double treble crochet' is the UK name of this concept and the US name of HEKL-0044. 'front post treble crochet' is the US name of this concept and the UK name of HEKL-0013 (front post double crochet)."@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0005 a skos:Concept ;
+vokdata:FoundationChain a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -442,79 +531,33 @@ vokdata:HEKL-0005 a skos:Concept ;
         "foundation chain"@en-US,
         "cadeneta base"@es,
         "luftmaskekjede"@nb ;
-    skos:related vokdata:HEKL-0031 ;
+    skos:related vokdata:Row ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0011 a skos:Concept ;
+vokdata:FrontPostDoubleTrebleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0011" ;
+    dct:identifier "HEKL-0044" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
-    skos:altLabel "trtr"@en-GB,
-        "ttr"@en-GB,
-        "dtr"@en-US,
-        "pat"@es,
-        "tst"@nb ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "stitch made with three yarn overs before inserting the hook; the yarn is pulled up and drawn through two loops at a time, four times"@en-US,
-        "maske der det lages tre kast før nålen stikkes inn i arbeidet; garnet hentes opp og trekkes gjennom to og to løkker, fire ganger"@nb ;
-    skos:editorialNote "[usikker] nb: «trippelstav»/«tst»; de: forkortelse mangler; es: «pat»" ;
+    xkos:isPartOf vokdata:RaisedHerringbone ;
+    skos:altLabel "FPttr"@en-GB,
+        "FPdtr"@en-US ;
+    skos:broader vokdata:DoubleTrebleCrochet,
+        vokdata:PostStitch ;
+    skos:definition "double treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
+        "trippelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
+    skos:editorialNote "[usikker] nb; [mangler] de, es" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "dreifaches Stäbchen"@de,
-        "triple treble crochet"@en-GB,
-        "double treble crochet"@en-US,
-        "punto alto triple"@es,
-        "trippelstav"@nb ;
-    skos:scopeNote "Caution: 'double treble crochet' is the US name of this concept and the UK name of HEKL-0010 (treble crochet). 'dtr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0010 (treble crochet)."@en-US ;
+    skos:prefLabel "front post triple treble crochet"@en-GB,
+        "front post double treble crochet"@en-US,
+        "relieftrippelstav forfra"@nb ;
+    skos:related vokdata:FrontPostDoubleCrochet ;
+    skos:scopeNote "Caution: 'FPdtr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0063 (front post treble crochet). 'front post double treble crochet' is the US name of this concept and the UK name of HEKL-0063 (front post treble crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0014 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0014" ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0055 ;
-    skos:altLabel "BPtr"@en-GB,
-        "BPdc"@en-US ;
-    skos:broader vokdata:HEKL-0009,
-        vokdata:HEKL-0012 ;
-    skos:definition "double crochet worked around the post of a stitch in the row below, inserting the hook from the back, so that the stitch lies on the back of the work"@en-US,
-        "stav heklet rundt stolpen på en maske i raden under med nålen stukket inn bakfra, slik at masken legger seg på baksiden av arbeidet"@nb ;
-    skos:editorialNote "[usikker] nb, de, es: termer ikke verifisert" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "Reliefstäbchen von hinten"@de,
-        "back post treble crochet"@en-GB,
-        "back post double crochet"@en-US,
-        "punto alto en relieve por detrás"@es,
-        "reliefstav bakfra"@nb ;
-    skos:related vokdata:HEKL-0013 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0015 a skos:Concept ;
-    svv:tier 2 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0015" ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0068,
-        vokdata:HEKL-0069 ;
-    skos:altLabel "BLO"@en-GB,
-        "BLO"@en-US ;
-    skos:definition "working method in which the hook is inserted under the back one only of the two top loops of a stitch"@en-US,
-        "arbeidsmåte der nålen stikkes inn bare under det bakre av de to maskeleddene øverst på masken"@nb ;
-    skos:editorialNote "[usikker] nb, es: termer ikke verifisert" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "nur ins hintere Maschenglied"@de,
-        "back loop only"@en-GB,
-        "back loop only"@en-US,
-        "solo por la hebra trasera"@es,
-        "kun bakre maskeledd"@nb ;
-    skos:related vokdata:HEKL-0016 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0017 a skos:Concept ;
+vokdata:Increase a skos:Concept ;
     svv:tier 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -531,53 +574,10 @@ vokdata:HEKL-0017 a skos:Concept ;
         "increase"@en-US,
         "aumento"@es,
         "økning"@nb ;
-    skos:related vokdata:HEKL-0018 ;
+    skos:related vokdata:Decrease ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0019 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0019" ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0052,
-        vokdata:HEKL-0076 ;
-    skos:altLabel "dc2tog"@en-GB,
-        "sc2tog"@en-US ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "decrease in which two incomplete single crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
-        "felling der to ufullførte fastmasker avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "2 feste Maschen zusammen abmaschen"@de,
-        "double crochet two together"@en-GB,
-        "single crochet two together"@en-US,
-        "2 puntos bajos juntos"@es,
-        "2 fastmasker sammen"@nb ;
-    skos:related vokdata:HEKL-0018 ;
-    skos:scopeNote "Caution: 'dc2tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0020 (double crochet two together). 'double crochet two together' is the UK name of this concept and the US name of HEKL-0020."@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0024 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0024" ;
-    dct:subject "hekling"@nb ;
-    skos:altLabel "punto piña"@es ;
-    skos:broader vokdata:HEKL-0022 ;
-    skos:definition "stitch in which several loops are pulled up from the same stitch and elongated before all loops are finished together, giving a soft, puffy stitch"@en-US,
-        "maske der flere løkker hentes opp fra samme maske og trekkes langt opp før alle løkkene avsluttes sammen; gir en myk, puffet maske"@nb ;
-    skos:editorialNote "[usikker] nb, de; es: «punto piña» brukes også om andre klynger" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "Puffmasche"@de,
-        "puff stitch"@en-GB,
-        "puff stitch"@en-US,
-        "punto puff"@es,
-        "puffmaske"@nb ;
-    skos:related vokdata:HEKL-0023 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0025 a skos:Concept ;
+vokdata:PopcornStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -585,7 +585,7 @@ vokdata:HEKL-0025 a skos:Concept ;
     dct:subject "hekling"@nb ;
     skos:altLabel "pc"@en-GB,
         "pc"@en-US ;
-    skos:broader vokdata:HEKL-0001 ;
+    skos:broader vokdata:Stitch ;
     skos:definition "stitch in which several complete double crochets are worked into the same stitch, after which the hook is drawn through the first of them so that the group folds together and closes"@en-US,
         "maske der flere fullførte staver hekles i samme maske, hvoretter nålen føres gjennom den første staven slik at gruppen foldes sammen og lukkes"@nb ;
     skos:editorialNote "Kilden (Part 9) har et mønsteravsnitt «Popcorn Stitch» med popcornmasker mellom halvstaver; ikke eget mønsterbegrep" ;
@@ -595,79 +595,100 @@ vokdata:HEKL-0025 a skos:Concept ;
         "popcorn stitch"@en-US,
         "punto palomita"@es,
         "popcornmaske"@nb ;
-    skos:related vokdata:HEKL-0023 ;
+    skos:related vokdata:Bobble ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0028 a skos:Concept ;
+vokdata:PuffStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0028" ;
+    dct:identifier "HEKL-0024" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0057 ;
-    skos:broader vokdata:HEKL-0009 ;
-    skos:definition "pair of double crochets in which the second is worked in front of or behind the first into a skipped stitch, so that they cross"@en-US,
-        "par av staver der den andre hekles foran eller bak den første i en maske som er hoppet over, slik at stavene krysser hverandre"@nb ;
-    skos:editorialNote "[usikker] de, es: termer ikke verifisert" ;
+    skos:altLabel "punto piña"@es ;
+    skos:broader vokdata:Cluster ;
+    skos:definition "stitch in which several loops are pulled up from the same stitch and elongated before all loops are finished together, giving a soft, puffy stitch"@en-US,
+        "maske der flere løkker hentes opp fra samme maske og trekkes langt opp før alle løkkene avsluttes sammen; gir en myk, puffet maske"@nb ;
+    skos:editorialNote "[usikker] nb, de; es: «punto piña» brukes også om andre klynger" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "gekreuztes Stäbchen"@de,
-        "crossed treble crochet"@en-GB,
-        "crossed double crochet"@en-US,
-        "punto alto cruzado"@es,
-        "krysset stav"@nb ;
-    skos:scopeNote "Caution: 'crossed double crochet' is the US name of this concept and the US name of HEKL-0057. 'crossed treble crochet' is the UK name of this concept and the UK name of HEKL-0057 (crossed double crochet)."@en-US ;
+    skos:prefLabel "Puffmasche"@de,
+        "puff stitch"@en-GB,
+        "puff stitch"@en-US,
+        "punto puff"@es,
+        "puffmaske"@nb ;
+    skos:related vokdata:Bobble ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0044 a skos:Concept ;
+vokdata:SingleCrochetTwoTogether a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0044" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:identifier "HEKL-0019" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0059 ;
-    skos:altLabel "FPttr"@en-GB,
-        "FPdtr"@en-US ;
-    skos:broader vokdata:HEKL-0011,
-        vokdata:HEKL-0012 ;
-    skos:definition "double treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
-        "trippelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
-    skos:editorialNote "[usikker] nb; [mangler] de, es" ;
+    xkos:isPartOf vokdata:CrossedCableStitch,
+        vokdata:WaveAndChevron ;
+    skos:altLabel "dc2tog"@en-GB,
+        "sc2tog"@en-US ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "decrease in which two incomplete single crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
+        "felling der to ufullførte fastmasker avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "front post triple treble crochet"@en-GB,
-        "front post double treble crochet"@en-US,
-        "relieftrippelstav forfra"@nb ;
-    skos:related vokdata:HEKL-0013 ;
-    skos:scopeNote "Caution: 'FPdtr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0063 (front post treble crochet). 'front post double treble crochet' is the US name of this concept and the UK name of HEKL-0063 (front post treble crochet)."@en-US ;
+    skos:prefLabel "2 feste Maschen zusammen abmaschen"@de,
+        "double crochet two together"@en-GB,
+        "single crochet two together"@en-US,
+        "2 puntos bajos juntos"@es,
+        "2 fastmasker sammen"@nb ;
+    skos:related vokdata:Decrease ;
+    skos:scopeNote "Caution: 'dc2tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0020 (double crochet two together). 'double crochet two together' is the UK name of this concept and the US name of HEKL-0020."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0002 a skos:Concept ;
+vokdata:Bobble a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0023" ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:BlackberrySaladStitch ;
+    skos:broader vokdata:Cluster ;
+    skos:definition "cluster of several incomplete double crochets worked into the same stitch and finished together, forming a raised bump"@en-US,
+        "klynge der flere ufullførte staver hekles i samme maske og avsluttes sammen, slik at det dannes en tydelig kul"@nb ;
+    skos:editorialNote "[usikker] nb: «boble» eller «nupp»; es: «punto garbanzo» ikke verifisert; Kilden (Unraveled Mitten) skriver «dc5tog (bobble)» om en boble på fem staver i samme maske." ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "Noppe"@de,
+        "bobble"@en-GB,
+        "bobble"@en-US,
+        "punto garbanzo"@es,
+        "boble"@nb ;
+    skos:related vokdata:PopcornStitch,
+        vokdata:PuffStitch ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:Chain a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0002" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0005,
-        vokdata:HEKL-0027,
-        vokdata:HEKL-0030,
-        vokdata:HEKL-0035,
-        vokdata:HEKL-0050,
-        vokdata:HEKL-0051,
-        vokdata:HEKL-0053,
-        vokdata:HEKL-0054,
-        vokdata:HEKL-0055,
-        vokdata:HEKL-0056,
-        vokdata:HEKL-0060,
-        vokdata:HEKL-0064,
-        vokdata:HEKL-0070,
-        vokdata:HEKL-0074,
-        vokdata:HEKL-0077 ;
+    xkos:isPartOf vokdata:ArcadeStitch,
+        vokdata:ClusterVStitch,
+        vokdata:FoundationChain,
+        vokdata:HappyHearts,
+        vokdata:IrisStitch,
+        vokdata:MiniButterflyStitch,
+        vokdata:MossStitch,
+        vokdata:OffsetVStitch,
+        vokdata:Picot,
+        vokdata:PikeStitch,
+        vokdata:SlantedSpikeStitch,
+        vokdata:TrinityStitch,
+        vokdata:VStitch,
+        vokdata:WattleStitch,
+        vokdata:ZigZagLozengeStitch ;
     skos:altLabel "Lm"@de,
         "ch"@en-GB,
         "ch"@en-US,
         "cad"@es,
         "lm"@nb ;
-    skos:broader vokdata:HEKL-0001 ;
+    skos:broader vokdata:Stitch ;
     skos:definition "stitch made by drawing the yarn through the loop on the hook without inserting the hook into the work"@en-US,
         "maske laget ved å trekke garnet gjennom løkken på nålen uten å stikke nålen inn i arbeidet"@nb ;
     skos:inScheme vok:HEKL ;
@@ -678,65 +699,62 @@ vokdata:HEKL-0002 a skos:Concept ;
         "luftmaske"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0008 a skos:Concept ;
+vokdata:ClusterVStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0008" ;
+    dct:identifier "HEKL-0064" ;
+    dct:source <https://theunraveledmitten.com/2022/10/05/2022-stash-busting-crochet-along-part-9/> ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0052,
-        vokdata:HEKL-0056,
-        vokdata:HEKL-0059,
-        vokdata:HEKL-0069,
-        vokdata:HEKL-0072 ;
-    skos:altLabel "hStb"@de,
-        "htr"@en-GB,
-        "hdc"@en-US,
-        "media vareta"@es,
-        "pma"@es,
-        "hst"@nb ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "stitch made with one yarn over before inserting the hook; the yarn is pulled up (three loops on the hook) and drawn through all three at once"@en-US,
-        "maske der det lages ett kast før nålen stikkes inn i arbeidet; garnet hentes opp (tre løkker på nålen) og trekkes gjennom alle tre i ett trekk"@nb ;
-    skos:editorialNote "[usikker] es: «punto medio alto» (Spania?) og «media vareta» (Latin-Amerika?)" ;
+    skos:broader vokdata:VStitch ;
+    skos:definition "V-stitch in which each double crochet is replaced by a double crochet two together: dc2tog, chain 1, dc2tog worked into the same stitch or space"@en-US,
+        "V-maske der hver stav er erstattet av to staver sammen: to staver sammen, én luftmaske og to staver sammen heklet i samme maske eller luftmaskebue"@nb ;
+    skos:editorialNote "Kilden bruker også navnet som overskrift for et mønsteravsnitt (Part 9) der masken gjentas; ikke eget mønsterbegrep; [mangler] nb, de, es" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "halbes Stäbchen"@de,
-        "half treble crochet"@en-GB,
-        "half double crochet"@en-US,
-        "punto medio alto"@es,
-        "halvstav"@nb ;
+    skos:prefLabel "cluster V-stitch"@en-GB,
+        "cluster V-stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0010 a skos:Concept ;
+vokdata:DoubleCrochetTwoTogether a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0010" ;
+    dct:identifier "HEKL-0020" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0052,
-        vokdata:HEKL-0058,
-        vokdata:HEKL-0072 ;
-    skos:altLabel "DStb"@de,
-        "dtr"@en-GB,
-        "tr"@en-US,
-        "treble"@en-US,
-        "pad"@es,
-        "dobbel stav"@nb,
-        "dst"@nb ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "stitch made with two yarn overs before inserting the hook; the yarn is pulled up and drawn through two loops at a time, three times"@en-US,
-        "maske der det lages to kast før nålen stikkes inn i arbeidet; garnet hentes opp og trekkes gjennom to og to løkker, tre ganger"@nb ;
-    skos:editorialNote "[usikker] es: forkortelse «pad»" ;
+    xkos:isPartOf vokdata:ClusterVStitch,
+        vokdata:ZigZagLozengeStitch ;
+    skos:altLabel "tr2tog"@en-GB,
+        "dc2tog"@en-US ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "decrease in which two incomplete double crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
+        "felling der to ufullførte staver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "Doppelstäbchen"@de,
-        "double treble crochet"@en-GB,
-        "treble crochet"@en-US,
-        "punto alto doble"@es,
-        "dobbelstav"@nb ;
-    skos:scopeNote "Caution: 'double treble crochet' is the UK name of this concept and the US name of HEKL-0011. 'dtr' is the UK abbreviation of this concept and the US abbreviation of HEKL-0011 (double treble crochet). 'tr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0009 (double crochet). 'treble crochet' is the US name of this concept and the UK name of HEKL-0009 (double crochet)."@en-US ;
+    skos:prefLabel "2 Stäbchen zusammen abmaschen"@de,
+        "treble crochet two together"@en-GB,
+        "double crochet two together"@en-US,
+        "2 puntos altos juntos"@es,
+        "2 staver sammen"@nb ;
+    skos:related vokdata:Decrease ;
+    skos:scopeNote "Caution: 'dc2tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0019 (single crochet two together). 'double crochet two together' is the US name of this concept and the UK name of HEKL-0019 (single crochet two together). 'tr2tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0040 (treble crochet two together). 'treble crochet two together' is the UK name of this concept and the US name of HEKL-0040."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0016 a skos:Concept ;
+vokdata:FloretStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0047" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which rows of alternating double crochets and slip stitches alternate with rows of double crochets only"@en-US,
+        "mønster der rader med vekselvis stav og kjedemaske veksler med rader med bare staver"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "floret stitch"@en-GB,
+        "floret stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:FrontLoopOnly a skos:Concept ;
     svv:tier 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -753,92 +771,10 @@ vokdata:HEKL-0016 a skos:Concept ;
         "front loop only"@en-US,
         "solo por la hebra delantera"@es,
         "kun fremre maskeledd"@nb ;
-    skos:related vokdata:HEKL-0015 ;
+    skos:related vokdata:BackLoopOnly ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0020 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0020" ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0056,
-        vokdata:HEKL-0064 ;
-    skos:altLabel "tr2tog"@en-GB,
-        "dc2tog"@en-US ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "decrease in which two incomplete double crochets are finished together by drawing the yarn through all loops on the hook at once"@en-US,
-        "felling der to ufullførte staver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett trekk"@nb ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "2 Stäbchen zusammen abmaschen"@de,
-        "treble crochet two together"@en-GB,
-        "double crochet two together"@en-US,
-        "2 puntos altos juntos"@es,
-        "2 staver sammen"@nb ;
-    skos:related vokdata:HEKL-0018 ;
-    skos:scopeNote "Caution: 'dc2tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0019 (single crochet two together). 'double crochet two together' is the US name of this concept and the UK name of HEKL-0019 (single crochet two together). 'tr2tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0040 (treble crochet two together). 'treble crochet two together' is the UK name of this concept and the US name of HEKL-0040."@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0023 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0023" ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0049 ;
-    skos:broader vokdata:HEKL-0022 ;
-    skos:definition "cluster of several incomplete double crochets worked into the same stitch and finished together, forming a raised bump"@en-US,
-        "klynge der flere ufullførte staver hekles i samme maske og avsluttes sammen, slik at det dannes en tydelig kul"@nb ;
-    skos:editorialNote "[usikker] nb: «boble» eller «nupp»; es: «punto garbanzo» ikke verifisert; Kilden (Unraveled Mitten) skriver «dc5tog (bobble)» om en boble på fem staver i samme maske." ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "Noppe"@de,
-        "bobble"@en-GB,
-        "bobble"@en-US,
-        "punto garbanzo"@es,
-        "boble"@nb ;
-    skos:related vokdata:HEKL-0024,
-        vokdata:HEKL-0025 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0026 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0026" ;
-    dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0050,
-        vokdata:HEKL-0066 ;
-    skos:altLabel "Muschel"@de ;
-    skos:definition "group of several double crochets, usually three to seven, worked into the same stitch so that they fan out"@en-US,
-        "gruppe av flere staver, vanligvis tre til sju, heklet i samme maske slik at de sprer seg ut som en vifte"@nb ;
-    skos:editorialNote "[usikker] de: «Fächer» eller «Muschel»" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "Fächer"@de,
-        "shell"@en-GB,
-        "shell"@en-US,
-        "abanico"@es,
-        "vifte"@nb ;
-    skos:related vokdata:HEKL-0027 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0030 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0030" ;
-    dct:subject "hekling"@nb ;
-    skos:altLabel "picot"@es ;
-    skos:definition "small decorative loop of chains closed with a slip stitch or single crochet into the base stitch"@en-US,
-        "liten dekorativ bue av luftmasker som lukkes med en kjedemaske eller fastmaske i utgangsmasken"@nb ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "Pikot"@de,
-        "picot"@en-GB,
-        "picot"@en-US,
-        "piquito"@es,
-        "picot"@nb ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0033 a skos:Concept ;
+vokdata:GrannySquare a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -856,79 +792,14 @@ vokdata:HEKL-0033 a skos:Concept ;
         "bestemorrute"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0047 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0047" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which rows of alternating double crochets and slip stitches alternate with rows of double crochets only"@en-US,
-        "mønster der rader med vekselvis stav og kjedemaske veksler med rader med bare staver"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "floret stitch"@en-GB,
-        "floret stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0048 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0048" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which one single crochet and two double crochets are worked into the same stitch, skipping two stitches between groups"@en-US,
-        "mønster der én fastmaske og to staver hekles i samme maske, med to masker hoppet over mellom gruppene"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "sedge stitch"@en-GB,
-        "sedge stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0064 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0064" ;
-    dct:source <https://theunraveledmitten.com/2022/10/05/2022-stash-busting-crochet-along-part-9/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0027 ;
-    skos:definition "V-stitch in which each double crochet is replaced by a double crochet two together: dc2tog, chain 1, dc2tog worked into the same stitch or space"@en-US,
-        "V-maske der hver stav er erstattet av to staver sammen: to staver sammen, én luftmaske og to staver sammen heklet i samme maske eller luftmaskebue"@nb ;
-    skos:editorialNote "Kilden bruker også navnet som overskrift for et mønsteravsnitt (Part 9) der masken gjentas; ikke eget mønsterbegrep; [mangler] nb, de, es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "cluster V-stitch"@en-GB,
-        "cluster V-stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0070 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0070" ;
-    dct:source <https://theunraveledmitten.com/2022/08/06/2022-crochet-along-part-7/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern of alternating extended single crochets and chains in which the extended single crochets are worked into the stitches of the row below, giving a loose mesh"@en-US,
-        "mønster av vekselvis forlenget fastmaske og luftmaske, der de forlengede fastmaskene hekles i maskene i raden under; gir et løst nett"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent; Kilden sier mønsteret ligner linen stitch (HEKL-0035), men hekles i maskene i stedet for i luftmaskebuene" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "pike stitch"@en-GB,
-        "pike stitch"@en-US ;
-    skos:related vokdata:HEKL-0035 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0075 a skos:Concept ;
+vokdata:GritStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0075" ;
     dct:source <https://theunraveledmitten.com/2022/11/01/2022-crochet-along-part-10/> ;
     dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
+    skos:broader vokdata:StitchPattern ;
     skos:definition "stitch pattern in which one single crochet and one double crochet are worked into the same stitch, skipping one stitch between groups"@en-US,
         "mønster der én fastmaske og én stav hekles i samme maske, med én maske hoppet over mellom gruppene"@nb ;
     skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
@@ -937,51 +808,235 @@ vokdata:HEKL-0075 a skos:Concept ;
         "grit stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0007 a skos:Concept ;
+vokdata:HalfDoubleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0007" ;
+    dct:identifier "HEKL-0008" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0035,
-        vokdata:HEKL-0048,
-        vokdata:HEKL-0049,
-        vokdata:HEKL-0050,
-        vokdata:HEKL-0051,
-        vokdata:HEKL-0052,
-        vokdata:HEKL-0053,
-        vokdata:HEKL-0055,
-        vokdata:HEKL-0057,
-        vokdata:HEKL-0058,
-        vokdata:HEKL-0060,
-        vokdata:HEKL-0065,
-        vokdata:HEKL-0067,
-        vokdata:HEKL-0068,
-        vokdata:HEKL-0071,
-        vokdata:HEKL-0072,
-        vokdata:HEKL-0073,
-        vokdata:HEKL-0074,
-        vokdata:HEKL-0075,
-        vokdata:HEKL-0076 ;
-    skos:altLabel "fM"@de,
-        "fe M"@de,
-        "dc"@en-GB,
-        "sc"@en-US,
-        "pb"@es,
-        "fm"@nb ;
-    skos:broader vokdata:HEKL-0001 ;
-    skos:definition "stitch in which the hook is inserted into the work, the yarn is pulled up (two loops on the hook) and drawn through both loops at once"@en-US,
-        "maske der nålen stikkes inn i arbeidet, garnet hentes opp (to løkker på nålen) og trekkes gjennom begge løkkene i ett trekk"@nb ;
+    xkos:isPartOf vokdata:BraidedCrochetStitch,
+        vokdata:LazyWaveStitch,
+        vokdata:RaisedHerringbone,
+        vokdata:WaveAndChevron,
+        vokdata:ZigZagLozengeStitch ;
+    skos:altLabel "hStb"@de,
+        "htr"@en-GB,
+        "hdc"@en-US,
+        "media vareta"@es,
+        "pma"@es,
+        "hst"@nb ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "stitch made with one yarn over before inserting the hook; the yarn is pulled up (three loops on the hook) and drawn through all three at once"@en-US,
+        "maske der det lages ett kast før nålen stikkes inn i arbeidet; garnet hentes opp (tre løkker på nålen) og trekkes gjennom alle tre i ett trekk"@nb ;
+    skos:editorialNote "[usikker] es: «punto medio alto» (Spania?) og «media vareta» (Latin-Amerika?)" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "feste Masche"@de,
-        "double crochet"@en-GB,
-        "single crochet"@en-US,
-        "punto bajo"@es,
-        "fastmaske"@nb ;
-    skos:scopeNote "Caution: 'dc' is the UK abbreviation of this concept and the US abbreviation of HEKL-0009 (double crochet). 'double crochet' is the UK name of this concept and the US name of HEKL-0009."@en-US ;
+    skos:prefLabel "halbes Stäbchen"@de,
+        "half treble crochet"@en-GB,
+        "half double crochet"@en-US,
+        "punto medio alto"@es,
+        "halvstav"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0013 a skos:Concept ;
+vokdata:Picot a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0030" ;
+    dct:subject "hekling"@nb ;
+    skos:altLabel "picot"@es ;
+    skos:definition "small decorative loop of chains closed with a slip stitch or single crochet into the base stitch"@en-US,
+        "liten dekorativ bue av luftmasker som lukkes med en kjedemaske eller fastmaske i utgangsmasken"@nb ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "Pikot"@de,
+        "picot"@en-GB,
+        "picot"@en-US,
+        "piquito"@es,
+        "picot"@nb ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:PikeStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0070" ;
+    dct:source <https://theunraveledmitten.com/2022/08/06/2022-crochet-along-part-7/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern of alternating extended single crochets and chains in which the extended single crochets are worked into the stitches of the row below, giving a loose mesh"@en-US,
+        "mønster av vekselvis forlenget fastmaske og luftmaske, der de forlengede fastmaskene hekles i maskene i raden under; gir et løst nett"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent; Kilden sier mønsteret ligner linen stitch (HEKL-0035), men hekles i maskene i stedet for i luftmaskebuene" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "pike stitch"@en-GB,
+        "pike stitch"@en-US ;
+    skos:related vokdata:MossStitch ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:SedgeStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0048" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which one single crochet and two double crochets are worked into the same stitch, skipping two stitches between groups"@en-US,
+        "mønster der én fastmaske og to staver hekles i samme maske, med to masker hoppet over mellom gruppene"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "sedge stitch"@en-GB,
+        "sedge stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:Shell a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0026" ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:ArcadeStitch,
+        vokdata:ThistleStitch ;
+    skos:altLabel "Muschel"@de ;
+    skos:definition "group of several double crochets, usually three to seven, worked into the same stitch so that they fan out"@en-US,
+        "gruppe av flere staver, vanligvis tre til sju, heklet i samme maske slik at de sprer seg ut som en vifte"@nb ;
+    skos:editorialNote "[usikker] de: «Fächer» eller «Muschel»" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "Fächer"@de,
+        "shell"@en-GB,
+        "shell"@en-US,
+        "abanico"@es,
+        "vifte"@nb ;
+    skos:related vokdata:VStitch ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:TrebleCrochet a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0010" ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:LazyWaveStitch,
+        vokdata:NubbyCrochetStitch,
+        vokdata:WaveAndChevron ;
+    skos:altLabel "DStb"@de,
+        "dtr"@en-GB,
+        "tr"@en-US,
+        "treble"@en-US,
+        "pad"@es,
+        "dobbel stav"@nb,
+        "dst"@nb ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "stitch made with two yarn overs before inserting the hook; the yarn is pulled up and drawn through two loops at a time, three times"@en-US,
+        "maske der det lages to kast før nålen stikkes inn i arbeidet; garnet hentes opp og trekkes gjennom to og to løkker, tre ganger"@nb ;
+    skos:editorialNote "[usikker] es: forkortelse «pad»" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "Doppelstäbchen"@de,
+        "double treble crochet"@en-GB,
+        "treble crochet"@en-US,
+        "punto alto doble"@es,
+        "dobbelstav"@nb ;
+    skos:scopeNote "Caution: 'double treble crochet' is the UK name of this concept and the US name of HEKL-0011. 'dtr' is the UK abbreviation of this concept and the US abbreviation of HEKL-0011 (double treble crochet). 'tr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0009 (double crochet). 'treble crochet' is the US name of this concept and the UK name of HEKL-0009 (double crochet)."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:AlpineStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0073" ;
+    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which rows of alternating double crochets and front post treble crochets around double crochets two rows below alternate with rows of single crochets"@en-US,
+        "mønster der rader med vekselvis stav og reliefdobbelstav forfra rundt staver to rader lenger ned veksler med rader med fastmasker"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "alpine stitch"@en-GB,
+        "alpine stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:BlackberrySaladStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0049" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which rows of double crochets alternate with rows of single crochets with a bobble in every fourth stitch"@en-US,
+        "mønster der rader med staver veksler med rader med fastmasker med en boble i hver fjerde maske"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "blackberry salad stitch"@en-GB,
+        "blackberry salad stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:BraidedCrochetStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0069" ;
+    dct:source <https://theunraveledmitten.com/2022/08/06/2022-crochet-along-part-7/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which rows of half double crochets alternate with rows of double crochets worked in the back loop only, giving the half double crochets a braided look"@en-US,
+        "mønster der rader med halvstaver veksler med rader med staver heklet i bakre maskeledd, slik at halvstavene ser flettet ut"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "braided crochet stitch"@en-GB,
+        "braided crochet stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:CrossedCableStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0076" ;
+    dct:source <https://theunraveledmitten.com/2022/11/01/2022-crochet-along-part-10/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which a long double crochet is worked into a skipped stitch across the front of three double crochets, forming crossed cables, with rows of single crochets in between"@en-US,
+        "mønster der en lang stav hekles i en maske som er hoppet over, foran tre staver, slik at det dannes kryssede kabler; veksler med rader med fastmasker"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent; Kilden sier mønsteret ligner crossed double crochet (HEKL-0028), men krysser over tre staver; «long dc» er ikke laget som eget begrep" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "crossed cable stitch"@en-GB,
+        "crossed cable stitch"@en-US ;
+    skos:related vokdata:CrossedDoubleCrochet ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:CrossedDoubleCrochet2 a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0057" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which rows of crossed double crochets alternate with rows of single crochets"@en-US,
+        "mønster der rader med kryssede staver veksler med rader med fastmasker"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; kilden bruker samme navn på mønsteret som på masken HEKL-0028; [usikker] nb, en-GB; [mangler] de, es" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "crossed treble crochet"@en-GB,
+        "crossed double crochet"@en-US,
+        "mønster med kryssede staver"@nb ;
+    skos:scopeNote "Caution: 'crossed double crochet' is the US name of this concept and the US name of HEKL-0028. 'crossed treble crochet' is the UK name of this concept and the UK name of HEKL-0028 (crossed double crochet)."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:ForkedClusterStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0065" ;
+    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which rows of forked clusters alternate with rows of single crochets"@en-US,
+        "mønster der rader med forked clusters veksler med rader med fastmasker"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "forked cluster stitch"@en-GB,
+        "forked cluster stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:FrontPostDoubleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -989,8 +1044,8 @@ vokdata:HEKL-0013 a skos:Concept ;
     dct:subject "hekling"@nb ;
     skos:altLabel "FPtr"@en-GB,
         "FPdc"@en-US ;
-    skos:broader vokdata:HEKL-0009,
-        vokdata:HEKL-0012 ;
+    skos:broader vokdata:DoubleCrochet,
+        vokdata:PostStitch ;
     skos:definition "double crochet worked around the post of a stitch in the row below, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
         "stav heklet rundt stolpen på en maske i raden under med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
     skos:editorialNote "[usikker] nb, de, es: termer ikke verifisert" ;
@@ -1000,53 +1055,43 @@ vokdata:HEKL-0013 a skos:Concept ;
         "front post double crochet"@en-US,
         "punto alto en relieve por delante"@es,
         "reliefstav forfra"@nb ;
-    skos:related vokdata:HEKL-0014 ;
+    skos:related vokdata:BackPostDoubleCrochet ;
     skos:scopeNote "Caution: 'FPtr' is the UK abbreviation of this concept and the US abbreviation of HEKL-0063 (front post treble crochet). 'front post treble crochet' is the UK name of this concept and the US name of HEKL-0063."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0031 a skos:Concept ;
+vokdata:IrisStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0031" ;
+    dct:identifier "HEKL-0054" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
-    skos:altLabel "vuelta"@es ;
-    skos:definition "line of stitches worked from one edge of the piece to the other before the work is turned"@en-US,
-        "rekke av masker heklet fra den ene kanten av arbeidet til den andre før arbeidet snus"@nb ;
-    skos:editorialNote "[usikker] es: «vuelta» brukes både om rad og omgang" ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which groups of two double crochets, one chain and two double crochets are worked into the chain space of the group in the row below"@en-US,
+        "mønster der grupper på to staver, én luftmaske og to staver hekles i luftmaskebuen i gruppen i raden under"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "Reihe"@de,
-        "row"@en-GB,
-        "row"@en-US,
-        "fila"@es,
-        "rad"@nb ;
-    skos:scopeNote "Caution: 'vuelta' is the Spanish alternative name of this concept and the Spanish name of HEKL-0032 (round)."@en-US ;
+    skos:prefLabel "iris stitch"@en-GB,
+        "iris stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0032 a skos:Concept ;
+vokdata:ModifiedSiltStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0032" ;
+    dct:identifier "HEKL-0068" ;
+    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0033 ;
-    skos:altLabel "Rd"@de,
-        "rnd"@en-GB,
-        "rnd"@en-US,
-        "ronda"@es ;
-    skos:definition "circuit of stitches worked in a circle or spiral without turning the work"@en-US,
-        "runde med masker heklet i sirkel eller spiral uten at arbeidet snus"@nb ;
-    skos:editorialNote "[usikker] es: «vuelta» brukes både om rad og omgang" ;
+    skos:broader vokdata:SiltStitch ;
+    skos:definition "silt stitch in which the double crochet rows are worked in the back loop only"@en-US,
+        "silt stitch der radene med staver hekles kun i bakre maskeledd"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
     skos:inScheme vok:HEKL ;
-    skos:prefLabel "Runde"@de,
-        "round"@en-GB,
-        "round"@en-US,
-        "vuelta"@es,
-        "omgang"@nb ;
-    skos:scopeNote "Caution: 'vuelta' is the Spanish name of this concept and the Spanish alternative name of HEKL-0031 (row)."@en-US ;
+    skos:prefLabel "modified silt stitch"@en-GB,
+        "modified silt stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0035 a skos:Concept ;
+vokdata:MossStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -1065,64 +1110,14 @@ vokdata:HEKL-0035 a skos:Concept ;
         "mosemaske"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0049 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0049" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which rows of double crochets alternate with rows of single crochets with a bobble in every fourth stitch"@en-US,
-        "mønster der rader med staver veksler med rader med fastmasker med en boble i hver fjerde maske"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "blackberry salad stitch"@en-GB,
-        "blackberry salad stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0054 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0054" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which groups of two double crochets, one chain and two double crochets are worked into the chain space of the group in the row below"@en-US,
-        "mønster der grupper på to staver, én luftmaske og to staver hekles i luftmaskebuen i gruppen i raden under"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "iris stitch"@en-GB,
-        "iris stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0057 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0057" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which rows of crossed double crochets alternate with rows of single crochets"@en-US,
-        "mønster der rader med kryssede staver veksler med rader med fastmasker"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; kilden bruker samme navn på mønsteret som på masken HEKL-0028; [usikker] nb, en-GB; [mangler] de, es" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "crossed treble crochet"@en-GB,
-        "crossed double crochet"@en-US,
-        "mønster med kryssede staver"@nb ;
-    skos:scopeNote "Caution: 'crossed double crochet' is the US name of this concept and the US name of HEKL-0028. 'crossed treble crochet' is the UK name of this concept and the UK name of HEKL-0028 (crossed double crochet)."@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0058 a skos:Concept ;
+vokdata:NubbyCrochetStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0058" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
+    skos:broader vokdata:StitchPattern ;
     skos:definition "stitch pattern in which rows of alternating single crochets and treble crochets, which form nubs, alternate with rows of double crochets"@en-US,
         "mønster der rader med vekselvis fastmaske og dobbelstav, som danner knuter, veksler med rader med staver"@nb ;
     skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
@@ -1131,143 +1126,14 @@ vokdata:HEKL-0058 a skos:Concept ;
         "nubby crochet stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0059 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0059" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern of half double crochets in which pairs of front post double treble crochets around stitches two rows below form a raised herringbone"@en-US,
-        "mønster av halvstaver der par av relieftrippelstaver forfra rundt masker to rader lenger ned danner et fiskebeinsmønster i relieff"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "raised herringbone"@en-GB,
-        "raised herringbone"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0065 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0065" ;
-    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which rows of forked clusters alternate with rows of single crochets"@en-US,
-        "mønster der rader med forked clusters veksler med rader med fastmasker"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "forked cluster stitch"@en-GB,
-        "forked cluster stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0066 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0066" ;
-    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which shells of five double crochets and pairs of double crochets are worked into the spaces between the stitches of the row below, so that the shells look like thistle flowers"@en-US,
-        "mønster der vifter på fem staver og par av staver hekles i mellomrommene mellom maskene i raden under, slik at viftene ligner tistelblomster"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "thistle stitch"@en-GB,
-        "thistle stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0067 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0067" ;
-    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which a row of groups of one single crochet and two double crochets lies between rows of double crochets"@en-US,
-        "mønster der en rad med grupper av én fastmaske og to staver ligger mellom rader med staver"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent; Kilden nevner mønsteret bare som grunnlag for modified silt stitch; [usikker] gruppene (sc, 2 dc) med to masker hoppet over hekles som i sedge stitch (HEKL-0048), mulig samme mønster med to navn" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "silt stitch"@en-GB,
-        "silt stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0068 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0068" ;
-    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0067 ;
-    skos:definition "silt stitch in which the double crochet rows are worked in the back loop only"@en-US,
-        "silt stitch der radene med staver hekles kun i bakre maskeledd"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "modified silt stitch"@en-GB,
-        "modified silt stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0069 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0069" ;
-    dct:source <https://theunraveledmitten.com/2022/08/06/2022-crochet-along-part-7/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which rows of half double crochets alternate with rows of double crochets worked in the back loop only, giving the half double crochets a braided look"@en-US,
-        "mønster der rader med halvstaver veksler med rader med staver heklet i bakre maskeledd, slik at halvstavene ser flettet ut"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "braided crochet stitch"@en-GB,
-        "braided crochet stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0073 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0073" ;
-    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which rows of alternating double crochets and front post treble crochets around double crochets two rows below alternate with rows of single crochets"@en-US,
-        "mønster der rader med vekselvis stav og reliefdobbelstav forfra rundt staver to rader lenger ned veksler med rader med fastmasker"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "alpine stitch"@en-GB,
-        "alpine stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0076 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0076" ;
-    dct:source <https://theunraveledmitten.com/2022/11/01/2022-crochet-along-part-10/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which a long double crochet is worked into a skipped stitch across the front of three double crochets, forming crossed cables, with rows of single crochets in between"@en-US,
-        "mønster der en lang stav hekles i en maske som er hoppet over, foran tre staver, slik at det dannes kryssede kabler; veksler med rader med fastmasker"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent; Kilden sier mønsteret ligner crossed double crochet (HEKL-0028), men krysser over tre staver; «long dc» er ikke laget som eget begrep" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "crossed cable stitch"@en-GB,
-        "crossed cable stitch"@en-US ;
-    skos:related vokdata:HEKL-0028 ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0077 a skos:Concept ;
+vokdata:OffsetVStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0077" ;
     dct:source <https://theunraveledmitten.com/2022/11/01/2022-crochet-along-part-10/> ;
     dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
+    skos:broader vokdata:StitchPattern ;
     skos:definition "stitch pattern of V-stitches in which each V-stitch is worked into a double crochet of the row below instead of into the chain space, so that the Vs are offset"@en-US,
         "mønster av V-masker der hver V-maske hekles i en stav i raden under i stedet for i luftmaskebuen, slik at V-ene forskyves"@nb ;
     skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
@@ -1276,44 +1142,194 @@ vokdata:HEKL-0077 a skos:Concept ;
         "offset V-stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0009 a skos:Concept ;
+vokdata:RaisedHerringbone a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0059" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern of half double crochets in which pairs of front post double treble crochets around stitches two rows below form a raised herringbone"@en-US,
+        "mønster av halvstaver der par av relieftrippelstaver forfra rundt masker to rader lenger ned danner et fiskebeinsmønster i relieff"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "raised herringbone"@en-GB,
+        "raised herringbone"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:Round a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0032" ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:GrannySquare ;
+    skos:altLabel "Rd"@de,
+        "rnd"@en-GB,
+        "rnd"@en-US,
+        "ronda"@es ;
+    skos:definition "circuit of stitches worked in a circle or spiral without turning the work"@en-US,
+        "runde med masker heklet i sirkel eller spiral uten at arbeidet snus"@nb ;
+    skos:editorialNote "[usikker] es: «vuelta» brukes både om rad og omgang" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "Runde"@de,
+        "round"@en-GB,
+        "round"@en-US,
+        "vuelta"@es,
+        "omgang"@nb ;
+    skos:scopeNote "Caution: 'vuelta' is the Spanish name of this concept and the Spanish alternative name of HEKL-0031 (row)."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:Row a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0031" ;
+    dct:subject "hekling"@nb ;
+    skos:altLabel "vuelta"@es ;
+    skos:definition "line of stitches worked from one edge of the piece to the other before the work is turned"@en-US,
+        "rekke av masker heklet fra den ene kanten av arbeidet til den andre før arbeidet snus"@nb ;
+    skos:editorialNote "[usikker] es: «vuelta» brukes både om rad og omgang" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "Reihe"@de,
+        "row"@en-GB,
+        "row"@en-US,
+        "fila"@es,
+        "rad"@nb ;
+    skos:scopeNote "Caution: 'vuelta' is the Spanish alternative name of this concept and the Spanish name of HEKL-0032 (round)."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:SiltStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0067" ;
+    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which a row of groups of one single crochet and two double crochets lies between rows of double crochets"@en-US,
+        "mønster der en rad med grupper av én fastmaske og to staver ligger mellom rader med staver"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent; Kilden nevner mønsteret bare som grunnlag for modified silt stitch; [usikker] gruppene (sc, 2 dc) med to masker hoppet over hekles som i sedge stitch (HEKL-0048), mulig samme mønster med to navn" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "silt stitch"@en-GB,
+        "silt stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:SingleCrochet a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0007" ;
+    dct:subject "hekling"@nb ;
+    xkos:isPartOf vokdata:AlpineStitch,
+        vokdata:ArcadeStitch,
+        vokdata:BlackberrySaladStitch,
+        vokdata:BoxedBeadStitch,
+        vokdata:CrossedCableStitch,
+        vokdata:CrossedDoubleCrochet2,
+        vokdata:ForkedClusterStitch,
+        vokdata:GritStitch,
+        vokdata:HappyHearts,
+        vokdata:LazyWaveStitch,
+        vokdata:MiniButterflyStitch,
+        vokdata:ModifiedSiltStitch,
+        vokdata:MossStitch,
+        vokdata:NubbyCrochetStitch,
+        vokdata:SedgeStitch,
+        vokdata:SiltStitch,
+        vokdata:SlantedSpikeStitch,
+        vokdata:TrinityStitch,
+        vokdata:WattleStitch,
+        vokdata:WaveAndChevron ;
+    skos:altLabel "fM"@de,
+        "fe M"@de,
+        "dc"@en-GB,
+        "sc"@en-US,
+        "pb"@es,
+        "fm"@nb ;
+    skos:broader vokdata:Stitch ;
+    skos:definition "stitch in which the hook is inserted into the work, the yarn is pulled up (two loops on the hook) and drawn through both loops at once"@en-US,
+        "maske der nålen stikkes inn i arbeidet, garnet hentes opp (to løkker på nålen) og trekkes gjennom begge løkkene i ett trekk"@nb ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "feste Masche"@de,
+        "double crochet"@en-GB,
+        "single crochet"@en-US,
+        "punto bajo"@es,
+        "fastmaske"@nb ;
+    skos:scopeNote "Caution: 'dc' is the UK abbreviation of this concept and the US abbreviation of HEKL-0009 (double crochet). 'double crochet' is the UK name of this concept and the US name of HEKL-0009."@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:ThistleStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0066" ;
+    dct:source <https://theunraveledmitten.com/2022/07/12/2022-stash-busting-crochet-along-part-6/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which shells of five double crochets and pairs of double crochets are worked into the spaces between the stitches of the row below, so that the shells look like thistle flowers"@en-US,
+        "mønster der vifter på fem staver og par av staver hekles i mellomrommene mellom maskene i raden under, slik at viftene ligner tistelblomster"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "thistle stitch"@en-GB,
+        "thistle stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:BoxedBeadStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0071" ;
+    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which extended single crochets, single crochets, double crochets and slanting clusters around the post of the neighbouring double crochet form small boxes"@en-US,
+        "mønster der forlengede fastmasker, fastmasker, staver og skrå klynger rundt stolpen på staven ved siden av danner små bokser"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "boxed bead stitch"@en-GB,
+        "boxed bead stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:DoubleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0009" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0026,
-        vokdata:HEKL-0027,
-        vokdata:HEKL-0033,
-        vokdata:HEKL-0047,
-        vokdata:HEKL-0048,
-        vokdata:HEKL-0049,
-        vokdata:HEKL-0050,
-        vokdata:HEKL-0051,
-        vokdata:HEKL-0052,
-        vokdata:HEKL-0054,
-        vokdata:HEKL-0055,
-        vokdata:HEKL-0057,
-        vokdata:HEKL-0058,
-        vokdata:HEKL-0065,
-        vokdata:HEKL-0066,
-        vokdata:HEKL-0067,
-        vokdata:HEKL-0068,
-        vokdata:HEKL-0069,
-        vokdata:HEKL-0071,
-        vokdata:HEKL-0072,
-        vokdata:HEKL-0073,
-        vokdata:HEKL-0074,
-        vokdata:HEKL-0075,
-        vokdata:HEKL-0076,
-        vokdata:HEKL-0077 ;
+    xkos:isPartOf vokdata:AlpineStitch,
+        vokdata:ArcadeStitch,
+        vokdata:BlackberrySaladStitch,
+        vokdata:BoxedBeadStitch,
+        vokdata:BraidedCrochetStitch,
+        vokdata:CrossedCableStitch,
+        vokdata:CrossedDoubleCrochet2,
+        vokdata:FloretStitch,
+        vokdata:ForkedClusterStitch,
+        vokdata:GrannySquare,
+        vokdata:GritStitch,
+        vokdata:HappyHearts,
+        vokdata:IrisStitch,
+        vokdata:LazyWaveStitch,
+        vokdata:MiniButterflyStitch,
+        vokdata:ModifiedSiltStitch,
+        vokdata:NubbyCrochetStitch,
+        vokdata:OffsetVStitch,
+        vokdata:SedgeStitch,
+        vokdata:Shell,
+        vokdata:SiltStitch,
+        vokdata:ThistleStitch,
+        vokdata:VStitch,
+        vokdata:WattleStitch,
+        vokdata:WaveAndChevron ;
     skos:altLabel "Stb"@de,
         "tr"@en-GB,
         "dc"@en-US,
         "pa"@es,
         "vareta"@es,
         "st"@nb ;
-    skos:broader vokdata:HEKL-0001 ;
+    skos:broader vokdata:Stitch ;
     skos:definition "stitch made with one yarn over before inserting the hook; the yarn is pulled up and drawn through two loops at a time, twice"@en-US,
         "maske der det lages ett kast før nålen stikkes inn i arbeidet; garnet hentes opp og trekkes gjennom to og to løkker, to ganger"@nb ;
     skos:inScheme vok:HEKL ;
@@ -1325,14 +1341,46 @@ vokdata:HEKL-0009 a skos:Concept ;
     skos:scopeNote "Caution: 'dc' is the US abbreviation of this concept and the UK abbreviation of HEKL-0007 (single crochet). 'double crochet' is the US name of this concept and the UK name of HEKL-0007 (single crochet). 'st' is the Norwegian abbreviation of this concept and the UK and US abbreviation of HEKL-0001 (stitch). 'tr' is the UK abbreviation of this concept and the US abbreviation of HEKL-0010 (treble crochet). 'treble crochet' is the UK name of this concept and the US name of HEKL-0010."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0012 a skos:Concept ;
+vokdata:LazyWaveStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0072" ;
+    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which basic stitches are worked in rising and falling height one after the other across the row, forming waves"@en-US,
+        "mønster der grunnmaskene hekles i stigende og synkende høyde etter hverandre langs raden, slik at det dannes bølger"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "lazy wave stitch"@en-GB,
+        "lazy wave stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:MiniButterflyStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0074" ;
+    dct:source <https://theunraveledmitten.com/2022/10/05/2022-stash-busting-crochet-along-part-9/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern in which chain loops are gathered in the middle by a single crochet worked from a later row, forming small butterfly shapes between groups of single crochets and double crochets"@en-US,
+        "mønster der buer av luftmasker samles på midten med en fastmaske i en rad lenger opp, slik at det dannes små sommerfuglformer mellom grupper av fastmasker og staver"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "mini butterfly stitch"@en-GB,
+        "mini butterfly stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:PostStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0012" ;
     dct:subject "hekling"@nb ;
     skos:altLabel "post stitch"@en-GB ;
-    skos:broader vokdata:HEKL-0001 ;
+    skos:broader vokdata:Stitch ;
     skos:definition "stitch worked around the post (body) of a stitch in the row below instead of through its top loops, so that it stands out in relief"@en-US,
         "maske som hekles rundt stolpen (selve maskekroppen) på en maske i raden under i stedet for gjennom maskeleddene øverst, slik at den legger seg i relieff"@nb ;
     skos:editorialNote "[usikker] nb, de, es: samlebegrep ikke verifisert" ;
@@ -1344,13 +1392,45 @@ vokdata:HEKL-0012 a skos:Concept ;
         "reliefmaske"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0027 a skos:Concept ;
+vokdata:SlantedSpikeStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0060" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern of single crochets in which elongated single crochets are worked into chain spaces three rows below, forming long slanted stitches"@en-US,
+        "mønster av fastmasker der spikemasker hekles ned i luftmaskebuer tre rader lenger ned, slik at det dannes lange, skrå masker"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "slanted spike stitch"@en-GB,
+        "slanted spike stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:TrinityStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0053" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern of single crochet three together clusters, each starting in the same stitch as the last leg of the previous cluster, separated by one chain"@en-US,
+        "mønster av klynger på tre fastmasker sammen, der hver klynge begynner i samme maske som siste ledd av forrige klynge og klyngene skilles av én luftmaske"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "trinity stitch"@en-GB,
+        "trinity stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:VStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0027" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0077 ;
+    xkos:isPartOf vokdata:OffsetVStitch ;
     skos:altLabel "punto uve"@es ;
     skos:definition "two double crochets with one chain between them, worked into the same stitch so that they form a V"@en-US,
         "to staver med én luftmaske imellom, heklet i samme maske slik at de danner en V"@nb ;
@@ -1361,17 +1441,17 @@ vokdata:HEKL-0027 a skos:Concept ;
         "V-stitch"@en-US,
         "punto V"@es,
         "V-maske"@nb ;
-    skos:related vokdata:HEKL-0026 ;
+    skos:related vokdata:Shell ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0051 a skos:Concept ;
+vokdata:WattleStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0051" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
+    skos:broader vokdata:StitchPattern ;
     skos:definition "stitch pattern in which one single crochet, one chain and one double crochet are worked into the same stitch or chain space for each group"@en-US,
         "mønster der én fastmaske, én luftmaske og én stav hekles i samme maske eller luftmaskebue i hver gruppe"@nb ;
     skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
@@ -1380,94 +1460,14 @@ vokdata:HEKL-0051 a skos:Concept ;
         "wattle stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0053 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0053" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern of single crochet three together clusters, each starting in the same stitch as the last leg of the previous cluster, separated by one chain"@en-US,
-        "mønster av klynger på tre fastmasker sammen, der hver klynge begynner i samme maske som siste ledd av forrige klynge og klyngene skilles av én luftmaske"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "trinity stitch"@en-GB,
-        "trinity stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0060 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0060" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern of single crochets in which elongated single crochets are worked into chain spaces three rows below, forming long slanted stitches"@en-US,
-        "mønster av fastmasker der spikemasker hekles ned i luftmaskebuer tre rader lenger ned, slik at det dannes lange, skrå masker"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "slanted spike stitch"@en-GB,
-        "slanted spike stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0071 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0071" ;
-    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which extended single crochets, single crochets, double crochets and slanting clusters around the post of the neighbouring double crochet form small boxes"@en-US,
-        "mønster der forlengede fastmasker, fastmasker, staver og skrå klynger rundt stolpen på staven ved siden av danner små bokser"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "boxed bead stitch"@en-GB,
-        "boxed bead stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0072 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0072" ;
-    dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which basic stitches are worked in rising and falling height one after the other across the row, forming waves"@en-US,
-        "mønster der grunnmaskene hekles i stigende og synkende høyde etter hverandre langs raden, slik at det dannes bølger"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "lazy wave stitch"@en-GB,
-        "lazy wave stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0074 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0074" ;
-    dct:source <https://theunraveledmitten.com/2022/10/05/2022-stash-busting-crochet-along-part-9/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern in which chain loops are gathered in the middle by a single crochet worked from a later row, forming small butterfly shapes between groups of single crochets and double crochets"@en-US,
-        "mønster der buer av luftmasker samles på midten med en fastmaske i en rad lenger opp, slik at det dannes små sommerfuglformer mellom grupper av fastmasker og staver"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "mini butterfly stitch"@en-GB,
-        "mini butterfly stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0055 a skos:Concept ;
+vokdata:HappyHearts a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0055" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
+    skos:broader vokdata:StitchPattern ;
     skos:definition "two-colour stitch pattern in which groups of five double crochets and back post double crochets around stitches two rows below form heart shapes"@en-US,
         "mønster i to farger der grupper på fem staver og reliefstaver bakfra rundt staver to rader lenger ned danner hjerteformer"@nb ;
     skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
@@ -1476,14 +1476,14 @@ vokdata:HEKL-0055 a skos:Concept ;
         "happy hearts"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0056 a skos:Concept ;
+vokdata:ZigZagLozengeStitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0056" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
+    skos:broader vokdata:StitchPattern ;
     skos:definition "two-colour stitch pattern in which rows of paired half double crochets separated by one chain alternate with rows of double crochet three together clusters in the chain spaces"@en-US,
         "mønster i to farger der rader med par av halvstaver skilt av én luftmaske veksler med rader med klynger på tre staver i luftmaskebuene"@nb ;
     skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
@@ -1492,7 +1492,23 @@ vokdata:HEKL-0056 a skos:Concept ;
         "zig zag lozenge stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0022 a skos:Concept ;
+vokdata:ArcadeStitch a skos:Concept ;
+    svv:tier 1 ;
+    euvoc:status concept_status:CANDIDATE ;
+    dct:created "2026-11-02"^^xsd:date ;
+    dct:identifier "HEKL-0050" ;
+    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
+    dct:subject "hekling"@nb ;
+    skos:broader vokdata:StitchPattern ;
+    skos:definition "stitch pattern of single crochets and three-chain spaces in which a shell of five double crochets is worked into each space in the following row, forming arches"@en-US,
+        "mønster av fastmasker og buer på tre luftmasker der det i neste rad hekles en vifte på fem staver i hver bue, slik at det dannes arkader"@nb ;
+    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
+    skos:inScheme vok:HEKL ;
+    skos:prefLabel "arcade stitch"@en-GB,
+        "arcade stitch"@en-US ;
+    dcat:contactPoint "https://github.com/UteBroenner" .
+
+vokdata:Cluster a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -1500,7 +1516,7 @@ vokdata:HEKL-0022 a skos:Concept ;
     dct:subject "hekling"@nb ;
     skos:altLabel "cl"@en-GB,
         "cl"@en-US ;
-    skos:broader vokdata:HEKL-0001 ;
+    skos:broader vokdata:Stitch ;
     skos:definition "stitch in which several incomplete stitches are worked and then finished together at the top in one movement"@en-US,
         "maske der flere ufullførte masker hekles og deretter avsluttes sammen øverst i ett trekk"@nb ;
     skos:editorialNote "[usikker] nb: «klynge»; de: «Büschelmasche» brukes også om puffmaske; [mangler] es" ;
@@ -1511,23 +1527,7 @@ vokdata:HEKL-0022 a skos:Concept ;
         "klynge"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0050 a skos:Concept ;
-    svv:tier 1 ;
-    euvoc:status concept_status:CANDIDATE ;
-    dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "HEKL-0050" ;
-    dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
-    dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
-    skos:definition "stitch pattern of single crochets and three-chain spaces in which a shell of five double crochets is worked into each space in the following row, forming arches"@en-US,
-        "mønster av fastmasker og buer på tre luftmasker der det i neste rad hekles en vifte på fem staver i hver bue, slik at det dannes arkader"@nb ;
-    skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
-    skos:inScheme vok:HEKL ;
-    skos:prefLabel "arcade stitch"@en-GB,
-        "arcade stitch"@en-US ;
-    dcat:contactPoint "https://github.com/UteBroenner" .
-
-vokdata:HEKL-0018 a skos:Concept ;
+vokdata:Decrease a skos:Concept ;
     svv:tier 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -1544,17 +1544,17 @@ vokdata:HEKL-0018 a skos:Concept ;
         "decrease"@en-US,
         "disminución"@es,
         "felling"@nb ;
-    skos:related vokdata:HEKL-0017 ;
+    skos:related vokdata:Increase ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0052 a skos:Concept ;
+vokdata:WaveAndChevron a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0052" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
-    skos:broader vokdata:HEKL-0046 ;
+    skos:broader vokdata:StitchPattern ;
     skos:definition "two-colour stitch pattern in which rows of stitches of rising and falling height form waves, and rows of single crochets with increases and decreases form chevrons"@en-US,
         "mønster i to farger der rader med masker i stigende og synkende høyde danner bølger, og rader med fastmasker med økninger og fellinger danner sikksakk"@nb ;
     skos:editorialNote "[omskrivning] definisjon utledet av mønsterbeskrivelsen i kilden; [mangler] nb, de, es: ingen etablert term kjent" ;
@@ -1563,14 +1563,14 @@ vokdata:HEKL-0052 a skos:Concept ;
         "wave and chevron"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0001 a skos:Concept ;
+vokdata:Stitch a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "HEKL-0001" ;
     dct:subject "hekling"@nb ;
-    xkos:isPartOf vokdata:HEKL-0031,
-        vokdata:HEKL-0032 ;
+    xkos:isPartOf vokdata:Round,
+        vokdata:Row ;
     skos:altLabel "M"@de,
         "st"@en-GB,
         "st"@en-US,
@@ -1587,7 +1587,7 @@ vokdata:HEKL-0001 a skos:Concept ;
     skos:scopeNote "Caution: 'punto' is the Spanish name of this concept and the Spanish alternative name of HEKL-0046 (stitch pattern). 'st' is the UK and US abbreviation of this concept and the Norwegian abbreviation of HEKL-0009 (double crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:HEKL-0046 a skos:Concept ;
+vokdata:StitchPattern a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;

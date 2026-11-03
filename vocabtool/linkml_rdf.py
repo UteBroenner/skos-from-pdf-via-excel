@@ -59,8 +59,11 @@ def workbook_to_data(v: Vocabulary, sv: SchemaView | None = None) -> dict:
     sv = sv or schemaview()
     if v.version != "v8":
         raise ValueError("LinkML conversion expects a v8 workbook (relations as IDs); migrate v7 first")
-    scheme_uri = f"{BASE}{v.kortnavn}"
-    id_to_uri = {c.key: f"{scheme_uri}/{c.key}" for c in v.concepts}
+    from .uri import concept_uri, local_name
+    scheme_uri = v.scheme_uri or f"{BASE}{v.kortnavn}"
+    # column B holds the concept name; without one, fall back to the CamelCase term (the checker reports it)
+    id_to_uri = {c.key: concept_uri(scheme_uri, (c.get("uri") or "").strip() or local_name(c.get(v.label_field) or c.key))
+                 for c in v.concepts}
     concepts = []
     for c in v.concepts:
         rec = {"uri": id_to_uri[c.key], "in_scheme": scheme_uri}
