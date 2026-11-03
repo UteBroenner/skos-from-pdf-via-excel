@@ -55,7 +55,9 @@ Relation targets that are not in the workbook are kept
 as written and listed, so they show up as `VT-REF-FORMAT` errors in v8.
 
 Fill empty concept names (column B) from the main-language term, in CamelCase
-(`rekkverk` → `Rekkverk`, `brystningshøyde` → `Brystningshoyde`, `single crochet` → `SingleCrochet`):
+(`rekkverk` → `Rekkverk`, `brystningshøyde` → `Brystningshoyde`, `skråstagbru` → `Skraastagbru`,
+`CE-merket produkt` → `CEMerketProdukt`, `single crochet` → `SingleCrochet`). æ → ae, ø → o, å → aa;
+acronyms written in capitals stay in capitals:
 
 ```bash
 python -m vocabtool uri path/to/workbook.xlsx

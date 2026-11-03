@@ -4,9 +4,9 @@ Column B of template v8 holds only the local name (e.g. "Rekkverk"); the full UR
 the ConceptScheme URI (cell B1) + "/" + the name, put together by the tools.
 
 The local name is the main-language prefLabel in CamelCase, transliterated to
-ASCII the way the v7 vocabularies did it (ø -> o, æ -> ae, å -> aa), e.g.
-"brystningshøyde" -> "Brystningshoyde", "CE-merket produkt" -> "CeMerketProdukt",
-"single crochet" -> "SingleCrochet".
+ASCII (ø -> o, æ -> ae, å -> always aa). Acronyms (words written fully in capitals) stay
+in capitals. Examples: "brystningshøyde" -> "Brystningshoyde", "skråstagbru" -> "Skraastagbru",
+"CE-merket produkt" -> "CEMerketProdukt", "single crochet" -> "SingleCrochet".
 """
 from __future__ import annotations
 
@@ -26,9 +26,15 @@ def ascii_fold(text: str) -> str:
 
 
 def local_name(label: str) -> str:
-    """CamelCase local name from a term: each word capitalised, the rest lowercased."""
+    """CamelCase local name from a term: each word capitalised, the rest lowercased,
+    except acronyms (all capitals, e.g. CE, IP, NIB), which are kept as written."""
     words = re.split(r"[^A-Za-z0-9]+", ascii_fold(label or ""))
-    return "".join(w[:1].upper() + w[1:].lower() for w in words if w)
+    def word(w):
+        letters = [ch for ch in w if ch.isalpha()]
+        if len(letters) >= 2 and all(ch.isupper() for ch in letters):
+            return w
+        return w[:1].upper() + w[1:].lower()
+    return "".join(word(w) for w in words if w)
 
 
 def local_part(uri: str, scheme_uri: str | None) -> str | None:
