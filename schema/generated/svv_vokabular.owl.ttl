@@ -406,10 +406,11 @@ svv:title svv:excel_cell "B13"@nb ;
 	skos:inScheme vok:def\/schema .
 svv:uri svv:excel_column "B" ;
 	svv:excel_name "begreps_URI" ;
+	svv:excel_value "CamelCase concept name only" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "uri" ;
 	rdfs:range xsd:anyURI ;
-	skos:definition "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula)." ;
+	skos:definition "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI." ;
 	skos:inScheme vok:def\/schema .
 svv:value_range svv:excel_column "AM" ;
 	svv:excel_name "verdiområde" ;

@@ -114,7 +114,7 @@ def cmd_uri(a):
     from .template_ext import uri_as_value
     from .uri import assign_names, concept_uri
     v = read_workbook(a.workbook)
-    names = assign_names(v.concepts, v.label_field, overwrite=a.overwrite)
+    names = assign_names(v.concepts, v.label_field, overwrite=a.overwrite, main_lang=v.main_lang)
     collisions = names.pop("_collisions")
     wb = openpyxl.load_workbook(a.workbook)
     uri_as_value(wb)

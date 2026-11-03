@@ -278,7 +278,7 @@ concepts:
   - media vareta
   definition_en_us: stitch made with one yarn over before inserting the hook; the yarn is pulled up (three loops on the hook)
     and drawn through all three at once
-- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
+- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0009
   pref_label_nb: stav
@@ -339,7 +339,7 @@ concepts:
     abbreviation of this concept and the UK and US abbreviation of HEKL-0001 (stitch). ''tr'' is the UK abbreviation of this
     concept and the US abbreviation of HEKL-0010 (treble crochet). ''treble crochet'' is the UK name of this concept and the
     US name of HEKL-0010.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet
+- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0010
   pref_label_nb: dobbelstav
@@ -379,7 +379,7 @@ concepts:
     is the UK abbreviation of this concept and the US abbreviation of HEKL-0011 (double treble crochet). ''tr'' is the US
     abbreviation of this concept and the UK abbreviation of HEKL-0009 (double crochet). ''treble crochet'' is the US name
     of this concept and the UK name of HEKL-0009 (double crochet).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleTrebleCrochet
+- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleTrebleCrochet-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0011
   pref_label_nb: trippelstav
@@ -442,7 +442,7 @@ concepts:
   subject: hekling
   broader:
   - http://example.org/vegvesen/vokabular/HEKL/PostStitch
-  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet-ENUS
   related:
   - http://example.org/vegvesen/vokabular/HEKL/BackPostDoubleCrochet
   contact_point: https://github.com/UteBroenner
@@ -471,7 +471,7 @@ concepts:
   subject: hekling
   broader:
   - http://example.org/vegvesen/vokabular/HEKL/PostStitch
-  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet-ENUS
   is_part_of:
   - http://example.org/vegvesen/vokabular/HEKL/HappyHearts
   related:
@@ -614,7 +614,7 @@ concepts:
     loops on the hook at once
   scope_note_en_us: 'Caution: ''dc2tog'' is the UK abbreviation of this concept and the US abbreviation of HEKL-0020 (double
     crochet two together). ''double crochet two together'' is the UK name of this concept and the US name of HEKL-0020.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether
+- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0020
   pref_label_nb: 2 staver sammen
@@ -822,7 +822,7 @@ concepts:
   editorial_note: '[usikker] de, es: termer ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet-ENUS
   is_part_of:
   - http://example.org/vegvesen/vokabular/HEKL/CrossedDoubleCrochet2
   contact_point: https://github.com/UteBroenner
@@ -959,8 +959,8 @@ concepts:
   subject: hekling
   related:
   - http://example.org/vegvesen/vokabular/HEKL/HalfDoubleCrochet
-  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet
-  - http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochet-ENUS
+  - http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet-ENUS
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1109,7 +1109,7 @@ concepts:
     loops on the hook at once
   scope_note_en_us: 'Caution: ''dc3tog'' is the UK abbreviation of this concept and the US abbreviation of HEKL-0042 (double
     crochet three together). ''double crochet three together'' is the UK name of this concept and the US name of HEKL-0042.'
-- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochetTwoTogether
+- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochetTwoTogether-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0040
   pref_label_nb: 2 dobbelstaver sammen
@@ -1141,7 +1141,7 @@ concepts:
   scope_note_en_us: 'Caution: ''tr2tog'' is the US abbreviation of this concept and the UK abbreviation of HEKL-0020 (double
     crochet two together). ''treble crochet two together'' is the US name of this concept and the UK name of HEKL-0020 (double
     crochet two together).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochetThreeTogether
+- uri: http://example.org/vegvesen/vokabular/HEKL/TrebleCrochetThreeTogether-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0041
   pref_label_nb: 3 dobbelstaver sammen
@@ -1173,7 +1173,7 @@ concepts:
   scope_note_en_us: 'Caution: ''tr3tog'' is the US abbreviation of this concept and the UK abbreviation of HEKL-0042 (double
     crochet three together). ''treble crochet three together'' is the US name of this concept and the UK name of HEKL-0042
     (double crochet three together).'
-- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetThreeTogether
+- uri: http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetThreeTogether-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0042
   pref_label_nb: 3 staver sammen
@@ -1187,7 +1187,7 @@ concepts:
   is_part_of:
   - http://example.org/vegvesen/vokabular/HEKL/ZigZagLozengeStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether-ENUS
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1235,7 +1235,7 @@ concepts:
   - htr2tog
   definition_en_us: decrease in which two incomplete half double crochets are finished together by drawing the yarn through
     all loops on the hook at once
-- uri: http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleTrebleCrochet
+- uri: http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleTrebleCrochet-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0044
   pref_label_nb: relieftrippelstav forfra
@@ -1246,7 +1246,7 @@ concepts:
   subject: hekling
   broader:
   - http://example.org/vegvesen/vokabular/HEKL/PostStitch
-  - http://example.org/vegvesen/vokabular/HEKL/DoubleTrebleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleTrebleCrochet-ENUS
   is_part_of:
   - http://example.org/vegvesen/vokabular/HEKL/RaisedHerringbone
   related:
@@ -1605,7 +1605,7 @@ concepts:
   is_part_of:
   - http://example.org/vegvesen/vokabular/HEKL/ForkedClusterStitch
   related:
-  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether
+  - http://example.org/vegvesen/vokabular/HEKL/DoubleCrochetTwoTogether-ENUS
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1639,7 +1639,7 @@ concepts:
   - slcl
   definition_en_us: cluster worked around the post of the previous double crochet, in which a yarn over and a loop are pulled
     up three times around the same post, after which the yarn is drawn through six loops and then through the last two
-- uri: http://example.org/vegvesen/vokabular/HEKL/FrontPostTrebleCrochet
+- uri: http://example.org/vegvesen/vokabular/HEKL/FrontPostTrebleCrochet-ENUS
   in_scheme: http://example.org/vegvesen/vokabular/HEKL
   identifier: HEKL-0063
   pref_label_nb: reliefdobbelstav forfra
@@ -1650,12 +1650,12 @@ concepts:
   subject: hekling
   broader:
   - http://example.org/vegvesen/vokabular/HEKL/PostStitch
-  - http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/TrebleCrochet-ENUS
   is_part_of:
   - http://example.org/vegvesen/vokabular/HEKL/AlpineStitch
   related:
   - http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleCrochet
-  - http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleTrebleCrochet
+  - http://example.org/vegvesen/vokabular/HEKL/FrontPostDoubleTrebleCrochet-ENUS
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat

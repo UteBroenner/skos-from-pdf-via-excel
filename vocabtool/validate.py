@@ -12,7 +12,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
 
 from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi
-from .uri import LOCAL_NAME_RE, local_name
+from .uri import LOCAL_NAME_RE, cross_language_homonyms, expected_name
 
 STATUS_VALUES = {"kandidat", "gjeldende", "utdatert", "forkastet"}
 TIERS = {"1", "2", "3"}
@@ -36,9 +36,9 @@ RULES = {
     "VT-ID-FORMAT": ("error", "ID does not match <kortnavn>-NNNN", "template v8 col A"),
     "VT-ID-DUPLICATE": ("error", "ID used on more than one row", ""),
     "VT-URI-MISSING": ("error", "concept name for the URI (column B) missing; run `vocabtool uri` to generate it from the term", "S03"),
-    "VT-URI-FORMAT": ("error", "column B must hold only the CamelCase concept name (letters and digits), e.g. Rekkverk", "S03"),
+    "VT-URI-FORMAT": ("error", "column B must hold only the CamelCase concept name (letters and digits, optionally a language suffix such as -ENUS), e.g. Rekkverk", "S03"),
     "VT-URI-DUPLICATE": ("error", "concept name in column B used on more than one row, so two concepts get the same URI", ""),
-    "VT-URI-LABEL": ("info", "concept name in column B differs from the CamelCase form of the main-language term (fine if the term was changed on purpose)", "S03"),
+    "VT-URI-LABEL": ("info", "concept name in column B differs from the CamelCase form of the main-language term, with -<LANG> suffix where the term means another concept in another language (fine if chosen on purpose)", "S03"),
     "VT-REQ-LABEL": ("error", "prefLabel in the main language missing", ""),
     "VT-REQ-DEF": ("error", "definition in the main language missing", ""),
     "VT-REF-FORMAT": ("error", "relation value is not an ID (v8 relations must use IDs)", ""),
@@ -127,6 +127,7 @@ def validate(v: Vocabulary) -> list[Finding]:
     concepts = v.concepts
     LF, DF = v.label_field, v.def_field   # main-language label / definition
     if v.version == "v8":
+        homonyms = cross_language_homonyms(concepts, LF)
         uris = Counter(c.get("uri") for c in concepts if c.get("uri"))
         for c in concepts:
             u = c.get("uri")
@@ -136,8 +137,8 @@ def validate(v: Vocabulary) -> list[Finding]:
             name = u.strip()
             if not LOCAL_NAME_RE.match(name):
                 F.append(_f("VT-URI-FORMAT", c, u))
-            elif c.get(LF) and name != local_name(c.get(LF)):
-                F.append(_f("VT-URI-LABEL", c, f"{name} vs {local_name(c.get(LF))}"))
+            elif c.get(LF) and name != expected_name(c, LF, v.main_lang, homonyms):
+                F.append(_f("VT-URI-LABEL", c, f"{name} vs {expected_name(c, LF, v.main_lang, homonyms)}"))
             if uris[u] > 1:
                 F.append(_f("VT-URI-DUPLICATE", c, u))
     keys = Counter(c.key for c in concepts)

@@ -30,7 +30,8 @@ The dataset tests these things:
 `dcat:contactPoint` is https://github.com/UteBroenner.
 
 Concept names (column B) are generated from the en-US term, e.g. `SingleCrochet`, which gives the URI
-`http://example.org/vegvesen/vokabular/HEKL/SingleCrochet`. The pattern HEKL-0057 is `CrossedDoubleCrochet2`,
+`http://example.org/vegvesen/vokabular/HEKL/SingleCrochet`. Nine stitches whose US name is the UK name of another
+stitch carry the suffix `-ENUS`, e.g. `DoubleCrochet-ENUS` (US double crochet = UK treble crochet). The pattern HEKL-0057 is `CrossedDoubleCrochet2`,
 because the stitch HEKL-0028 already has `CrossedDoubleCrochet`. This is part of the open stitch-versus-pattern decision.
 
 Every label clash has a draft en-US scope note (column AY) that warns about it and names the other concept's ID.

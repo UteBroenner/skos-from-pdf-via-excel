@@ -7,7 +7,7 @@ Template v8 · kortnavn `HEKL` · 77 concepts (code lists not checked)
 | Severity | Rule | Count | Meaning |
 | --- | --- | ---: | --- |
 | info | VT-LABEL-NOTED | 46 | label clash documented in a scope note that names the other concept |
-| info | VT-URI-LABEL | 1 | concept name in column B differs from the CamelCase form of the main-language term (fine if the term was changed on purpose) |
+| info | VT-URI-LABEL | 1 | concept name in column B differs from the CamelCase form of the main-language term, with -<LANG> suffix where the term means another concept in another language (fine if chosen on purpose) |
 
 ## Findings (errors and warnings)
 

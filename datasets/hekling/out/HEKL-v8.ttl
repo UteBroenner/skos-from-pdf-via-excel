@@ -42,7 +42,7 @@ vokdata:ChainSpace a skos:Concept ;
     skos:related vokdata:Chain ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:DoubleCrochetThreeTogether a skos:Concept ;
+vokdata:DoubleCrochetThreeTogether-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -62,7 +62,7 @@ vokdata:DoubleCrochetThreeTogether a skos:Concept ;
         "double crochet three together"@en-US,
         "3 puntos altos juntos"@es,
         "3 staver sammen"@nb ;
-    skos:related vokdata:DoubleCrochetTwoTogether ;
+    skos:related vokdata:DoubleCrochetTwoTogether-ENUS ;
     skos:scopeNote "Caution: 'dc3tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0039 (single crochet three together). 'double crochet three together' is the US name of this concept and the UK name of HEKL-0039 (single crochet three together). 'tr3tog' is the UK abbreviation of this concept and the US abbreviation of HEKL-0041 (treble crochet three together). 'treble crochet three together' is the UK name of this concept and the US name of HEKL-0041."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
@@ -126,10 +126,10 @@ vokdata:ForkedCluster a skos:Concept ;
     skos:inScheme vok:HEKL ;
     skos:prefLabel "forked cluster"@en-GB,
         "forked cluster"@en-US ;
-    skos:related vokdata:DoubleCrochetTwoTogether ;
+    skos:related vokdata:DoubleCrochetTwoTogether-ENUS ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:FrontPostTrebleCrochet a skos:Concept ;
+vokdata:FrontPostTrebleCrochet-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -140,7 +140,7 @@ vokdata:FrontPostTrebleCrochet a skos:Concept ;
     skos:altLabel "FPdtr"@en-GB,
         "FPtr"@en-US ;
     skos:broader vokdata:PostStitch,
-        vokdata:TrebleCrochet ;
+        vokdata:TrebleCrochet-ENUS ;
     skos:definition "treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
         "dobbelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
     skos:editorialNote "[usikker] nb; [mangler] de, es" ;
@@ -149,7 +149,7 @@ vokdata:FrontPostTrebleCrochet a skos:Concept ;
         "front post treble crochet"@en-US,
         "reliefdobbelstav forfra"@nb ;
     skos:related vokdata:FrontPostDoubleCrochet,
-        vokdata:FrontPostDoubleTrebleCrochet ;
+        vokdata:FrontPostDoubleTrebleCrochet-ENUS ;
     skos:scopeNote "Caution: 'FPdtr' is the UK abbreviation of this concept and the US abbreviation of HEKL-0044 (front post double treble crochet). 'FPtr' is the US abbreviation of this concept and the UK abbreviation of HEKL-0013 (front post double crochet). 'front post double treble crochet' is the UK name of this concept and the US name of HEKL-0044. 'front post treble crochet' is the US name of this concept and the UK name of HEKL-0013 (front post double crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
@@ -327,7 +327,7 @@ vokdata:SpikeStitch a skos:Concept ;
         "spikemaske"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:TrebleCrochetThreeTogether a skos:Concept ;
+vokdata:TrebleCrochetThreeTogether-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -351,7 +351,7 @@ vokdata:TrebleCrochetThreeTogether a skos:Concept ;
     skos:scopeNote "Caution: 'tr3tog' is the US abbreviation of this concept and the UK abbreviation of HEKL-0042 (double crochet three together). 'treble crochet three together' is the US name of this concept and the UK name of HEKL-0042 (double crochet three together)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:TrebleCrochetTwoTogether a skos:Concept ;
+vokdata:TrebleCrochetTwoTogether-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -421,9 +421,9 @@ vokdata:YarnOver a skos:Concept ;
         "yarn over"@en-US,
         "lazada"@es,
         "kast"@nb ;
-    skos:related vokdata:DoubleCrochet,
+    skos:related vokdata:DoubleCrochet-ENUS,
         vokdata:HalfDoubleCrochet,
-        vokdata:TrebleCrochet ;
+        vokdata:TrebleCrochet-ENUS ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:BackLoopOnly a skos:Concept ;
@@ -457,7 +457,7 @@ vokdata:BackPostDoubleCrochet a skos:Concept ;
     xkos:isPartOf vokdata:HappyHearts ;
     skos:altLabel "BPtr"@en-GB,
         "BPdc"@en-US ;
-    skos:broader vokdata:DoubleCrochet,
+    skos:broader vokdata:DoubleCrochet-ENUS,
         vokdata:PostStitch ;
     skos:definition "double crochet worked around the post of a stitch in the row below, inserting the hook from the back, so that the stitch lies on the back of the work"@en-US,
         "stav heklet rundt stolpen på en maske i raden under med nålen stukket inn bakfra, slik at masken legger seg på baksiden av arbeidet"@nb ;
@@ -478,7 +478,7 @@ vokdata:CrossedDoubleCrochet a skos:Concept ;
     dct:identifier "HEKL-0028" ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:CrossedDoubleCrochet2 ;
-    skos:broader vokdata:DoubleCrochet ;
+    skos:broader vokdata:DoubleCrochet-ENUS ;
     skos:definition "pair of double crochets in which the second is worked in front of or behind the first into a skipped stitch, so that they cross"@en-US,
         "par av staver der den andre hekles foran eller bak den første i en maske som er hoppet over, slik at stavene krysser hverandre"@nb ;
     skos:editorialNote "[usikker] de, es: termer ikke verifisert" ;
@@ -491,7 +491,7 @@ vokdata:CrossedDoubleCrochet a skos:Concept ;
     skos:scopeNote "Caution: 'crossed double crochet' is the US name of this concept and the US name of HEKL-0057. 'crossed treble crochet' is the UK name of this concept and the UK name of HEKL-0057 (crossed double crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:DoubleTrebleCrochet a skos:Concept ;
+vokdata:DoubleTrebleCrochet-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -534,7 +534,7 @@ vokdata:FoundationChain a skos:Concept ;
     skos:related vokdata:Row ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:FrontPostDoubleTrebleCrochet a skos:Concept ;
+vokdata:FrontPostDoubleTrebleCrochet-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -544,7 +544,7 @@ vokdata:FrontPostDoubleTrebleCrochet a skos:Concept ;
     xkos:isPartOf vokdata:RaisedHerringbone ;
     skos:altLabel "FPttr"@en-GB,
         "FPdtr"@en-US ;
-    skos:broader vokdata:DoubleTrebleCrochet,
+    skos:broader vokdata:DoubleTrebleCrochet-ENUS,
         vokdata:PostStitch ;
     skos:definition "double treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
         "trippelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
@@ -715,7 +715,7 @@ vokdata:ClusterVStitch a skos:Concept ;
         "cluster V-stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:DoubleCrochetTwoTogether a skos:Concept ;
+vokdata:DoubleCrochetTwoTogether-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -908,7 +908,7 @@ vokdata:Shell a skos:Concept ;
     skos:related vokdata:VStitch ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:TrebleCrochet a skos:Concept ;
+vokdata:TrebleCrochet-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
@@ -1044,7 +1044,7 @@ vokdata:FrontPostDoubleCrochet a skos:Concept ;
     dct:subject "hekling"@nb ;
     skos:altLabel "FPtr"@en-GB,
         "FPdc"@en-US ;
-    skos:broader vokdata:DoubleCrochet,
+    skos:broader vokdata:DoubleCrochet-ENUS,
         vokdata:PostStitch ;
     skos:definition "double crochet worked around the post of a stitch in the row below, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
         "stav heklet rundt stolpen på en maske i raden under med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
@@ -1292,7 +1292,7 @@ vokdata:BoxedBeadStitch a skos:Concept ;
         "boxed bead stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:DoubleCrochet a skos:Concept ;
+vokdata:DoubleCrochet-ENUS a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;

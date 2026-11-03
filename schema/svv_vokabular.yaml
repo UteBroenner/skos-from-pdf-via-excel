@@ -110,7 +110,8 @@ slots:
     range: uri
     description: >-
       Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the
-      workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.
+      workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language
+      suffix when the term means another concept in another language) and the tools build the URI.
     annotations: {excel_column: B, excel_name: begreps_URI, excel_value: CamelCase concept name only}
   kortnavn:
     slot_uri: svv:kortnavn

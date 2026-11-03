@@ -127,8 +127,10 @@ class ConceptScheme(ConfiguredBaseModel):
          'from_schema': 'http://example.org/vegvesen/vokabular/def/schema',
          'tree_root': True})
 
-    uri: str = Field(default=..., description="""Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
-                         'excel_name': {'tag': 'excel_name', 'value': 'begreps_URI'}},
+    uri: str = Field(default=..., description="""Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
+                         'excel_name': {'tag': 'excel_name', 'value': 'begreps_URI'},
+                         'excel_value': {'tag': 'excel_value',
+                                         'value': 'CamelCase concept name only'}},
          'domain_of': ['ConceptScheme', 'Concept']} })
     kortnavn: str = Field(default=..., description="""Short name of the vocabulary, max 4 letters or digits (cell B12).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B12'}},
          'domain_of': ['ConceptScheme'],
@@ -174,8 +176,10 @@ class Concept(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'skos:Concept',
          'from_schema': 'http://example.org/vegvesen/vokabular/def/schema'})
 
-    uri: str = Field(default=..., description="""Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
-                         'excel_name': {'tag': 'excel_name', 'value': 'begreps_URI'}},
+    uri: str = Field(default=..., description="""Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
+                         'excel_name': {'tag': 'excel_name', 'value': 'begreps_URI'},
+                         'excel_value': {'tag': 'excel_value',
+                                         'value': 'CamelCase concept name only'}},
          'domain_of': ['ConceptScheme', 'Concept']} })
     identifier: str = Field(default=..., description="""Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'A'},
                          'excel_name': {'tag': 'excel_name',

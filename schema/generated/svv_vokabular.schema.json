@@ -342,7 +342,7 @@
                     ]
                 },
                 "uri": {
-                    "description": "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).",
+                    "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.",
                     "format": "uri",
                     "type": "string"
                 },
@@ -424,7 +424,7 @@
                     "type": "string"
                 },
                 "uri": {
-                    "description": "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).",
+                    "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.",
                     "format": "uri",
                     "type": "string"
                 }
@@ -502,7 +502,7 @@
             "type": "string"
         },
         "uri": {
-            "description": "Concept or scheme URI. For concepts built as <scheme URI>/<identifier> (v8 column B formula).",
+            "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.",
             "format": "uri",
             "type": "string"
         }

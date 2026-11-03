@@ -18,7 +18,7 @@
     "severity": "info",
     "rule": "VT-URI-LABEL",
     "count": 1,
-    "description": "concept name in column B differs from the CamelCase form of the main-language term (fine if the term was changed on purpose)"
+    "description": "concept name in column B differs from the CamelCase form of the main-language term, with -<LANG> suffix where the term means another concept in another language (fine if chosen on purpose)"
    }
   ]
  },
@@ -29,7 +29,7 @@
    "key": "HEKL-0057",
    "sheet": "vokabular",
    "row": 79,
-   "message": "concept name in column B differs from the CamelCase form of the main-language term (fine if the term was changed on purpose): CrossedDoubleCrochet2 vs CrossedDoubleCrochet",
+   "message": "concept name in column B differs from the CamelCase form of the main-language term, with -<LANG> suffix where the term means another concept in another language (fine if chosen on purpose): CrossedDoubleCrochet2 vs CrossedDoubleCrochet",
    "ref": "S03"
   },
   {

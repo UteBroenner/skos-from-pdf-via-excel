@@ -61,7 +61,8 @@ Fill empty concept names (column B) from the main-language term, in CamelCase
 python -m vocabtool uri path/to/workbook.xlsx
 ```
 
-Existing names are kept, and `--overwrite` regenerates all of them. If two concepts would get the same name,
+Existing names are kept, and `--overwrite` regenerates all of them. Names whose term means another concept in
+another language get a language suffix (`DoubleCrochet-ENUS`). If two concepts would get the same name,
 the second gets a number (`Name2`) and the command lists it, so you can choose a better name.
 
 Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `schema/README.md`):
@@ -91,6 +92,8 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 
 - Column A `dct:identifier` holds the row key `<kortnavn>-NNNN` (kortnavn: max 4 letters or digits).
 - Column B holds only the concept name in CamelCase (letters and digits), e.g. `Rekkverk`.
+  If the main-language term is the name of a different concept in another language, the name gets the main
+  language as suffix, e.g. `DoubleCrochet-ENUS` (US *double crochet* is UK *treble crochet*).
   The tools build the URI from it: ConceptScheme URI (cell B1, `…/vokabular/<kortnavn>`) + `/` + name,
   e.g. `http://example.org/vegvesen/vokabular/N101/Rekkverk`. The vocabulary segment keeps equal names
   in different vocabularies apart.
@@ -105,8 +108,8 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 | --- | --- | --- |
 | VT-ID-FORMAT | error | ID matches `<kortnavn>-NNNN` (v8) |
 | VT-ID-DUPLICATE | error | ID unique |
-| VT-URI-MISSING / VT-URI-FORMAT / VT-URI-DUPLICATE | error | concept name in column B present, CamelCase letters and digits only, unique (S03) |
-| VT-URI-LABEL | info | concept name differs from the CamelCase form of the main-language term |
+| VT-URI-MISSING / VT-URI-FORMAT / VT-URI-DUPLICATE | error | concept name in column B present, CamelCase letters and digits (optional language suffix such as `-ENUS`), unique (S03) |
+| VT-URI-LABEL | info | concept name differs from the expected name (CamelCase main-language term, with suffix where needed) |
 | VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
 | VT-REF-FORMAT | error | relation values are IDs (v8) |
 | VT-REF-SELF | error | no relation to itself |
