@@ -48,11 +48,12 @@ def cross_language_homonyms(concepts, label_field: str) -> set:
     """Keys of concepts whose main-language term is a label (any language, pref or alt)
     of a different concept under another language tag."""
     from .reader import label_fields, split_multi
+    main_tag = label_fields({label_field: 1}).get(label_field, "")
     owners = {}
     for c in concepts:
         for fld, tag in label_fields(c.fields).items():
-            if fld == label_field:
-                continue
+            if tag.lower() == main_tag.lower():
+                continue   # same-language clashes are not solved by a language suffix
             vals = split_multi(c.get(fld)) if fld.startswith("alt_") else [c.get(fld)] if c.get(fld) else []
             for v in vals:
                 owners.setdefault(v.strip().lower(), set()).add(c.key)
