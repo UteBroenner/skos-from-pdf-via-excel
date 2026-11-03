@@ -1,8 +1,17 @@
-# vocab-tools
+# General
+This repository holds tools and instructions / skills for Claude.ai / code to extract concepts from a source (e.g. PDF)
+It works with an Excel template that will be reviewd by humans. The spreadsheet holds the information in columns that 
+are compliant to the Norwegian standard for concept descriptions https://fellesdatakatalog.digdir.no/specification/skos-ap-no-begrep,
+i.e. concepts are described in the two Norwegian langiages with a set of mandatory properties.
+The attributes `skos:broader`, `xkos:isPartOf` and `skos:related` create a taxonomy, while `skos:altLabel`, `skos:hiddenLabel`, `skos:exactMatch` and `skos:closeMatch` make a thesaurus 
+that might be used further in a simple information model. 
 
-Checks SKOS vocabulary workbooks (Excel template v8, also reads v7) and draws an
+After review by technical experts these spreadsheets can be converted to RDF for machine readability and further
+development into ontologies. 
+
+## vocab-tools
+Checks SKOS vocabulary workbooks and draws an
 interactive graph of `skos:broader`, `xkos:isPartOf` and `skos:related`.
-Code lists (`kodeverk` sheet) are ignored.
 
 Vocabulary data is not part of this repository. Put workbooks in `samples/`;
 outputs are written to `out/`. Both folders are ignored by git.
@@ -13,7 +22,7 @@ Requires Python 3.10+. `check` and `migrate` need only `openpyxl`. The LinkML/RD
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
-## Commands
+### Commands
 
 Validate a workbook. This writes a report (`.md` and `.json`) and a graph page (`.html`) to `out/`:
 
@@ -30,7 +39,7 @@ rewrites relations from `vok:X` to IDs:
 python -m vocabtool migrate samples/N101-v7.xlsx --template templates/SKOS-Excel-mal-v8-for-import.xlsx --out out/N101-v8.xlsx
 ```
 
-Relation targets that are not in the workbook (for example `vok:Veg`) are kept
+Relation targets that are not in the workbook are kept
 as written and listed, so they show up as `VT-REF-FORMAT` errors in v8.
 
 Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `schema/README.md`):
