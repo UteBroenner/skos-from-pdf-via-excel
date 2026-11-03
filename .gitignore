@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
 .venv/
-samples/
-out/
+# Vegvesen workbooks and their outputs stay local (top-level folders only)
+/samples/
+/out/
