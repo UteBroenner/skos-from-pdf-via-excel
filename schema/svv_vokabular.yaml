@@ -112,18 +112,18 @@ slots:
       Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the
       workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language
       suffix when the term means another concept in another language) and the tools build the URI.
-    annotations: {excel_column: B, excel_name: begreps_URI, excel_value: CamelCase concept name only}
+    annotations: {excel_column: B, excel_name: begrep, excel_value: CamelCase concept name only}
   kortnavn:
     slot_uri: svv:kortnavn
     required: true
     pattern: "^[A-Za-z0-9]{1,4}$"
     description: Short name of the vocabulary, max 4 letters or digits (cell B12).
-    annotations: {excel_cell: B12}
+    annotations: {excel_cell: B14}
   title:
     slot_uri: dct:title
     in_language: nb
     required: true
-    annotations: {excel_cell: B13}
+    annotations: {excel_cell: B15}
   main_language:
     slot_uri: svv:mainLanguage
     description: >-
@@ -132,16 +132,16 @@ slots:
     annotations: {excel_label: hovedspråk}
   creator:
     slot_uri: dct:creator
-    annotations: {excel_cell: B14}
+    annotations: {excel_cell: B16}
   publisher:
     slot_uri: dct:publisher
     description: System-generated at publication.
-    annotations: {excel_cell: B15}
+    annotations: {excel_cell: B17}
   issued:
     slot_uri: dct:issued
     range: date
     description: System-generated at publication.
-    annotations: {excel_cell: B16}
+    annotations: {excel_cell: B18}
   concepts:
     slot_uri: svv:concepts
     range: Concept
@@ -202,64 +202,64 @@ slots:
     slot_uri: skos:altLabel
     in_language: en
     multivalued: true
-    annotations: {excel_column: K, excel_name: tillat_term_engelsk, requirement: anbefalt, separator: ","}
+    annotations: {excel_column: L, excel_name: tillat_term_engelsk, requirement: anbefalt, separator: ","}
   alt_label_nn:
     slot_uri: skos:altLabel
     in_language: nn
     multivalued: true
-    annotations: {excel_column: L, excel_name: tillat_term_nynorsk, requirement: anbefalt, separator: ","}
+    annotations: {excel_column: K, excel_name: tillat_term_nynorsk, requirement: anbefalt, separator: ","}
   hidden_label:
     slot_uri: skos:hiddenLabel
     in_language: nb
     description: Discouraged term, e.g. a common misspelling.
     annotations: {excel_column: T, excel_name: frarådd_term, requirement: valgfri}
 
-  # ---------- language extension (template v8-lang-ext, columns AO-AX; tier moves to AY) ----------
+  # ---------- language extension (template v8-lang-ext, columns AN-AW; tier moves to AX) ----------
   pref_label_en_us:
     slot_uri: skos:prefLabel
     in_language: en-US
-    annotations: {excel_column: AO, excel_name: anbefalt_term_engelsk_us, requirement: valgfri, template: v8-lang-ext}
+    annotations: {excel_column: AN, excel_name: anbefalt_term_engelsk_us, requirement: valgfri, template: v8-lang-ext}
   pref_label_en_gb:
     slot_uri: skos:prefLabel
     in_language: en-GB
-    annotations: {excel_column: AP, excel_name: anbefalt_term_engelsk_gb, requirement: valgfri, template: v8-lang-ext}
+    annotations: {excel_column: AO, excel_name: anbefalt_term_engelsk_gb, requirement: valgfri, template: v8-lang-ext}
   pref_label_de:
     slot_uri: skos:prefLabel
     in_language: de
-    annotations: {excel_column: AQ, excel_name: anbefalt_term_tysk, requirement: valgfri, template: v8-lang-ext}
+    annotations: {excel_column: AP, excel_name: anbefalt_term_tysk, requirement: valgfri, template: v8-lang-ext}
   pref_label_es:
     slot_uri: skos:prefLabel
     in_language: es
-    annotations: {excel_column: AR, excel_name: anbefalt_term_spansk, requirement: valgfri, template: v8-lang-ext}
+    annotations: {excel_column: AQ, excel_name: anbefalt_term_spansk, requirement: valgfri, template: v8-lang-ext}
   alt_label_en_us:
     slot_uri: skos:altLabel
     in_language: en-US
     multivalued: true
-    annotations: {excel_column: AS, excel_name: tillat_term_engelsk_us, requirement: valgfri, template: v8-lang-ext, separator: ","}
+    annotations: {excel_column: AR, excel_name: tillat_term_engelsk_us, requirement: valgfri, template: v8-lang-ext, separator: ","}
   alt_label_en_gb:
     slot_uri: skos:altLabel
     in_language: en-GB
     multivalued: true
-    annotations: {excel_column: AT, excel_name: tillat_term_engelsk_gb, requirement: valgfri, template: v8-lang-ext, separator: ","}
+    annotations: {excel_column: AS, excel_name: tillat_term_engelsk_gb, requirement: valgfri, template: v8-lang-ext, separator: ","}
   alt_label_de:
     slot_uri: skos:altLabel
     in_language: de
     multivalued: true
-    annotations: {excel_column: AU, excel_name: tillat_term_tysk, requirement: valgfri, template: v8-lang-ext, separator: ","}
+    annotations: {excel_column: AT, excel_name: tillat_term_tysk, requirement: valgfri, template: v8-lang-ext, separator: ","}
   alt_label_es:
     slot_uri: skos:altLabel
     in_language: es
     multivalued: true
-    annotations: {excel_column: AV, excel_name: tillat_term_spansk, requirement: valgfri, template: v8-lang-ext, separator: ","}
+    annotations: {excel_column: AU, excel_name: tillat_term_spansk, requirement: valgfri, template: v8-lang-ext, separator: ","}
   definition_en_us:
     slot_uri: skos:definition
     in_language: en-US
-    annotations: {excel_column: AW, excel_name: definisjon_engelsk_us, requirement: valgfri, template: v8-lang-ext}
+    annotations: {excel_column: AV, excel_name: definisjon_engelsk_us, requirement: valgfri, template: v8-lang-ext}
   scope_note_en_us:
     slot_uri: skos:scopeNote
     in_language: en-US
     description: Usage note in US English, e.g. a warning that a term means another concept elsewhere.
-    annotations: {excel_column: AX, excel_name: merknad_engelsk_us, requirement: valgfri, template: v8-lang-ext}
+    annotations: {excel_column: AW, excel_name: merknad_engelsk_us, requirement: valgfri, template: v8-lang-ext}
 
   # ---------- documentation ----------
   audience:
@@ -335,7 +335,8 @@ slots:
   created_by:
     slot_uri: dct:contributor
     pattern: "^[^@\\s]+@vegvesen\\.no$"
-    annotations: {excel_column: AD, excel_name: opprettet_av}
+    description: Hidden column; template formula = dct:creator of the vocabulary (cell B16).
+    annotations: {excel_column: AD, excel_name: opprettet_av, hidden: true}
   modified:
     slot_uri: dct:modified
     range: date
@@ -374,7 +375,7 @@ slots:
     minimum_value: 1
     maximum_value: 3
     description: 1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.
-    annotations: {excel_column: "AO (base template), AY (language extension): always the last column, outside the Excel table", excel_name: tier, requirement: internt}
+    annotations: {excel_column: "AN (base template), AX (language extension): always the last column, outside the Excel table", excel_name: tier, requirement: internt}
 
 enums:
   ConceptStatus:

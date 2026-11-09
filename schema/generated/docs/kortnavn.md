@@ -73,7 +73,7 @@ URI: [svv:kortnavn](http://example.org/vegvesen/vokabular/def#kortnavn)
 
 | property | value |
 | --- | --- |
-| excel_cell | B12 |
+| excel_cell | B14 |
 
 
 
@@ -104,7 +104,7 @@ name: kortnavn
 annotations:
   excel_cell:
     tag: excel_cell
-    value: B12
+    value: B14
 description: Short name of the vocabulary, max 4 letters or digits (cell B12).
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000

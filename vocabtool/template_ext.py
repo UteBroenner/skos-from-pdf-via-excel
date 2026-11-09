@@ -32,8 +32,10 @@ def uri_as_value(wb) -> int:
     ws = wb["vokabular"]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
     removed = 0
-    ws.cell(hdr - 2, 2).value = ("begrepsnavn i CamelCase, f.eks. Rekkverk (kun bokstaver og tall); "
-                                 "URI = ConceptScheme URI (B1) + / + navnet")
+    desc = ws.cell(hdr - 2, 2)
+    if not desc.value or "kortnavn-0001" in str(desc.value):   # only replace the original v8 example text
+        desc.value = ("begrepsnavn i CamelCase, f.eks. Rekkverk (kun bokstaver og tall); "
+                      "URI = ConceptScheme URI (B1) + / + navnet")
     for r in range(hdr + 2, ws.max_row + 1):
         b = ws.cell(r, 2)
         if isinstance(b.value, str) and b.value.startswith("=") and "$B$1" in b.value:

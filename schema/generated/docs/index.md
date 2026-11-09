@@ -34,7 +34,7 @@ Name: svv_vokabular
 | [concepts](concepts.md) | Container slot for the data file only |
 | [contact_point](contact_point.md) | E-mail address or web address |
 | [created](created.md) |  |
-| [created_by](created_by.md) |  |
+| [created_by](created_by.md) | Hidden column; template formula = dct:creator of the vocabulary (cell B16) |
 | [creator](creator.md) |  |
 | [data_structure_label](data_structure_label.md) |  |
 | [definition_en](definition_en.md) |  |

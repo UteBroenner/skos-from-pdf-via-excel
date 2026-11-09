@@ -82,8 +82,8 @@ Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `
 .venv/bin/python -m vocabtool rdf out/N101-v8.xlsx --out out/rdf
 ```
 
-Add language columns to the template. They are inserted after column AN, and `tier` moves to the last column,
-outside the Excel table. It is internal and is not imported. Columns A–AN keep their letters:
+Add language columns to the template. They are inserted after column AM, and `tier` moves to the last column,
+outside the Excel table. It is internal and is not imported. Columns A–AM keep their letters:
 
 ```bash
 .venv/bin/python -c "from vocabtool.template_ext import extend_template as e; print(e('templates/SKOS-Excel-mal-v8-for-import.xlsx', 'templates/SKOS-Excel-mal-v8-lang-ext.xlsx', ['en-US','en-GB','de','es'], ['en-US']))"
@@ -109,7 +109,10 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
   The tools build the URI from it: ConceptScheme URI (cell B1, `…/vokabular/<kortnavn>`) + `/` + name,
   e.g. `http://example.org/vegvesen/vokabular/N101/Rekkverk`. The vocabulary segment keeps equal names
   in different vocabularies apart.
-- The change hash (column AN) covers columns A–AM, including the concept name.
+- Layout of the master template (`templates/SKOS-Excel-mal-v8-for-import.xlsx`): scheme rows 14–18 (B14 `kortnavn`,
+  B15 title, B16 `dct:creator`), requirement row 20, description row 21, property row 23, technical names in row 24
+  (the Excel table header), data from row 25. Column AD (`opprettet_av`) is hidden and filled by formula from B16.
+  `tier` is the last column, outside the table.
 - `skos:broader`, `xkos:isPartOf` and `skos:related` contain **IDs**, separated by commas.
 - Header row = the row with `skos:prefLabel@nb`. In v8 the following row holds the technical names.
 - Code lists (`kodeverk` sheet) are not read.

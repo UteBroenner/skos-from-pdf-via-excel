@@ -59,7 +59,7 @@ URI: [dct:issued](http://purl.org/dc/terms/issued)
 
 | property | value |
 | --- | --- |
-| excel_cell | B16 |
+| excel_cell | B18 |
 
 
 
@@ -90,7 +90,7 @@ name: issued
 annotations:
   excel_cell:
     tag: excel_cell
-    value: B16
+    value: B18
 description: System-generated at publication.
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000

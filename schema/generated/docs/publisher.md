@@ -59,7 +59,7 @@ URI: [dct:publisher](http://purl.org/dc/terms/publisher)
 
 | property | value |
 | --- | --- |
-| excel_cell | B15 |
+| excel_cell | B17 |
 
 
 
@@ -90,7 +90,7 @@ name: publisher
 annotations:
   excel_cell:
     tag: excel_cell
-    value: B15
+    value: B17
 description: System-generated at publication.
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000

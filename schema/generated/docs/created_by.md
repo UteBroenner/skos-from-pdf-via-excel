@@ -5,6 +5,11 @@ search:
 
 # Slot: created_by 
 
+
+_Hidden column; template formula = dct:creator of the vocabulary (cell B16)._
+
+
+
 <div data-search-exclude markdown="1">
 
 
@@ -63,6 +68,7 @@ URI: [dct:contributor](http://purl.org/dc/terms/contributor)
 | --- | --- |
 | excel_column | AD |
 | excel_name | opprettet_av |
+| hidden | True |
 
 
 
@@ -97,6 +103,11 @@ annotations:
   excel_name:
     tag: excel_name
     value: opprettet_av
+  hidden:
+    tag: hidden
+    value: true
+description: Hidden column; template formula = dct:creator of the vocabulary (cell
+  B16).
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: dct:contributor

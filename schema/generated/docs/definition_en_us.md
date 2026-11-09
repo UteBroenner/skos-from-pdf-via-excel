@@ -54,7 +54,7 @@ URI: [skos:definition](http://www.w3.org/2004/02/skos/core#definition)
 
 | property | value |
 | --- | --- |
-| excel_column | AW |
+| excel_column | AV |
 | excel_name | definisjon_engelsk_us |
 | requirement | valgfri |
 | template | v8-lang-ext |
@@ -88,7 +88,7 @@ name: definition_en_us
 annotations:
   excel_column:
     tag: excel_column
-    value: AW
+    value: AV
   excel_name:
     tag: excel_name
     value: definisjon_engelsk_us

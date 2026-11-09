@@ -86,7 +86,7 @@ URI: [svv:uri](http://example.org/vegvesen/vokabular/def#uri)
 | property | value |
 | --- | --- |
 | excel_column | B |
-| excel_name | begreps_URI |
+| excel_name | begrep |
 | excel_value | CamelCase concept name only |
 
 
@@ -121,7 +121,7 @@ annotations:
     value: B
   excel_name:
     tag: excel_name
-    value: begreps_URI
+    value: begrep
   excel_value:
     tag: excel_value
     value: CamelCase concept name only

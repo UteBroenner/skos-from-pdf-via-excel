@@ -106,6 +106,7 @@
                     ]
                 },
                 "created_by": {
+                    "description": "Hidden column; template formula = dct:creator of the vocabulary (cell B16).",
                     "pattern": "^[^@\\s]+@vegvesen\\.no$",
                     "type": [
                         "string",

@@ -128,27 +128,27 @@ class ConceptScheme(ConfiguredBaseModel):
          'tree_root': True})
 
     uri: str = Field(default=..., description="""Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
-                         'excel_name': {'tag': 'excel_name', 'value': 'begreps_URI'},
+                         'excel_name': {'tag': 'excel_name', 'value': 'begrep'},
                          'excel_value': {'tag': 'excel_value',
                                          'value': 'CamelCase concept name only'}},
          'domain_of': ['ConceptScheme', 'Concept']} })
-    kortnavn: str = Field(default=..., description="""Short name of the vocabulary, max 4 letters or digits (cell B12).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B12'}},
+    kortnavn: str = Field(default=..., description="""Short name of the vocabulary, max 4 letters or digits (cell B12).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B14'}},
          'domain_of': ['ConceptScheme'],
          'slot_uri': 'svv:kortnavn'} })
-    title: str = Field(default=..., json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B13'}},
+    title: str = Field(default=..., json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B15'}},
          'domain_of': ['ConceptScheme'],
          'in_language': 'nb',
          'slot_uri': 'dct:title'} })
     main_language: Optional[str] = Field(default=None, description="""BCP 47 tag of the language in which every concept must have a prefLabel and a definition (scheme row \"hovedspråk\"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_label': {'tag': 'excel_label', 'value': 'hovedspråk'}},
          'domain_of': ['ConceptScheme'],
          'slot_uri': 'svv:mainLanguage'} })
-    creator: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B14'}},
+    creator: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B16'}},
          'domain_of': ['ConceptScheme'],
          'slot_uri': 'dct:creator'} })
-    publisher: Optional[str] = Field(default=None, description="""System-generated at publication.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B15'}},
+    publisher: Optional[str] = Field(default=None, description="""System-generated at publication.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B17'}},
          'domain_of': ['ConceptScheme'],
          'slot_uri': 'dct:publisher'} })
-    issued: Optional[date] = Field(default=None, description="""System-generated at publication.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B16'}},
+    issued: Optional[date] = Field(default=None, description="""System-generated at publication.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B18'}},
          'domain_of': ['ConceptScheme'],
          'slot_uri': 'dct:issued'} })
     concepts: Optional[list[Concept]] = Field(default=None, description="""Container slot for the data file only. Not written to RDF; the RDF writer emits skos:inScheme on each concept instead.""", json_schema_extra = { "linkml_meta": {'annotations': {'rdf_skip': {'tag': 'rdf_skip', 'value': True}},
@@ -177,7 +177,7 @@ class Concept(ConfiguredBaseModel):
          'from_schema': 'http://example.org/vegvesen/vokabular/def/schema'})
 
     uri: str = Field(default=..., description="""Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
-                         'excel_name': {'tag': 'excel_name', 'value': 'begreps_URI'},
+                         'excel_name': {'tag': 'excel_name', 'value': 'begrep'},
                          'excel_value': {'tag': 'excel_value',
                                          'value': 'CamelCase concept name only'}},
          'domain_of': ['ConceptScheme', 'Concept']} })
@@ -248,7 +248,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'nb',
          'slot_uri': 'skos:altLabel'} })
-    alt_label_en: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'K'},
+    alt_label_en: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'L'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_engelsk'},
                          'requirement': {'tag': 'requirement', 'value': 'anbefalt'},
@@ -256,7 +256,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en',
          'slot_uri': 'skos:altLabel'} })
-    alt_label_nn: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'L'},
+    alt_label_nn: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'K'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_nynorsk'},
                          'requirement': {'tag': 'requirement', 'value': 'anbefalt'},
@@ -356,8 +356,9 @@ class Concept(ConfiguredBaseModel):
                          'requirement': {'tag': 'requirement', 'value': 'anbefalt'}},
          'domain_of': ['Concept'],
          'slot_uri': 'dct:created'} })
-    created_by: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AD'},
-                         'excel_name': {'tag': 'excel_name', 'value': 'opprettet_av'}},
+    created_by: Optional[str] = Field(default=None, description="""Hidden column; template formula = dct:creator of the vocabulary (cell B16).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AD'},
+                         'excel_name': {'tag': 'excel_name', 'value': 'opprettet_av'},
+                         'hidden': {'tag': 'hidden', 'value': True}},
          'domain_of': ['Concept'],
          'slot_uri': 'dct:contributor'} })
     modified: Optional[date] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AE'},
@@ -410,14 +411,14 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'slot_uri': 'skosno:valueRange'} })
     tier: Optional[int] = Field(default=None, description="""1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.""", ge=1, le=3, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column',
-                                          'value': 'AO (base template), AY (language '
+                                          'value': 'AN (base template), AX (language '
                                                    'extension): always the last '
                                                    'column, outside the Excel table'},
                          'excel_name': {'tag': 'excel_name', 'value': 'tier'},
                          'requirement': {'tag': 'requirement', 'value': 'internt'}},
          'domain_of': ['Concept'],
          'slot_uri': 'svv:tier'} })
-    pref_label_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AO'},
+    pref_label_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AN'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -425,7 +426,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:prefLabel'} })
-    pref_label_en_gb: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AP'},
+    pref_label_en_gb: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AO'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_gb'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -433,7 +434,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-GB',
          'slot_uri': 'skos:prefLabel'} })
-    pref_label_de: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AQ'},
+    pref_label_de: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AP'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_tysk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -441,7 +442,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'de',
          'slot_uri': 'skos:prefLabel'} })
-    pref_label_es: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AR'},
+    pref_label_es: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AQ'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_spansk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -449,7 +450,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'es',
          'slot_uri': 'skos:prefLabel'} })
-    alt_label_en_us: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AS'},
+    alt_label_en_us: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AR'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -458,7 +459,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:altLabel'} })
-    alt_label_en_gb: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AT'},
+    alt_label_en_gb: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AS'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_engelsk_gb'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -467,7 +468,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-GB',
          'slot_uri': 'skos:altLabel'} })
-    alt_label_de: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AU'},
+    alt_label_de: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AT'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_tysk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -476,7 +477,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'de',
          'slot_uri': 'skos:altLabel'} })
-    alt_label_es: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AV'},
+    alt_label_es: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AU'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_spansk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -485,7 +486,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'es',
          'slot_uri': 'skos:altLabel'} })
-    definition_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AW'},
+    definition_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AV'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'definisjon_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -493,7 +494,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:definition'} })
-    scope_note_en_us: Optional[str] = Field(default=None, description="""Usage note in US English, e.g. a warning that a term means another concept elsewhere.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AX'},
+    scope_note_en_us: Optional[str] = Field(default=None, description="""Usage note in US English, e.g. a warning that a term means another concept elsewhere.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AW'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'merknad_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},

@@ -61,7 +61,7 @@ URI: [dct:title](http://purl.org/dc/terms/title)
 
 | property | value |
 | --- | --- |
-| excel_cell | B13 |
+| excel_cell | B15 |
 
 
 
@@ -92,7 +92,7 @@ name: title
 annotations:
   excel_cell:
     tag: excel_cell
-    value: B13
+    value: B15
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 in_language: nb
 rank: 1000

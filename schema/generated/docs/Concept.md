@@ -207,7 +207,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [close_match](close_match.md) | * <br/> [uri](uri.md) |  | direct |
 | [contact_point](contact_point.md) | 1 <br/> [String](String.md) | E-mail address or web address | direct |
 | [created](created.md) | 0..1 <br/> [Date](Date.md) |  | direct |
-| [created_by](created_by.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [created_by](created_by.md) | 0..1 <br/> [String](String.md) | Hidden column; template formula = dct:creator of the vocabulary (cell B16) | direct |
 | [modified](modified.md) | 0..1 <br/> [Date](Date.md) |  | direct |
 | [modified_by](modified_by.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [version_info](version_info.md) | 0..1 <br/> [String](String.md) |  | direct |
@@ -363,7 +363,7 @@ attributes:
         value: B
       excel_name:
         tag: excel_name
-        value: begreps_URI
+        value: begrep
       excel_value:
         tag: excel_value
         value: CamelCase concept name only
@@ -575,7 +575,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: K
+        value: L
       excel_name:
         tag: excel_name
         value: tillat_term_engelsk
@@ -599,7 +599,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: L
+        value: K
       excel_name:
         tag: excel_name
         value: tillat_term_nynorsk
@@ -953,6 +953,11 @@ attributes:
       excel_name:
         tag: excel_name
         value: opprettet_av
+      hidden:
+        tag: hidden
+        value: true
+    description: Hidden column; template formula = dct:creator of the vocabulary (cell
+      B16).
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: dct:contributor
@@ -1135,7 +1140,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: 'AO (base template), AY (language extension): always the last column,
+        value: 'AN (base template), AX (language extension): always the last column,
           outside the Excel table'
       excel_name:
         tag: excel_name
@@ -1160,7 +1165,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AO
+        value: AN
       excel_name:
         tag: excel_name
         value: anbefalt_term_engelsk_us
@@ -1183,7 +1188,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AP
+        value: AO
       excel_name:
         tag: excel_name
         value: anbefalt_term_engelsk_gb
@@ -1206,7 +1211,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AQ
+        value: AP
       excel_name:
         tag: excel_name
         value: anbefalt_term_tysk
@@ -1229,7 +1234,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AR
+        value: AQ
       excel_name:
         tag: excel_name
         value: anbefalt_term_spansk
@@ -1252,7 +1257,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AS
+        value: AR
       excel_name:
         tag: excel_name
         value: tillat_term_engelsk_us
@@ -1279,7 +1284,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AT
+        value: AS
       excel_name:
         tag: excel_name
         value: tillat_term_engelsk_gb
@@ -1306,7 +1311,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AU
+        value: AT
       excel_name:
         tag: excel_name
         value: tillat_term_tysk
@@ -1333,7 +1338,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AV
+        value: AU
       excel_name:
         tag: excel_name
         value: tillat_term_spansk
@@ -1360,7 +1365,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AW
+        value: AV
       excel_name:
         tag: excel_name
         value: definisjon_engelsk_us
@@ -1383,7 +1388,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AX
+        value: AW
       excel_name:
         tag: excel_name
         value: merknad_engelsk_us

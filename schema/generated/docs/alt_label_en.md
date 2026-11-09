@@ -61,7 +61,7 @@ URI: [skos:altLabel](http://www.w3.org/2004/02/skos/core#altLabel)
 
 | property | value |
 | --- | --- |
-| excel_column | K |
+| excel_column | L |
 | excel_name | tillat_term_engelsk |
 | requirement | anbefalt |
 | separator | , |
@@ -95,7 +95,7 @@ name: alt_label_en
 annotations:
   excel_column:
     tag: excel_column
-    value: K
+    value: L
   excel_name:
     tag: excel_name
     value: tillat_term_engelsk

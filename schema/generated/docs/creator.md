@@ -54,7 +54,7 @@ URI: [dct:creator](http://purl.org/dc/terms/creator)
 
 | property | value |
 | --- | --- |
-| excel_cell | B14 |
+| excel_cell | B16 |
 
 
 
@@ -85,7 +85,7 @@ name: creator
 annotations:
   excel_cell:
     tag: excel_cell
-    value: B14
+    value: B16
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: dct:creator

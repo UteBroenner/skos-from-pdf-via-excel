@@ -160,7 +160,7 @@ attributes:
         value: B
       excel_name:
         tag: excel_name
-        value: begreps_URI
+        value: begrep
       excel_value:
         tag: excel_value
         value: CamelCase concept name only
@@ -182,7 +182,7 @@ attributes:
     annotations:
       excel_cell:
         tag: excel_cell
-        value: B12
+        value: B14
     description: Short name of the vocabulary, max 4 letters or digits (cell B12).
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
@@ -198,7 +198,7 @@ attributes:
     annotations:
       excel_cell:
         tag: excel_cell
-        value: B13
+        value: B15
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: nb
     rank: 1000
@@ -228,7 +228,7 @@ attributes:
     annotations:
       excel_cell:
         tag: excel_cell
-        value: B14
+        value: B16
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: dct:creator
@@ -241,7 +241,7 @@ attributes:
     annotations:
       excel_cell:
         tag: excel_cell
-        value: B15
+        value: B17
     description: System-generated at publication.
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
@@ -255,7 +255,7 @@ attributes:
     annotations:
       excel_cell:
         tag: excel_cell
-        value: B16
+        value: B18
     description: System-generated at publication.
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
