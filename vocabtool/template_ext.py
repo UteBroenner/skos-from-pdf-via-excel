@@ -108,7 +108,11 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
     tech, first = hdr + 1, hdr + 2
     last_col = max(c.column for c in ws[hdr] if c.value not in (None, ""))
-    last_row = max([r for r in range(first, ws.max_row + 1) if ws.cell(r, 1).value] or [first])
+    # never shrink: last row with an ID, with prepared formulas (template rows), or the current table end
+    formula_rows = [r for r in range(first, ws.max_row + 1)
+                    if any(isinstance(c.value, str) and c.value.startswith("=") for c in ws[r])]
+    table_ends = [int(re.search(r"(\d+)$", t.ref).group(1)) for t in ws.tables.values()]
+    last_row = max([r for r in range(first, ws.max_row + 1) if ws.cell(r, 1).value] + formula_rows + table_ends + [first])
     L = get_column_letter(last_col)
 
     # every table column needs a unique, non-empty header in the technical-name row
