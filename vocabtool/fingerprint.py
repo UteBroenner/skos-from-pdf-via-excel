@@ -13,7 +13,7 @@ import hashlib
 from datetime import date, datetime
 
 EXCLUDED = {"intern_identifikator", "dato_opprettet", "opprettet_av", "dato_sist_endret", "sist_endret_av",
-            "fingeravtrykk", "endringshash", "tier"}
+            "endringshash", "tier"}
 
 
 def normalise(value) -> str:

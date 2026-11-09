@@ -179,11 +179,11 @@ def hide_column(wb, technical_name: str, sheet: str = "vokabular") -> str | None
     return None
 
 
-FINGERPRINT = "fingeravtrykk"
+FINGERPRINT = "endringshash"
 
 
 def ensure_fingerprint_column(wb, sheet: str = "vokabular") -> str:
-    """Add the system column 'fingeravtrykk' inside the Excel table (before a trailing 'tier').
+    """Add the system column 'endringshash' inside the Excel table (before a trailing 'tier').
     Returns its column letter."""
     ws = wb[sheet]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")

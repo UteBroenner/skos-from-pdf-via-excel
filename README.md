@@ -67,7 +67,7 @@ This command:
 - converts relations written as a concept name (`Rekkverk`) or as the main-language term (`rekkverk`) into IDs.
   Unknown or ambiguous values are left as written and listed.
 - stretches the Excel table and formatting to all rows.
-- writes a fingerprint per row in the system column `fingeravtrykk`, inside the table: SHA-256 over all imported
+- writes a fingerprint per row in the system column `endringshash`, inside the table: SHA-256 over all imported
   columns except the ID, created/modified date and person. The rule is in `vocabtool/fingerprint.py`.
   The checker warns (`VT-FINGERPRINT`) when a row was edited after `prepare`.
 
@@ -131,7 +131,7 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 - Layout of the master template (`templates/SKOS-Excel-mal-v8-for-import.xlsx`): scheme rows 14–18 (B14 `kortnavn`,
   B15 title, B16 `dct:creator`), requirement row 20, description row 21, property row 23, technical names in row 24
   (the Excel table header), data from row 25. Column AD (`opprettet_av`) is hidden and filled by formula from B16.
-  `fingeravtrykk` (system, written by `prepare`) is the last column inside the table, and `tier` is the last column,
+  `endringshash` (system, written by `prepare`) is the last column inside the table, and `tier` is the last column,
   outside the table.
 
 ## Power Automate import (planned design)

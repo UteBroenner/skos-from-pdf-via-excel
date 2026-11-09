@@ -8,7 +8,7 @@
 3. Relations (broader, isPartOf, related): values written as a concept name (column B) or as the
    main-language term are replaced by the concept's ID. Unknown or ambiguous values are left as
    written and reported.
-4. Fingerprint (column 'fingeravtrykk', inside the table): SHA-256 of the row content, used by the
+4. Fingerprint (column 'endringshash', inside the table): SHA-256 of the row content, used by the
    Power Automate import to stamp dato_sist_endret / sist_endret_av only on rows that changed
    (see vocabtool.fingerprint).
 5. Excel table, formatting and validation stretched to all rows (see template_ext.fit_table).
