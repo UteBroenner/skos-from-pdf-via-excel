@@ -5,6 +5,8 @@
   rdf      <v8.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
   uri      <v8.xlsx> [--overwrite]        fill empty concept names (column B) from the main-language term
   fit      <v8.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns
+  prepare  <v8.xlsx>                      generate IDs, convert relations written as names/terms to IDs,
+                                          fill concept names, stretch the table (run after filling in)
 """
 from __future__ import annotations
 
@@ -142,6 +144,20 @@ def cmd_fit(a):
     return 0
 
 
+def cmd_prepare(a):
+    from .prepare import prepare
+    r = prepare(a.workbook)
+    print(f"{a.workbook}: {r['new_ids']} new IDs, {r['relations_converted']} relation values converted to IDs, "
+          f"{r['new_names']} new concept names; table {r['table'].get('begrepsliste')}")
+    for key, fld, t in r["unresolved"]:
+        print(f"  not found: {key} {fld} -> {t!r}")
+    for key, fld, t in r["ambiguous"]:
+        print(f"  ambiguous (several concepts): {key} {fld} -> {t!r}")
+    for key, base, name in r["name_collisions"]:
+        print(f"  {key}: name '{base}' taken, used '{name}'")
+    return 0
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="vocabtool")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -150,6 +166,7 @@ def main(argv=None):
     m.add_argument("--out", required=True); m.add_argument("--kortnavn"); m.set_defaults(fn=cmd_migrate)
     r = sub.add_parser("rdf"); r.add_argument("workbook"); r.add_argument("--out", default="out/rdf"); r.set_defaults(fn=cmd_rdf)
     u = sub.add_parser("uri"); u.add_argument("workbook"); u.add_argument("--overwrite", action="store_true"); u.set_defaults(fn=cmd_uri)
+    pr = sub.add_parser("prepare"); pr.add_argument("workbook"); pr.set_defaults(fn=cmd_prepare)
     ft = sub.add_parser("fit"); ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
     a = p.parse_args(argv)
     return a.fn(a)

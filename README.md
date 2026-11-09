@@ -54,6 +54,22 @@ python -m vocabtool migrate samples/N101-v7.xlsx --template templates/SKOS-Excel
 Relation targets that are not in the workbook are kept
 as written and listed, so they show up as `VT-REF-FORMAT` errors in v8.
 
+After filling in a workbook (by hand or by AI extraction), let the tools generate what nobody should type:
+
+```bash
+python -m vocabtool prepare path/to/workbook.xlsx
+```
+
+This command:
+- generates missing IDs in column A as the next free `<kortnavn>-NNNN`. They are values, not formulas, so sorting
+  or inserting rows never changes them. Don't delete concepts; set their status to `forkastet`, so no number is reused.
+- fills missing concept names in column B (see below).
+- converts relations written as a concept name (`Rekkverk`) or as the main-language term (`rekkverk`) into IDs.
+  Unknown or ambiguous values are left as written and listed.
+- stretches the Excel table and formatting to all rows.
+
+Relations can therefore be written as names or terms during extraction and review.
+
 Fill empty concept names (column B) from the main-language term, in CamelCase
 (`rekkverk` → `Rekkverk`, `brystningshøyde` → `Brystningshoyde`, `skråstagbru` → `Skraastagbru`,
 `CE-merket produkt` → `CEMerketProdukt`, `single crochet` → `SingleCrochet`). æ → ae, ø → o, å → aa;
@@ -167,6 +183,7 @@ vocabtool/linkml_rdf.py      Excel -> LinkML data -> RDF, SHACL fixes
 vocabtool/template_ext.py    add language columns to the template
 vocabtool/clash_notes.py     draft scope notes for label clashes
 vocabtool/uri.py             concept names (CamelCase) and URIs
+vocabtool/prepare.py         generate IDs, names; relations by name/term -> ID
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   Excel template v8 and v8 with language extension
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)

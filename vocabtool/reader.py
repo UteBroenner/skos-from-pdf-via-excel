@@ -220,7 +220,9 @@ def read_workbook(path: str | Path) -> Vocabulary:
         key_field = "identifier" if is_v8 else "uri"
         for r_idx, row in enumerate(ws.iter_rows(min_row=first_data, values_only=True), start=first_data):
             rec = {k: as_text(row[i]) if i < len(row) else None for k, i in colmap.items()}
-            if not any(rec.get(k) for k in ("identifier", "uri", "label_nb")):
+            # a row counts as a concept if it has an ID, a name, or any label / definition (any language)
+            if not any(v for k, v in rec.items()
+                       if k in ("identifier", "uri") or k.startswith(("label_", "def_"))):
                 continue
             key = rec.get(key_field) or rec.get("uri") or rec.get("identifier") or f"{ws.title}!row{r_idx}"
             rels = {f: split_multi(rec.get(f)) for f in RELATION_FIELDS}
