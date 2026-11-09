@@ -1135,7 +1135,8 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AO
+        value: 'AO (base template), AY (language extension): always the last column,
+          outside the Excel table'
       excel_name:
         tag: excel_name
         value: tier
@@ -1159,7 +1160,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AP
+        value: AO
       excel_name:
         tag: excel_name
         value: anbefalt_term_engelsk_us
@@ -1182,7 +1183,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AQ
+        value: AP
       excel_name:
         tag: excel_name
         value: anbefalt_term_engelsk_gb
@@ -1205,7 +1206,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AR
+        value: AQ
       excel_name:
         tag: excel_name
         value: anbefalt_term_tysk
@@ -1228,7 +1229,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AS
+        value: AR
       excel_name:
         tag: excel_name
         value: anbefalt_term_spansk
@@ -1251,7 +1252,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AT
+        value: AS
       excel_name:
         tag: excel_name
         value: tillat_term_engelsk_us
@@ -1278,7 +1279,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AU
+        value: AT
       excel_name:
         tag: excel_name
         value: tillat_term_engelsk_gb
@@ -1305,7 +1306,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AV
+        value: AU
       excel_name:
         tag: excel_name
         value: tillat_term_tysk
@@ -1332,7 +1333,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AW
+        value: AV
       excel_name:
         tag: excel_name
         value: tillat_term_spansk
@@ -1359,7 +1360,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AX
+        value: AW
       excel_name:
         tag: excel_name
         value: definisjon_engelsk_us
@@ -1382,7 +1383,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: AY
+        value: AX
       excel_name:
         tag: excel_name
         value: merknad_engelsk_us

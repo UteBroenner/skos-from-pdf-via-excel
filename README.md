@@ -69,6 +69,7 @@ the second gets a number (`Name2`) and the command lists it, so you can choose a
 
 Stretch the Excel table `begrepsliste`, the formatting (wrapped, top-aligned), conditional formatting and
 data validation to all rows and columns in use. Power Automate reads only what is inside the table.
+The `tier` column (always last) stays outside the table.
 `migrate` and `uri` do this automatically:
 
 ```bash
@@ -81,7 +82,8 @@ Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `
 .venv/bin/python -m vocabtool rdf out/N101-v8.xlsx --out out/rdf
 ```
 
-Add language columns to the template (appended after column AO; existing columns keep their letters):
+Add language columns to the template. They are inserted after column AN, and `tier` moves to the last column,
+outside the Excel table. It is internal and is not imported. Columns A–AN keep their letters:
 
 ```bash
 .venv/bin/python -c "from vocabtool.template_ext import extend_template as e; print(e('templates/SKOS-Excel-mal-v8-for-import.xlsx', 'templates/SKOS-Excel-mal-v8-lang-ext.xlsx', ['en-US','en-GB','de','es'], ['en-US']))"

@@ -27,7 +27,7 @@ svv:ConceptStatus a owl:Class ;
 	skos:definition "Status values from the template's statusliste, mapped to the EU concept-status authority table." ;
 	skos:inScheme vok:def\/schema ;
 	linkml:permissible_values concept_status:CANDIDATE , concept_status:CURRENT , concept_status:DEPRECATED , concept_status:RETIRED .
-svv:alt_label_de svv:excel_column "AV"@de ;
+svv:alt_label_de svv:excel_column "AU"@de ;
 	svv:excel_name "tillat_term_tysk"@de ;
 	svv:requirement "valgfri"@de ;
 	svv:separator ","@de ;
@@ -44,7 +44,7 @@ svv:alt_label_en svv:excel_column "K"@en ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_en"@en ;
 	skos:inScheme vok:def\/schema .
-svv:alt_label_en_gb svv:excel_column "AU"@en-gb ;
+svv:alt_label_en_gb svv:excel_column "AT"@en-gb ;
 	svv:excel_name "tillat_term_engelsk_gb"@en-gb ;
 	svv:requirement "valgfri"@en-gb ;
 	svv:separator ","@en-gb ;
@@ -53,7 +53,7 @@ svv:alt_label_en_gb svv:excel_column "AU"@en-gb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_en_gb"@en-gb ;
 	skos:inScheme vok:def\/schema .
-svv:alt_label_en_us svv:excel_column "AT"@en-us ;
+svv:alt_label_en_us svv:excel_column "AS"@en-us ;
 	svv:excel_name "tillat_term_engelsk_us"@en-us ;
 	svv:requirement "valgfri"@en-us ;
 	svv:separator ","@en-us ;
@@ -62,7 +62,7 @@ svv:alt_label_en_us svv:excel_column "AT"@en-us ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_en_us"@en-us ;
 	skos:inScheme vok:def\/schema .
-svv:alt_label_es svv:excel_column "AW"@es ;
+svv:alt_label_es svv:excel_column "AV"@es ;
 	svv:excel_name "tillat_term_spansk"@es ;
 	svv:requirement "valgfri"@es ;
 	svv:separator ","@es ;
@@ -151,7 +151,7 @@ svv:definition_en svv:excel_column "H"@en ;
 	a owl:DatatypeProperty ;
 	rdfs:label "definition_en"@en ;
 	skos:inScheme vok:def\/schema .
-svv:definition_en_us svv:excel_column "AX"@en-us ;
+svv:definition_en_us svv:excel_column "AW"@en-us ;
 	svv:excel_name "definisjon_engelsk_us"@en-us ;
 	svv:requirement "valgfri"@en-us ;
 	svv:template "v8-lang-ext"@en-us ;
@@ -265,7 +265,7 @@ svv:notation svv:excel_column "F" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "notation" ;
 	skos:inScheme vok:def\/schema .
-svv:pref_label_de svv:excel_column "AR"@de ;
+svv:pref_label_de svv:excel_column "AQ"@de ;
 	svv:excel_name "anbefalt_term_tysk"@de ;
 	svv:requirement "valgfri"@de ;
 	svv:template "v8-lang-ext"@de ;
@@ -280,7 +280,7 @@ svv:pref_label_en svv:excel_column "D"@en ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_en"@en ;
 	skos:inScheme vok:def\/schema .
-svv:pref_label_en_gb svv:excel_column "AQ"@en-gb ;
+svv:pref_label_en_gb svv:excel_column "AP"@en-gb ;
 	svv:excel_name "anbefalt_term_engelsk_gb"@en-gb ;
 	svv:requirement "valgfri"@en-gb ;
 	svv:template "v8-lang-ext"@en-gb ;
@@ -288,7 +288,7 @@ svv:pref_label_en_gb svv:excel_column "AQ"@en-gb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_en_gb"@en-gb ;
 	skos:inScheme vok:def\/schema .
-svv:pref_label_en_us svv:excel_column "AP"@en-us ;
+svv:pref_label_en_us svv:excel_column "AO"@en-us ;
 	svv:excel_name "anbefalt_term_engelsk_us"@en-us ;
 	svv:requirement "valgfri"@en-us ;
 	svv:template "v8-lang-ext"@en-us ;
@@ -296,7 +296,7 @@ svv:pref_label_en_us svv:excel_column "AP"@en-us ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_en_us"@en-us ;
 	skos:inScheme vok:def\/schema .
-svv:pref_label_es svv:excel_column "AS"@es ;
+svv:pref_label_es svv:excel_column "AR"@es ;
 	svv:excel_name "anbefalt_term_spansk"@es ;
 	svv:requirement "valgfri"@es ;
 	svv:template "v8-lang-ext"@es ;
@@ -353,7 +353,7 @@ svv:scope_note svv:excel_column "P"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "scope_note"@nb ;
 	skos:inScheme vok:def\/schema .
-svv:scope_note_en_us svv:excel_column "AY"@en-us ;
+svv:scope_note_en_us svv:excel_column "AX"@en-us ;
 	svv:excel_name "merknad_engelsk_us"@en-us ;
 	svv:requirement "valgfri"@en-us ;
 	svv:template "v8-lang-ext"@en-us ;
@@ -391,7 +391,7 @@ svv:subject svv:excel_column "S"@nb ;
 	rdfs:label "subject"@nb ;
 	skos:definition "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now."@nb ;
 	skos:inScheme vok:def\/schema .
-svv:tier svv:excel_column "AO" ;
+svv:tier svv:excel_column "AO (base template), AY (language extension): always the last column, outside the Excel table" ;
 	svv:excel_name "tier" ;
 	svv:requirement "internt" ;
 	a owl:DatatypeProperty ;

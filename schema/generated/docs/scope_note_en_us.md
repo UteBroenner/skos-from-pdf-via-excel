@@ -59,7 +59,7 @@ URI: [skos:scopeNote](http://www.w3.org/2004/02/skos/core#scopeNote)
 
 | property | value |
 | --- | --- |
-| excel_column | AY |
+| excel_column | AX |
 | excel_name | merknad_engelsk_us |
 | requirement | valgfri |
 | template | v8-lang-ext |
@@ -93,7 +93,7 @@ name: scope_note_en_us
 annotations:
   excel_column:
     tag: excel_column
-    value: AY
+    value: AX
   excel_name:
     tag: excel_name
     value: merknad_engelsk_us

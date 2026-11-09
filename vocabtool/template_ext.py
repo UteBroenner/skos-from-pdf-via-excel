@@ -53,6 +53,16 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
     tech, req, desc = hdr + 1, hdr - 3, hdr - 2
     existing = {normalise_header(c.value) for c in ws[hdr]}
     col = ws.max_column + 1
+    # keep 'tier' (internal, not imported) as the last column, outside the Excel table:
+    # new columns are inserted in front of it
+    tier_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "tier"), None)
+    n_new = sum(1 for kind_langs in (langs, langs, def_langs, scope_langs) for lang in kind_langs)
+    if tier_col and tier_col == max(c.column for c in ws[hdr] if c.value not in (None, "")) and n_new:
+        tier_width = ws.column_dimensions[get_column_letter(tier_col)].width
+        ws.insert_cols(tier_col, n_new)
+        ws.column_dimensions[get_column_letter(tier_col + n_new)].width = tier_width or 10
+        col = tier_col
+    first_new = get_column_letter(col)
     style_src = ws.cell(hdr, 3)          # prefLabel@nb header as style model
     tech_src = ws.cell(tech, 3)
     added = []
@@ -84,8 +94,8 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
     # extend the change hash (TEXTJOIN over A, C:AM) with the new columns
     for r in range(tech + 1, ws.max_row + 1):
         for c in ws[r]:
-            if isinstance(c.value, str) and "TEXTJOIN" in c.value and "$AM" in c.value and ",vokabular!$AP" not in c.value:
-                c.value = re.sub(r"(vokabular!\$[AC](\d+):\$AM\d+)", rf"\1,vokabular!$AP\2:${last}\2", c.value)
+            if isinstance(c.value, str) and "TEXTJOIN" in c.value and "$AM" in c.value and f",vokabular!${first_new}" not in c.value:
+                c.value = re.sub(r"(vokabular!\$[AC](\d+):\$AM\d+)", rf"\1,vokabular!${first_new}\2:${last}\2", c.value)
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
     wb.save(dst)
     return added
@@ -108,6 +118,8 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
     tech, first = hdr + 1, hdr + 2
     last_col = max(c.column for c in ws[hdr] if c.value not in (None, ""))
+    if normalise_header(ws.cell(hdr, last_col).value) == "tier":
+        last_col -= 1          # tier is internal: not in the table, not imported
     # never shrink: last row with an ID, with prepared formulas (template rows), or the current table end
     formula_rows = [r for r in range(first, ws.max_row + 1)
                     if any(isinstance(c.value, str) and c.value.startswith("=") for c in ws[r])]

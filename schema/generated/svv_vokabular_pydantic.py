@@ -409,12 +409,15 @@ class Concept(ConfiguredBaseModel):
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'}},
          'domain_of': ['Concept'],
          'slot_uri': 'skosno:valueRange'} })
-    tier: Optional[int] = Field(default=None, description="""1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.""", ge=1, le=3, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AO'},
+    tier: Optional[int] = Field(default=None, description="""1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.""", ge=1, le=3, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column',
+                                          'value': 'AO (base template), AY (language '
+                                                   'extension): always the last '
+                                                   'column, outside the Excel table'},
                          'excel_name': {'tag': 'excel_name', 'value': 'tier'},
                          'requirement': {'tag': 'requirement', 'value': 'internt'}},
          'domain_of': ['Concept'],
          'slot_uri': 'svv:tier'} })
-    pref_label_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AP'},
+    pref_label_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AO'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -422,7 +425,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:prefLabel'} })
-    pref_label_en_gb: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AQ'},
+    pref_label_en_gb: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AP'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_gb'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -430,7 +433,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-GB',
          'slot_uri': 'skos:prefLabel'} })
-    pref_label_de: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AR'},
+    pref_label_de: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AQ'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_tysk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -438,7 +441,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'de',
          'slot_uri': 'skos:prefLabel'} })
-    pref_label_es: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AS'},
+    pref_label_es: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AR'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_spansk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -446,7 +449,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'es',
          'slot_uri': 'skos:prefLabel'} })
-    alt_label_en_us: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AT'},
+    alt_label_en_us: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AS'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -455,7 +458,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:altLabel'} })
-    alt_label_en_gb: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AU'},
+    alt_label_en_gb: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AT'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_engelsk_gb'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -464,7 +467,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-GB',
          'slot_uri': 'skos:altLabel'} })
-    alt_label_de: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AV'},
+    alt_label_de: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AU'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_tysk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -473,7 +476,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'de',
          'slot_uri': 'skos:altLabel'} })
-    alt_label_es: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AW'},
+    alt_label_es: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AV'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'tillat_term_spansk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -482,7 +485,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'es',
          'slot_uri': 'skos:altLabel'} })
-    definition_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AX'},
+    definition_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AW'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'definisjon_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
@@ -490,7 +493,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:definition'} })
-    scope_note_en_us: Optional[str] = Field(default=None, description="""Usage note in US English, e.g. a warning that a term means another concept elsewhere.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AY'},
+    scope_note_en_us: Optional[str] = Field(default=None, description="""Usage note in US English, e.g. a warning that a term means another concept elsewhere.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AX'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'merknad_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},

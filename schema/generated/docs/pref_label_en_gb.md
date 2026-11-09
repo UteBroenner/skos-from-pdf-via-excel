@@ -54,7 +54,7 @@ URI: [skos:prefLabel](http://www.w3.org/2004/02/skos/core#prefLabel)
 
 | property | value |
 | --- | --- |
-| excel_column | AQ |
+| excel_column | AP |
 | excel_name | anbefalt_term_engelsk_gb |
 | requirement | valgfri |
 | template | v8-lang-ext |
@@ -88,7 +88,7 @@ name: pref_label_en_gb
 annotations:
   excel_column:
     tag: excel_column
-    value: AQ
+    value: AP
   excel_name:
     tag: excel_name
     value: anbefalt_term_engelsk_gb

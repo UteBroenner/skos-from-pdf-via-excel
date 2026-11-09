@@ -34,7 +34,7 @@ Concept names (column B) are generated from the en-US term, e.g. `SingleCrochet`
 stitch carry the suffix `-ENUS`, e.g. `DoubleCrochet-ENUS` (US double crochet = UK treble crochet). The pattern HEKL-0057 is `CrossedDoubleCrochet2`,
 because the stitch HEKL-0028 already has `CrossedDoubleCrochet`. This is part of the open stitch-versus-pattern decision.
 
-Every label clash has a draft en-US scope note (column AY) that warns about it and names the other concept's ID.
+Every label clash has a draft en-US scope note (column AX) that warns about it and names the other concept's ID.
 There are 19 concepts with notes, covering the US/UK cross-overs, Norwegian versus English `st`, Spanish *punto* and *vuelta*,
 and the crossed double crochet stitch versus pattern.
 
