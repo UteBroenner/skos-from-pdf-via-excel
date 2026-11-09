@@ -39,6 +39,7 @@ RULES = {
     "VT-URI-FORMAT": ("error", "column B must hold only the CamelCase concept name (letters and digits, optionally a language suffix such as -ENUS), e.g. Rekkverk", "S03"),
     "VT-URI-DUPLICATE": ("error", "concept name in column B used on more than one row, so two concepts get the same URI", ""),
     "VT-URI-LABEL": ("info", "concept name in column B differs from the CamelCase form of the main-language term, with -<LANG> suffix where the term means another concept in another language (fine if chosen on purpose)", "S03"),
+    "VT-FINGERPRINT": ("warning", "fingerprint missing or outdated: the row was changed after `vocabtool prepare`; run prepare before import", ""),
     "VT-REQ-LABEL": ("error", "prefLabel in the main language missing", ""),
     "VT-REQ-DEF": ("error", "definition in the main language missing", ""),
     "VT-REF-FORMAT": ("error", "relation value is not an ID (v8 relations must use IDs)", ""),
@@ -126,6 +127,16 @@ def validate(v: Vocabulary) -> list[Finding]:
     F: list[Finding] = []
     concepts = v.concepts
     LF, DF = v.label_field, v.def_field   # main-language label / definition
+    if v.version == "v8" and any("fingerprint" in cm for cm in v.columns.values()):
+        import openpyxl
+        from .fingerprint import fingerprint, row_values
+        ws = openpyxl.load_workbook(v.path, data_only=True)[concepts[0].sheet] if concepts else None
+        hdr = next((r for r in range(1, 40) if ws is not None and str(ws.cell(r, 1).value or "").strip() == "dct:identifier"), None)
+        if hdr:
+            last = max(c.column for c in ws[hdr + 1] if c.value)
+            for c in concepts:
+                if c.get("fingerprint") != fingerprint(row_values(ws, c.row, hdr + 1, last)):
+                    F.append(_f("VT-FINGERPRINT", c))
     if v.version == "v8":
         homonyms = cross_language_homonyms(concepts, LF)
         uris = Counter(c.get("uri") for c in concepts if c.get("uri"))

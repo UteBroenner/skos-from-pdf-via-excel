@@ -53,6 +53,7 @@ PROPERTY_MAP = {
     "skosno:dataStructureLabel": "data_structure_label",
     "skosno:valueRange": "value_range",
     "tier": "tier",
+    "fingeravtrykk": "fingerprint",     # system column written by vocabtool prepare
 }
 # dct:contributor appears twice in v8 (created by / modified by), once in v7.
 CONTRIBUTOR_FIELDS = ["created_by", "modified_by"]

@@ -148,7 +148,8 @@ def cmd_prepare(a):
     from .prepare import prepare
     r = prepare(a.workbook)
     print(f"{a.workbook}: {r['new_ids']} new IDs, {r['relations_converted']} relation values converted to IDs, "
-          f"{r['new_names']} new concept names; table {r['table'].get('begrepsliste')}")
+          f"{r['new_names']} new concept names, {r['fingerprints_updated']} fingerprints set/updated "
+          f"(column {r['fingerprint_column']}); table {r['table'].get('begrepsliste')}")
     for key, fld, t in r["unresolved"]:
         print(f"  not found: {key} {fld} -> {t!r}")
     for key, fld, t in r["ambiguous"]:

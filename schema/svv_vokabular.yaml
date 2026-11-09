@@ -375,7 +375,7 @@ slots:
     minimum_value: 1
     maximum_value: 3
     description: 1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.
-    annotations: {excel_column: "AN (base template), AX (language extension): always the last column, outside the Excel table", excel_name: tier, requirement: internt}
+    annotations: {excel_column: "AO (base template), AY (language extension): always the last column, outside the Excel table", excel_name: tier, requirement: internt}
 
 enums:
   ConceptStatus:

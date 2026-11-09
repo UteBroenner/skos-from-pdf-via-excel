@@ -67,7 +67,7 @@ URI: [svv:tier](http://example.org/vegvesen/vokabular/def#tier)
 
 | property | value |
 | --- | --- |
-| excel_column | AN (base template), AX (language extension): always the last column, outside the Excel table |
+| excel_column | AO (base template), AY (language extension): always the last column, outside the Excel table |
 | excel_name | tier |
 | requirement | internt |
 
@@ -100,7 +100,7 @@ name: tier
 annotations:
   excel_column:
     tag: excel_column
-    value: 'AN (base template), AX (language extension): always the last column, outside
+    value: 'AO (base template), AY (language extension): always the last column, outside
       the Excel table'
   excel_name:
     tag: excel_name

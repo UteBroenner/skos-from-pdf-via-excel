@@ -393,7 +393,7 @@ svv:subject svv:excel_column "S"@nb ;
 	rdfs:label "subject"@nb ;
 	skos:definition "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now."@nb ;
 	skos:inScheme vok:def\/schema .
-svv:tier svv:excel_column "AN (base template), AX (language extension): always the last column, outside the Excel table" ;
+svv:tier svv:excel_column "AO (base template), AY (language extension): always the last column, outside the Excel table" ;
 	svv:excel_name "tier" ;
 	svv:requirement "internt" ;
 	a owl:DatatypeProperty ;

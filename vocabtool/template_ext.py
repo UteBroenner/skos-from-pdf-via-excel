@@ -177,3 +177,34 @@ def hide_column(wb, technical_name: str, sheet: str = "vokabular") -> str | None
             ws.column_dimensions[c.column_letter].hidden = True
             return c.column_letter
     return None
+
+
+FINGERPRINT = "fingeravtrykk"
+
+
+def ensure_fingerprint_column(wb, sheet: str = "vokabular") -> str:
+    """Add the system column 'fingeravtrykk' inside the Excel table (before a trailing 'tier').
+    Returns its column letter."""
+    ws = wb[sheet]
+    hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
+    tech = hdr + 1
+    for c in ws[tech]:
+        if c.value == FINGERPRINT:
+            return c.column_letter
+    used = [c.column for c in ws[hdr] if c.value not in (None, "")]
+    last = max(used)
+    col = last + 1
+    if normalise_header(ws.cell(hdr, last).value) == "tier":
+        width = ws.column_dimensions[get_column_letter(last)].width
+        ws.insert_cols(last, 1)
+        ws.column_dimensions[get_column_letter(last + 1)].width = width or 10
+        col = last
+    ws.cell(hdr, col).value = FINGERPRINT
+    ws.cell(tech, col).value = FINGERPRINT
+    ws.cell(hdr - 3, col).value = "systemgenerert"
+    ws.cell(hdr - 2, col).value = ("SHA-256 av radens innhold (uten ID, datoer og personer); "
+                                   "settes av vocabtool prepare – ikke rediger")
+    for r, src in ((hdr, ws.cell(hdr, 3)), (tech, ws.cell(tech, 3)), (hdr - 3, ws.cell(hdr - 3, 3))):
+        ws.cell(r, col)._style = copy.copy(src._style)
+    ws.column_dimensions[get_column_letter(col)].width = 20
+    return get_column_letter(col)

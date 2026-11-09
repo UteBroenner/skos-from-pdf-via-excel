@@ -1140,7 +1140,7 @@ attributes:
     annotations:
       excel_column:
         tag: excel_column
-        value: 'AN (base template), AX (language extension): always the last column,
+        value: 'AO (base template), AY (language extension): always the last column,
           outside the Excel table'
       excel_name:
         tag: excel_name

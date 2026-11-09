@@ -67,6 +67,9 @@ This command:
 - converts relations written as a concept name (`Rekkverk`) or as the main-language term (`rekkverk`) into IDs.
   Unknown or ambiguous values are left as written and listed.
 - stretches the Excel table and formatting to all rows.
+- writes a fingerprint per row in the system column `fingeravtrykk`, inside the table: SHA-256 over all imported
+  columns except the ID, created/modified date and person. The rule is in `vocabtool/fingerprint.py`.
+  The checker warns (`VT-FINGERPRINT`) when a row was edited after `prepare`.
 
 Relations can therefore be written as names or terms during extraction and review.
 
@@ -128,7 +131,24 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 - Layout of the master template (`templates/SKOS-Excel-mal-v8-for-import.xlsx`): scheme rows 14–18 (B14 `kortnavn`,
   B15 title, B16 `dct:creator`), requirement row 20, description row 21, property row 23, technical names in row 24
   (the Excel table header), data from row 25. Column AD (`opprettet_av`) is hidden and filled by formula from B16.
-  `tier` is the last column, outside the table.
+  `fingeravtrykk` (system, written by `prepare`) is the last column inside the table, and `tier` is the last column,
+  outside the table.
+
+## Power Automate import (planned design)
+
+The import stamps `dato_sist_endret` / `sist_endret_av` only on concepts whose content changed:
+
+1. Trigger: the workbook is created or changed in the SharePoint library. Keep the file's *Modified By* now:
+   it is the editor. Running `prepare` saves the file again under the flow's account.
+2. Run `prepare`, which fills IDs, names and relations and computes the fingerprints.
+3. For each row of the table `begrepsliste`, find the List item by `intern_identifikator`:
+   - **no item:** create it; `dato_opprettet` = today.
+   - **fingerprint differs:** update it; `dato_sist_endret` = today, `sist_endret_av` = editor from step 1.
+   - **fingerprint equal:** skip.
+4. Ignore triggers caused by the flow's own save (trigger condition on *Modified By*).
+
+If two people edit the same file between imports, every change is attributed to the last one,
+so use one reviewer per file/domain at a time.
 - `skos:broader`, `xkos:isPartOf` and `skos:related` contain **IDs**, separated by commas.
 - Header row = the row with `skos:prefLabel@nb`. In v8 the following row holds the technical names.
 - Code lists (`kodeverk` sheet) are not read.
@@ -183,7 +203,8 @@ vocabtool/linkml_rdf.py      Excel -> LinkML data -> RDF, SHACL fixes
 vocabtool/template_ext.py    add language columns to the template
 vocabtool/clash_notes.py     draft scope notes for label clashes
 vocabtool/uri.py             concept names (CamelCase) and URIs
-vocabtool/prepare.py         generate IDs, names; relations by name/term -> ID
+vocabtool/prepare.py         generate IDs, names, fingerprints; relations by name/term -> ID
+vocabtool/fingerprint.py     row fingerprint rule (shared with any other implementation)
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   Excel template v8 and v8 with language extension
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)

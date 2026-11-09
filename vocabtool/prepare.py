@@ -8,7 +8,10 @@
 3. Relations (broader, isPartOf, related): values written as a concept name (column B) or as the
    main-language term are replaced by the concept's ID. Unknown or ambiguous values are left as
    written and reported.
-4. Excel table, formatting and validation stretched to all rows (see template_ext.fit_table).
+4. Fingerprint (column 'fingeravtrykk', inside the table): SHA-256 of the row content, used by the
+   Power Automate import to stamp dato_sist_endret / sist_endret_av only on rows that changed
+   (see vocabtool.fingerprint).
+5. Excel table, formatting and validation stretched to all rows (see template_ext.fit_table).
 """
 from __future__ import annotations
 
@@ -17,7 +20,8 @@ import re
 import openpyxl
 
 from .reader import read_workbook, RELATION_FIELDS, split_multi
-from .template_ext import uri_as_value, fit_table
+from .template_ext import uri_as_value, fit_table, ensure_fingerprint_column
+from .fingerprint import fingerprint, row_values
 from .uri import assign_names
 
 
@@ -81,8 +85,21 @@ def prepare(path: str) -> dict:
             ws.cell(c.row, cols[fld]).value = ", ".join(out)
 
 
-    # 4. table / formatting
+    # 4. table / formatting, then 5. fingerprints over the final row content
+    fp_col = ensure_fingerprint_column(wb)
     fit = fit_table(wb)
+    hdr = next(r for r in range(1, 40) if (ws.cell(r, 1).value or "").strip() == "dct:identifier")
+    last_col = openpyxl.utils.column_index_from_string(fit["last_column"])
+    fp_idx = openpyxl.utils.column_index_from_string(fp_col)
+    changed_fp = 0
+    for r in range(hdr + 2, ws.max_row + 1):
+        if not ws.cell(r, 1).value:
+            continue
+        fp = fingerprint(row_values(ws, r, hdr + 1, last_col))
+        if ws.cell(r, fp_idx).value != fp:
+            ws.cell(r, fp_idx).value = fp
+            changed_fp += 1
     wb.save(path)
     return {"new_ids": len(new_ids), "relations_converted": converted, "unresolved": unresolved,
-            "ambiguous": ambiguous, "new_names": len(names), "name_collisions": collisions, "table": fit}
+            "ambiguous": ambiguous, "new_names": len(names), "name_collisions": collisions, "table": fit,
+            "fingerprint_column": fp_col, "fingerprints_updated": changed_fp}

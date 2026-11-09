@@ -411,7 +411,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'slot_uri': 'skosno:valueRange'} })
     tier: Optional[int] = Field(default=None, description="""1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.""", ge=1, le=3, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column',
-                                          'value': 'AN (base template), AX (language '
+                                          'value': 'AO (base template), AY (language '
                                                    'extension): always the last '
                                                    'column, outside the Excel table'},
                          'excel_name': {'tag': 'excel_name', 'value': 'tier'},
