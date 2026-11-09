@@ -33,16 +33,16 @@ class Finding:
 
 
 RULES = {
-    "VT-ID-FORMAT": ("error", "ID does not match <kortnavn>-NNNN", "template v8 col A"),
+    "VT-ID-FORMAT": ("error", "column A must be <kortnavn>-<concept name> (formula in the template)", "template v8 col A"),
+    "VT-KORTNAVN": ("warning", "kortnavn is not 1-4 letters or digits as the template asks", "template v8"),
     "VT-ID-DUPLICATE": ("error", "ID used on more than one row", ""),
     "VT-URI-MISSING": ("error", "concept name for the URI (column B) missing; run `vocabtool uri` to generate it from the term", "S03"),
     "VT-URI-FORMAT": ("error", "column B must hold only the CamelCase concept name (letters and digits, optionally a language suffix such as -ENUS), e.g. Rekkverk", "S03"),
     "VT-URI-DUPLICATE": ("error", "concept name in column B used on more than one row, so two concepts get the same URI", ""),
     "VT-URI-LABEL": ("info", "concept name in column B differs from the CamelCase form of the main-language term, with -<LANG> suffix where the term means another concept in another language (fine if chosen on purpose)", "S03"),
-    "VT-FINGERPRINT": ("warning", "fingerprint missing or outdated: the row was changed after `vocabtool prepare`; run prepare before import", ""),
     "VT-REQ-LABEL": ("error", "prefLabel in the main language missing", ""),
     "VT-REQ-DEF": ("error", "definition in the main language missing", ""),
-    "VT-REF-FORMAT": ("error", "relation value is not an ID (v8 relations must use IDs)", ""),
+    "VT-REF-FORMAT": ("error", "relation value is not a concept name (v8 relations use the names in column B)", ""),
     "VT-REF-DANGLING": ("warning", "relation target not found in this workbook", ""),
     "VT-REF-SELF": ("error", "concept relates to itself", ""),
     "VT-CYCLE-BROADER": ("error", "cycle in skos:broader", "SKOS"),
@@ -127,16 +127,6 @@ def validate(v: Vocabulary) -> list[Finding]:
     F: list[Finding] = []
     concepts = v.concepts
     LF, DF = v.label_field, v.def_field   # main-language label / definition
-    if v.version == "v8" and any("fingerprint" in cm for cm in v.columns.values()):
-        import openpyxl
-        from .fingerprint import fingerprint, row_values
-        ws = openpyxl.load_workbook(v.path, data_only=True)[concepts[0].sheet] if concepts else None
-        hdr = next((r for r in range(1, 40) if ws is not None and str(ws.cell(r, 1).value or "").strip() == "dct:identifier"), None)
-        if hdr:
-            last = max(c.column for c in ws[hdr + 1] if c.value)
-            for c in concepts:
-                if c.get("fingerprint") != fingerprint(row_values(ws, c.row, hdr + 1, last)):
-                    F.append(_f("VT-FINGERPRINT", c))
     if v.version == "v8":
         homonyms = cross_language_homonyms(concepts, LF)
         uris = Counter(c.get("uri") for c in concepts if c.get("uri"))
@@ -154,14 +144,14 @@ def validate(v: Vocabulary) -> list[Finding]:
                 F.append(_f("VT-URI-DUPLICATE", c, u))
     keys = Counter(c.key for c in concepts)
     by_key = v.by_key()
-    id_re = re.compile(rf"^{re.escape(v.kortnavn)}-\d{{4}}$") if (v.version == "v8" and v.kortnavn) else None
-    any_id_re = re.compile(r"^[A-Za-z0-9]{1,4}-\d{4}$")
+    if v.version == "v8" and v.kortnavn and not re.fullmatch(r"[A-Za-z0-9]{1,4}", v.kortnavn):
+        F.append(Finding("VT-KORTNAVN", "warning", None, None, None, RULES["VT-KORTNAVN"][1] + f": {v.kortnavn}", "template v8"))
 
     for c in concepts:
-        if keys[c.key] > 1:
+        if keys[c.key] > 1 and v.version != "v8":        # v8: duplicate names are VT-URI-DUPLICATE
             F.append(_f("VT-ID-DUPLICATE", c, c.key))
-        if id_re and not id_re.match(c.key):
-            F.append(_f("VT-ID-FORMAT", c, c.key))
+        if v.version == "v8" and v.kortnavn and c.get("uri") and c.get("identifier") != f"{v.kortnavn}-{c.get('uri').strip()}":
+            F.append(_f("VT-ID-FORMAT", c, f"{c.get('identifier')} (expected {v.kortnavn}-{c.get('uri').strip()})"))
         if not c.get(LF):
             F.append(_f("VT-REQ-LABEL", c))
         if not c.get(DF):
@@ -189,7 +179,7 @@ def validate(v: Vocabulary) -> list[Finding]:
             for t in c.relations.get(fld, []):
                 if t == c.key:
                     F.append(_f("VT-REF-SELF", c, prop))
-                elif v.version == "v8" and not any_id_re.match(t):
+                elif v.version == "v8" and not LOCAL_NAME_RE.match(t):
                     F.append(_f("VT-REF-FORMAT", c, f"{prop} = {t!r}"))
                 elif t not in by_key:
                     F.append(_f("VT-REF-DANGLING", c, f"{prop} -> {t}"))

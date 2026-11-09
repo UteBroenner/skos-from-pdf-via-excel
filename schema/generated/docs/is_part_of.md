@@ -64,7 +64,7 @@ URI: [xkos:isPartOf](http://rdf-vocabulary.ddialliance.org/xkos#isPartOf)
 | excel_column | V |
 | excel_name | er_del_av |
 | requirement | valgfri |
-| excel_value | identifier |
+| excel_value | concept name (column B) |
 
 
 
@@ -104,7 +104,7 @@ annotations:
     value: valgfri
   excel_value:
     tag: excel_value
-    value: identifier
+    value: concept name (column B)
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: xkos:isPartOf

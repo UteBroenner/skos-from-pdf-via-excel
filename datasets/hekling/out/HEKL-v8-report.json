@@ -1,13 +1,19 @@
 {
  "file": "HEKL-v8.xlsx",
  "version": "v8",
- "kortnavn": "HEKL",
+ "kortnavn": "crochet-us",
  "concepts": 77,
  "summary": {
   "errors": 0,
-  "warnings": 0,
+  "warnings": 1,
   "info": 47,
   "by_rule": [
+   {
+    "severity": "warning",
+    "rule": "VT-KORTNAVN",
+    "count": 1,
+    "description": "kortnavn is not 1-4 letters or digits as the template asks"
+   },
    {
     "severity": "info",
     "rule": "VT-LABEL-NOTED",
@@ -26,16 +32,25 @@
   {
    "rule": "VT-URI-LABEL",
    "severity": "info",
-   "key": "HEKL-0057",
+   "key": "CrossedDoubleCrochet2",
    "sheet": "vokabular",
    "row": 81,
    "message": "concept name in column B differs from the CamelCase form of the main-language term, with -<LANG> suffix where the term means another concept in another language (fine if chosen on purpose): CrossedDoubleCrochet2 vs CrossedDoubleCrochet",
    "ref": "S03"
   },
   {
+   "rule": "VT-KORTNAVN",
+   "severity": "warning",
+   "key": null,
+   "sheet": null,
+   "row": null,
+   "message": "kortnavn is not 1-4 letters or digits as the template asks: crochet-us",
+   "ref": "template v8"
+  },
+  {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0028",
+   "key": "CrossedDoubleCrochet",
    "sheet": "vokabular",
    "row": 52,
    "message": "label clash documented in a scope note that names the other concept: crossed double crochet",
@@ -44,7 +59,7 @@
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0057",
+   "key": "CrossedDoubleCrochet2",
    "sheet": "vokabular",
    "row": 81,
    "message": "label clash documented in a scope note that names the other concept: crossed double crochet",
@@ -53,397 +68,397 @@
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0001",
+   "key": "Stitch",
    "sheet": "vokabular",
    "row": 25,
-   "message": "label clash documented in a scope note that names the other concept: 'punto' as pref@es; also HEKL-0046 (alt@es)",
+   "message": "label clash documented in a scope note that names the other concept: 'punto' as pref@es; also StitchPattern (alt@es)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0046",
+   "key": "StitchPattern",
    "sheet": "vokabular",
    "row": 70,
-   "message": "label clash documented in a scope note that names the other concept: 'punto' as alt@es; also HEKL-0001 (pref@es)",
+   "message": "label clash documented in a scope note that names the other concept: 'punto' as alt@es; also Stitch (pref@es)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0001",
+   "key": "DoubleCrochet-ENUS",
+   "sheet": "vokabular",
+   "row": 33,
+   "message": "label clash documented in a scope note that names the other concept: 'st' as alt@nb; also Stitch (alt@en-GB), Stitch (alt@en-US)",
+   "ref": ""
+  },
+  {
+   "rule": "VT-LABEL-NOTED",
+   "severity": "info",
+   "key": "Stitch",
    "sheet": "vokabular",
    "row": 25,
-   "message": "label clash documented in a scope note that names the other concept: 'st' as alt@en-GB, alt@en-US; also HEKL-0009 (alt@nb)",
+   "message": "label clash documented in a scope note that names the other concept: 'st' as alt@en-GB, alt@en-US; also DoubleCrochet-ENUS (alt@nb)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0009",
+   "key": "DoubleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 33,
-   "message": "label clash documented in a scope note that names the other concept: 'st' as alt@nb; also HEKL-0001 (alt@en-GB), HEKL-0001 (alt@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'double crochet' as pref@en-US; also SingleCrochet (pref@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0007",
+   "key": "SingleCrochet",
    "sheet": "vokabular",
    "row": 31,
-   "message": "label clash documented in a scope note that names the other concept: 'double crochet' as pref@en-GB; also HEKL-0009 (pref@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'double crochet' as pref@en-GB; also DoubleCrochet-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0009",
+   "key": "DoubleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 33,
-   "message": "label clash documented in a scope note that names the other concept: 'double crochet' as pref@en-US; also HEKL-0007 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'dc' as alt@en-US; also SingleCrochet (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0007",
+   "key": "SingleCrochet",
    "sheet": "vokabular",
    "row": 31,
-   "message": "label clash documented in a scope note that names the other concept: 'dc' as alt@en-GB; also HEKL-0009 (alt@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'dc' as alt@en-GB; also DoubleCrochet-ENUS (alt@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0009",
+   "key": "DoubleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 33,
-   "message": "label clash documented in a scope note that names the other concept: 'dc' as alt@en-US; also HEKL-0007 (alt@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'treble crochet' as pref@en-GB; also TrebleCrochet-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0009",
+   "key": "TrebleCrochet-ENUS",
+   "sheet": "vokabular",
+   "row": 34,
+   "message": "label clash documented in a scope note that names the other concept: 'treble crochet' as pref@en-US; also DoubleCrochet-ENUS (pref@en-GB)",
+   "ref": ""
+  },
+  {
+   "rule": "VT-LABEL-NOTED",
+   "severity": "info",
+   "key": "DoubleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 33,
-   "message": "label clash documented in a scope note that names the other concept: 'treble crochet' as pref@en-GB; also HEKL-0010 (pref@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'tr' as alt@en-GB; also TrebleCrochet-ENUS (alt@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0010",
+   "key": "TrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 34,
-   "message": "label clash documented in a scope note that names the other concept: 'treble crochet' as pref@en-US; also HEKL-0009 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'tr' as alt@en-US; also DoubleCrochet-ENUS (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0009",
-   "sheet": "vokabular",
-   "row": 33,
-   "message": "label clash documented in a scope note that names the other concept: 'tr' as alt@en-GB; also HEKL-0010 (alt@en-US)",
-   "ref": ""
-  },
-  {
-   "rule": "VT-LABEL-NOTED",
-   "severity": "info",
-   "key": "HEKL-0010",
-   "sheet": "vokabular",
-   "row": 34,
-   "message": "label clash documented in a scope note that names the other concept: 'tr' as alt@en-US; also HEKL-0009 (alt@en-GB)",
-   "ref": ""
-  },
-  {
-   "rule": "VT-LABEL-NOTED",
-   "severity": "info",
-   "key": "HEKL-0010",
-   "sheet": "vokabular",
-   "row": 34,
-   "message": "label clash documented in a scope note that names the other concept: 'double treble crochet' as pref@en-GB; also HEKL-0011 (pref@en-US)",
-   "ref": ""
-  },
-  {
-   "rule": "VT-LABEL-NOTED",
-   "severity": "info",
-   "key": "HEKL-0011",
+   "key": "DoubleTrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 35,
-   "message": "label clash documented in a scope note that names the other concept: 'double treble crochet' as pref@en-US; also HEKL-0010 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'double treble crochet' as pref@en-US; also TrebleCrochet-ENUS (pref@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0010",
+   "key": "TrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 34,
-   "message": "label clash documented in a scope note that names the other concept: 'dtr' as alt@en-GB; also HEKL-0011 (alt@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'double treble crochet' as pref@en-GB; also DoubleTrebleCrochet-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0011",
+   "key": "DoubleTrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 35,
-   "message": "label clash documented in a scope note that names the other concept: 'dtr' as alt@en-US; also HEKL-0010 (alt@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'dtr' as alt@en-US; also TrebleCrochet-ENUS (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0013",
+   "key": "TrebleCrochet-ENUS",
+   "sheet": "vokabular",
+   "row": 34,
+   "message": "label clash documented in a scope note that names the other concept: 'dtr' as alt@en-GB; also DoubleTrebleCrochet-ENUS (alt@en-US)",
+   "ref": ""
+  },
+  {
+   "rule": "VT-LABEL-NOTED",
+   "severity": "info",
+   "key": "FrontPostDoubleCrochet",
    "sheet": "vokabular",
    "row": 37,
-   "message": "label clash documented in a scope note that names the other concept: 'front post treble crochet' as pref@en-GB; also HEKL-0063 (pref@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'front post treble crochet' as pref@en-GB; also FrontPostTrebleCrochet-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0063",
+   "key": "FrontPostTrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 87,
-   "message": "label clash documented in a scope note that names the other concept: 'front post treble crochet' as pref@en-US; also HEKL-0013 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'front post treble crochet' as pref@en-US; also FrontPostDoubleCrochet (pref@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0013",
+   "key": "FrontPostDoubleCrochet",
    "sheet": "vokabular",
    "row": 37,
-   "message": "label clash documented in a scope note that names the other concept: 'fptr' as alt@en-GB; also HEKL-0063 (alt@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'fptr' as alt@en-GB; also FrontPostTrebleCrochet-ENUS (alt@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0063",
+   "key": "FrontPostTrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 87,
-   "message": "label clash documented in a scope note that names the other concept: 'fptr' as alt@en-US; also HEKL-0013 (alt@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'fptr' as alt@en-US; also FrontPostDoubleCrochet (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0019",
+   "key": "DoubleCrochetTwoTogether-ENUS",
+   "sheet": "vokabular",
+   "row": 44,
+   "message": "label clash documented in a scope note that names the other concept: 'double crochet two together' as pref@en-US; also SingleCrochetTwoTogether (pref@en-GB)",
+   "ref": ""
+  },
+  {
+   "rule": "VT-LABEL-NOTED",
+   "severity": "info",
+   "key": "SingleCrochetTwoTogether",
    "sheet": "vokabular",
    "row": 43,
-   "message": "label clash documented in a scope note that names the other concept: 'double crochet two together' as pref@en-GB; also HEKL-0020 (pref@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'double crochet two together' as pref@en-GB; also DoubleCrochetTwoTogether-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0020",
+   "key": "DoubleCrochetTwoTogether-ENUS",
    "sheet": "vokabular",
    "row": 44,
-   "message": "label clash documented in a scope note that names the other concept: 'double crochet two together' as pref@en-US; also HEKL-0019 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'dc2tog' as alt@en-US; also SingleCrochetTwoTogether (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0019",
+   "key": "SingleCrochetTwoTogether",
    "sheet": "vokabular",
    "row": 43,
-   "message": "label clash documented in a scope note that names the other concept: 'dc2tog' as alt@en-GB; also HEKL-0020 (alt@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'dc2tog' as alt@en-GB; also DoubleCrochetTwoTogether-ENUS (alt@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0020",
+   "key": "DoubleCrochetTwoTogether-ENUS",
    "sheet": "vokabular",
    "row": 44,
-   "message": "label clash documented in a scope note that names the other concept: 'dc2tog' as alt@en-US; also HEKL-0019 (alt@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'treble crochet two together' as pref@en-GB; also TrebleCrochetTwoTogether-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0020",
-   "sheet": "vokabular",
-   "row": 44,
-   "message": "label clash documented in a scope note that names the other concept: 'treble crochet two together' as pref@en-GB; also HEKL-0040 (pref@en-US)",
-   "ref": ""
-  },
-  {
-   "rule": "VT-LABEL-NOTED",
-   "severity": "info",
-   "key": "HEKL-0040",
+   "key": "TrebleCrochetTwoTogether-ENUS",
    "sheet": "vokabular",
    "row": 64,
-   "message": "label clash documented in a scope note that names the other concept: 'treble crochet two together' as pref@en-US; also HEKL-0020 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'treble crochet two together' as pref@en-US; also DoubleCrochetTwoTogether-ENUS (pref@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0020",
+   "key": "DoubleCrochetTwoTogether-ENUS",
    "sheet": "vokabular",
    "row": 44,
-   "message": "label clash documented in a scope note that names the other concept: 'tr2tog' as alt@en-GB; also HEKL-0040 (alt@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'tr2tog' as alt@en-GB; also TrebleCrochetTwoTogether-ENUS (alt@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0040",
+   "key": "TrebleCrochetTwoTogether-ENUS",
    "sheet": "vokabular",
    "row": 64,
-   "message": "label clash documented in a scope note that names the other concept: 'tr2tog' as alt@en-US; also HEKL-0020 (alt@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'tr2tog' as alt@en-US; also DoubleCrochetTwoTogether-ENUS (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0028",
+   "key": "CrossedDoubleCrochet",
    "sheet": "vokabular",
    "row": 52,
-   "message": "label clash documented in a scope note that names the other concept: 'crossed treble crochet' as pref@en-GB; also HEKL-0057 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'crossed treble crochet' as pref@en-GB; also CrossedDoubleCrochet2 (pref@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0057",
+   "key": "CrossedDoubleCrochet2",
    "sheet": "vokabular",
    "row": 81,
-   "message": "label clash documented in a scope note that names the other concept: 'crossed treble crochet' as pref@en-GB; also HEKL-0028 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'crossed treble crochet' as pref@en-GB; also CrossedDoubleCrochet (pref@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0031",
-   "sheet": "vokabular",
-   "row": 55,
-   "message": "label clash documented in a scope note that names the other concept: 'vuelta' as alt@es; also HEKL-0032 (pref@es)",
-   "ref": ""
-  },
-  {
-   "rule": "VT-LABEL-NOTED",
-   "severity": "info",
-   "key": "HEKL-0032",
+   "key": "Round",
    "sheet": "vokabular",
    "row": 56,
-   "message": "label clash documented in a scope note that names the other concept: 'vuelta' as pref@es; also HEKL-0031 (alt@es)",
+   "message": "label clash documented in a scope note that names the other concept: 'vuelta' as pref@es; also Row (alt@es)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0039",
+   "key": "Row",
+   "sheet": "vokabular",
+   "row": 55,
+   "message": "label clash documented in a scope note that names the other concept: 'vuelta' as alt@es; also Round (pref@es)",
+   "ref": ""
+  },
+  {
+   "rule": "VT-LABEL-NOTED",
+   "severity": "info",
+   "key": "DoubleCrochetThreeTogether-ENUS",
+   "sheet": "vokabular",
+   "row": 66,
+   "message": "label clash documented in a scope note that names the other concept: 'double crochet three together' as pref@en-US; also SingleCrochetThreeTogether (pref@en-GB)",
+   "ref": ""
+  },
+  {
+   "rule": "VT-LABEL-NOTED",
+   "severity": "info",
+   "key": "SingleCrochetThreeTogether",
    "sheet": "vokabular",
    "row": 63,
-   "message": "label clash documented in a scope note that names the other concept: 'double crochet three together' as pref@en-GB; also HEKL-0042 (pref@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'double crochet three together' as pref@en-GB; also DoubleCrochetThreeTogether-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0042",
+   "key": "DoubleCrochetThreeTogether-ENUS",
    "sheet": "vokabular",
    "row": 66,
-   "message": "label clash documented in a scope note that names the other concept: 'double crochet three together' as pref@en-US; also HEKL-0039 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'dc3tog' as alt@en-US; also SingleCrochetThreeTogether (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0039",
+   "key": "SingleCrochetThreeTogether",
    "sheet": "vokabular",
    "row": 63,
-   "message": "label clash documented in a scope note that names the other concept: 'dc3tog' as alt@en-GB; also HEKL-0042 (alt@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'dc3tog' as alt@en-GB; also DoubleCrochetThreeTogether-ENUS (alt@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0042",
+   "key": "DoubleCrochetThreeTogether-ENUS",
    "sheet": "vokabular",
    "row": 66,
-   "message": "label clash documented in a scope note that names the other concept: 'dc3tog' as alt@en-US; also HEKL-0039 (alt@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'treble crochet three together' as pref@en-GB; also TrebleCrochetThreeTogether-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0041",
+   "key": "TrebleCrochetThreeTogether-ENUS",
    "sheet": "vokabular",
    "row": 65,
-   "message": "label clash documented in a scope note that names the other concept: 'treble crochet three together' as pref@en-US; also HEKL-0042 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'treble crochet three together' as pref@en-US; also DoubleCrochetThreeTogether-ENUS (pref@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0042",
+   "key": "DoubleCrochetThreeTogether-ENUS",
    "sheet": "vokabular",
    "row": 66,
-   "message": "label clash documented in a scope note that names the other concept: 'treble crochet three together' as pref@en-GB; also HEKL-0041 (pref@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'tr3tog' as alt@en-GB; also TrebleCrochetThreeTogether-ENUS (alt@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0041",
+   "key": "TrebleCrochetThreeTogether-ENUS",
    "sheet": "vokabular",
    "row": 65,
-   "message": "label clash documented in a scope note that names the other concept: 'tr3tog' as alt@en-US; also HEKL-0042 (alt@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'tr3tog' as alt@en-US; also DoubleCrochetThreeTogether-ENUS (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0042",
-   "sheet": "vokabular",
-   "row": 66,
-   "message": "label clash documented in a scope note that names the other concept: 'tr3tog' as alt@en-GB; also HEKL-0041 (alt@en-US)",
-   "ref": ""
-  },
-  {
-   "rule": "VT-LABEL-NOTED",
-   "severity": "info",
-   "key": "HEKL-0044",
+   "key": "FrontPostDoubleTrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 68,
-   "message": "label clash documented in a scope note that names the other concept: 'front post double treble crochet' as pref@en-US; also HEKL-0063 (pref@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'front post double treble crochet' as pref@en-US; also FrontPostTrebleCrochet-ENUS (pref@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0063",
+   "key": "FrontPostTrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 87,
-   "message": "label clash documented in a scope note that names the other concept: 'front post double treble crochet' as pref@en-GB; also HEKL-0044 (pref@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'front post double treble crochet' as pref@en-GB; also FrontPostDoubleTrebleCrochet-ENUS (pref@en-US)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0044",
+   "key": "FrontPostDoubleTrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 68,
-   "message": "label clash documented in a scope note that names the other concept: 'fpdtr' as alt@en-US; also HEKL-0063 (alt@en-GB)",
+   "message": "label clash documented in a scope note that names the other concept: 'fpdtr' as alt@en-US; also FrontPostTrebleCrochet-ENUS (alt@en-GB)",
    "ref": ""
   },
   {
    "rule": "VT-LABEL-NOTED",
    "severity": "info",
-   "key": "HEKL-0063",
+   "key": "FrontPostTrebleCrochet-ENUS",
    "sheet": "vokabular",
    "row": 87,
-   "message": "label clash documented in a scope note that names the other concept: 'fpdtr' as alt@en-GB; also HEKL-0044 (alt@en-US)",
+   "message": "label clash documented in a scope note that names the other concept: 'fpdtr' as alt@en-GB; also FrontPostDoubleTrebleCrochet-ENUS (alt@en-US)",
    "ref": ""
   }
  ]

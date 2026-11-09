@@ -181,8 +181,8 @@
                     ]
                 },
                 "identifier": {
-                    "description": "Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID.",
-                    "pattern": "^[A-Za-z0-9]{1,4}-\\d{4}$",
+                    "description": "<kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column A). Relations in Excel use the concept name.",
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$",
                     "type": "string"
                 },
                 "in_scheme": {
@@ -403,7 +403,7 @@
                     ]
                 },
                 "kortnavn": {
-                    "description": "Short name of the vocabulary, max 4 letters or digits (cell B12).",
+                    "description": "Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14).",
                     "pattern": "^[A-Za-z0-9]{1,4}$",
                     "type": "string"
                 },
@@ -481,7 +481,7 @@
             ]
         },
         "kortnavn": {
-            "description": "Short name of the vocabulary, max 4 letters or digits (cell B12).",
+            "description": "Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14).",
             "pattern": "^[A-Za-z0-9]{1,4}$",
             "type": "string"
         },

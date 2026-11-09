@@ -132,7 +132,7 @@ class ConceptScheme(ConfiguredBaseModel):
                          'excel_value': {'tag': 'excel_value',
                                          'value': 'CamelCase concept name only'}},
          'domain_of': ['ConceptScheme', 'Concept']} })
-    kortnavn: str = Field(default=..., description="""Short name of the vocabulary, max 4 letters or digits (cell B12).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B14'}},
+    kortnavn: str = Field(default=..., description="""Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B14'}},
          'domain_of': ['ConceptScheme'],
          'slot_uri': 'svv:kortnavn'} })
     title: str = Field(default=..., json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B15'}},
@@ -181,7 +181,7 @@ class Concept(ConfiguredBaseModel):
                          'excel_value': {'tag': 'excel_value',
                                          'value': 'CamelCase concept name only'}},
          'domain_of': ['ConceptScheme', 'Concept']} })
-    identifier: str = Field(default=..., description="""Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'A'},
+    identifier: str = Field(default=..., description="""<kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column A). Relations in Excel use the concept name.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'A'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'intern_identifikator'},
                          'requirement': {'tag': 'requirement',
@@ -309,20 +309,23 @@ class Concept(ConfiguredBaseModel):
          'slot_uri': 'skos:hiddenLabel'} })
     broader: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'U'},
                          'excel_name': {'tag': 'excel_name', 'value': 'har_overbegrep'},
-                         'excel_value': {'tag': 'excel_value', 'value': 'identifier'},
+                         'excel_value': {'tag': 'excel_value',
+                                         'value': 'concept name (column B)'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'}},
          'domain_of': ['Concept'],
          'slot_uri': 'skos:broader'} })
     is_part_of: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'V'},
                          'excel_name': {'tag': 'excel_name', 'value': 'er_del_av'},
-                         'excel_value': {'tag': 'excel_value', 'value': 'identifier'},
+                         'excel_value': {'tag': 'excel_value',
+                                         'value': 'concept name (column B)'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'}},
          'domain_of': ['Concept'],
          'slot_uri': 'xkos:isPartOf'} })
     related: Optional[list[str]] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'W'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'er_relatert_til'},
-                         'excel_value': {'tag': 'excel_value', 'value': 'identifier'},
+                         'excel_value': {'tag': 'excel_value',
+                                         'value': 'concept name (column B)'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
                          'separator': {'tag': 'separator', 'value': ','}},
          'domain_of': ['Concept'],
@@ -506,7 +509,7 @@ class Concept(ConfiguredBaseModel):
 
     @field_validator('identifier')
     def pattern_identifier(cls, v):
-        pattern=re.compile(r"^[A-Za-z0-9]{1,4}-\d{4}$")
+        pattern=re.compile(r"^[A-Za-z0-9][A-Za-z0-9-]*$")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):

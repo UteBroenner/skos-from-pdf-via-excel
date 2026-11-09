@@ -180,7 +180,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [uri](uri.md) | 1 <br/> [uri](uri.md) | Concept or scheme URI | direct |
-| [identifier](identifier.md) | 1 <br/> [String](String.md) | Internal ID <kortnavn>-NNNN | direct |
+| [identifier](identifier.md) | 1 <br/> [String](String.md) | <kortnavn>-<concept name>, e | direct |
 | [pref_label_nb](pref_label_nb.md) | 0..1 <br/> [String](String.md) | Recommended term, bokmål | direct |
 | [pref_label_en](pref_label_en.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [pref_label_nn](pref_label_nn.md) | 0..1 <br/> [String](String.md) | Obligatory in the template, but left empty by extraction for the expert (S06) | direct |
@@ -392,7 +392,8 @@ attributes:
       requirement:
         tag: requirement
         value: obligatorisk
-    description: Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID.
+    description: <kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column
+      A). Relations in Excel use the concept name.
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: dct:identifier
@@ -401,7 +402,7 @@ attributes:
     - Concept
     range: string
     required: true
-    pattern: ^[A-Za-z0-9]{1,4}-\d{4}$
+    pattern: ^[A-Za-z0-9][A-Za-z0-9-]*$
   pref_label_nb:
     name: pref_label_nb
     annotations:
@@ -784,7 +785,7 @@ attributes:
         value: valgfri
       excel_value:
         tag: excel_value
-        value: identifier
+        value: concept name (column B)
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: skos:broader
@@ -807,7 +808,7 @@ attributes:
         value: valgfri
       excel_value:
         tag: excel_value
-        value: identifier
+        value: concept name (column B)
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: xkos:isPartOf
@@ -833,7 +834,7 @@ attributes:
         value: ','
       excel_value:
         tag: excel_value
-        value: identifier
+        value: concept name (column B)
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: skos:related

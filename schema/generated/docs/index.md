@@ -46,11 +46,11 @@ Name: svv_vokabular
 | [exact_match](exact_match.md) |  |
 | [example](example.md) |  |
 | [hidden_label](hidden_label.md) | Discouraged term, e |
-| [identifier](identifier.md) | Internal ID <kortnavn>-NNNN |
+| [identifier](identifier.md) | <kortnavn>-<concept name>, e |
 | [in_scheme](in_scheme.md) | Set by the converter from the scheme URI |
 | [is_part_of](is_part_of.md) |  |
 | [issued](issued.md) | System-generated at publication |
-| [kortnavn](kortnavn.md) | Short name of the vocabulary, max 4 letters or digits (cell B12) |
+| [kortnavn](kortnavn.md) | Short name of the vocabulary; the template asks for max 4 letters or digits (... |
 | [main_language](main_language.md) | BCP 47 tag of the language in which every concept must have a prefLabel and a... |
 | [modified](modified.md) |  |
 | [modified_by](modified_by.md) |  |

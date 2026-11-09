@@ -65,7 +65,7 @@ URI: [skos:related](http://www.w3.org/2004/02/skos/core#related)
 | excel_name | er_relatert_til |
 | requirement | valgfri |
 | separator | , |
-| excel_value | identifier |
+| excel_value | concept name (column B) |
 
 
 
@@ -108,7 +108,7 @@ annotations:
     value: ','
   excel_value:
     tag: excel_value
-    value: identifier
+    value: concept name (column B)
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: skos:related

@@ -117,7 +117,7 @@ slots:
     slot_uri: svv:kortnavn
     required: true
     pattern: "^[A-Za-z0-9]{1,4}$"
-    description: Short name of the vocabulary, max 4 letters or digits (cell B12).
+    description: Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14).
     annotations: {excel_cell: B14}
   title:
     slot_uri: dct:title
@@ -160,8 +160,8 @@ slots:
   identifier:
     slot_uri: dct:identifier
     required: true
-    pattern: "^[A-Za-z0-9]{1,4}-\\d{4}$"
-    description: Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID.
+    pattern: "^[A-Za-z0-9][A-Za-z0-9-]*$"
+    description: <kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column A). Relations in Excel use the concept name.
     annotations: {excel_column: A, excel_name: intern_identifikator, requirement: obligatorisk}
   pref_label_nb:
     slot_uri: skos:prefLabel
@@ -293,17 +293,17 @@ slots:
     slot_uri: skos:broader
     range: Concept
     multivalued: true
-    annotations: {excel_column: U, excel_name: har_overbegrep, requirement: valgfri, excel_value: identifier}
+    annotations: {excel_column: U, excel_name: har_overbegrep, requirement: valgfri, excel_value: concept name (column B)}
   is_part_of:
     slot_uri: xkos:isPartOf
     range: Concept
     multivalued: true
-    annotations: {excel_column: V, excel_name: er_del_av, requirement: valgfri, excel_value: identifier}
+    annotations: {excel_column: V, excel_name: er_del_av, requirement: valgfri, excel_value: concept name (column B)}
   related:
     slot_uri: skos:related
     range: Concept
     multivalued: true
-    annotations: {excel_column: W, excel_name: er_relatert_til, requirement: valgfri, separator: ",", excel_value: identifier}
+    annotations: {excel_column: W, excel_name: er_relatert_til, requirement: valgfri, separator: ",", excel_value: concept name (column B)}
   relation_role:
     slot_uri: skosno:relationRole
     in_language: nb

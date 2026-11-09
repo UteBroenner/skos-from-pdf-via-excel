@@ -126,7 +126,8 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
     formula_rows = [r for r in range(first, ws.max_row + 1)
                     if any(isinstance(c.value, str) and c.value.startswith("=") for c in ws[r])]
     table_ends = [int(re.search(r"(\d+)$", t.ref).group(1)) for t in ws.tables.values()]
-    last_row = max([r for r in range(first, ws.max_row + 1) if ws.cell(r, 1).value] + formula_rows + table_ends + [first])
+    last_row = max([r for r in range(first, ws.max_row + 1) if ws.cell(r, 1).value or ws.cell(r, 2).value]
+                   + formula_rows + table_ends + [first])
     L = get_column_letter(last_col)
 
     # every table column needs a unique, non-empty header in the technical-name row
@@ -179,32 +180,60 @@ def hide_column(wb, technical_name: str, sheet: str = "vokabular") -> str | None
     return None
 
 
-FINGERPRINT = "endringshash"
+
+HASH_COLUMN = "endringshash"
+GOVERNANCE = {"intern_identifikator", "dato_opprettet", "opprettet_av", "dato_sist_endret", "sist_endret_av", HASH_COLUMN}
 
 
-def ensure_fingerprint_column(wb, sheet: str = "vokabular") -> str:
-    """Add the system column 'endringshash' inside the Excel table (before a trailing 'tier').
-    Returns its column letter."""
+def _ranges(cols: list[int]) -> list[tuple[int, int]]:
+    out = []
+    for c in sorted(cols):
+        if out and c == out[-1][1] + 1:
+            out[-1] = (out[-1][0], c)
+        else:
+            out.append((c, c))
+    return out
+
+
+def apply_formulas(wb, sheet: str = "vokabular") -> dict:
+    """Write the two formula columns for every row of the Excel table:
+
+    - column A (dct:identifier) = <kortnavn>-<concept name>, e.g. N101-Rekkverk
+    - endringshash = TEXTJOIN of the row content (all table columns except ID, created/modified
+      date and person, and the hash itself); Power Automate compares it with the List to find changed rows.
+    The endringshash column is added before a trailing 'tier' if the template has none.
+    """
     ws = wb[sheet]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
-    tech = hdr + 1
-    for c in ws[tech]:
-        if c.value == FINGERPRINT:
-            return c.column_letter
-    used = [c.column for c in ws[hdr] if c.value not in (None, "")]
-    last = max(used)
-    col = last + 1
-    if normalise_header(ws.cell(hdr, last).value) == "tier":
-        width = ws.column_dimensions[get_column_letter(last)].width
-        ws.insert_cols(last, 1)
-        ws.column_dimensions[get_column_letter(last + 1)].width = width or 10
-        col = last
-    ws.cell(hdr, col).value = FINGERPRINT
-    ws.cell(tech, col).value = FINGERPRINT
-    ws.cell(hdr - 3, col).value = "systemgenerert"
-    ws.cell(hdr - 2, col).value = ("SHA-256 av radens innhold (uten ID, datoer og personer); "
-                                   "settes av vocabtool prepare – ikke rediger")
-    for r, src in ((hdr, ws.cell(hdr, 3)), (tech, ws.cell(tech, 3)), (hdr - 3, ws.cell(hdr - 3, 3))):
-        ws.cell(r, col)._style = copy.copy(src._style)
-    ws.column_dimensions[get_column_letter(col)].width = 20
-    return get_column_letter(col)
+    tech, first = hdr + 1, hdr + 2
+    k_row = next(r for r in range(1, hdr) if normalise_header(ws.cell(r, 1).value).startswith("kortnavn"))
+    # make sure the hash column exists, inside the table, before a trailing tier
+    hash_col = next((c.column for c in ws[tech] if c.value == HASH_COLUMN), None)
+    if hash_col is None:
+        last = max(c.column for c in ws[hdr] if c.value not in (None, ""))
+        hash_col = last + 1
+        if normalise_header(ws.cell(hdr, last).value) == "tier":
+            width = ws.column_dimensions[get_column_letter(last)].width
+            ws.insert_cols(last, 1)
+            ws.column_dimensions[get_column_letter(last + 1)].width = width or 10
+            hash_col = last
+        for r, src in ((hdr, ws.cell(hdr, 3)), (tech, ws.cell(tech, 3)), (hdr - 3, ws.cell(hdr - 3, 3))):
+            ws.cell(r, hash_col)._style = copy.copy(src._style)
+        ws.cell(hdr, hash_col).value = HASH_COLUMN
+        ws.cell(tech, hash_col).value = HASH_COLUMN
+        ws.cell(hdr - 3, hash_col).value = "systemgenerert"
+        ws.column_dimensions[get_column_letter(hash_col)].width = 20
+    ws.cell(hdr - 2, hash_col).value = ("formel: radens innhold uten ID, datoer og personer; brukes av Power Automate "
+                                        "for å finne endrede begreper – ikke rediger")
+    ws.cell(hdr - 2, 1).value = "genereres: <kortnavn>-<begrepsnavn>, f.eks. N101-Rekkverk – ikke rediger"
+    t = next(iter(ws.tables.values()))
+    end_col = openpyxl.utils.column_index_from_string(re.match(r"[A-Z]+", t.ref.split(":")[1]).group(0))
+    last_row = int(re.search(r"(\d+)$", t.ref).group(1))
+    content = [c for c in range(1, end_col + 1) if ws.cell(tech, c).value and ws.cell(tech, c).value not in GOVERNANCE]
+    for r in range(first, last_row + 1):
+        parts = ",".join(f"${get_column_letter(a)}{r}:${get_column_letter(b)}{r}" if a != b else f"${get_column_letter(a)}{r}"
+                         for a, b in _ranges(content))
+        ws.cell(r, 1).value = f'=IF(${"B"}{r}="","",$B${k_row}&"-"&$B{r})'
+        ws.cell(r, hash_col).value = f'=IF($B{r}="","",_xlfn.TEXTJOIN("|",FALSE,{parts}))'
+    return {"rows": f"{first}-{last_row}", "hash_column": get_column_letter(hash_col),
+            "hash_covers": ",".join(f"{get_column_letter(a)}:{get_column_letter(b)}" for a, b in _ranges(content))}

@@ -6,7 +6,7 @@ search:
 # Slot: identifier 
 
 
-_Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID._
+_<kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column A). Relations in Excel use the concept name._
 
 
 
@@ -52,7 +52,7 @@ URI: [dct:identifier](http://purl.org/dc/terms/identifier)
 
 | Property | Value |
 | --- | --- |
-| Regex Pattern | `^[A-Za-z0-9]{1,4}-\d{4}$` |
+| Regex Pattern | `^[A-Za-z0-9][A-Za-z0-9-]*$` |
 
 
 
@@ -113,7 +113,8 @@ annotations:
   requirement:
     tag: requirement
     value: obligatorisk
-description: Internal ID <kortnavn>-NNNN. Relations in Excel refer to this ID.
+description: <kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column A).
+  Relations in Excel use the concept name.
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: dct:identifier
@@ -121,7 +122,7 @@ domain_of:
 - Concept
 range: string
 required: true
-pattern: ^[A-Za-z0-9]{1,4}-\d{4}$
+pattern: ^[A-Za-z0-9][A-Za-z0-9-]*$
 
 ```
 </details></div>

@@ -4,9 +4,8 @@
   migrate  <v7.xlsx> --template <v8.xlsx> --out <file.xlsx> [--kortnavn N101]
   rdf      <v8.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
   uri      <v8.xlsx> [--overwrite]        fill empty concept names (column B) from the main-language term
-  fit      <v8.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns
-  prepare  <v8.xlsx>                      generate IDs, convert relations written as names/terms to IDs,
-                                          fill concept names, stretch the table (run after filling in)
+  fit      <v8.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns;
+                                          write the formulas for column A and endringshash
 """
 from __future__ import annotations
 
@@ -64,9 +63,9 @@ def cmd_migrate(a):
         print("fields with no v8 column (not migrated):", ", ".join(r["fields_without_v8_column"]))
     if r["change_note_moved_to_version_notes"]:
         print(f"{r['change_note_moved_to_version_notes']} skos:changeNote values moved to adms:versionNotes")
-    map_path = Path(a.out).with_suffix(".idmap.json")
-    map_path.write_text(json.dumps(r["id_map"], ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"ID map: {map_path}")
+    map_path = Path(a.out).with_suffix(".namemap.json")
+    map_path.write_text(json.dumps(r["name_map"], ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"v7 URI -> v8 name map: {map_path}")
     return 0
 
 
@@ -114,7 +113,7 @@ def cmd_rdf(a):
 def cmd_uri(a):
     import openpyxl
     from .reader import normalise_header
-    from .template_ext import uri_as_value, fit_table
+    from .template_ext import uri_as_value, fit_table, apply_formulas
     from .uri import assign_names, concept_uri
     v = read_workbook(a.workbook)
     names = assign_names(v.concepts, v.label_field, overwrite=a.overwrite, main_lang=v.main_lang)
@@ -126,6 +125,7 @@ def cmd_uri(a):
     for key, name in names.items():
         ws.cell(by_key[key].row, 2).value = name
     fit_table(wb)
+    apply_formulas(wb)
     wb.save(a.workbook)
     print(f"{len(names)} concept names written to column B of {a.workbook}"
           + (f" (URI e.g. {concept_uri(v.scheme_uri, next(iter(names.values())))})" if names and v.scheme_uri else ""))
@@ -139,23 +139,9 @@ def cmd_fit(a):
     from .template_ext import fit_table
     wb = openpyxl.load_workbook(a.workbook)
     r = fit_table(wb)
+    apply_formulas(wb)
     wb.save(a.workbook)
     print(f"{a.workbook}: {r}")
-    return 0
-
-
-def cmd_prepare(a):
-    from .prepare import prepare
-    r = prepare(a.workbook)
-    print(f"{a.workbook}: {r['new_ids']} new IDs, {r['relations_converted']} relation values converted to IDs, "
-          f"{r['new_names']} new concept names, {r['fingerprints_updated']} fingerprints set/updated "
-          f"(column {r['fingerprint_column']}); table {r['table'].get('begrepsliste')}")
-    for key, fld, t in r["unresolved"]:
-        print(f"  not found: {key} {fld} -> {t!r}")
-    for key, fld, t in r["ambiguous"]:
-        print(f"  ambiguous (several concepts): {key} {fld} -> {t!r}")
-    for key, base, name in r["name_collisions"]:
-        print(f"  {key}: name '{base}' taken, used '{name}'")
     return 0
 
 
@@ -167,7 +153,6 @@ def main(argv=None):
     m.add_argument("--out", required=True); m.add_argument("--kortnavn"); m.set_defaults(fn=cmd_migrate)
     r = sub.add_parser("rdf"); r.add_argument("workbook"); r.add_argument("--out", default="out/rdf"); r.set_defaults(fn=cmd_rdf)
     u = sub.add_parser("uri"); u.add_argument("workbook"); u.add_argument("--overwrite", action="store_true"); u.set_defaults(fn=cmd_uri)
-    pr = sub.add_parser("prepare"); pr.add_argument("workbook"); pr.set_defaults(fn=cmd_prepare)
     ft = sub.add_parser("fit"); ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
     a = p.parse_args(argv)
     return a.fn(a)

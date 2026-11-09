@@ -1,9 +1,9 @@
 """Migrate a v7 workbook into the v8 template.
 
-- Assigns IDs <kortnavn>-0001.. in reading order (sheet by sheet, row by row).
+- Column A (dct:identifier) is the template formula <kortnavn>-<concept name>.
 - Keeps the v7 concept name: vok:Rekkverk -> "Rekkverk" in column B (a value, not a formula).
   The full URI is then <ConceptScheme URI>/Rekkverk, e.g. …/vokabular/N101/Rekkverk.
-- Rewrites broader / isPartOf / related from v7 prefixed URIs (vok:X) to IDs.
+- Rewrites broader / isPartOf / related from v7 prefixed URIs (vok:X) to concept names (X).
   Targets not found in the workbook are kept unchanged and reported.
 - Code lists are not migrated.
 - Keeps template formulas (URI, change hash), data validation and hidden rows;
@@ -19,7 +19,7 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 
 from .reader import read_workbook, normalise_header, PROPERTY_MAP, CONTRIBUTOR_FIELDS, RELATION_FIELDS
-from .template_ext import uri_as_value, fit_table
+from .template_ext import uri_as_value, fit_table, apply_formulas
 
 DATE_FIELDS = {"created", "modified", "start_date", "end_date"}
 # v7 fields without a v8 column, and where they go
@@ -45,8 +45,8 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
     if v7.version != "v7":
         raise ValueError(f"{src} is not a v7 workbook (detected {v7.version})")
     kortnavn = kortnavn or v7.kortnavn
-    if not kortnavn or not re.fullmatch(r"[A-Za-z0-9]{1,4}", kortnavn):
-        raise ValueError(f"kortnavn must be 1-4 letters/digits, got {kortnavn!r}; pass --kortnavn")
+    if not kortnavn or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*", kortnavn):
+        raise ValueError(f"kortnavn must be letters, digits or hyphens, got {kortnavn!r}; pass --kortnavn")
 
     wb = openpyxl.load_workbook(template)
     uri_as_value(wb)          # column B holds the URI as a value; hash covers A:AM
@@ -67,7 +67,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
         elif a == "dct:creator" and v7.concepts:
             pass
 
-    id_of = {c.key: f"{kortnavn}-{i:04d}" for i, c in enumerate(v7.concepts, start=1)}
+    name_of = {c.key: c.key.split(":", 1)[-1] for c in v7.concepts}   # vok:Rekkverk -> Rekkverk
     unresolved, fallback_used, dropped = [], 0, set()
 
     # clear example rows (keep template formulas)
@@ -85,16 +85,16 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
                 extra = rec.pop(f7)
                 rec[f8] = f"{rec[f8]} | {extra}" if rec.get(f8) else extra
                 fallback_used += 1
-        rec["identifier"] = id_of[c.key]
-        rec["uri"] = c.key.split(":", 1)[-1]   # vok:Rekkverk -> Rekkverk (column B holds the name only)
+        rec["identifier"] = None                 # column A: template formula <kortnavn>-<name>
+        rec["uri"] = name_of[c.key]              # column B holds the name only
         for fld in RELATION_FIELDS:
             new = []
             for t in c.relations[fld]:
-                if t in id_of:
-                    new.append(id_of[t])
+                if t in name_of:
+                    new.append(name_of[t])
                 else:
-                    new.append(t)
-                    unresolved.append((id_of[c.key], fld, t))
+                    new.append(t.split(":", 1)[-1])
+                    unresolved.append((name_of[c.key], fld, t))
             rec[fld] = ", ".join(new) if new else None
         m = re.fullmatch(r'"([^"]*)"@\w+', (rec.get("status") or "").strip())
         if m:
@@ -138,6 +138,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
                 dv.formula1 = dv.formula1.replace(f"${last_template_row}", f"${n_last}")
 
     fit_table(wb)              # table, formatting and validation cover all rows and columns
+    apply_formulas(wb)         # column A = <kortnavn>-<name>, endringshash
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
     wb.save(dst)
     return {
@@ -146,5 +147,5 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
         "unresolved_relations": unresolved,
         "change_note_moved_to_version_notes": fallback_used,
         "fields_without_v8_column": sorted(dropped),
-        "id_map": id_of,
+        "name_map": name_of,
     }

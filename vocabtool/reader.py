@@ -53,7 +53,7 @@ PROPERTY_MAP = {
     "skosno:dataStructureLabel": "data_structure_label",
     "skosno:valueRange": "value_range",
     "tier": "tier",
-    "endringshash": "fingerprint",      # system column written by vocabtool prepare
+    "endringshash": "change_hash",      # system column, formula over the row content
 }
 # dct:contributor appears twice in v8 (created by / modified by), once in v7.
 CONTRIBUTOR_FIELDS = ["created_by", "modified_by"]
@@ -218,7 +218,7 @@ def read_workbook(path: str | Path) -> Vocabulary:
         columns[ws.title] = {k: openpyxl.utils.get_column_letter(i + 1) for k, i in colmap.items()}
         unmapped[ws.title] = skipped
 
-        key_field = "identifier" if is_v8 else "uri"
+        key_field = "uri"   # v7: vok:Name in column A; v8: concept name in column B (column A is a formula)
         for r_idx, row in enumerate(ws.iter_rows(min_row=first_data, values_only=True), start=first_data):
             rec = {k: as_text(row[i]) if i < len(row) else None for k, i in colmap.items()}
             # a row counts as a concept if it has an ID, a name, or any label / definition (any language)
@@ -234,6 +234,11 @@ def read_workbook(path: str | Path) -> Vocabulary:
         kortnavn = None
     if not kortnavn and meta.get("scheme_uri") and not str(meta["scheme_uri"]).startswith("="):
         kortnavn = str(meta["scheme_uri"]).rstrip("/").rsplit("/", 1)[-1]
+    # v8: column A is the formula <kortnavn>-<name>; files saved by tools have no cached value
+    if version == "v8" and kortnavn:
+        for c in concepts:
+            if not c.fields.get("identifier") and c.fields.get("uri"):
+                c.fields["identifier"] = f"{kortnavn}-{c.fields['uri'].strip()}"
     scheme_uri = as_text(meta.get("scheme_uri"))
     # v8 B1 is a formula; a missing or stale cached value (e.g. ".../<kortnavn>") is rebuilt from kortnavn
     if kortnavn and (not scheme_uri or scheme_uri.startswith("=") or not scheme_uri.rstrip("/").endswith("/" + kortnavn)):

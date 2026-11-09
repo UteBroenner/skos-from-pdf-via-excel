@@ -64,7 +64,7 @@ URI: [skos:broader](http://www.w3.org/2004/02/skos/core#broader)
 | excel_column | U |
 | excel_name | har_overbegrep |
 | requirement | valgfri |
-| excel_value | identifier |
+| excel_value | concept name (column B) |
 
 
 
@@ -104,7 +104,7 @@ annotations:
     value: valgfri
   excel_value:
     tag: excel_value
-    value: identifier
+    value: concept name (column B)
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: skos:broader

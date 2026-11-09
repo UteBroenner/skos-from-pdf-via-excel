@@ -70,7 +70,7 @@ URI: [skos:ConceptScheme](http://www.w3.org/2004/02/skos/core#ConceptScheme)
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [uri](uri.md) | 1 <br/> [uri](uri.md) | Concept or scheme URI | direct |
-| [kortnavn](kortnavn.md) | 1 <br/> [String](String.md) | Short name of the vocabulary, max 4 letters or digits (cell B12) | direct |
+| [kortnavn](kortnavn.md) | 1 <br/> [String](String.md) | Short name of the vocabulary; the template asks for max 4 letters or digits (... | direct |
 | [title](title.md) | 1 <br/> [String](String.md) |  | direct |
 | [main_language](main_language.md) | 0..1 <br/> [String](String.md) | BCP 47 tag of the language in which every concept must have a prefLabel and a... | direct |
 | [creator](creator.md) | 0..1 <br/> [String](String.md) |  | direct |
@@ -183,7 +183,8 @@ attributes:
       excel_cell:
         tag: excel_cell
         value: B14
-    description: Short name of the vocabulary, max 4 letters or digits (cell B12).
+    description: Short name of the vocabulary; the template asks for max 4 letters
+      or digits (cell B14).
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: svv:kortnavn

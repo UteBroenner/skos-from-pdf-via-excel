@@ -6,7 +6,7 @@ search:
 # Slot: kortnavn 
 
 
-_Short name of the vocabulary, max 4 letters or digits (cell B12)._
+_Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14)._
 
 
 
@@ -105,7 +105,8 @@ annotations:
   excel_cell:
     tag: excel_cell
     value: B14
-description: Short name of the vocabulary, max 4 letters or digits (cell B12).
+description: Short name of the vocabulary; the template asks for max 4 letters or
+  digits (cell B14).
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: svv:kortnavn
