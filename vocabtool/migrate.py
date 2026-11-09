@@ -70,10 +70,12 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
     id_of = {c.key: f"{kortnavn}-{i:04d}" for i, c in enumerate(v7.concepts, start=1)}
     unresolved, fallback_used, dropped = [], 0, set()
 
-    # clear example rows
+    # clear example rows (keep template formulas)
     for r in range(first, last_template_row + 1):
         for f, col in cols.items():
-            ws.cell(r, col).value = None
+            v = ws.cell(r, col).value
+            if not (isinstance(v, str) and v.startswith("=")):
+                ws.cell(r, col).value = None
 
     for i, c in enumerate(v7.concepts):
         r = first + i
@@ -110,6 +112,9 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
                     val = datetime.fromisoformat(val[:10])
                 except ValueError:
                     pass
+            cur = ws.cell(r, cols[f]).value
+            if isinstance(cur, str) and cur.startswith("="):
+                continue           # template formula (e.g. opprettet_av = dct:creator) wins
             ws.cell(r, cols[f]).value = val
             if f in DATE_FIELDS and isinstance(val, datetime):
                 ws.cell(r, cols[f]).number_format = "yyyy-mm-dd"
@@ -117,10 +122,12 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
     # extend formulas (URI col B, hash col) and validations beyond template rows
     n_last = first + len(v7.concepts) - 1
     hash_col = next((c.column for c in ws[hdr + 1] if normalise_header(c.value) == "endringshash"), None)
+    # copy every formula of the last template row (change hash, opprettet_av = dct:creator, …) to the new rows
+    template_formulas = {c.column: c.value for c in ws[last_template_row]
+                         if isinstance(c.value, str) and c.value.startswith("=")}
     for r in range(last_template_row + 1, n_last + 1):
-        if hash_col:
-            ws.cell(r, hash_col).value = (f'=IF(ISBLANK(vokabular!$A{r}),"",_xlfn.TEXTJOIN("|",FALSE,'
-                                          f'vokabular!$A{r}:$AM{r}))')
+        for col, f in template_formulas.items():
+            ws.cell(r, col).value = re.sub(rf"(\$?[A-Z]{{1,3}}){last_template_row}\b", rf"\g<1>{r}", f)
     if n_last > last_template_row:
         for dv in ws.data_validations.dataValidation:
             new_ranges = []

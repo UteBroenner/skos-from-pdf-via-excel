@@ -14,7 +14,8 @@ import openpyxl
 # Normalised header (property) -> canonical field name.
 # Headers are normalised by removing whitespace and any "(separator=...)" suffix.
 PROPERTY_MAP = {
-    "URI": "uri",                       # v7: prefixed name (vok:X) is the row key; v8: formula
+    "URI": "uri",                       # v7: prefixed name (vok:X) is the row key; v8: concept name
+    "skos:Concept": "uri",              # v8 (owner's layout): column B header for the concept name
     "dct:identifier": "identifier",     # v8: row key (kortnavn-0001); v7: usually empty
     "skos:prefLabel@nb": "label_nb",
     "skos:prefLabel@en": "label_en",
@@ -92,7 +93,7 @@ def label_fields(fields) -> dict[str, str]:
 
 def normalise_header(value) -> str:
     s = re.sub(r"\s+", "", str(value or ""))
-    return s.split("(")[0]
+    return s.split("(")[0].rstrip("?")
 
 
 def split_multi(value) -> list[str]:

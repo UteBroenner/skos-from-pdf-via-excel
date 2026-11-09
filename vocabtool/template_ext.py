@@ -164,3 +164,14 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
     for dv in ws.data_validations.dataValidation:
         dv.sqref = openpyxl.worksheet.cell_range.MultiCellRange(stretch(str(dv.sqref)))
     return out
+
+
+def hide_column(wb, technical_name: str, sheet: str = "vokabular") -> str | None:
+    """Hide the column whose technical name (row below the property header) matches, e.g. 'opprettet_av'."""
+    ws = wb[sheet]
+    hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
+    for c in ws[hdr + 1]:
+        if c.value == technical_name:
+            ws.column_dimensions[c.column_letter].hidden = True
+            return c.column_letter
+    return None
