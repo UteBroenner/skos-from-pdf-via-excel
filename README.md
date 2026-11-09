@@ -67,6 +67,14 @@ Existing names are kept, and `--overwrite` regenerates all of them. Names whose 
 another language get a language suffix (`DoubleCrochet-ENUS`). If two concepts would get the same name,
 the second gets a number (`Name2`) and the command lists it, so you can choose a better name.
 
+Stretch the Excel table `begrepsliste`, the formatting (wrapped, top-aligned), conditional formatting and
+data validation to all rows and columns in use. Power Automate reads only what is inside the table.
+`migrate` and `uri` do this automatically:
+
+```bash
+python -m vocabtool fit path/to/workbook.xlsx
+```
+
 Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `schema/README.md`):
 
 ```bash

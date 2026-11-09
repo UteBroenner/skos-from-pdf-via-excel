@@ -19,7 +19,7 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 
 from .reader import read_workbook, normalise_header, PROPERTY_MAP, CONTRIBUTOR_FIELDS, RELATION_FIELDS
-from .template_ext import uri_as_value
+from .template_ext import uri_as_value, fit_table
 
 DATE_FIELDS = {"created", "modified", "start_date", "end_date"}
 # v7 fields without a v8 column, and where they go
@@ -130,6 +130,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
             if dv.formula1 and f"${last_template_row}" in dv.formula1:
                 dv.formula1 = dv.formula1.replace(f"${last_template_row}", f"${n_last}")
 
+    fit_table(wb)              # table, formatting and validation cover all rows and columns
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
     wb.save(dst)
     return {

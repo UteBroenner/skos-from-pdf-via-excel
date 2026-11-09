@@ -4,6 +4,7 @@
   migrate  <v7.xlsx> --template <v8.xlsx> --out <file.xlsx> [--kortnavn N101]
   rdf      <v8.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
   uri      <v8.xlsx> [--overwrite]        fill empty concept names (column B) from the main-language term
+  fit      <v8.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns
 """
 from __future__ import annotations
 
@@ -111,7 +112,7 @@ def cmd_rdf(a):
 def cmd_uri(a):
     import openpyxl
     from .reader import normalise_header
-    from .template_ext import uri_as_value
+    from .template_ext import uri_as_value, fit_table
     from .uri import assign_names, concept_uri
     v = read_workbook(a.workbook)
     names = assign_names(v.concepts, v.label_field, overwrite=a.overwrite, main_lang=v.main_lang)
@@ -122,11 +123,22 @@ def cmd_uri(a):
     by_key = v.by_key()
     for key, name in names.items():
         ws.cell(by_key[key].row, 2).value = name
+    fit_table(wb)
     wb.save(a.workbook)
     print(f"{len(names)} concept names written to column B of {a.workbook}"
           + (f" (URI e.g. {concept_uri(v.scheme_uri, next(iter(names.values())))})" if names and v.scheme_uri else ""))
     for key, base, name in collisions:
         print(f"  {key}: '{base}' is taken, used '{name}'; choose a better name in column B")
+    return 0
+
+
+def cmd_fit(a):
+    import openpyxl
+    from .template_ext import fit_table
+    wb = openpyxl.load_workbook(a.workbook)
+    r = fit_table(wb)
+    wb.save(a.workbook)
+    print(f"{a.workbook}: {r}")
     return 0
 
 
@@ -138,5 +150,6 @@ def main(argv=None):
     m.add_argument("--out", required=True); m.add_argument("--kortnavn"); m.set_defaults(fn=cmd_migrate)
     r = sub.add_parser("rdf"); r.add_argument("workbook"); r.add_argument("--out", default="out/rdf"); r.set_defaults(fn=cmd_rdf)
     u = sub.add_parser("uri"); u.add_argument("workbook"); u.add_argument("--overwrite", action="store_true"); u.set_defaults(fn=cmd_uri)
+    ft = sub.add_parser("fit"); ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
     a = p.parse_args(argv)
     return a.fn(a)

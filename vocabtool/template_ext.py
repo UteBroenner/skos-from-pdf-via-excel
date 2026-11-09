@@ -89,3 +89,62 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
     wb.save(dst)
     return added
+
+
+def fit_table(wb, sheet: str = "vokabular") -> dict:
+    """Stretch the Excel table, formatting, conditional formatting and data validation
+    to the last used row (ID in column A) and the last header column.
+
+    Power Automate reads only rows and columns inside the table, so rows below the
+    template's 102 prepared rows, and columns added after AN (tier, language extension),
+    must be inside it.
+    """
+    from copy import copy as _copy
+    from openpyxl.styles import Alignment
+    from openpyxl.worksheet.table import TableColumn
+    from openpyxl.formatting.formatting import ConditionalFormattingList
+
+    ws = wb[sheet]
+    hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
+    tech, first = hdr + 1, hdr + 2
+    last_col = max(c.column for c in ws[hdr] if c.value not in (None, ""))
+    last_row = max([r for r in range(first, ws.max_row + 1) if ws.cell(r, 1).value] or [first])
+    L = get_column_letter(last_col)
+
+    # every table column needs a unique, non-empty header in the technical-name row
+    for col in range(1, last_col + 1):
+        if not ws.cell(tech, col).value:
+            ws.cell(tech, col).value = normalise_header(ws.cell(hdr, col).value).split(":")[-1].replace("@", "_") or f"kolonne_{col}"
+            ws.cell(tech, col)._style = _copy(ws.cell(tech, 3)._style)
+
+    tables = list(ws.tables.values())
+    out = {"rows": f"{first}-{last_row}", "last_column": L}
+    for t in tables:
+        start = t.ref.split(":")[0]
+        t.ref = f"{start}:{L}{last_row}"
+        if t.autoFilter is not None:
+            t.autoFilter.ref = t.ref
+        t.tableColumns = [TableColumn(id=i + 1, name=str(ws.cell(tech, col).value))
+                          for i, col in enumerate(range(1, last_col + 1))]
+        out[t.name] = t.ref
+
+    # formatting: top-aligned, wrapped text in every data cell
+    for r in range(first, last_row + 1):
+        for col in range(1, last_col + 1):
+            c = ws.cell(r, col)
+            al = _copy(c.alignment)
+            c.alignment = Alignment(horizontal=al.horizontal, vertical="top", wrap_text=True)
+
+    # conditional formatting and data validation down to the last row
+    def stretch(ref: str) -> str:
+        return " ".join(re.sub(r"(\$?[A-Z]+\$?)(\d+)$", lambda m: m.group(1) + str(max(int(m.group(2)), last_row)), part)
+                        if ":" in part else part for part in ref.split())
+    old = ws.conditional_formatting
+    new = ConditionalFormattingList()
+    for cf in old:
+        for rule in cf.rules:
+            new.add(stretch(str(cf.sqref)), rule)
+    ws.conditional_formatting = new
+    for dv in ws.data_validations.dataValidation:
+        dv.sqref = openpyxl.worksheet.cell_range.MultiCellRange(stretch(str(dv.sqref)))
+    return out
