@@ -138,7 +138,7 @@ def cmd_uri(a):
 
 def cmd_fit(a):
     import openpyxl
-    from .template_ext import fit_table
+    from .template_ext import fit_table, apply_formulas
     wb = openpyxl.load_workbook(a.workbook)
     r = fit_table(wb)
     apply_formulas(wb)

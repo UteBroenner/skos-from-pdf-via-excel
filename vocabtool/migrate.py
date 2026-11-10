@@ -26,6 +26,18 @@ DATE_FIELDS = {"created", "modified", "start_date", "end_date"}
 FALLBACK = {"change_note": "version_notes"}
 
 
+_PREFIX_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_-]*:(?=\S)")
+
+
+def _strip_prefix(key: str) -> str:
+    """vok:Rekkverk -> Rekkverk. Text with a colon followed by a space ("Skadekonsekvens for: bæreevne")
+    is not a prefixed name and is kept whole; so are full URIs (http://...)."""
+    key = key.strip()
+    if key.lower().startswith(("http://", "https://", "urn:")):
+        return key
+    return _PREFIX_RE.sub("", key, count=1)
+
+
 def _v8_columns(ws, hdr_row):
     cols, contrib = {}, 0
     for cell in ws[hdr_row]:
@@ -67,7 +79,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
         elif a == "dct:creator" and v7.concepts:
             pass
 
-    name_of = {c.key: c.key.split(":", 1)[-1] for c in v7.concepts}   # vok:Rekkverk -> Rekkverk
+    name_of = {c.key: _strip_prefix(c.key) for c in v7.concepts}   # vok:Rekkverk -> Rekkverk
     unresolved, fallback_used, dropped = [], 0, set()
 
     # clear example rows (keep template formulas)
@@ -93,7 +105,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
                 if t in name_of:
                     new.append(name_of[t])
                 else:
-                    new.append(t.split(":", 1)[-1])
+                    new.append(_strip_prefix(t))
                     unresolved.append((name_of[c.key], fld, t))
             rec[fld] = ", ".join(new) if new else None
         m = re.fullmatch(r'"([^"]*)"@\w+', (rec.get("status") or "").strip())
