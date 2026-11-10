@@ -10,6 +10,8 @@ that might be used further in a simple information model.
 After review by technical experts these spreadsheets can be converted to RDF for machine readability and further
 development into ontologies. 
 
+Current state, decisions and next steps: [`docs/status.md`](docs/status.md).
+
 ## Repository contents
 
 | Folder | Content | Status |
