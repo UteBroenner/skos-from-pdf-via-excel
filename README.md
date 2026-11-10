@@ -131,6 +131,36 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
   `endringshash` (formula: `TEXTJOIN` of the row content without ID, dates and persons) is the last column inside
   the table, and `tier` is the last column, outside it. `vocabtool fit` writes both formulas for all table rows.
 
+## OWL import
+
+Add the classes of OWL ontologies (Turtle) as concepts to a v8 workbook. Classes that are already concepts are merged:
+
+```bash
+python -m vocabtool owl-import V440-v8.xlsx v440-owl.ttl v440-brudata-owl.ttl --out V440-v8-owl.xlsx --contact datagovernance@vegvesen.no
+```
+
+Start a new vocabulary from the empty template, and copy definitions from another vocabulary where a label matches:
+
+```bash
+python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-owl.ttl --out V441-v8.xlsx --kortnavn V441 --title "Hb V441" --link V440-v8-owl.xlsx
+```
+
+- **Merge:** a class whose Norwegian label (or an alt label) is already in the workbook is merged into that concept, when only one class
+  in the file uses the label. The concept gets the class IRI in `skos:exactMatch`; code, English label and broader are filled
+  only where empty. Differences are listed as conflicts in the log and are never overwritten.
+- **Reviewed merges:** `--merge-map map.json` (`{"<class IRI>": "<concept name>"}`) merges spelling or wording variants,
+  e.g. classes with the same code. The class label is recorded in the editorial note.
+- **New concepts:** label from `rdfs:label@no` (first letter lower case unless an acronym) and `@en`; `kode` → `skos:notation`;
+  parent class → `skos:broader`; class IRI → `skos:exactMatch`; source = the ontology; editorial note with chapter and section
+  and `[mangler] definisjon`. A label used by several classes gets the parent as qualifier ("fundament, pilar").
+  A class without a label gets a term from its IRI, flagged in the editorial note.
+- **`--link`:** a new concept whose label matches one concept with a definition in the other workbook gets `skos:exactMatch` to it,
+  its definition copied and that concept as source (`direct-from-source`).
+- **Skipped:** deprecated classes and the technical root (the single top class of a file); `--keep-root` keeps the root.
+  Code values (individuals) and properties are not imported.
+- The rows are added in hierarchy order (parent first, siblings by code), and the same input always gives the same workbook.
+  The log (`<out>.owl-import.json` or `--log`) lists merged, new, skipped and linked classes and the conflicts.
+
 ## Collections
 
 A collection (`skos:Collection`) is recorded only in the main-language scope note of each member concept,
@@ -237,6 +267,7 @@ vocabtool/clash_notes.py     draft scope notes for label clashes
 vocabtool/uri.py             concept names (CamelCase) and URIs
 vocabtool/rename.py          rename a concept and its references, or a collection
 vocabtool/samling.py         collections from the scope-note sentence
+vocabtool/owl_import.py      OWL classes -> concepts, merging with existing ones
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   empty templates: v8 (master), v8 with language extension, v7
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)
