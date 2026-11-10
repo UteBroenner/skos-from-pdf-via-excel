@@ -10,7 +10,7 @@
                                           write the formulas for column A and endringshash
   owl-import <v8.xlsx> <owl.ttl> [...] --out <file.xlsx> [--link V440.xlsx] [--merge-map map.json]
              [--log log.json] [--contact E-MAIL] [--kortnavn V441 --title "…"] [--keep-root]
-             [--derive-code-definitions]
+             [--derive-code-definitions] [--tier 1]
                                           add OWL classes as concepts, merging with existing ones
   set-fields <v8.xlsx> <values.json> [--out <file.xlsx>]
                                           write reviewed values (e.g. definitions) into concepts by name
@@ -175,7 +175,7 @@ def cmd_owl_import(a):
     from .owl_import import owl_import
     log = owl_import(a.workbook, a.owl, a.out, link=a.link, merge_map=a.merge_map, contact=a.contact,
                      keep_root=a.keep_root, kortnavn=a.kortnavn, title=a.title,
-                     derive_code_definitions=a.derive_code_definitions)
+                     derive_code_definitions=a.derive_code_definitions, tier=a.tier)
     log_path = Path(a.log or Path(a.out).with_suffix(".owl-import.json"))
     log_path.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{a.out}: {len(log['merged'])} classes merged, {len(log['new'])} new concepts, "
@@ -219,6 +219,7 @@ def main(argv=None):
     oi.add_argument("--contact", help="dcat:contactPoint for new concepts")
     oi.add_argument("--kortnavn"); oi.add_argument("--title")
     oi.add_argument("--keep-root", action="store_true", help="import the single top class of a file too")
+    oi.add_argument("--tier", choices=["1", "2", "3"], help="tier for new concepts (existing concepts keep theirs)")
     oi.add_argument("--derive-code-definitions", action="store_true",
                     help="give new code entries a definition built from code and broader, marked [avledet]")
     oi.set_defaults(fn=cmd_owl_import)

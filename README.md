@@ -156,6 +156,7 @@ python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-
   parent class → `skos:broader`; class IRI → `skos:exactMatch`; source = the ontology; editorial note with chapter and section
   and `[mangler] definisjon`. A label used by several classes gets the parent as qualifier ("fundament, pilar").
   A class without a label gets a term from its IRI, flagged in the editorial note.
+- **`--tier 1`:** sets the tier of new concepts (existing concepts keep theirs). Classes from an ontology are Tier 1.
 - **`--derive-code-definitions`:** a new code entry (a class with `kode`) without another definition gets one built from the
   code table, e.g. "kodeverdi 59 under «buebru og hvelvbru» i V440 (kap. V-6, avsnitt V-6.1)", with
   `relationshipWithSource` `derived-from-source` and `[avledet]` in the editorial note. The checker lists these as
