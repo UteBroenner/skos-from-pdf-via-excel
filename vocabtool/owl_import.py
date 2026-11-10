@@ -17,6 +17,9 @@ New concepts (one row per class):
 - notation = `kode`, broader = parent class, exactMatch = class IRI, source = ontology IRI,
   editorial note with chapter/section (`kapittel`, `avsnitt`) and "[mangler] definisjon"
 - status kandidat, created today, contact point if given
+- --derive-code-definitions: a new concept with a code and no other definition gets one built from the code table,
+  e.g. "kodeverdi 59 under «buebru og hvelvbru» i V440 (kap. V-6, avsnitt V-6.1)", relationshipWithSource
+  derived-from-source and "[avledet]" in the editorial note (checker: VT-DEF-DERIVED, info)
 - --link <v8 workbook>: a new concept whose label matches exactly one concept with a definition there gets
   exactMatch to it, its definition copied, source = that concept and relationshipWithSource direct-from-source
 
@@ -67,7 +70,7 @@ def read_classes(path) -> tuple[str, dict]:
     cls = {c for c in g.subjects(RDF.type, OWL.Class) if isinstance(c, URIRef)}
     out = {}
     for c in cls:
-        lit = {str(p).rsplit("#", 1)[-1].rsplit("/", 1)[-1]: str(o) for p, o in g.predicate_objects(c)
+        lit = {str(p).rsplit("#", 1)[-1].rsplit("/", 1)[-1]: str(o).strip() for p, o in g.predicate_objects(c)
                if isinstance(o, Literal) and p != RDFS.label}
         out[str(c)] = {"iri": str(c), "no": _label(g, c, ("no", "nb", "")), "en": _label(g, c, ("en",)),
                        "parents": sorted(str(o) for o in g.objects(c, RDFS.subClassOf) if isinstance(o, URIRef)),
@@ -77,7 +80,7 @@ def read_classes(path) -> tuple[str, dict]:
 
 
 def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=None, keep_root=False,
-               kortnavn=None, title=None) -> dict:
+               kortnavn=None, title=None, derive_code_definitions=False) -> dict:
     v = read_workbook(workbook)
     wb = openpyxl.load_workbook(workbook)
     ws = wb["vokabular"]
@@ -109,7 +112,8 @@ def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=
         next_row = max(c.row for c in v.concepts)
     else:   # empty template: data start after the row with technical names (intern_identifikator)
         next_row = next(r for r in range(1, 40) if str(ws.cell(r, 1).value or "").strip() == "intern_identifikator")
-    log = {"merged": [], "new": [], "skipped": [], "linked": [], "conflicts": []}
+    log = {"merged": [], "new": [], "skipped": [], "linked": [], "conflicts": [], "derived": []}
+    voc_name = kortnavn or v.kortnavn
 
     for owl in owls:
         ont, C = read_classes(owl)
@@ -222,6 +226,16 @@ def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=
                           "relationship_with_source": "direct-from-source",
                           "editorial_note": f"[kilde] Definisjon kopiert fra {lv.kortnavn} ({t.key}). " + note.replace(" [mangler] definisjon.", "")})
                 log["linked"].append({"concept": name_of[i], "to": turi})
+            elif derive_code_definitions and notation:
+                # code entry: definition from the code table (code + broader), marked as derived
+                plabel = rows[parent_name]["fields"].get(LF) if parent_name in rows else None
+                where = f"{voc_name or onto_short}{' (' + place + ')' if place else ''}"
+                f[v.def_field] = (f"kodeverdi {notation} under «{plabel}» i {where}" if plabel
+                                  else f"kodeverdi {notation} i {where}")
+                f["relationship_with_source"] = "derived-from-source"
+                f["editorial_note"] = note.replace("[mangler] definisjon.",
+                                                   "[avledet] Definisjonen er laget fra kodetabellen (kode og overbegrep), ikke sitert fra kilden.")
+                log["derived"].append({"concept": name_of[i], "definition": f[v.def_field]})
             next_row += 1
             rows[name_of[i]] = {"row": next_row, "fields": f, "broader": [parent_name] if parent_name else [],
                                 "new": True, "changed": set(f)}

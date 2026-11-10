@@ -45,6 +45,8 @@ RULES = {
     "VT-URI-LABEL": ("info", "concept name in column B differs from the CamelCase form of the main-language term (fine if chosen on purpose)", "S03"),
     "VT-REQ-LABEL": ("error", "prefLabel in the main language missing", ""),
     "VT-REQ-DEF": ("error", "definition in the main language missing", ""),
+    "VT-REQ-DEF-CODE": ("warning", "code entry (has skos:notation) without a definition in the main language; code-table entries often have none in the source", ""),
+    "VT-DEF-DERIVED": ("info", "definition derived from the code table, not quoted from the source ([avledet] in the editorial note); check it", ""),
     "VT-REF-FORMAT": ("error", "relation value is not a concept name (v8 relations use the names in column B)", ""),
     "VT-REF-DANGLING": ("warning", "relation target not found in this workbook", ""),
     "VT-REF-SELF": ("error", "concept relates to itself", ""),
@@ -175,7 +177,9 @@ def validate(v: Vocabulary) -> list[Finding]:
         if not c.get(LF):
             F.append(_f("VT-REQ-LABEL", c))
         if not c.get(DF):
-            F.append(_f("VT-REQ-DEF", c))
+            F.append(_f("VT-REQ-DEF-CODE" if c.get("notation") else "VT-REQ-DEF", c))
+        elif "[avledet]" in (c.get("editorial_note") or ""):
+            F.append(_f("VT-DEF-DERIVED", c))
         if v.main_lang == "nb" and (not c.get("label_nn") or not c.get("def_nn")):
             F.append(_f("VT-NN-MISSING", c))
         if not c.tier:

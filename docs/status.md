@@ -52,6 +52,9 @@ The crochet example (`datasets/hekling/`) is described in its own README.
   `skos:exactMatch` to the other concept's URI, its definition copied, `dct:source` = that URI,
   `skosno:relationshipWithSource` = `direct-from-source` (value still to be confirmed against SKOS-AP-NO) and an editorial
   note "[kilde] Definisjon kopiert fra V440 (<name>)." Close matches get `skos:closeMatch` only, with no definition copied.
+- **Definitions of code entries** (concepts with `skos:notation`): a missing definition is a warning (`VT-REQ-DEF-CODE`),
+  not an error, also in SHACL. `owl-import --derive-code-definitions` builds one from the code table, marked `[avledet]`
+  (`VT-DEF-DERIVED`, info), to be replaced by a definition from the handbook where it has one.
 - **Duplicates and generic names:** keep one row per concept; a concept in several groups names all of them in the
   collection sentence. Generic names get a qualifier in V440 style: "<term>, <group>".
 

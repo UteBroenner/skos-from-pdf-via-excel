@@ -156,6 +156,10 @@ python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-
   parent class → `skos:broader`; class IRI → `skos:exactMatch`; source = the ontology; editorial note with chapter and section
   and `[mangler] definisjon`. A label used by several classes gets the parent as qualifier ("fundament, pilar").
   A class without a label gets a term from its IRI, flagged in the editorial note.
+- **`--derive-code-definitions`:** a new code entry (a class with `kode`) without another definition gets one built from the
+  code table, e.g. "kodeverdi 59 under «buebru og hvelvbru» i V440 (kap. V-6, avsnitt V-6.1)", with
+  `relationshipWithSource` `derived-from-source` and `[avledet]` in the editorial note. The checker lists these as
+  `VT-DEF-DERIVED` (info), so an expert can replace them with a real definition.
 - **`--link`:** a new concept whose label matches one concept with a definition in the other workbook gets `skos:exactMatch` to it,
   its definition copied and that concept as source (`direct-from-source`).
 - **Skipped:** deprecated classes and the technical root (the single top class of a file); `--keep-root` keeps the root.
@@ -216,6 +220,8 @@ so use one reviewer per file/domain at a time.
 | VT-URI-MISSING / VT-URI-FORMAT / VT-URI-DUPLICATE | error | concept name in column B present, CamelCase letters and digits, unique (S03) |
 | VT-URI-LABEL | info | concept name differs from the CamelCase form of the main-language term |
 | VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
+| VT-REQ-DEF-CODE | warning | code entry (has `skos:notation`) without a definition: code-table entries often have none in the source |
+| VT-DEF-DERIVED | info | definition derived from the code table (`[avledet]`), not quoted from the source; check it |
 | VT-REF-FORMAT | error | relation values are concept names (v8) |
 | VT-PREFIX | error | no `vok:` prefix in the cells of the Excel table (relations, `dct:subject`, notes); use the concept name |
 | VT-PREFIX-KODE | info | `kode:` references to code lists; kept until the handling of code lists is decided |
