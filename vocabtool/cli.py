@@ -5,6 +5,7 @@
   rdf      <v8.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
   uri      <v8.xlsx> [--overwrite]        fill empty concept names (column B) from the main-language term
   rename   <v8.xlsx> OLD NEW [OLD NEW …]  rename concepts (column B) and update relations and notes
+           --collection OLD NEW            rename a collection in the scope-note sentences ("Inngår i samlingen …")
   fit      <v8.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns;
                                           write the formulas for column A and endringshash
 """
@@ -91,7 +92,7 @@ def cmd_rdf(a):
     conforms, sres = shacl_validate(g, shapes)
     short = lambda u: u.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
     lines = [f"# LinkML / SHACL report: {v.path.name}", "",
-             f"{len(data['concepts'])} concepts · {len(g)} triples · SHACL conforms: **{conforms}**", "",
+             f"{len(data['concepts'])} concepts · {len(data.get('collections', []))} collections · {len(g)} triples · SHACL conforms: **{conforms}**", "",
              f"## LinkML validation ({len(lres)} issues)", ""]
     lines += [f"- {r.message}" for r in lres[:200]]
     lines += ["", f"## Values not written to RDF ({len(skipped)}, not IRIs)", "", "| Concept | Slot | Value |", "| --- | --- | --- |"]
@@ -100,7 +101,7 @@ def cmd_rdf(a):
     for r in sorted(sres, key=lambda r: (r["severity"] != "Violation", r["focus"])):
         lines.append(f"| {r['severity']} | {short(r['focus'])} | {short(r['path'])} | {short(r['value'])} | {r['message'][:120].replace('|', '/')} |")
     (out / f"{stem}-shacl-report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"{v.path.name}: {len(data['concepts'])} concepts, {len(g)} triples")
+    print(f"{v.path.name}: {len(data['concepts'])} concepts, {len(data.get('collections', []))} collections, {len(g)} triples")
     print(f"  LinkML validation: {len(lres)} issues")
     print(f"  not written to RDF (not IRIs): {len(skipped)}")
     c = Counter((r["severity"], r["message"].split(":")[0][:60] if r["message"].startswith("VT-") else r["component"].replace("ConstraintComponent", "") + " " + short(r["path"])) for r in sres)
@@ -147,7 +148,13 @@ def cmd_fit(a):
 
 
 def cmd_rename(a):
-    from .rename import rename
+    from .rename import rename, rename_collection
+    if a.collection:
+        if len(a.pairs) != 2:
+            raise SystemExit("give one pair: --collection OLD NEW")
+        r = rename_collection(a.workbook, *a.pairs)
+        print(f"{a.workbook}: collection renamed in {r['notes']} scope notes")
+        return 0
     if len(a.pairs) % 2:
         raise SystemExit("give pairs: OLD NEW [OLD NEW …]")
     pairs = dict(zip(a.pairs[::2], a.pairs[1::2]))
@@ -164,7 +171,8 @@ def main(argv=None):
     m.add_argument("--out", required=True); m.add_argument("--kortnavn"); m.set_defaults(fn=cmd_migrate)
     r = sub.add_parser("rdf"); r.add_argument("workbook"); r.add_argument("--out", default="out/rdf"); r.set_defaults(fn=cmd_rdf)
     u = sub.add_parser("uri"); u.add_argument("workbook"); u.add_argument("--overwrite", action="store_true"); u.set_defaults(fn=cmd_uri)
-    rn = sub.add_parser("rename"); rn.add_argument("workbook"); rn.add_argument("pairs", nargs="+"); rn.set_defaults(fn=cmd_rename)
+    rn = sub.add_parser("rename"); rn.add_argument("workbook"); rn.add_argument("pairs", nargs="+")
+    rn.add_argument("--collection", action="store_true", help="rename a collection, not a concept"); rn.set_defaults(fn=cmd_rename)
     ft = sub.add_parser("fit"); ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
     a = p.parse_args(argv)
     return a.fn(a)

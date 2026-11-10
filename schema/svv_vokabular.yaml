@@ -46,6 +46,7 @@ classes:
       - publisher
       - issued
       - concepts
+      - collections
 
   Concept:
     class_uri: skos:Concept
@@ -102,6 +103,24 @@ classes:
       - scope_note_en_us
       - in_scheme
 
+  Collection:
+    class_uri: skos:Collection
+    description: >-
+      A group of concepts, recorded in the main-language scope note of each member
+      ("Inngår i samlingen X." / "Inngår i samlingene X, Y."). There is no Excel row for the
+      collection itself. URI <scheme URI>/samling/<CamelCase name>; the label is the name as written.
+      Unordered and not nested.
+    slots:
+      - uri
+      - pref_label_nb
+      - pref_label_en
+      - pref_label_nn
+      - pref_label_en_us
+      - pref_label_en_gb
+      - pref_label_de
+      - pref_label_es
+      - member
+
 slots:
 
   # ---------- scheme ----------
@@ -150,6 +169,22 @@ slots:
       Container slot for the data file only. Not written to RDF; the RDF writer
       emits skos:inScheme on each concept instead.
     annotations: {rdf_skip: true}
+  collections:
+    slot_uri: svv:collections
+    range: Collection
+    multivalued: true
+    inlined_as_list: true
+    description: >-
+      Container slot for the data file only. Not written to RDF; the collections are written
+      as resources of their own. Built from the scope-note sentence, not from a column.
+    annotations: {rdf_skip: true}
+  member:
+    slot_uri: skos:member
+    range: Concept
+    multivalued: true
+    required: true
+    description: Concepts whose main-language scope note names the collection.
+    annotations: {excel_source: "scope note sentence: Inngår i samlingen/samlingene …"}
   in_scheme:
     slot_uri: skos:inScheme
     range: uri

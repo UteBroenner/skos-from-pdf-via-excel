@@ -1,6 +1,8 @@
 # LinkML schema and RDF route
 
 `svv_vokabular.yaml` models template v8 (vokabular sheet; code lists excluded).
+Collections (`Collection`, `skos:member`) have no column: the converter builds them from the scope-note sentence
+"Inngår i samlingen X." (see the main README, *Collections*).
 For every slot it records:
 
 - `slot_uri`: the RDF property;
@@ -42,7 +44,7 @@ Each item below was tested here. None of it is assumed from documentation.
 | RDF dumper writes enum text, not `meaning` | `euvoc:status "kandidat"` instead of the EU concept-status URI | RDF writer uses `meaning` |
 | SHACL generator: several slots on one property each get `sh:maxCount 1` | a concept with `@nb` and `@nn` labels fails | Replaced by qualified shapes per language (`sh:qualifiedValueShape [sh:languageIn ("nb")]`) |
 | SHACL generator sets `sh:datatype xsd:string` on language slots | every `"…"@nb` value fails | Replaced by `rdf:langString` + `sh:languageIn` |
-| SHACL generator: container slot `concepts` | none; the RDF writer emits `skos:inScheme` instead | `rdf_skip` annotation |
+| SHACL generator: container slots `concepts`, `collections` | none; the RDF writer emits `skos:inScheme` on concepts and writes collections as resources of their own | `rdf_skip` annotation |
 | Cross-row rules (cycles, S27, Tier 1 isolated) | not expressible in LinkML | Hand-written SHACL-SPARQL in `shapes/cross_row.shacl.ttl` |
 | `sh:languageIn ("en")` also matches `en-US` / `en-GB` (language-range matching) | "max one English label" fails when US and UK labels exist | qualified shape for `en` excludes the more specific tags (`sh:not [sh:languageIn ("en-US" "en-GB")]`) |
 

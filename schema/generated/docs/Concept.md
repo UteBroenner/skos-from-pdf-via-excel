@@ -242,6 +242,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [Concept](Concept.md) | [broader](broader.md) | range | [Concept](Concept.md) |
 | [Concept](Concept.md) | [is_part_of](is_part_of.md) | range | [Concept](Concept.md) |
 | [Concept](Concept.md) | [related](related.md) | range | [Concept](Concept.md) |
+| [Collection](Collection.md) | [member](member.md) | range | [Concept](Concept.md) |
 
 
 
@@ -377,6 +378,7 @@ attributes:
     domain_of:
     - ConceptScheme
     - Concept
+    - Collection
     range: uri
     required: true
   identifier:
@@ -423,6 +425,7 @@ attributes:
     owner: Concept
     domain_of:
     - Concept
+    - Collection
     range: string
   pref_label_en:
     name: pref_label_en
@@ -443,6 +446,7 @@ attributes:
     owner: Concept
     domain_of:
     - Concept
+    - Collection
     range: string
   pref_label_nn:
     name: pref_label_nn
@@ -465,6 +469,7 @@ attributes:
     owner: Concept
     domain_of:
     - Concept
+    - Collection
     range: string
   notation:
     name: notation
@@ -1182,6 +1187,7 @@ attributes:
     owner: Concept
     domain_of:
     - Concept
+    - Collection
     range: string
   pref_label_en_gb:
     name: pref_label_en_gb
@@ -1205,6 +1211,7 @@ attributes:
     owner: Concept
     domain_of:
     - Concept
+    - Collection
     range: string
   pref_label_de:
     name: pref_label_de
@@ -1228,6 +1235,7 @@ attributes:
     owner: Concept
     domain_of:
     - Concept
+    - Collection
     range: string
   pref_label_es:
     name: pref_label_es
@@ -1251,6 +1259,7 @@ attributes:
     owner: Concept
     domain_of:
     - Concept
+    - Collection
     range: string
   alt_label_en_us:
     name: alt_label_en_us

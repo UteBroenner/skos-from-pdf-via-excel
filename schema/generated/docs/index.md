@@ -12,6 +12,7 @@ Name: svv_vokabular
 
 | Class | Description |
 | --- | --- |
+| [Collection](Collection.md) | A group of concepts, recorded in the main-language scope note of each member ... |
 | [Concept](Concept.md) | One row in the vokabular sheet (row 23 onwards) |
 | [ConceptScheme](ConceptScheme.md) | One vocabulary = one Excel workbook (vokabular sheet, rows 1-16) |
 
@@ -31,6 +32,7 @@ Name: svv_vokabular
 | [audience](audience.md) |  |
 | [broader](broader.md) |  |
 | [close_match](close_match.md) |  |
+| [collections](collections.md) | Container slot for the data file only |
 | [concepts](concepts.md) | Container slot for the data file only |
 | [contact_point](contact_point.md) | E-mail address or web address |
 | [created](created.md) |  |
@@ -52,6 +54,7 @@ Name: svv_vokabular
 | [issued](issued.md) | System-generated at publication |
 | [kortnavn](kortnavn.md) | Short name of the vocabulary, letters, digits and hyphens, e |
 | [main_language](main_language.md) | BCP 47 tag of the language in which every concept must have a prefLabel and a... |
+| [member](member.md) | Concepts whose main-language scope note names the collection |
 | [modified](modified.md) |  |
 | [modified_by](modified_by.md) |  |
 | [notation](notation.md) |  |

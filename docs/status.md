@@ -36,6 +36,9 @@ The crochet example (`datasets/hekling/`) is described in its own README.
 - **Label clashes** (the same term for different concepts) are documented in a scope note that names the other concept.
   The checker then reports them as info.
 - **Concepts are not deleted.** Set the status to `forkastet` instead.
+- **Collections** are recorded only in the main-language scope note: "Inngår i samlingen X." /
+  "Inngår i samlingene X, Y." The tools build `skos:Collection` (URI `…/<kortnavn>/samling/<Name>`) and `skos:member`.
+  There is no collection sheet, so nothing can diverge. `dct:subject` is for subject areas only.
 
 ## Tools
 
@@ -46,7 +49,7 @@ Run as `python -m vocabtool <command>`. Details in the README.
 | `check` | VT rules, report (`.md`, `.json`) and interactive graph page |
 | `migrate` | v7 → v8; keeps the v7 names, relations become names |
 | `uri` | fills missing concept names |
-| `rename` | renames a concept and every relation and note that refers to it |
+| `rename` | renames a concept and every relation and note that refers to it; `--collection` renames a collection |
 | `fit` | stretches the table, formatting and validation; writes the formulas |
 | `rdf` | LinkML data, SKOS Turtle, LinkML and SHACL validation |
 
@@ -93,5 +96,5 @@ The main changes needed:
 **Open decisions:**
 - S16: move `exactMatch`/`closeMatch` text to `editorialNote`?
 - S18: `dct:subject` as a concept name?
-- Code lists: shared scheme (K2/V19) or none (O3)?
+- Code lists: shared scheme (K2/V19) or none (O3)? Each code list can now be a collection.
 - May the instructions be public?

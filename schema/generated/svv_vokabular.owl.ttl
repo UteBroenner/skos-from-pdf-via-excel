@@ -9,21 +9,27 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix pav: <http://purl.org/pav/> .
+svv:Collection a owl:Class ;
+	rdfs:label "Collection" ;
+	rdfs:subClassOf _:c14n108 , _:c14n11 , _:c14n123 , _:c14n137 , _:c14n141 , _:c14n150 , _:c14n156 , _:c14n160 , _:c14n167 , _:c14n173 , _:c14n176 , _:c14n182 , _:c14n186 , _:c14n188 , _:c14n192 , _:c14n23 , _:c14n26 , _:c14n42 , _:c14n62 , _:c14n69 , _:c14n74 , _:c14n83 , _:c14n86 , _:c14n9 , _:c14n97 , _:c14n98 ;
+	skos:definition "A group of concepts, recorded in the main-language scope note of each member (\"Inngår i samlingen X.\" / \"Inngår i samlingene X, Y.\"). There is no Excel row for the collection itself. URI <scheme URI>/samling/<CamelCase name>; the label is the name as written. Unordered and not nested." ;
+	skos:exactMatch skos:Collection ;
+	skos:inScheme vok:def\/schema .
 svv:Concept a owl:Class ;
 	rdfs:label "Concept" ;
-	rdfs:subClassOf _:c14n0 , _:c14n1 , _:c14n10 , _:c14n100 , _:c14n103 , _:c14n104 , _:c14n105 , _:c14n106 , _:c14n107 , _:c14n108 , _:c14n109 , _:c14n11 , _:c14n110 , _:c14n111 , _:c14n112 , _:c14n113 , _:c14n114 , _:c14n115 , _:c14n116 , _:c14n117 , _:c14n120 , _:c14n121 , _:c14n122 , _:c14n123 , _:c14n124 , _:c14n125 , _:c14n126 , _:c14n128 , _:c14n129 , _:c14n13 , _:c14n130 , _:c14n132 , _:c14n133 , _:c14n134 , _:c14n135 , _:c14n136 , _:c14n137 , _:c14n138 , _:c14n139 , _:c14n14 , _:c14n140 , _:c14n141 , _:c14n142 , _:c14n143 , _:c14n144 , _:c14n146 , _:c14n147 , _:c14n149 , _:c14n15 , _:c14n150 , _:c14n151 , _:c14n154 , _:c14n155 , _:c14n157 , _:c14n158 , _:c14n159 , _:c14n16 , _:c14n160 , _:c14n162 , _:c14n163 , _:c14n164 , _:c14n167 , _:c14n168 , _:c14n169 , _:c14n17 , _:c14n171 , _:c14n18 , _:c14n19 , _:c14n2 , _:c14n20 , _:c14n21 , _:c14n22 , _:c14n23 , _:c14n24 , _:c14n25 , _:c14n26 , _:c14n28 , _:c14n29 , _:c14n3 , _:c14n30 , _:c14n31 , _:c14n32 , _:c14n33 , _:c14n34 , _:c14n35 , _:c14n36 , _:c14n37 , _:c14n38 , _:c14n39 , _:c14n4 , _:c14n41 , _:c14n42 , _:c14n43 , _:c14n44 , _:c14n45 , _:c14n47 , _:c14n48 , _:c14n49 , _:c14n5 , _:c14n50 , _:c14n51 , _:c14n52 , _:c14n54 , _:c14n55 , _:c14n56 , _:c14n57 , _:c14n58 , _:c14n59 , _:c14n6 , _:c14n60 , _:c14n61 , _:c14n62 , _:c14n63 , _:c14n65 , _:c14n66 , _:c14n67 , _:c14n7 , _:c14n70 , _:c14n71 , _:c14n74 , _:c14n75 , _:c14n76 , _:c14n77 , _:c14n78 , _:c14n79 , _:c14n8 , _:c14n80 , _:c14n81 , _:c14n83 , _:c14n84 , _:c14n85 , _:c14n86 , _:c14n89 , _:c14n90 , _:c14n92 , _:c14n96 , _:c14n97 , _:c14n98 ;
+	rdfs:subClassOf _:c14n0 , _:c14n1 , _:c14n102 , _:c14n103 , _:c14n105 , _:c14n110 , _:c14n111 , _:c14n112 , _:c14n114 , _:c14n117 , _:c14n118 , _:c14n119 , _:c14n12 , _:c14n120 , _:c14n121 , _:c14n122 , _:c14n124 , _:c14n125 , _:c14n126 , _:c14n127 , _:c14n128 , _:c14n129 , _:c14n13 , _:c14n130 , _:c14n131 , _:c14n132 , _:c14n135 , _:c14n136 , _:c14n138 , _:c14n139 , _:c14n140 , _:c14n142 , _:c14n143 , _:c14n145 , _:c14n146 , _:c14n147 , _:c14n149 , _:c14n15 , _:c14n151 , _:c14n152 , _:c14n153 , _:c14n154 , _:c14n155 , _:c14n157 , _:c14n158 , _:c14n159 , _:c14n16 , _:c14n161 , _:c14n162 , _:c14n163 , _:c14n164 , _:c14n166 , _:c14n169 , _:c14n17 , _:c14n171 , _:c14n172 , _:c14n174 , _:c14n178 , _:c14n179 , _:c14n18 , _:c14n181 , _:c14n183 , _:c14n184 , _:c14n185 , _:c14n189 , _:c14n19 , _:c14n190 , _:c14n191 , _:c14n195 , _:c14n196 , _:c14n197 , _:c14n199 , _:c14n2 , _:c14n20 , _:c14n21 , _:c14n22 , _:c14n24 , _:c14n25 , _:c14n27 , _:c14n28 , _:c14n29 , _:c14n3 , _:c14n30 , _:c14n32 , _:c14n33 , _:c14n34 , _:c14n35 , _:c14n36 , _:c14n37 , _:c14n38 , _:c14n39 , _:c14n4 , _:c14n40 , _:c14n41 , _:c14n43 , _:c14n44 , _:c14n46 , _:c14n48 , _:c14n49 , _:c14n5 , _:c14n50 , _:c14n51 , _:c14n53 , _:c14n54 , _:c14n55 , _:c14n56 , _:c14n57 , _:c14n58 , _:c14n6 , _:c14n60 , _:c14n61 , _:c14n63 , _:c14n64 , _:c14n65 , _:c14n66 , _:c14n67 , _:c14n68 , _:c14n7 , _:c14n70 , _:c14n71 , _:c14n73 , _:c14n75 , _:c14n76 , _:c14n79 , _:c14n8 , _:c14n80 , _:c14n84 , _:c14n85 , _:c14n87 , _:c14n88 , _:c14n89 , _:c14n90 , _:c14n91 , _:c14n92 , _:c14n94 , _:c14n95 , _:c14n96 , _:c14n99 ;
 	skos:definition "One row in the vokabular sheet (row 23 onwards)." ;
 	skos:exactMatch skos:Concept ;
 	skos:inScheme vok:def\/schema .
 svv:ConceptScheme a owl:Class ;
 	rdfs:label "ConceptScheme" ;
-	rdfs:subClassOf _:c14n101 , _:c14n102 , _:c14n118 , _:c14n119 , _:c14n12 , _:c14n131 , _:c14n148 , _:c14n152 , _:c14n156 , _:c14n161 , _:c14n165 , _:c14n166 , _:c14n170 , _:c14n64 , _:c14n68 , _:c14n69 , _:c14n72 , _:c14n82 , _:c14n88 , _:c14n91 , _:c14n94 , _:c14n95 , _:c14n99 ;
+	rdfs:subClassOf _:c14n101 , _:c14n104 , _:c14n107 , _:c14n109 , _:c14n113 , _:c14n115 , _:c14n116 , _:c14n133 , _:c14n134 , _:c14n14 , _:c14n148 , _:c14n168 , _:c14n170 , _:c14n175 , _:c14n180 , _:c14n187 , _:c14n193 , _:c14n194 , _:c14n198 , _:c14n47 , _:c14n72 , _:c14n77 , _:c14n78 , _:c14n81 , _:c14n93 ;
 	skos:definition "One vocabulary = one Excel workbook (vokabular sheet, rows 1-16)." ;
 	skos:exactMatch skos:ConceptScheme ;
 	skos:inScheme vok:def\/schema .
 svv:ConceptStatus a owl:Class ;
 	rdfs:label "ConceptStatus" ;
-	owl:unionOf _:c14n127 ;
+	owl:unionOf _:c14n144 ;
 	skos:definition "Status values from the template's statusliste, mapped to the EU concept-status authority table." ;
 	skos:inScheme vok:def\/schema ;
 	linkml:permissible_values concept_status:CANDIDATE , concept_status:CURRENT , concept_status:DEPRECATED , concept_status:RETIRED .
@@ -107,6 +113,12 @@ svv:close_match svv:excel_column "Z" ;
 	rdfs:label "close_match" ;
 	rdfs:range xsd:anyURI ;
 	skos:inScheme vok:def\/schema .
+svv:collections svv:rdf_skip true ;
+	a owl:ObjectProperty ;
+	rdfs:label "collections" ;
+	rdfs:range svv:Collection ;
+	skos:definition "Container slot for the data file only. Not written to RDF; the collections are written as resources of their own. Built from the scope-note sentence, not from a column." ;
+	skos:inScheme vok:def\/schema .
 svv:concepts svv:rdf_skip true ;
 	a owl:ObjectProperty ;
 	rdfs:label "concepts" ;
@@ -118,7 +130,7 @@ svv:contact_point svv:excel_column "AA" ;
 	svv:requirement "obligatorisk" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "contact_point" ;
-	rdfs:range _:c14n27 ;
+	rdfs:range _:c14n31 ;
 	skos:definition "E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no (fixed value in the field instructions); the schema accepts any address." ;
 	skos:inScheme vok:def\/schema .
 svv:created svv:excel_column "AC" ;
@@ -133,7 +145,7 @@ svv:created_by svv:excel_column "AD" ;
 	svv:hidden true ;
 	a owl:DatatypeProperty ;
 	rdfs:label "created_by" ;
-	rdfs:range _:c14n153 ;
+	rdfs:range _:c14n177 ;
 	skos:definition "Hidden column; template formula = dct:creator of the vocabulary (cell B16)." ;
 	skos:inScheme vok:def\/schema .
 svv:creator svv:excel_cell "B16" ;
@@ -215,7 +227,7 @@ svv:identifier svv:excel_column "A" ;
 	svv:requirement "obligatorisk" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "identifier" ;
-	rdfs:range _:c14n53 ;
+	rdfs:range _:c14n59 ;
 	skos:definition "<kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column A). Relations in Excel use the concept name." ;
 	skos:inScheme vok:def\/schema .
 svv:in_scheme a owl:DatatypeProperty ;
@@ -240,13 +252,19 @@ svv:issued svv:excel_cell "B18" ;
 svv:kortnavn svv:excel_cell "B14" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "kortnavn" ;
-	rdfs:range _:c14n87 ;
+	rdfs:range _:c14n100 ;
 	skos:definition "Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14)." ;
 	skos:inScheme vok:def\/schema .
 svv:main_language svv:excel_label "hovedspråk" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "main_language" ;
 	skos:definition "BCP 47 tag of the language in which every concept must have a prefLabel and a definition (scheme row \"hovedspråk\"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl)." ;
+	skos:inScheme vok:def\/schema .
+svv:member svv:excel_source "scope note sentence: Inngår i samlingen/samlingene …" ;
+	a owl:ObjectProperty ;
+	rdfs:label "member" ;
+	rdfs:range svv:Concept ;
+	skos:definition "Concepts whose main-language scope note names the collection." ;
 	skos:inScheme vok:def\/schema .
 svv:modified svv:excel_column "AE" ;
 	svv:excel_name "dato_sist_endret" ;
@@ -259,7 +277,7 @@ svv:modified_by svv:excel_column "AF" ;
 	svv:excel_name "sist_endret_av" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "modified_by" ;
-	rdfs:range _:c14n46 ;
+	rdfs:range _:c14n52 ;
 	skos:inScheme vok:def\/schema .
 svv:notation svv:excel_column "F" ;
 	svv:excel_name "notasjon_eller_kode" ;
@@ -398,7 +416,7 @@ svv:tier svv:excel_column "AO (base template), AY (language extension): always t
 	svv:requirement "internt" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "tier" ;
-	rdfs:range _:c14n93 ;
+	rdfs:range _:c14n106 ;
 	skos:definition "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes." ;
 	skos:inScheme vok:def\/schema .
 svv:title svv:excel_cell "B15"@nb ;
@@ -456,589 +474,673 @@ _:c14n0 a owl:Restriction ;
 _:c14n1 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty svv:identifier .
-_:c14n10 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:definition_en .
-_:c14n100 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:pref_label_de .
+_:c14n10 rdf:first concept_status:CURRENT ;
+	rdf:rest _:c14n45 .
+_:c14n100 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n240 .
 _:c14n101 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty svv:title .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:publisher .
 _:c14n102 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:title .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:audience .
 _:c14n103 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:subject .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_es .
 _:c14n104 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:version_info .
+	owl:allValuesFrom _:c14n234 ;
+	owl:onProperty svv:kortnavn .
 _:c14n105 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:alt_label_en_us .
-_:c14n106 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:alt_label_en .
-_:c14n107 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:relation_role .
+	owl:onProperty svv:source .
+_:c14n106 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n214 .
+_:c14n107 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:publisher .
 _:c14n108 a owl:Restriction ;
-	owl:minCardinality 0 ;
+	owl:allValuesFrom xsd:string ;
 	owl:onProperty svv:pref_label_de .
 _:c14n109 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:created .
+	owl:onProperty svv:publisher .
 _:c14n11 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:alt_label_en_gb .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_en .
 _:c14n110 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:example .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:in_scheme .
 _:c14n111 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:alt_label_de .
+	owl:allValuesFrom xsd:anyURI ;
+	owl:onProperty svv:source .
 _:c14n112 a owl:Restriction ;
-	owl:allValuesFrom _:c14n206 ;
-	owl:onProperty svv:contact_point .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:notation .
 _:c14n113 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:in_scheme .
+	owl:onProperty svv:concepts .
 _:c14n114 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:data_structure_label .
+	owl:onProperty svv:pref_label_de .
 _:c14n115 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:alt_label_nn .
+	owl:minCardinality 1 ;
+	owl:onProperty svv:title .
 _:c14n116 a owl:Restriction ;
-	owl:allValuesFrom svv:Concept ;
-	owl:onProperty svv:broader .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:title .
 _:c14n117 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:source .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:subject .
 _:c14n118 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:issued .
+	owl:onProperty svv:version_info .
 _:c14n119 a owl:Restriction ;
-	owl:allValuesFrom xsd:anyURI ;
-	owl:onProperty svv:uri .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:alt_label_en_us .
 _:c14n12 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:main_language .
+	owl:onProperty svv:definition_en .
 _:c14n120 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:alt_label_en_gb .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:alt_label_en .
 _:c14n121 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:definition_nn .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:relation_role .
 _:c14n122 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:alt_label_es .
+	owl:onProperty svv:pref_label_de .
 _:c14n123 a owl:Restriction ;
-	owl:allValuesFrom xsd:date ;
-	owl:onProperty svv:start_date .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:pref_label_en_gb .
 _:c14n124 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:definition_en .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:created .
 _:c14n125 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:hidden_label .
+	owl:onProperty svv:example .
 _:c14n126 a owl:Restriction ;
-	owl:allValuesFrom svv:Concept ;
-	owl:onProperty svv:related .
-_:c14n127 rdf:first concept_status:CANDIDATE ;
-	rdf:rest _:c14n9 .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:alt_label_de .
+_:c14n127 a owl:Restriction ;
+	owl:allValuesFrom _:c14n231 ;
+	owl:onProperty svv:contact_point .
 _:c14n128 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:exact_match .
+	owl:onProperty svv:in_scheme .
 _:c14n129 a owl:Restriction ;
-	owl:allValuesFrom xsd:date ;
-	owl:onProperty svv:end_date .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:data_structure_label .
 _:c14n13 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:alt_label_es .
+	owl:onProperty svv:alt_label_en_gb .
 _:c14n130 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:pref_label_en_gb .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:alt_label_nn .
 _:c14n131 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:main_language .
+	owl:allValuesFrom svv:Concept ;
+	owl:onProperty svv:broader .
 _:c14n132 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty svv:identifier .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:source .
 _:c14n133 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:end_date .
+	owl:onProperty svv:issued .
 _:c14n134 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:tier .
+	owl:allValuesFrom xsd:anyURI ;
+	owl:onProperty svv:uri .
 _:c14n135 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:notation .
+	owl:onProperty svv:alt_label_en_gb .
 _:c14n136 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:data_structure_label .
-_:c14n137 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:alt_label_nb .
-_:c14n138 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:definition_nb .
-_:c14n139 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:notation .
-_:c14n14 a owl:Restriction ;
-	owl:maxCardinality 1 ;
+	owl:minCardinality 0 ;
 	owl:onProperty svv:definition_nn .
+_:c14n137 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_nb .
+_:c14n138 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:alt_label_es .
+_:c14n139 a owl:Restriction ;
+	owl:allValuesFrom xsd:date ;
+	owl:onProperty svv:start_date .
+_:c14n14 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:main_language .
 _:c14n140 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:tier .
+	owl:onProperty svv:definition_en .
 _:c14n141 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:relation_role .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_en_gb .
 _:c14n142 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:pref_label_nb .
-_:c14n143 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:scope_note_en_us .
-_:c14n144 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:definition_en_us .
-_:c14n145 rdf:first concept_status:RETIRED ;
-	rdf:rest rdf:nil .
-_:c14n146 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:pref_label_nn .
-_:c14n147 a owl:Restriction ;
-	owl:allValuesFrom svv:Concept ;
-	owl:onProperty svv:is_part_of .
-_:c14n148 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:issued .
-_:c14n149 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:contact_point .
-_:c14n15 a owl:Restriction ;
-	owl:allValuesFrom _:c14n203 ;
-	owl:onProperty svv:identifier .
-_:c14n150 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:status .
-_:c14n151 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:definition_nn .
+	owl:onProperty svv:hidden_label .
+_:c14n143 a owl:Restriction ;
+	owl:allValuesFrom svv:Concept ;
+	owl:onProperty svv:related .
+_:c14n144 rdf:first concept_status:CANDIDATE ;
+	rdf:rest _:c14n10 .
+_:c14n145 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:exact_match .
+_:c14n146 a owl:Restriction ;
+	owl:allValuesFrom xsd:date ;
+	owl:onProperty svv:end_date .
+_:c14n147 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_en_gb .
+_:c14n148 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:main_language .
+_:c14n149 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty svv:identifier .
+_:c14n15 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:alt_label_es .
+_:c14n150 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_es .
+_:c14n151 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:end_date .
 _:c14n152 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:creator .
-_:c14n153 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n194 .
+	owl:onProperty svv:tier .
+_:c14n153 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:notation .
 _:c14n154 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:pref_label_en_us .
+	owl:onProperty svv:data_structure_label .
 _:c14n155 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:audience .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:alt_label_nb .
 _:c14n156 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty svv:kortnavn .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_en_gb .
 _:c14n157 a owl:Restriction ;
-	owl:allValuesFrom xsd:date ;
-	owl:onProperty svv:created .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:definition_nb .
 _:c14n158 a owl:Restriction ;
-	owl:allValuesFrom _:c14n73 ;
-	owl:onProperty svv:tier .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:notation .
 _:c14n159 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:broader .
+	owl:onProperty svv:tier .
 _:c14n16 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:pref_label_en_us .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:definition_nn .
 _:c14n160 a owl:Restriction ;
-	owl:allValuesFrom xsd:anyURI ;
-	owl:onProperty svv:in_scheme .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_nn .
 _:c14n161 a owl:Restriction ;
-	owl:allValuesFrom svv:Concept ;
-	owl:onProperty svv:concepts .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:relation_role .
 _:c14n162 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:alt_label_nb .
+	owl:onProperty svv:pref_label_nb .
 _:c14n163 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:example .
+	owl:onProperty svv:scope_note_en_us .
 _:c14n164 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:created .
-_:c14n165 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:creator .
+	owl:onProperty svv:definition_en_us .
+_:c14n165 rdf:first concept_status:RETIRED ;
+	rdf:rest rdf:nil .
 _:c14n166 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty svv:uri .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_nn .
 _:c14n167 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:version_notes .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_en_us .
 _:c14n168 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:pref_label_en .
+	owl:onProperty svv:collections .
 _:c14n169 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:pref_label_nb .
-_:c14n17 a owl:Restriction ;
-	owl:minCardinality 0 ;
+	owl:allValuesFrom svv:Concept ;
 	owl:onProperty svv:is_part_of .
+_:c14n17 a owl:Restriction ;
+	owl:allValuesFrom _:c14n228 ;
+	owl:onProperty svv:identifier .
 _:c14n170 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:creator .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:issued .
 _:c14n171 a owl:Restriction ;
 	owl:maxCardinality 1 ;
+	owl:onProperty svv:contact_point .
+_:c14n172 a owl:Restriction ;
+	owl:minCardinality 0 ;
 	owl:onProperty svv:status .
-_:c14n172 xsd:maxInclusive 3 .
-_:c14n173 rdf:first _:c14n172 ;
-	rdf:rest rdf:nil .
-_:c14n174 a rdfs:Datatype ;
-	owl:onDatatype xsd:integer ;
-	owl:withRestrictions _:c14n173 .
-_:c14n175 rdf:first _:c14n174 ;
-	rdf:rest rdf:nil .
-_:c14n176 rdf:first _:c14n178 ;
-	rdf:rest _:c14n175 .
-_:c14n177 rdf:first xsd:integer ;
-	rdf:rest _:c14n176 .
-_:c14n178 a rdfs:Datatype ;
-	owl:onDatatype xsd:integer ;
-	owl:withRestrictions _:c14n179 .
-_:c14n179 rdf:first _:c14n180 ;
-	rdf:rest rdf:nil .
-_:c14n18 a owl:Restriction ;
+_:c14n173 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty svv:uri .
+_:c14n174 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:version_info .
-_:c14n180 xsd:minInclusive 1 .
-_:c14n181 xsd:maxInclusive 3 .
-_:c14n182 rdf:first _:c14n181 ;
-	rdf:rest rdf:nil .
-_:c14n183 a rdfs:Datatype ;
-	owl:onDatatype xsd:integer ;
-	owl:withRestrictions _:c14n182 .
-_:c14n184 rdf:first _:c14n183 ;
-	rdf:rest rdf:nil .
-_:c14n185 rdf:first _:c14n187 ;
-	rdf:rest _:c14n184 .
-_:c14n186 rdf:first xsd:integer ;
-	rdf:rest _:c14n185 .
-_:c14n187 a rdfs:Datatype ;
-	owl:onDatatype xsd:integer ;
-	owl:withRestrictions _:c14n188 .
-_:c14n188 rdf:first _:c14n189 ;
-	rdf:rest rdf:nil .
-_:c14n189 xsd:minInclusive 1 .
-_:c14n19 a owl:Restriction ;
+	owl:onProperty svv:definition_nn .
+_:c14n175 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:modified .
-_:c14n190 xsd:pattern "^[^@\\s]+@vegvesen\\.no$" .
-_:c14n191 rdf:first _:c14n190 ;
-	rdf:rest rdf:nil .
-_:c14n192 a rdfs:Datatype ;
+	owl:onProperty svv:creator .
+_:c14n176 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_nn .
+_:c14n177 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n191 .
-_:c14n193 xsd:pattern "^[^@\\s]+@vegvesen\\.no$" .
-_:c14n194 rdf:first _:c14n193 ;
-	rdf:rest rdf:nil .
-_:c14n195 xsd:pattern "^[^@\\s]+@vegvesen\\.no$" .
-_:c14n196 rdf:first _:c14n195 ;
-	rdf:rest rdf:nil .
-_:c14n197 xsd:pattern "^[^@\\s]+@vegvesen\\.no$" .
-_:c14n198 rdf:first _:c14n197 ;
-	rdf:rest rdf:nil .
-_:c14n199 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n198 .
+	owl:withRestrictions _:c14n222 .
+_:c14n178 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_en_us .
+_:c14n179 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:audience .
+_:c14n18 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_en_us .
+_:c14n180 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty svv:kortnavn .
+_:c14n181 a owl:Restriction ;
+	owl:allValuesFrom xsd:date ;
+	owl:onProperty svv:created .
+_:c14n182 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_nb .
+_:c14n183 a owl:Restriction ;
+	owl:allValuesFrom _:c14n82 ;
+	owl:onProperty svv:tier .
+_:c14n184 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:broader .
+_:c14n185 a owl:Restriction ;
+	owl:allValuesFrom xsd:anyURI ;
+	owl:onProperty svv:in_scheme .
+_:c14n186 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_de .
+_:c14n187 a owl:Restriction ;
+	owl:allValuesFrom svv:Concept ;
+	owl:onProperty svv:concepts .
+_:c14n188 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_en_us .
+_:c14n189 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:alt_label_nb .
+_:c14n19 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:is_part_of .
+_:c14n190 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:example .
+_:c14n191 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:created .
+_:c14n192 a owl:Restriction ;
+	owl:allValuesFrom svv:Concept ;
+	owl:onProperty svv:member .
+_:c14n193 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:creator .
+_:c14n194 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty svv:uri .
+_:c14n195 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:version_notes .
+_:c14n196 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_en .
+_:c14n197 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_nb .
+_:c14n198 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:creator .
+_:c14n199 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:status .
 _:c14n2 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty svv:relation_role .
 _:c14n20 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:close_match .
-_:c14n200 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:version_info .
+_:c14n200 xsd:maxInclusive 3 .
+_:c14n201 rdf:first _:c14n200 ;
+	rdf:rest rdf:nil .
+_:c14n202 a rdfs:Datatype ;
+	owl:onDatatype xsd:integer ;
 	owl:withRestrictions _:c14n201 .
-_:c14n201 rdf:first _:c14n202 ;
+_:c14n203 rdf:first _:c14n202 ;
 	rdf:rest rdf:nil .
-_:c14n202 xsd:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
-_:c14n203 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n204 .
-_:c14n204 rdf:first _:c14n205 ;
-	rdf:rest rdf:nil .
-_:c14n205 xsd:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
+_:c14n204 rdf:first _:c14n206 ;
+	rdf:rest _:c14n203 .
+_:c14n205 rdf:first xsd:integer ;
+	rdf:rest _:c14n204 .
 _:c14n206 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
+	owl:onDatatype xsd:integer ;
 	owl:withRestrictions _:c14n207 .
 _:c14n207 rdf:first _:c14n208 ;
 	rdf:rest rdf:nil .
-_:c14n208 xsd:pattern "^([^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}|https?://\\S+)$" .
-_:c14n209 xsd:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
+_:c14n208 xsd:minInclusive 1 .
+_:c14n209 xsd:maxInclusive 3 .
 _:c14n21 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:audience .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:modified .
 _:c14n210 rdf:first _:c14n209 ;
 	rdf:rest rdf:nil .
-_:c14n211 xsd:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
+_:c14n211 a rdfs:Datatype ;
+	owl:onDatatype xsd:integer ;
+	owl:withRestrictions _:c14n210 .
 _:c14n212 rdf:first _:c14n211 ;
 	rdf:rest rdf:nil .
-_:c14n213 rdf:first _:c14n214 ;
+_:c14n213 rdf:first _:c14n215 ;
+	rdf:rest _:c14n212 .
+_:c14n214 rdf:first xsd:integer ;
+	rdf:rest _:c14n213 .
+_:c14n215 a rdfs:Datatype ;
+	owl:onDatatype xsd:integer ;
+	owl:withRestrictions _:c14n216 .
+_:c14n216 rdf:first _:c14n217 ;
 	rdf:rest rdf:nil .
-_:c14n214 xsd:pattern "^([^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}|https?://\\S+)$" .
+_:c14n217 xsd:minInclusive 1 .
+_:c14n218 xsd:pattern "^[^@\\s]+@vegvesen\\.no$" .
+_:c14n219 rdf:first _:c14n218 ;
+	rdf:rest rdf:nil .
 _:c14n22 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:pref_label_en_gb .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:close_match .
+_:c14n220 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n219 .
+_:c14n221 xsd:pattern "^[^@\\s]+@vegvesen\\.no$" .
+_:c14n222 rdf:first _:c14n221 ;
+	rdf:rest rdf:nil .
+_:c14n223 xsd:pattern "^[^@\\s]+@vegvesen\\.no$" .
+_:c14n224 rdf:first _:c14n223 ;
+	rdf:rest rdf:nil .
+_:c14n225 xsd:pattern "^[^@\\s]+@vegvesen\\.no$" .
+_:c14n226 rdf:first _:c14n225 ;
+	rdf:rest rdf:nil .
+_:c14n227 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n226 .
+_:c14n228 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n229 .
+_:c14n229 rdf:first _:c14n230 ;
+	rdf:rest rdf:nil .
 _:c14n23 a owl:Restriction ;
-	owl:maxCardinality 1 ;
+	owl:minCardinality 0 ;
 	owl:onProperty svv:pref_label_de .
+_:c14n230 xsd:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
+_:c14n231 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n232 .
+_:c14n232 rdf:first _:c14n233 ;
+	rdf:rest rdf:nil .
+_:c14n233 xsd:pattern "^([^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}|https?://\\S+)$" .
+_:c14n234 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n235 .
+_:c14n235 rdf:first _:c14n236 ;
+	rdf:rest rdf:nil .
+_:c14n236 xsd:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
+_:c14n237 xsd:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
+_:c14n238 rdf:first _:c14n237 ;
+	rdf:rest rdf:nil .
+_:c14n239 xsd:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
 _:c14n24 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:alt_label_en .
+	owl:onProperty svv:audience .
+_:c14n240 rdf:first _:c14n239 ;
+	rdf:rest rdf:nil .
+_:c14n241 rdf:first _:c14n242 ;
+	rdf:rest rdf:nil .
+_:c14n242 xsd:pattern "^([^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}|https?://\\S+)$" .
 _:c14n25 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:definition_nb .
-_:c14n26 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:pref_label_es .
-_:c14n27 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n213 .
-_:c14n28 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
 	owl:onProperty svv:pref_label_en_gb .
-_:c14n29 a owl:Restriction ;
+_:c14n26 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:pref_label_en .
+_:c14n27 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_de .
+_:c14n28 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:hidden_label .
+	owl:onProperty svv:alt_label_en .
+_:c14n29 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:definition_nb .
 _:c14n3 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty svv:related .
 _:c14n30 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:start_date .
-_:c14n31 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:definition_en_us .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_es .
+_:c14n31 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n241 .
 _:c14n32 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:editorial_note .
+	owl:onProperty svv:pref_label_en_gb .
 _:c14n33 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:data_structure_label .
+	owl:onProperty svv:hidden_label .
 _:c14n34 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:start_date .
+_:c14n35 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:definition_en_us .
+_:c14n36 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:editorial_note .
+_:c14n37 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:data_structure_label .
+_:c14n38 a owl:Restriction ;
 	owl:allValuesFrom xsd:anyURI ;
 	owl:onProperty svv:uri .
-_:c14n35 a owl:Restriction ;
+_:c14n39 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty svv:pref_label_en .
-_:c14n36 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:created_by .
-_:c14n37 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:pref_label_nn .
-_:c14n38 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:value_range .
-_:c14n39 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:scope_note .
 _:c14n4 a owl:Restriction ;
 	owl:allValuesFrom svv:ConceptStatus ;
 	owl:onProperty svv:status .
-_:c14n40 rdf:first concept_status:DEPRECATED ;
-	rdf:rest _:c14n145 .
+_:c14n40 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:created_by .
 _:c14n41 a owl:Restriction ;
-	owl:allValuesFrom xsd:date ;
-	owl:onProperty svv:modified .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:pref_label_nn .
 _:c14n42 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:scope_note_en_us .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:pref_label_es .
 _:c14n43 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:end_date .
+	owl:onProperty svv:value_range .
 _:c14n44 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:relationship_with_source .
-_:c14n45 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:scope_note_en_us .
-_:c14n46 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n196 .
-_:c14n47 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
+	owl:minCardinality 0 ;
 	owl:onProperty svv:scope_note .
+_:c14n45 rdf:first concept_status:DEPRECATED ;
+	rdf:rest _:c14n165 .
+_:c14n46 a owl:Restriction ;
+	owl:allValuesFrom xsd:date ;
+	owl:onProperty svv:modified .
+_:c14n47 a owl:Restriction ;
+	owl:allValuesFrom svv:Collection ;
+	owl:onProperty svv:collections .
 _:c14n48 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:subject .
+	owl:onProperty svv:scope_note_en_us .
 _:c14n49 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:start_date .
+	owl:onProperty svv:end_date .
 _:c14n5 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty svv:modified_by .
 _:c14n50 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:created_by .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:relationship_with_source .
 _:c14n51 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:definition_nb .
-_:c14n52 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty svv:uri .
-_:c14n53 a rdfs:Datatype ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:scope_note_en_us .
+_:c14n52 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n212 .
+	owl:withRestrictions _:c14n224 .
+_:c14n53 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:scope_note .
 _:c14n54 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:alt_label_nn .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:subject .
 _:c14n55 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:scope_note .
+	owl:onProperty svv:start_date .
 _:c14n56 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:example .
+	owl:onProperty svv:created_by .
 _:c14n57 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:value_range .
+	owl:onProperty svv:definition_nb .
 _:c14n58 a owl:Restriction ;
-	owl:allValuesFrom xsd:anyURI ;
-	owl:onProperty svv:exact_match .
-_:c14n59 a owl:Restriction ;
-	owl:maxCardinality 1 ;
+	owl:minCardinality 1 ;
 	owl:onProperty svv:uri .
+_:c14n59 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n238 .
 _:c14n6 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty svv:pref_label_en_us .
 _:c14n60 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:modified .
+	owl:onProperty svv:alt_label_nn .
 _:c14n61 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:pref_label_nb .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:scope_note .
 _:c14n62 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty svv:contact_point .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:pref_label_en_us .
 _:c14n63 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:subject .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:example .
 _:c14n64 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty svv:value_range .
+_:c14n65 a owl:Restriction ;
+	owl:allValuesFrom xsd:anyURI ;
+	owl:onProperty svv:exact_match .
+_:c14n66 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty svv:uri .
-_:c14n65 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty svv:relationship_with_source .
-_:c14n66 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:value_range .
 _:c14n67 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:alt_label_en_us .
+	owl:onProperty svv:modified .
 _:c14n68 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:main_language .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:pref_label_nb .
 _:c14n69 a owl:Restriction ;
-	owl:allValuesFrom xsd:date ;
-	owl:onProperty svv:issued .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:pref_label_nn .
 _:c14n7 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty svv:editorial_note .
 _:c14n70 a owl:Restriction ;
-	owl:allValuesFrom _:c14n199 ;
-	owl:onProperty svv:created_by .
+	owl:minCardinality 1 ;
+	owl:onProperty svv:contact_point .
 _:c14n71 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:hidden_label .
+	owl:minCardinality 0 ;
+	owl:onProperty svv:subject .
 _:c14n72 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:kortnavn .
-_:c14n73 a rdfs:Datatype ;
-	owl:intersectionOf _:c14n186 .
-_:c14n74 a owl:Restriction ;
-	owl:allValuesFrom xsd:anyURI ;
-	owl:onProperty svv:close_match .
-_:c14n75 a owl:Restriction ;
-	owl:allValuesFrom _:c14n192 ;
-	owl:onProperty svv:modified_by .
-_:c14n76 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:pref_label_es .
-_:c14n77 a owl:Restriction ;
+	owl:onProperty svv:uri .
+_:c14n73 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:version_notes .
-_:c14n78 a owl:Restriction ;
-	owl:maxCardinality 1 ;
 	owl:onProperty svv:relationship_with_source .
-_:c14n79 a owl:Restriction ;
+_:c14n74 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:pref_label_nb .
+_:c14n75 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:value_range .
+_:c14n76 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:modified_by .
+	owl:onProperty svv:alt_label_en_us .
+_:c14n77 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:main_language .
+_:c14n78 a owl:Restriction ;
+	owl:allValuesFrom xsd:date ;
+	owl:onProperty svv:issued .
+_:c14n79 a owl:Restriction ;
+	owl:allValuesFrom _:c14n227 ;
+	owl:onProperty svv:created_by .
 _:c14n8 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty svv:pref_label_en .
 _:c14n80 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:pref_label_nn .
+	owl:onProperty svv:hidden_label .
 _:c14n81 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:definition_en .
-_:c14n82 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:title .
+	owl:onProperty svv:kortnavn .
+_:c14n82 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n205 .
 _:c14n83 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:definition_en_us .
-_:c14n84 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:version_info .
-_:c14n85 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty svv:version_notes .
-_:c14n86 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:alt_label_de .
-_:c14n87 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n210 .
+	owl:onProperty svv:pref_label_en .
+_:c14n84 a owl:Restriction ;
+	owl:allValuesFrom xsd:anyURI ;
+	owl:onProperty svv:close_match .
+_:c14n85 a owl:Restriction ;
+	owl:allValuesFrom _:c14n220 ;
+	owl:onProperty svv:modified_by .
+_:c14n86 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:uri .
+_:c14n87 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty svv:pref_label_es .
 _:c14n88 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:publisher .
+	owl:onProperty svv:version_notes .
 _:c14n89 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:audience .
-_:c14n9 rdf:first concept_status:CURRENT ;
-	rdf:rest _:c14n40 .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:relationship_with_source .
+_:c14n9 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty svv:member .
 _:c14n90 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:pref_label_es .
+	owl:onProperty svv:modified_by .
 _:c14n91 a owl:Restriction ;
-	owl:allValuesFrom _:c14n200 ;
-	owl:onProperty svv:kortnavn .
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:pref_label_nn .
 _:c14n92 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:source .
-_:c14n93 a rdfs:Datatype ;
-	owl:intersectionOf _:c14n177 .
-_:c14n94 a owl:Restriction ;
+	owl:onProperty svv:definition_en .
+_:c14n93 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:publisher .
+	owl:onProperty svv:title .
+_:c14n94 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty svv:definition_en_us .
 _:c14n95 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:publisher .
+	owl:onProperty svv:version_info .
 _:c14n96 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty svv:in_scheme .
+	owl:onProperty svv:version_notes .
 _:c14n97 a owl:Restriction ;
-	owl:allValuesFrom xsd:anyURI ;
-	owl:onProperty svv:source .
-_:c14n98 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty svv:notation .
+	owl:onProperty svv:pref_label_es .
+_:c14n98 a owl:Restriction ;
+	owl:allValuesFrom xsd:anyURI ;
+	owl:onProperty svv:uri .
 _:c14n99 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty svv:concepts .
+	owl:onProperty svv:alt_label_de .
 

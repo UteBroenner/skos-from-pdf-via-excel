@@ -13,17 +13,23 @@
 @prefix adms: <http://www.w3.org/ns/adms#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+skos:Collection a sh:NodeShape ;
+	rdfs:comment "A group of concepts, recorded in the main-language scope note of each member (\"Inngår i samlingen X.\" / \"Inngår i samlingene X, Y.\"). There is no Excel row for the collection itself. URI <scheme URI>/samling/<CamelCase name>; the label is the name as written. Unordered and not nested." ;
+	sh:closed true ;
+	sh:ignoredProperties _:c14n51 ;
+	sh:property _:c14n12 , _:c14n14 , _:c14n18 , _:c14n30 , _:c14n4 , _:c14n41 , _:c14n44 , _:c14n56 , _:c14n71 ;
+	sh:targetClass skos:Collection .
 skos:Concept a sh:NodeShape ;
 	rdfs:comment "One row in the vokabular sheet (row 23 onwards)." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n49 ;
-	sh:property _:c14n0 , _:c14n1 , _:c14n10 , _:c14n11 , _:c14n12 , _:c14n13 , _:c14n14 , _:c14n17 , _:c14n18 , _:c14n19 , _:c14n2 , _:c14n23 , _:c14n24 , _:c14n25 , _:c14n26 , _:c14n27 , _:c14n28 , _:c14n29 , _:c14n3 , _:c14n30 , _:c14n31 , _:c14n32 , _:c14n34 , _:c14n36 , _:c14n37 , _:c14n38 , _:c14n39 , _:c14n40 , _:c14n41 , _:c14n42 , _:c14n43 , _:c14n44 , _:c14n46 , _:c14n47 , _:c14n48 , _:c14n5 , _:c14n50 , _:c14n51 , _:c14n52 , _:c14n53 , _:c14n54 , _:c14n56 , _:c14n57 , _:c14n58 , _:c14n6 , _:c14n60 , _:c14n61 , _:c14n62 , _:c14n7 , _:c14n8 ;
+	sh:ignoredProperties _:c14n59 ;
+	sh:property _:c14n0 , _:c14n1 , _:c14n13 , _:c14n15 , _:c14n16 , _:c14n17 , _:c14n19 , _:c14n2 , _:c14n22 , _:c14n23 , _:c14n24 , _:c14n28 , _:c14n29 , _:c14n3 , _:c14n31 , _:c14n32 , _:c14n33 , _:c14n34 , _:c14n35 , _:c14n36 , _:c14n37 , _:c14n38 , _:c14n40 , _:c14n43 , _:c14n45 , _:c14n46 , _:c14n47 , _:c14n48 , _:c14n49 , _:c14n50 , _:c14n52 , _:c14n53 , _:c14n55 , _:c14n57 , _:c14n58 , _:c14n6 , _:c14n60 , _:c14n61 , _:c14n62 , _:c14n63 , _:c14n64 , _:c14n66 , _:c14n67 , _:c14n68 , _:c14n7 , _:c14n70 , _:c14n72 , _:c14n73 , _:c14n8 , _:c14n9 ;
 	sh:targetClass skos:Concept .
 skos:ConceptScheme a sh:NodeShape ;
 	rdfs:comment "One vocabulary = one Excel workbook (vokabular sheet, rows 1-16)." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n21 ;
-	sh:property _:c14n16 , _:c14n20 , _:c14n33 , _:c14n35 , _:c14n45 , _:c14n59 , _:c14n63 , _:c14n9 ;
+	sh:ignoredProperties _:c14n26 ;
+	sh:property _:c14n10 , _:c14n11 , _:c14n21 , _:c14n25 , _:c14n39 , _:c14n42 , _:c14n54 , _:c14n69 , _:c14n74 ;
 	sh:targetClass skos:ConceptScheme .
 _:c14n0 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
@@ -36,79 +42,114 @@ _:c14n1 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 19 ;
 	sh:path skos:hiddenLabel .
-_:c14n10 sh:datatype xsd:string ;
+_:c14n10 sh:class skos:Collection ;
+	sh:description "Container slot for the data file only. Not written to RDF; the collections are written as resources of their own. Built from the scope-note sentence, not from a column." ;
+	sh:nodeKind sh:IRI ;
+	sh:order 8 ;
+	sh:path svv:collections .
+_:c14n11 sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:IRI ;
+	sh:order 0 ;
+	sh:path svv:uri .
+_:c14n12 sh:datatype xsd:string ;
+	sh:description "Recommended term, bokmål. Lowercase except acronyms (S05). Required when the main language is nb (SHACL rule)."@nb ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path skos:prefLabel .
+_:c14n13 sh:datatype xsd:string ;
 	sh:description "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now."@nb ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 18 ;
 	sh:path dct:subject .
-_:c14n11 sh:datatype xsd:date ;
+_:c14n14 sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:IRI ;
+	sh:order 0 ;
+	sh:path svv:uri .
+_:c14n15 sh:datatype xsd:date ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 34 ;
 	sh:path euvoc:startDate .
-_:c14n12 sh:class skos:Concept ;
+_:c14n16 sh:class skos:Concept ;
 	sh:nodeKind sh:IRI ;
 	sh:order 22 ;
 	sh:path skos:related .
-_:c14n13 sh:datatype xsd:string ;
+_:c14n17 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 45 ;
 	sh:path skos:altLabel .
-_:c14n14 sh:datatype xsd:string ;
+_:c14n18 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 5 ;
+	sh:path skos:prefLabel .
+_:c14n19 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 14 ;
 	sh:path skosno:relationshipWithSource .
-_:c14n15 rdf:first concept_status:DEPRECATED ;
-	rdf:rest _:c14n55 .
-_:c14n16 sh:datatype xsd:string ;
-	sh:maxCount 1 ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 2 ;
-	sh:path dct:title .
-_:c14n17 sh:datatype xsd:string ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 32 ;
-	sh:path adms:versionNotes .
-_:c14n18 sh:datatype xsd:string ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 3 ;
-	sh:path skos:prefLabel .
-_:c14n19 sh:datatype xsd:date ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 29 ;
-	sh:path dct:modified .
 _:c14n2 sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path svv:uri .
-_:c14n20 sh:datatype xsd:string ;
+_:c14n20 rdf:first concept_status:DEPRECATED ;
+	rdf:rest _:c14n65 .
+_:c14n21 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 2 ;
+	sh:path dct:title .
+_:c14n22 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 32 ;
+	sh:path adms:versionNotes .
+_:c14n23 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 3 ;
+	sh:path skos:prefLabel .
+_:c14n24 sh:datatype xsd:date ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 29 ;
+	sh:path dct:modified .
+_:c14n25 sh:datatype xsd:string ;
 	sh:description "BCP 47 tag of the language in which every concept must have a prefLabel and a definition (scheme row \"hovedspråk\"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl)." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path svv:mainLanguage .
-_:c14n21 rdf:first rdf:type ;
+_:c14n26 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n22 rdf:first concept_status:CANDIDATE ;
-	rdf:rest _:c14n4 .
-_:c14n23 sh:datatype xsd:string ;
+_:c14n27 rdf:first concept_status:CANDIDATE ;
+	rdf:rest _:c14n5 .
+_:c14n28 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 23 ;
 	sh:path skosno:relationRole .
-_:c14n24 sh:datatype xsd:string ;
+_:c14n29 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 41 ;
 	sh:path skos:prefLabel .
-_:c14n25 sh:datatype xsd:string ;
+_:c14n3 sh:datatype xsd:string ;
+	sh:nodeKind sh:Literal ;
+	sh:order 44 ;
+	sh:path skos:altLabel .
+_:c14n30 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 7 ;
+	sh:path skos:prefLabel .
+_:c14n31 sh:datatype xsd:string ;
 	sh:description "<kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column A). Relations in Excel use the concept name." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
@@ -116,43 +157,39 @@ _:c14n25 sh:datatype xsd:string ;
 	sh:order 1 ;
 	sh:path dct:identifier ;
 	sh:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
-_:c14n26 sh:datatype xsd:string ;
+_:c14n32 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 7 ;
 	sh:path skos:definition .
-_:c14n27 sh:datatype xsd:string ;
+_:c14n33 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 8 ;
 	sh:path skos:definition .
-_:c14n28 sh:datatype xsd:string ;
+_:c14n34 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 43 ;
 	sh:path skos:altLabel .
-_:c14n29 sh:datatype xsd:string ;
+_:c14n35 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 16 ;
 	sh:path skos:editorialNote .
-_:c14n3 sh:datatype xsd:string ;
-	sh:nodeKind sh:Literal ;
-	sh:order 44 ;
-	sh:path skos:altLabel .
-_:c14n30 sh:class skos:Concept ;
+_:c14n36 sh:class skos:Concept ;
 	sh:nodeKind sh:IRI ;
 	sh:order 21 ;
 	sh:path xkos:isPartOf .
-_:c14n31 sh:datatype xsd:string ;
+_:c14n37 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 17 ;
 	sh:path skos:example .
-_:c14n32 sh:datatype xsd:string ;
+_:c14n38 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 11 ;
 	sh:path skos:altLabel .
-_:c14n33 sh:datatype xsd:string ;
+_:c14n39 sh:datatype xsd:string ;
 	sh:description "Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14)." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
@@ -160,117 +197,140 @@ _:c14n33 sh:datatype xsd:string ;
 	sh:order 1 ;
 	sh:path svv:kortnavn ;
 	sh:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" .
-_:c14n34 sh:datatype xsd:string ;
+_:c14n4 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 4 ;
+	sh:path skos:prefLabel .
+_:c14n40 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 10 ;
 	sh:path skos:altLabel .
-_:c14n35 sh:datatype xsd:date ;
+_:c14n41 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 6 ;
+	sh:path skos:prefLabel .
+_:c14n42 sh:datatype xsd:date ;
 	sh:description "System-generated at publication." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 6 ;
 	sh:path dct:issued .
-_:c14n36 sh:datatype xsd:date ;
+_:c14n43 sh:datatype xsd:date ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 35 ;
 	sh:path euvoc:endDate .
-_:c14n37 sh:datatype xsd:string ;
+_:c14n44 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 2 ;
+	sh:path skos:prefLabel .
+_:c14n45 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 46 ;
 	sh:path skos:altLabel .
-_:c14n38 sh:datatype xsd:string ;
+_:c14n46 sh:datatype xsd:string ;
 	sh:description "Obligatory in the template, but left empty by extraction for the expert (S06)."@nn ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path skos:prefLabel .
-_:c14n39 sh:datatype xsd:string ;
+_:c14n47 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 15 ;
 	sh:path skos:scopeNote .
-_:c14n4 rdf:first concept_status:CURRENT ;
-	rdf:rest _:c14n15 .
-_:c14n40 sh:class skos:Concept ;
+_:c14n48 sh:class skos:Concept ;
 	sh:nodeKind sh:IRI ;
 	sh:order 20 ;
 	sh:path skos:broader .
-_:c14n41 sh:datatype xsd:string ;
+_:c14n49 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 40 ;
 	sh:path skos:prefLabel .
-_:c14n42 sh:datatype xsd:string ;
+_:c14n5 rdf:first concept_status:CURRENT ;
+	rdf:rest _:c14n20 .
+_:c14n50 sh:datatype xsd:string ;
 	sh:description "Usage note in US English, e.g. a warning that a term means another concept elsewhere."@en-us ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 48 ;
 	sh:path skos:scopeNote .
-_:c14n43 sh:datatype xsd:string ;
+_:c14n51 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n52 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 36 ;
 	sh:path skosno:dataStructureLabel .
-_:c14n44 sh:datatype xsd:string ;
+_:c14n53 sh:datatype xsd:string ;
 	sh:description "Required when the main language is nb (SHACL rule)."@nb ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 6 ;
 	sh:path skos:definition .
-_:c14n45 sh:datatype xsd:string ;
+_:c14n54 sh:datatype xsd:string ;
 	sh:description "System-generated at publication." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 5 ;
 	sh:path dct:publisher .
-_:c14n46 sh:datatype xsd:string ;
+_:c14n55 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 9 ;
 	sh:path skos:altLabel .
-_:c14n47 sh:datatype xsd:string ;
+_:c14n56 sh:datatype xsd:string ;
+	sh:description "Obligatory in the template, but left empty by extraction for the expert (S06)."@nn ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 3 ;
+	sh:path skos:prefLabel .
+_:c14n57 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 39 ;
 	sh:path skos:prefLabel .
-_:c14n48 sh:datatype xsd:string ;
+_:c14n58 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 5 ;
 	sh:path skos:notation .
-_:c14n49 rdf:first rdf:type ;
+_:c14n59 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n5 sh:datatype xsd:string ;
+_:c14n6 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 47 ;
 	sh:path skos:definition .
-_:c14n50 sh:nodeKind sh:IRI ;
+_:c14n60 sh:nodeKind sh:IRI ;
 	sh:order 24 ;
 	sh:path skos:exactMatch .
-_:c14n51 sh:maxCount 1 ;
+_:c14n61 sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 13 ;
 	sh:path dct:source .
-_:c14n52 sh:datatype xsd:string ;
+_:c14n62 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 37 ;
 	sh:path skosno:valueRange .
-_:c14n53 sh:datatype xsd:string ;
+_:c14n63 sh:datatype xsd:string ;
 	sh:description "Recommended term, bokmål. Lowercase except acronyms (S05). Required when the main language is nb (SHACL rule)."@nb ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path skos:prefLabel .
-_:c14n54 sh:description "Set by the converter from the scheme URI." ;
+_:c14n64 sh:description "Set by the converter from the scheme URI." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 49 ;
 	sh:path skos:inScheme .
-_:c14n55 rdf:first concept_status:RETIRED ;
+_:c14n65 rdf:first concept_status:RETIRED ;
 	rdf:rest rdf:nil .
-_:c14n56 sh:datatype xsd:string ;
+_:c14n66 sh:datatype xsd:string ;
 	sh:description "E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no (fixed value in the field instructions); the schema accepts any address." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
@@ -278,52 +338,58 @@ _:c14n56 sh:datatype xsd:string ;
 	sh:order 26 ;
 	sh:path dcat:contactPoint ;
 	sh:pattern "^([^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}|https?://\\S+)$" .
-_:c14n57 sh:datatype xsd:string ;
+_:c14n67 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 31 ;
 	sh:path owl:versionInfo .
-_:c14n58 sh:in _:c14n22 ;
+_:c14n68 sh:in _:c14n27 ;
 	sh:maxCount 1 ;
 	sh:order 33 ;
 	sh:path euvoc:status .
-_:c14n59 sh:class skos:Concept ;
+_:c14n69 sh:class skos:Concept ;
 	sh:description "Container slot for the data file only. Not written to RDF; the RDF writer emits skos:inScheme on each concept instead." ;
 	sh:nodeKind sh:IRI ;
 	sh:order 7 ;
 	sh:path svv:concepts .
-_:c14n6 sh:datatype xsd:date ;
+_:c14n7 sh:datatype xsd:date ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 27 ;
 	sh:path dct:created .
-_:c14n60 sh:datatype xsd:string ;
+_:c14n70 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 12 ;
 	sh:path dct:audience .
-_:c14n61 sh:datatype xsd:string ;
+_:c14n71 sh:class skos:Concept ;
+	sh:description "Concepts whose main-language scope note names the collection." ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:IRI ;
+	sh:order 8 ;
+	sh:path skos:member .
+_:c14n72 sh:datatype xsd:string ;
 	sh:description "Hidden column; template formula = dct:creator of the vocabulary (cell B16)." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 28 ;
 	sh:path dct:contributor ;
 	sh:pattern "^[^@\\s]+@vegvesen\\.no$" .
-_:c14n62 sh:datatype xsd:string ;
+_:c14n73 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 30 ;
 	sh:path dct:contributor ;
 	sh:pattern "^[^@\\s]+@vegvesen\\.no$" .
-_:c14n63 sh:datatype xsd:string ;
+_:c14n74 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path dct:creator .
-_:c14n7 sh:nodeKind sh:IRI ;
+_:c14n8 sh:nodeKind sh:IRI ;
 	sh:order 25 ;
 	sh:path skos:closeMatch .
-_:c14n8 sh:datatype xsd:integer ;
+_:c14n9 sh:datatype xsd:integer ;
 	sh:description "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes." ;
 	sh:maxCount 1 ;
 	sh:maxInclusive 3 ;
@@ -331,9 +397,4 @@ _:c14n8 sh:datatype xsd:integer ;
 	sh:nodeKind sh:Literal ;
 	sh:order 38 ;
 	sh:path svv:tier .
-_:c14n9 sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:IRI ;
-	sh:order 0 ;
-	sh:path svv:uri .
 

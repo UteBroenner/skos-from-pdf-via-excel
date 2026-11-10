@@ -1,5 +1,74 @@
 {
     "$defs": {
+        "Collection": {
+            "additionalProperties": false,
+            "description": "A group of concepts, recorded in the main-language scope note of each member (\"Inng\u00e5r i samlingen X.\" / \"Inng\u00e5r i samlingene X, Y.\"). There is no Excel row for the collection itself. URI <scheme URI>/samling/<CamelCase name>; the label is the name as written. Unordered and not nested.",
+            "properties": {
+                "member": {
+                    "description": "Concepts whose main-language scope note names the collection.",
+                    "items": {
+                        "format": "uri",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "pref_label_de": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_en": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_en_gb": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_en_us": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_es": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_nb": {
+                    "description": "Recommended term, bokm\u00e5l. Lowercase except acronyms (S05). Required when the main language is nb (SHACL rule).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "pref_label_nn": {
+                    "description": "Obligatory in the template, but left empty by extraction for the expert (S06).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "uri": {
+                    "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.",
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "uri",
+                "member"
+            ],
+            "title": "Collection",
+            "type": "object"
+        },
         "Concept": {
             "additionalProperties": false,
             "description": "One row in the vokabular sheet (row 23 onwards).",
@@ -378,6 +447,16 @@
             "additionalProperties": false,
             "description": "One vocabulary = one Excel workbook (vokabular sheet, rows 1-16).",
             "properties": {
+                "collections": {
+                    "description": "Container slot for the data file only. Not written to RDF; the collections are written as resources of their own. Built from the scope-note sentence, not from a column.",
+                    "items": {
+                        "$ref": "#/$defs/Collection"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "concepts": {
                     "description": "Container slot for the data file only. Not written to RDF; the RDF writer emits skos:inScheme on each concept instead.",
                     "items": {
@@ -456,6 +535,16 @@
     "description": "One vocabulary = one Excel workbook (vokabular sheet, rows 1-16).",
     "metamodel_version": "1.12.0",
     "properties": {
+        "collections": {
+            "description": "Container slot for the data file only. Not written to RDF; the collections are written as resources of their own. Built from the scope-note sentence, not from a column.",
+            "items": {
+                "$ref": "#/$defs/Collection"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
         "concepts": {
             "description": "Container slot for the data file only. Not written to RDF; the RDF writer emits skos:inScheme on each concept instead.",
             "items": {

@@ -13,6 +13,7 @@ from dataclasses import dataclass, asdict
 
 from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi
 from .uri import LOCAL_NAME_RE, expected_name
+from .samling import collections, sentence_problems
 
 STATUS_VALUES = {"kandidat", "gjeldende", "utdatert", "forkastet"}
 TIERS = {"1", "2", "3"}
@@ -62,6 +63,14 @@ RULES = {
     "VT-STATUS-LITERAL": ("warning", "status written as RDF literal; use the plain list value", ""),
     "VT-NN-MISSING": ("info", "nn label/definition empty (left for expert)", "S06/S17/S21"),
     "VT-CONTACT": ("warning", "dcat:contactPoint missing", ""),
+    "VT-COLL-MEMBERS": ("info", "collection recorded in scope notes (\"Inngår i samlingen …\"), with its members", ""),
+    "VT-COLL-SINGLE": ("warning", "collection has only one member; check the spelling of the name", ""),
+    "VT-COLL-SIMILAR": ("warning", "two collection names are almost the same; possibly a typo", ""),
+    "VT-COLL-SPELLING": ("warning", "one collection written in more than one way; the first spelling becomes the label", ""),
+    "VT-COLL-CONCEPT": ("info", "collection has the same name as a concept; if that row is only a heading, set its status to forkastet", ""),
+    "VT-COLL-SYNTAX": ("warning", "main-language scope note mentions a collection but not as \"Inngår i samlingen X.\" or \"Inngår i samlingene X, Y.\"", ""),
+    "VT-COLL-FORM": ("info", "use \"samlingen\" for one collection and \"samlingene\" for several", ""),
+    "VT-COLL-OTHER-LANG": ("warning", "collection sentence in a scope note that is not in the main language; only the main-language note is read", ""),
 }
 
 
@@ -248,6 +257,33 @@ def validate(v: Vocabulary) -> list[Finding]:
         n_parts = lab.count(",") + lab.count(" og ") + lab.count(" eller ")
         if n_parts >= 1 and " og " in lab and narrower_count[c.key] >= 2:
             F.append(_f("VT-LABEL-GROUPING", c, f"{c.get(LF)} ({narrower_count[c.key]} narrower)"))
+    F += _collection_findings(v, by_key)
+    return F
+
+
+def _collection_findings(v: Vocabulary, by_key) -> list[Finding]:
+    """Collections from the scope-note sentence (see samling.py)."""
+    import difflib
+    F = [_f(rule, c, detail) for c, rule, detail in sentence_problems(v)]
+    cols = collections(v)
+    names = {(c.get("uri") or "").strip() for c in v.concepts}
+    def coll(rule, col, extra):
+        first = by_key[col.members[0]]
+        return Finding(rule, RULES[rule][0], first.key, first.sheet, first.row,
+                       f"{RULES[rule][1]}: {extra}", RULES[rule][2])
+    for col in cols.values():
+        F.append(coll("VT-COLL-MEMBERS", col, f"{col.label} ({len(col.members)}): {'; '.join(col.members)}"))
+        if len(col.members) == 1:
+            F.append(coll("VT-COLL-SINGLE", col, col.label))
+        if len(col.spellings) > 1:
+            F.append(coll("VT-COLL-SPELLING", col, " / ".join(sorted(col.spellings))))
+        if col.name in names:
+            F.append(coll("VT-COLL-CONCEPT", col, col.name))
+    keys = sorted(cols)
+    for i, a in enumerate(keys):
+        for b in keys[i + 1:]:
+            if difflib.SequenceMatcher(None, a.lower(), b.lower()).ratio() >= 0.9:
+                F.append(coll("VT-COLL-SIMILAR", cols[a], f"{cols[a].label} / {cols[b].label}"))
     return F
 
 
