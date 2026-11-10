@@ -95,6 +95,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'svv',
                              'prefix_reference': 'https://w3id.org/linkml/'},
                   'owl': {'prefix_prefix': 'owl',
                           'prefix_reference': 'http://www.w3.org/2002/07/owl#'},
+                  'relationship_with_source_type': {'prefix_prefix': 'relationship_with_source_type',
+                                                    'prefix_reference': 'https://data.norge.no/vocabulary/relationship-with-source-type#'},
                   'skos': {'prefix_prefix': 'skos',
                            'prefix_reference': 'http://www.w3.org/2004/02/skos/core#'},
                   'skosno': {'prefix_prefix': 'skosno',
@@ -107,6 +109,15 @@ linkml_meta = LinkMLMeta({'default_prefix': 'svv',
                            'prefix_reference': 'http://rdf-vocabulary.ddialliance.org/xkos#'}},
      'source_file': 'schema/svv_vokabular.yaml',
      'title': 'SKOS-vokabular (Excel-mal v8)'} )
+
+class RelationshipWithSource(str, Enum):
+    """
+    Values of skosno:relationshipWithSource (SKOS-AP-NO). direct-from-source = definition copied or quoted from the source; derived-from-source = paraphrased or derived from the source; self-composed = written without a source.
+    """
+    self_composed = "self-composed"
+    derived_from_source = "derived-from-source"
+    direct_from_source = "direct-from-source"
+
 
 class ConceptStatus(str, Enum):
     """
@@ -276,7 +287,7 @@ class Concept(ConfiguredBaseModel):
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'}},
          'domain_of': ['Concept'],
          'slot_uri': 'dct:source'} })
-    relationship_with_source: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'O'},
+    relationship_with_source: Optional[RelationshipWithSource] = Field(default=None, description="""How the definition relates to its source (SKOS-AP-NO). In Excel the value may also be written with spaces (\"derived from source\"); the converter writes the hyphenated form.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'O'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'forhold_til_kilde'}},
          'domain_of': ['Concept'],

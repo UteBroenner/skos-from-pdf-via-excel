@@ -353,10 +353,15 @@
                     ]
                 },
                 "relationship_with_source": {
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RelationshipWithSource"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "How the definition relates to its source (SKOS-AP-NO). In Excel the value may also be written with spaces (\"derived from source\"); the converter writes the hyphenated form."
                 },
                 "scope_note": {
                     "type": [
@@ -526,6 +531,16 @@
                 "forkastet"
             ],
             "title": "ConceptStatus",
+            "type": "string"
+        },
+        "RelationshipWithSource": {
+            "description": "Values of skosno:relationshipWithSource (SKOS-AP-NO). direct-from-source = definition copied or quoted from the source; derived-from-source = paraphrased or derived from the source; self-composed = written without a source.",
+            "enum": [
+                "self-composed",
+                "derived-from-source",
+                "direct-from-source"
+            ],
+            "title": "RelationshipWithSource",
             "type": "string"
         }
     },

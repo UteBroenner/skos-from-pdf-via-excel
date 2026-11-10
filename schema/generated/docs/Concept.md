@@ -129,6 +129,15 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
         
       Concept : relationship_with_source
         
+          
+    
+        
+        
+        Concept --> "0..1" RelationshipWithSource : relationship_with_source
+        click RelationshipWithSource href "../RelationshipWithSource/"
+    
+
+        
       Concept : scope_note
         
       Concept : scope_note_en_us
@@ -193,7 +202,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [alt_label_nn](alt_label_nn.md) | * <br/> [String](String.md) |  | direct |
 | [audience](audience.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [source](source.md) | 0..1 <br/> [uri](uri.md) |  | direct |
-| [relationship_with_source](relationship_with_source.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [relationship_with_source](relationship_with_source.md) | 0..1 <br/> [RelationshipWithSource](RelationshipWithSource.md) | How the definition relates to its source (SKOS-AP-NO) | direct |
 | [scope_note](scope_note.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [editorial_note](editorial_note.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [example](example.md) | 0..1 <br/> [String](String.md) |  | direct |
@@ -667,13 +676,16 @@ attributes:
       excel_name:
         tag: excel_name
         value: forhold_til_kilde
+    description: How the definition relates to its source (SKOS-AP-NO). In Excel the
+      value may also be written with spaces ("derived from source"); the converter
+      writes the hyphenated form.
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: skosno:relationshipWithSource
     owner: Concept
     domain_of:
     - Concept
-    range: string
+    range: RelationshipWithSource
   scope_note:
     name: scope_note
     annotations:

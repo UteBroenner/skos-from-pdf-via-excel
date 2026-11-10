@@ -17,6 +17,7 @@ from .samling import collections, sentence_problems
 
 STATUS_VALUES = {"kandidat", "gjeldende", "utdatert", "forkastet"}
 TIERS = {"1", "2", "3"}
+SOURCE_RELATIONS = {"self-composed", "derived-from-source", "direct-from-source"}   # skosno:relationshipWithSource
 PREFIX_RE = re.compile(r"(?<![\w-])vok:(?=[A-Za-z0-9])")
 KODE_RE = re.compile(r"(?<![\w-])kode:(?=[A-Za-z0-9])")     # code-list references: kept until code lists are decided
 
@@ -63,6 +64,7 @@ RULES = {
     "VT-LABEL-VARIANT": ("info", "term means a different concept in another regional variant of the language (e.g. en-US vs en-GB)", ""),
     "VT-LABEL-CASE": ("warning", "main-language prefLabel starts with a capital letter (not an acronym)", "S05"),
     "VT-LABEL-GROUPING": ("warning", "label lists several things and has narrower concepts; possibly a table heading, not a concept", ""),
+    "VT-SOURCE-REL": ("warning", "skosno:relationshipWithSource is not self-composed, derived-from-source or direct-from-source", "SKOS-AP-NO"),
     "VT-STATUS": ("warning", "status not in statusliste", ""),
     "VT-STATUS-LITERAL": ("warning", "status written as RDF literal; use the plain list value", ""),
     "VT-NN-MISSING": ("info", "nn label/definition empty (left for expert)", "S06/S17/S21"),
@@ -193,6 +195,9 @@ def validate(v: Vocabulary) -> list[Finding]:
             F.append(_f("VT-STATUS-LITERAL", c, raw_st))
         elif st and st not in STATUS_VALUES:
             F.append(_f("VT-STATUS", c, st))
+        rel = c.get("relationship_with_source")
+        if rel and "-".join(rel.strip().lower().split()) not in SOURCE_RELATIONS:
+            F.append(_f("VT-SOURCE-REL", c, rel))
         if not c.get("contact_point"):
             F.append(_f("VT-CONTACT", c))
         lab = c.get(LF) or ""

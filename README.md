@@ -250,6 +250,7 @@ so use one reviewer per file/domain at a time.
 | VT-LABEL-VARIANT | info | same term means different concepts in two regional variants (en-US vs en-GB); this is the difference the vocabulary documents |
 | VT-LABEL-CASE | warning | main-language prefLabel lowercase, except acronyms (S05) |
 | VT-LABEL-GROUPING | warning | heuristic: label lists several items ("… og …") and has ≥2 narrower concepts, so it is probably a table heading |
+| VT-SOURCE-REL | warning | `skosno:relationshipWithSource` is `self-composed`, `derived-from-source` or `direct-from-source` (spaces instead of hyphens are accepted) |
 | VT-STATUS / VT-STATUS-LITERAL | warning | status is one of kandidat, gjeldende, utdatert, forkastet, written as a plain value |
 | VT-TIER-INVALID | warning | tier is 1, 2 or 3 |
 | VT-CONTACT | warning | contactPoint present |

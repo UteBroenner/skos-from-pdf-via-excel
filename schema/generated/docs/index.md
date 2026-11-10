@@ -68,7 +68,7 @@ Name: svv_vokabular
 | [publisher](publisher.md) | System-generated at publication |
 | [related](related.md) |  |
 | [relation_role](relation_role.md) |  |
-| [relationship_with_source](relationship_with_source.md) |  |
+| [relationship_with_source](relationship_with_source.md) | How the definition relates to its source (SKOS-AP-NO) |
 | [scope_note](scope_note.md) |  |
 | [scope_note_en_us](scope_note_en_us.md) | Usage note in US English, e |
 | [source](source.md) |  |
@@ -88,6 +88,7 @@ Name: svv_vokabular
 | Enumeration | Description |
 | --- | --- |
 | [ConceptStatus](ConceptStatus.md) | Status values from the template's statusliste, mapped to the EU concept-statu... |
+| [RelationshipWithSource](RelationshipWithSource.md) | Values of skosno:relationshipWithSource (SKOS-AP-NO) |
 
 
 ## Types

@@ -25,6 +25,7 @@ prefixes:
   vok: http://example.org/vegvesen/vokabular/
   svv: http://example.org/vegvesen/vokabular/def#
   concept_status: http://publications.europa.eu/resource/authority/concept-status/
+  relationship_with_source_type: https://data.norge.no/vocabulary/relationship-with-source-type#
 
 default_prefix: svv
 default_range: string
@@ -305,6 +306,10 @@ slots:
     annotations: {excel_column: N, excel_name: kilde, requirement: valgfri}
   relationship_with_source:
     slot_uri: skosno:relationshipWithSource
+    range: RelationshipWithSource
+    description: >-
+      How the definition relates to its source (SKOS-AP-NO). In Excel the value may also be written with spaces
+      ("derived from source"); the converter writes the hyphenated form.
     annotations: {excel_column: O, excel_name: forhold_til_kilde}
   scope_note:
     slot_uri: skos:scopeNote
@@ -412,6 +417,14 @@ slots:
     annotations: {excel_column: "AO (base template), AY (language extension): always the last column, outside the Excel table", excel_name: tier, requirement: internt}
 
 enums:
+  RelationshipWithSource:
+    description: >-
+      Values of skosno:relationshipWithSource (SKOS-AP-NO). direct-from-source = definition copied or quoted from the
+      source; derived-from-source = paraphrased or derived from the source; self-composed = written without a source.
+    permissible_values:
+      self-composed: {meaning: relationship_with_source_type:self-composed}
+      derived-from-source: {meaning: relationship_with_source_type:derived-from-source}
+      direct-from-source: {meaning: relationship_with_source_type:direct-from-source}
   ConceptStatus:
     description: Status values from the template's statusliste, mapped to the EU concept-status authority table.
     permissible_values:
