@@ -16,7 +16,7 @@ development into ontologies.
 | --- | --- | --- |
 | `vocabtool/` | Python tools: check, v7→v8 migration, graph, LinkML/RDF conversion, language columns, clash notes | in repository |
 | `schema/` | LinkML schema for template v8, generated artefacts (JSON Schema, Pydantic, SHACL, OWL, docs), cross-row SHACL rules | in repository |
-| `templates/` | Excel template v8 and v8 with language extension (en-US, en-GB, de, es, en-US definitions and scope notes) | in repository |
+| `templates/` | Empty Excel templates: v8 (master), v8 with language extension, and v7 (previous version), see `templates/README.md` | in repository |
 | `datasets/hekling/` | Example vocabulary: 77 crochet stitches and stitch patterns, main language en-US, with check reports, graph and RDF in `out/` | in repository |
 | `instructions/` | Extraction instructions (project instructions, prompt template, SKOS field instructions, RDF conversion rules) | **not yet added** |
 | `samples/`, `out/` | Your own (e.g. Vegvesen) workbooks and their outputs | local only, ignored by git |
@@ -193,7 +193,7 @@ vocabtool/clash_notes.py     draft scope notes for label clashes
 vocabtool/uri.py             concept names (CamelCase) and URIs
 vocabtool/rename.py          rename a concept and its references
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
-templates/                   Excel template v8 and v8 with language extension
+templates/                   empty templates: v8 (master), v8 with language extension, v7
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)
 datasets/hekling/out/        its check report, graph, YAML and Turtle
 samples/                     your workbooks (not in git)

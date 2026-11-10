@@ -232,7 +232,7 @@ def read_workbook(path: str | Path) -> Vocabulary:
     kortnavn = meta.get("kortnavn")
     if kortnavn and kortnavn.startswith("<"):
         kortnavn = None
-    if not kortnavn and meta.get("scheme_uri") and not str(meta["scheme_uri"]).startswith("="):
+    if not kortnavn and version != "v8" and meta.get("scheme_uri") and not str(meta["scheme_uri"]).startswith("="):
         kortnavn = str(meta["scheme_uri"]).rstrip("/").rsplit("/", 1)[-1]
     # v8: column A is the formula <kortnavn>-<name>; files saved by tools have no cached value
     if version == "v8" and kortnavn:

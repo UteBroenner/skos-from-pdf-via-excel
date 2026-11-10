@@ -143,7 +143,9 @@ def validate(v: Vocabulary) -> list[Finding]:
                 F.append(_f("VT-URI-DUPLICATE", c, u))
     keys = Counter(c.key for c in concepts)
     by_key = v.by_key()
-    if v.version == "v8" and v.kortnavn and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*", v.kortnavn):
+    if v.version == "v8" and not v.kortnavn:
+        F.append(Finding("VT-KORTNAVN", "error", None, None, None, "kortnavn (short name of the vocabulary) is empty", "template v8"))
+    elif v.version == "v8" and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*", v.kortnavn):
         F.append(Finding("VT-KORTNAVN", "error", None, None, None, RULES["VT-KORTNAVN"][1] + f": {v.kortnavn}", "template v8"))
 
     for c in concepts:
