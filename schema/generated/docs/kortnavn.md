@@ -6,7 +6,7 @@ search:
 # Slot: kortnavn 
 
 
-_Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14)._
+_Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14)._
 
 
 
@@ -52,7 +52,7 @@ URI: [svv:kortnavn](http://example.org/vegvesen/vokabular/def#kortnavn)
 
 | Property | Value |
 | --- | --- |
-| Regex Pattern | `^[A-Za-z0-9]{1,4}$` |
+| Regex Pattern | `^[A-Za-z0-9][A-Za-z0-9-]*$` |
 
 
 
@@ -105,8 +105,8 @@ annotations:
   excel_cell:
     tag: excel_cell
     value: B14
-description: Short name of the vocabulary; the template asks for max 4 letters or
-  digits (cell B14).
+description: Short name of the vocabulary, letters, digits and hyphens, e.g. N101
+  or crochet-us (cell B14).
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: svv:kortnavn
@@ -114,7 +114,7 @@ domain_of:
 - ConceptScheme
 range: string
 required: true
-pattern: ^[A-Za-z0-9]{1,4}$
+pattern: ^[A-Za-z0-9][A-Za-z0-9-]*$
 
 ```
 </details></div>

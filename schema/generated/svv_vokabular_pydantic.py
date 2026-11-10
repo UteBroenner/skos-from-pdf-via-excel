@@ -127,12 +127,12 @@ class ConceptScheme(ConfiguredBaseModel):
          'from_schema': 'http://example.org/vegvesen/vokabular/def/schema',
          'tree_root': True})
 
-    uri: str = Field(default=..., description="""Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
+    uri: str = Field(default=..., description="""Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
                          'excel_name': {'tag': 'excel_name', 'value': 'begrep'},
                          'excel_value': {'tag': 'excel_value',
                                          'value': 'CamelCase concept name only'}},
          'domain_of': ['ConceptScheme', 'Concept']} })
-    kortnavn: str = Field(default=..., description="""Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B14'}},
+    kortnavn: str = Field(default=..., description="""Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14).""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B14'}},
          'domain_of': ['ConceptScheme'],
          'slot_uri': 'svv:kortnavn'} })
     title: str = Field(default=..., json_schema_extra = { "linkml_meta": {'annotations': {'excel_cell': {'tag': 'excel_cell', 'value': 'B15'}},
@@ -157,7 +157,7 @@ class ConceptScheme(ConfiguredBaseModel):
 
     @field_validator('kortnavn')
     def pattern_kortnavn(cls, v):
-        pattern=re.compile(r"^[A-Za-z0-9]{1,4}$")
+        pattern=re.compile(r"^[A-Za-z0-9][A-Za-z0-9-]*$")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):
@@ -176,7 +176,7 @@ class Concept(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'skos:Concept',
          'from_schema': 'http://example.org/vegvesen/vokabular/def/schema'})
 
-    uri: str = Field(default=..., description="""Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
+    uri: str = Field(default=..., description="""Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.""", json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'B'},
                          'excel_name': {'tag': 'excel_name', 'value': 'begrep'},
                          'excel_value': {'tag': 'excel_value',
                                          'value': 'CamelCase concept name only'}},

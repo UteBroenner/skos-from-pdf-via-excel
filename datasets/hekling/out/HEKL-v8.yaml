@@ -32,7 +32,7 @@ concepts:
   - p
   definition_en_us: basic unit of crochet, formed by drawing the yarn through one or more loops on the hook
   scope_note_en_us: 'Caution: ''punto'' is the Spanish name of this concept and the Spanish alternative name of StitchPattern
-    (stitch pattern). ''st'' is the UK and US abbreviation of this concept and the Norwegian abbreviation of DoubleCrochet-ENUS
+    (stitch pattern). ''st'' is the UK and US abbreviation of this concept and the Norwegian abbreviation of DoubleCrochet
     (double crochet).'
 - uri: http://example.org/vegvesen/vokabular/crochet-us/Chain
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
@@ -239,8 +239,8 @@ concepts:
   - pb
   definition_en_us: stitch in which the hook is inserted into the work, the yarn is pulled up (two loops on the hook) and
     drawn through both loops at once
-  scope_note_en_us: 'Caution: ''dc'' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochet-ENUS
-    (double crochet). ''double crochet'' is the UK name of this concept and the US name of DoubleCrochet-ENUS.'
+  scope_note_en_us: 'Caution: ''dc'' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochet (double
+    crochet). ''double crochet'' is the UK name of this concept and the US name of DoubleCrochet.'
 - uri: http://example.org/vegvesen/vokabular/crochet-us/HalfDoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
   identifier: crochet-us-HalfDoubleCrochet
@@ -278,9 +278,9 @@ concepts:
   - media vareta
   definition_en_us: stitch made with one yarn over before inserting the hook; the yarn is pulled up (three loops on the hook)
     and drawn through all three at once
-- uri: http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet-ENUS
+- uri: http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-DoubleCrochet-ENUS
+  identifier: crochet-us-DoubleCrochet
   pref_label_nb: stav
   definition_nb: maske der det lages ett kast før nålen stikkes inn i arbeidet; garnet hentes opp og trekkes gjennom to og
     to løkker, to ganger
@@ -337,11 +337,11 @@ concepts:
   scope_note_en_us: 'Caution: ''dc'' is the US abbreviation of this concept and the UK abbreviation of SingleCrochet (single
     crochet). ''double crochet'' is the US name of this concept and the UK name of SingleCrochet (single crochet). ''st''
     is the Norwegian abbreviation of this concept and the UK and US abbreviation of Stitch (stitch). ''tr'' is the UK abbreviation
-    of this concept and the US abbreviation of TrebleCrochet-ENUS (treble crochet). ''treble crochet'' is the UK name of this
-    concept and the US name of TrebleCrochet-ENUS.'
-- uri: http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochet-ENUS
+    of this concept and the US abbreviation of TrebleCrochet (treble crochet). ''treble crochet'' is the UK name of this concept
+    and the US name of TrebleCrochet.'
+- uri: http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-TrebleCrochet-ENUS
+  identifier: crochet-us-TrebleCrochet
   pref_label_nb: dobbelstav
   definition_nb: maske der det lages to kast før nålen stikkes inn i arbeidet; garnet hentes opp og trekkes gjennom to og
     to løkker, tre ganger
@@ -375,13 +375,13 @@ concepts:
   - pad
   definition_en_us: stitch made with two yarn overs before inserting the hook; the yarn is pulled up and drawn through two
     loops at a time, three times
-  scope_note_en_us: 'Caution: ''double treble crochet'' is the UK name of this concept and the US name of DoubleTrebleCrochet-ENUS.
-    ''dtr'' is the UK abbreviation of this concept and the US abbreviation of DoubleTrebleCrochet-ENUS (double treble crochet).
-    ''tr'' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochet-ENUS (double crochet). ''treble
-    crochet'' is the US name of this concept and the UK name of DoubleCrochet-ENUS (double crochet).'
-- uri: http://example.org/vegvesen/vokabular/crochet-us/DoubleTrebleCrochet-ENUS
+  scope_note_en_us: 'Caution: ''double treble crochet'' is the UK name of this concept and the US name of DoubleTrebleCrochet.
+    ''dtr'' is the UK abbreviation of this concept and the US abbreviation of DoubleTrebleCrochet (double treble crochet).
+    ''tr'' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochet (double crochet). ''treble crochet''
+    is the US name of this concept and the UK name of DoubleCrochet (double crochet).'
+- uri: http://example.org/vegvesen/vokabular/crochet-us/DoubleTrebleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-DoubleTrebleCrochet-ENUS
+  identifier: crochet-us-DoubleTrebleCrochet
   pref_label_nb: trippelstav
   definition_nb: maske der det lages tre kast før nålen stikkes inn i arbeidet; garnet hentes opp og trekkes gjennom to og
     to løkker, fire ganger
@@ -408,9 +408,8 @@ concepts:
   - pat
   definition_en_us: stitch made with three yarn overs before inserting the hook; the yarn is pulled up and drawn through two
     loops at a time, four times
-  scope_note_en_us: 'Caution: ''double treble crochet'' is the US name of this concept and the UK name of TrebleCrochet-ENUS
-    (treble crochet). ''dtr'' is the US abbreviation of this concept and the UK abbreviation of TrebleCrochet-ENUS (treble
-    crochet).'
+  scope_note_en_us: 'Caution: ''double treble crochet'' is the US name of this concept and the UK name of TrebleCrochet (treble
+    crochet). ''dtr'' is the US abbreviation of this concept and the UK abbreviation of TrebleCrochet (treble crochet).'
 - uri: http://example.org/vegvesen/vokabular/crochet-us/PostStitch
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
   identifier: crochet-us-PostStitch
@@ -443,7 +442,7 @@ concepts:
   subject: hekling
   broader:
   - http://example.org/vegvesen/vokabular/crochet-us/PostStitch
-  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet
   related:
   - http://example.org/vegvesen/vokabular/crochet-us/BackPostDoubleCrochet
   contact_point: https://github.com/UteBroenner
@@ -460,8 +459,8 @@ concepts:
   - FPtr
   definition_en_us: double crochet worked around the post of a stitch in the row below, inserting the hook from the front,
     so that the stitch lies on the front of the work
-  scope_note_en_us: 'Caution: ''FPtr'' is the UK abbreviation of this concept and the US abbreviation of FrontPostTrebleCrochet-ENUS
-    (front post treble crochet). ''front post treble crochet'' is the UK name of this concept and the US name of FrontPostTrebleCrochet-ENUS.'
+  scope_note_en_us: 'Caution: ''FPtr'' is the UK abbreviation of this concept and the US abbreviation of FrontPostTrebleCrochet
+    (front post treble crochet). ''front post treble crochet'' is the UK name of this concept and the US name of FrontPostTrebleCrochet.'
 - uri: http://example.org/vegvesen/vokabular/crochet-us/BackPostDoubleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
   identifier: crochet-us-BackPostDoubleCrochet
@@ -472,7 +471,7 @@ concepts:
   subject: hekling
   broader:
   - http://example.org/vegvesen/vokabular/crochet-us/PostStitch
-  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet
   is_part_of:
   - http://example.org/vegvesen/vokabular/crochet-us/HappyHearts
   related:
@@ -613,11 +612,11 @@ concepts:
   - dc2tog
   definition_en_us: decrease in which two incomplete single crochets are finished together by drawing the yarn through all
     loops on the hook at once
-  scope_note_en_us: 'Caution: ''dc2tog'' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochetTwoTogether-ENUS
-    (double crochet two together). ''double crochet two together'' is the UK name of this concept and the US name of DoubleCrochetTwoTogether-ENUS.'
-- uri: http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochetTwoTogether-ENUS
+  scope_note_en_us: 'Caution: ''dc2tog'' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochetTwoTogether
+    (double crochet two together). ''double crochet two together'' is the UK name of this concept and the US name of DoubleCrochetTwoTogether.'
+- uri: http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochetTwoTogether
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-DoubleCrochetTwoTogether-ENUS
+  identifier: crochet-us-DoubleCrochetTwoTogether
   pref_label_nb: 2 staver sammen
   definition_nb: felling der to ufullførte staver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen i ett
     trekk
@@ -645,8 +644,8 @@ concepts:
     loops on the hook at once
   scope_note_en_us: 'Caution: ''dc2tog'' is the US abbreviation of this concept and the UK abbreviation of SingleCrochetTwoTogether
     (single crochet two together). ''double crochet two together'' is the US name of this concept and the UK name of SingleCrochetTwoTogether
-    (single crochet two together). ''tr2tog'' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochetTwoTogether-ENUS
-    (treble crochet two together). ''treble crochet two together'' is the UK name of this concept and the US name of TrebleCrochetTwoTogether-ENUS.'
+    (single crochet two together). ''tr2tog'' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochetTwoTogether
+    (treble crochet two together). ''treble crochet two together'' is the UK name of this concept and the US name of TrebleCrochetTwoTogether.'
 - uri: http://example.org/vegvesen/vokabular/crochet-us/InvisibleDecrease
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
   identifier: crochet-us-InvisibleDecrease
@@ -823,7 +822,7 @@ concepts:
   editorial_note: '[usikker] de, es: termer ikke verifisert'
   subject: hekling
   broader:
-  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet
   is_part_of:
   - http://example.org/vegvesen/vokabular/crochet-us/CrossedDoubleCrochet2
   contact_point: https://github.com/UteBroenner
@@ -958,8 +957,8 @@ concepts:
   subject: hekling
   related:
   - http://example.org/vegvesen/vokabular/crochet-us/HalfDoubleCrochet
-  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet-ENUS
-  - http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochet-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochet
+  - http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1106,11 +1105,11 @@ concepts:
   - dc3tog
   definition_en_us: decrease in which three incomplete single crochets are finished together by drawing the yarn through all
     loops on the hook at once
-  scope_note_en_us: 'Caution: ''dc3tog'' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochetThreeTogether-ENUS
-    (double crochet three together). ''double crochet three together'' is the UK name of this concept and the US name of DoubleCrochetThreeTogether-ENUS.'
-- uri: http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochetTwoTogether-ENUS
+  scope_note_en_us: 'Caution: ''dc3tog'' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochetThreeTogether
+    (double crochet three together). ''double crochet three together'' is the UK name of this concept and the US name of DoubleCrochetThreeTogether.'
+- uri: http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochetTwoTogether
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-TrebleCrochetTwoTogether-ENUS
+  identifier: crochet-us-TrebleCrochetTwoTogether
   pref_label_nb: 2 dobbelstaver sammen
   definition_nb: felling der to ufullførte dobbelstaver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen
     i ett trekk
@@ -1137,12 +1136,12 @@ concepts:
   - dtr2tog
   definition_en_us: decrease in which two incomplete treble crochets are finished together by drawing the yarn through all
     loops on the hook at once
-  scope_note_en_us: 'Caution: ''tr2tog'' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochetTwoTogether-ENUS
-    (double crochet two together). ''treble crochet two together'' is the US name of this concept and the UK name of DoubleCrochetTwoTogether-ENUS
+  scope_note_en_us: 'Caution: ''tr2tog'' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochetTwoTogether
+    (double crochet two together). ''treble crochet two together'' is the US name of this concept and the UK name of DoubleCrochetTwoTogether
     (double crochet two together).'
-- uri: http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochetThreeTogether-ENUS
+- uri: http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochetThreeTogether
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-TrebleCrochetThreeTogether-ENUS
+  identifier: crochet-us-TrebleCrochetThreeTogether
   pref_label_nb: 3 dobbelstaver sammen
   definition_nb: felling der tre ufullførte dobbelstaver avsluttes sammen ved at garnet trekkes gjennom alle løkkene på nålen
     i ett trekk
@@ -1169,12 +1168,12 @@ concepts:
   - dtr3tog
   definition_en_us: decrease in which three incomplete treble crochets are finished together by drawing the yarn through all
     loops on the hook at once
-  scope_note_en_us: 'Caution: ''tr3tog'' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochetThreeTogether-ENUS
-    (double crochet three together). ''treble crochet three together'' is the US name of this concept and the UK name of DoubleCrochetThreeTogether-ENUS
+  scope_note_en_us: 'Caution: ''tr3tog'' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochetThreeTogether
+    (double crochet three together). ''treble crochet three together'' is the US name of this concept and the UK name of DoubleCrochetThreeTogether
     (double crochet three together).'
-- uri: http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochetThreeTogether-ENUS
+- uri: http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochetThreeTogether
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-DoubleCrochetThreeTogether-ENUS
+  identifier: crochet-us-DoubleCrochetThreeTogether
   pref_label_nb: 3 staver sammen
   definition_nb: klynge der tre ufullførte staver hekles i samme maske eller luftmaskebue og avsluttes sammen i ett trekk
   source: https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/
@@ -1186,7 +1185,7 @@ concepts:
   is_part_of:
   - http://example.org/vegvesen/vokabular/crochet-us/ZigZagLozengeStitch
   related:
-  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochetTwoTogether-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochetTwoTogether
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1203,8 +1202,8 @@ concepts:
     together in one movement
   scope_note_en_us: 'Caution: ''dc3tog'' is the US abbreviation of this concept and the UK abbreviation of SingleCrochetThreeTogether
     (single crochet three together). ''double crochet three together'' is the US name of this concept and the UK name of SingleCrochetThreeTogether
-    (single crochet three together). ''tr3tog'' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochetThreeTogether-ENUS
-    (treble crochet three together). ''treble crochet three together'' is the UK name of this concept and the US name of TrebleCrochetThreeTogether-ENUS.'
+    (single crochet three together). ''tr3tog'' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochetThreeTogether
+    (treble crochet three together). ''treble crochet three together'' is the UK name of this concept and the US name of TrebleCrochetThreeTogether.'
 - uri: http://example.org/vegvesen/vokabular/crochet-us/HalfDoubleCrochetTwoTogether
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
   identifier: crochet-us-HalfDoubleCrochetTwoTogether
@@ -1234,9 +1233,9 @@ concepts:
   - htr2tog
   definition_en_us: decrease in which two incomplete half double crochets are finished together by drawing the yarn through
     all loops on the hook at once
-- uri: http://example.org/vegvesen/vokabular/crochet-us/FrontPostDoubleTrebleCrochet-ENUS
+- uri: http://example.org/vegvesen/vokabular/crochet-us/FrontPostDoubleTrebleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-FrontPostDoubleTrebleCrochet-ENUS
+  identifier: crochet-us-FrontPostDoubleTrebleCrochet
   pref_label_nb: relieftrippelstav forfra
   definition_nb: trippelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken
     legger seg på forsiden av arbeidet
@@ -1245,7 +1244,7 @@ concepts:
   subject: hekling
   broader:
   - http://example.org/vegvesen/vokabular/crochet-us/PostStitch
-  - http://example.org/vegvesen/vokabular/crochet-us/DoubleTrebleCrochet-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/DoubleTrebleCrochet
   is_part_of:
   - http://example.org/vegvesen/vokabular/crochet-us/RaisedHerringbone
   related:
@@ -1262,8 +1261,8 @@ concepts:
   - FPttr
   definition_en_us: double treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front,
     so that the stitch lies on the front of the work
-  scope_note_en_us: 'Caution: ''FPdtr'' is the US abbreviation of this concept and the UK abbreviation of FrontPostTrebleCrochet-ENUS
-    (front post treble crochet). ''front post double treble crochet'' is the US name of this concept and the UK name of FrontPostTrebleCrochet-ENUS
+  scope_note_en_us: 'Caution: ''FPdtr'' is the US abbreviation of this concept and the UK abbreviation of FrontPostTrebleCrochet
+    (front post treble crochet). ''front post double treble crochet'' is the US name of this concept and the UK name of FrontPostTrebleCrochet
     (front post treble crochet).'
 - uri: http://example.org/vegvesen/vokabular/crochet-us/ChainSpace
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
@@ -1603,7 +1602,7 @@ concepts:
   is_part_of:
   - http://example.org/vegvesen/vokabular/crochet-us/ForkedClusterStitch
   related:
-  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochetTwoTogether-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/DoubleCrochetTwoTogether
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1637,9 +1636,9 @@ concepts:
   - slcl
   definition_en_us: cluster worked around the post of the previous double crochet, in which a yarn over and a loop are pulled
     up three times around the same post, after which the yarn is drawn through six loops and then through the last two
-- uri: http://example.org/vegvesen/vokabular/crochet-us/FrontPostTrebleCrochet-ENUS
+- uri: http://example.org/vegvesen/vokabular/crochet-us/FrontPostTrebleCrochet
   in_scheme: http://example.org/vegvesen/vokabular/crochet-us
-  identifier: crochet-us-FrontPostTrebleCrochet-ENUS
+  identifier: crochet-us-FrontPostTrebleCrochet
   pref_label_nb: reliefdobbelstav forfra
   definition_nb: dobbelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken
     legger seg på forsiden av arbeidet
@@ -1648,12 +1647,12 @@ concepts:
   subject: hekling
   broader:
   - http://example.org/vegvesen/vokabular/crochet-us/PostStitch
-  - http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochet-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/TrebleCrochet
   is_part_of:
   - http://example.org/vegvesen/vokabular/crochet-us/AlpineStitch
   related:
   - http://example.org/vegvesen/vokabular/crochet-us/FrontPostDoubleCrochet
-  - http://example.org/vegvesen/vokabular/crochet-us/FrontPostDoubleTrebleCrochet-ENUS
+  - http://example.org/vegvesen/vokabular/crochet-us/FrontPostDoubleTrebleCrochet
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
@@ -1666,9 +1665,9 @@ concepts:
   - FPdtr
   definition_en_us: treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so
     that the stitch lies on the front of the work
-  scope_note_en_us: 'Caution: ''FPdtr'' is the UK abbreviation of this concept and the US abbreviation of FrontPostDoubleTrebleCrochet-ENUS
+  scope_note_en_us: 'Caution: ''FPdtr'' is the UK abbreviation of this concept and the US abbreviation of FrontPostDoubleTrebleCrochet
     (front post double treble crochet). ''FPtr'' is the US abbreviation of this concept and the UK abbreviation of FrontPostDoubleCrochet
-    (front post double crochet). ''front post double treble crochet'' is the UK name of this concept and the US name of FrontPostDoubleTrebleCrochet-ENUS.
+    (front post double crochet). ''front post double treble crochet'' is the UK name of this concept and the US name of FrontPostDoubleTrebleCrochet.
     ''front post treble crochet'' is the US name of this concept and the UK name of FrontPostDoubleCrochet (front post double
     crochet).'
 - uri: http://example.org/vegvesen/vokabular/crochet-us/ClusterVStitch

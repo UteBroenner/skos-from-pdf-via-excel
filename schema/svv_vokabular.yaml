@@ -110,14 +110,13 @@ slots:
     range: uri
     description: >-
       Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the
-      workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language
-      suffix when the term means another concept in another language) and the tools build the URI.
+      workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.
     annotations: {excel_column: B, excel_name: begrep, excel_value: CamelCase concept name only}
   kortnavn:
     slot_uri: svv:kortnavn
     required: true
-    pattern: "^[A-Za-z0-9]{1,4}$"
-    description: Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14).
+    pattern: "^[A-Za-z0-9][A-Za-z0-9-]*$"
+    description: Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14).
     annotations: {excel_cell: B14}
   title:
     slot_uri: dct:title

@@ -368,9 +368,8 @@ attributes:
         tag: excel_value
         value: CamelCase concept name only
     description: 'Concept or scheme URI. For concepts: <scheme URI>/<concept name>,
-      where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk,
-      or DoubleCrochet-ENUS with a language suffix when the term means another concept
-      in another language) and the tools build the URI.'
+      where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk)
+      and the tools build the URI.'
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     identifier: true

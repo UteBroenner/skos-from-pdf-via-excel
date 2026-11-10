@@ -90,11 +90,6 @@ skos:ConceptScheme a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
             sh:path dct:title ],
-        [ sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path svv:uri ],
         [ sh:datatype xsd:string ;
             sh:description "BCP 47 tag of the language in which every concept must have a prefLabel and a definition (scheme row \"hovedspråk\"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl)." ;
             sh:maxCount 1 ;
@@ -102,13 +97,13 @@ skos:ConceptScheme a sh:NodeShape ;
             sh:order 3 ;
             sh:path svv:mainLanguage ],
         [ sh:datatype xsd:string ;
-            sh:description "Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14)." ;
+            sh:description "Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path svv:kortnavn ;
-            sh:pattern "^[A-Za-z0-9]{1,4}$" ],
+            sh:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" ],
         [ sh:datatype xsd:date ;
             sh:description "System-generated at publication." ;
             sh:maxCount 1 ;
@@ -130,7 +125,12 @@ skos:ConceptScheme a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
-            sh:path dct:creator ] ;
+            sh:path dct:creator ],
+        [ sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path svv:uri ] ;
     sh:targetClass skos:ConceptScheme .
 
 svv:prefixes sh:declare [ sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
@@ -144,95 +144,100 @@ skos:Concept a sh:NodeShape ;
     rdfs:comment "One row in the vokabular sheet (row 23 onwards)." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:languageIn ( "nb" "en" "nn" "en-US" ) ;
-            sh:path skos:definition ],
-        [ sh:name "scope_note" ;
-            sh:path skos:scopeNote ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "definition_en" ;
+    sh:property [ sh:name "definition_en" ;
             sh:path skos:definition ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
                     sh:not [ sh:languageIn ( "en-US" ) ] ] ],
+        [ sh:name "scope_note_en_us" ;
+            sh:path skos:scopeNote ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:altLabel ],
+        [ sh:name "pref_label_en_us" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
+        [ sh:name "pref_label_nn" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
+        [ sh:name "alt_label_de" ;
+            sh:path skos:altLabel ],
+        [ sh:name "definition_nb" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
         [ sh:name "definition_nn" ;
             sh:path skos:definition ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
-        [ sh:name "alt_label_de" ;
+        [ sh:languageIn ( "en-US" "nb" ) ;
+            sh:path skos:scopeNote ],
+        [ sh:name "alt_label_en_gb" ;
+            sh:path skos:altLabel ],
+        [ sh:name "alt_label_es" ;
+            sh:path skos:altLabel ],
+        [ sh:name "alt_label_en_us" ;
             sh:path skos:altLabel ],
         [ sh:name "pref_label_es" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
-        [ sh:name "scope_note_en_us" ;
-            sh:path skos:scopeNote ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:name "alt_label_es" ;
-            sh:path skos:altLabel ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:prefLabel ],
-        [ sh:name "pref_label_de" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
-        [ sh:name "created_by" ;
-            sh:path dct:contributor ;
-            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
-        [ sh:maxCount 2 ;
-            sh:path dct:contributor ],
-        [ sh:name "alt_label_en_us" ;
-            sh:path skos:altLabel ],
-        [ sh:languageIn ( "en-US" "nb" ) ;
-            sh:path skos:scopeNote ],
-        [ sh:name "pref_label_en_gb" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
-        [ sh:name "pref_label_nb" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "pref_label_en_us" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:name "definition_nb" ;
-            sh:path skos:definition ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "alt_label_en" ;
+        [ sh:name "alt_label_nn" ;
             sh:path skos:altLabel ],
         [ sh:name "pref_label_en" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
                     sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:altLabel ],
-        [ sh:name "pref_label_nn" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
-        [ sh:name "alt_label_en_gb" ;
-            sh:path skos:altLabel ],
-        [ sh:name "alt_label_nn" ;
-            sh:path skos:altLabel ],
-        [ sh:name "definition_en_us" ;
-            sh:path skos:definition ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
         [ sh:name "alt_label_nb" ;
             sh:path skos:altLabel ],
         [ sh:name "modified_by" ;
             sh:path dct:contributor ;
             sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
+        [ sh:name "pref_label_en_gb" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
+        [ sh:name "scope_note" ;
+            sh:path skos:scopeNote ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
+        [ sh:name "pref_label_nb" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
+        [ sh:name "alt_label_en" ;
+            sh:path skos:altLabel ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:prefLabel ],
+        [ sh:name "created_by" ;
+            sh:path dct:contributor ;
+            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" ) ;
+            sh:path skos:definition ],
+        [ sh:name "pref_label_de" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
+        [ sh:maxCount 2 ;
+            sh:path dct:contributor ],
+        [ sh:name "definition_en_us" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
         [ sh:datatype xsd:date ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 29 ;
             sh:path dct:modified ],
+        [ sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path svv:uri ],
         [ sh:datatype rdf:langString ;
             sh:languageIn ( "nb" ) ;
             sh:maxCount 1 ;
@@ -287,11 +292,6 @@ skos:Concept a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 5 ;
             sh:path skos:notation ],
-        [ sh:datatype xsd:date ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 27 ;
-            sh:path dct:created ],
         [ sh:nodeKind sh:IRI ;
             sh:order 24 ;
             sh:path skos:exactMatch ],
@@ -299,15 +299,18 @@ skos:Concept a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 13 ;
             sh:path dct:source ],
+        [ sh:datatype rdf:langString ;
+            sh:description "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now."@nb ;
+            sh:languageIn ( "nb" ) ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 18 ;
+            sh:path dct:subject ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 37 ;
             sh:path skosno:valueRange ],
-        [ sh:class skos:Concept ;
-            sh:nodeKind sh:IRI ;
-            sh:order 22 ;
-            sh:path skos:related ],
         [ sh:description "Set by the converter from the scheme URI." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -330,14 +333,24 @@ skos:Concept a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 33 ;
             sh:path euvoc:status ],
-        [ sh:nodeKind sh:IRI ;
-            sh:order 25 ;
-            sh:path skos:closeMatch ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 27 ;
+            sh:path dct:created ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 12 ;
             sh:path dct:audience ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 34 ;
+            sh:path euvoc:startDate ],
+        [ sh:nodeKind sh:IRI ;
+            sh:order 25 ;
+            sh:path skos:closeMatch ],
         [ sh:datatype xsd:integer ;
             sh:description "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes." ;
             sh:maxCount 1 ;
@@ -346,18 +359,10 @@ skos:Concept a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 38 ;
             sh:path svv:tier ],
-        [ sh:datatype rdf:langString ;
-            sh:description "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now."@nb ;
-            sh:languageIn ( "nb" ) ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 18 ;
-            sh:path dct:subject ],
-        [ sh:datatype xsd:date ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 34 ;
-            sh:path euvoc:startDate ],
+        [ sh:class skos:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 22 ;
+            sh:path skos:related ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -367,11 +372,6 @@ skos:Concept a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 32 ;
-            sh:path adms:versionNotes ],
-        [ sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path svv:uri ] ;
+            sh:path adms:versionNotes ] ;
     sh:targetClass skos:Concept .
 

@@ -42,11 +42,11 @@ vokdata:ChainSpace a skos:Concept ;
     skos:related vokdata:Chain ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:DoubleCrochetThreeTogether-ENUS a skos:Concept ;
+vokdata:DoubleCrochetThreeTogether a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-DoubleCrochetThreeTogether-ENUS" ;
+    dct:identifier "crochet-us-DoubleCrochetThreeTogether" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:ZigZagLozengeStitch ;
@@ -62,8 +62,8 @@ vokdata:DoubleCrochetThreeTogether-ENUS a skos:Concept ;
         "double crochet three together"@en-US,
         "3 puntos altos juntos"@es,
         "3 staver sammen"@nb ;
-    skos:related vokdata:DoubleCrochetTwoTogether-ENUS ;
-    skos:scopeNote "Caution: 'dc3tog' is the US abbreviation of this concept and the UK abbreviation of SingleCrochetThreeTogether (single crochet three together). 'double crochet three together' is the US name of this concept and the UK name of SingleCrochetThreeTogether (single crochet three together). 'tr3tog' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochetThreeTogether-ENUS (treble crochet three together). 'treble crochet three together' is the UK name of this concept and the US name of TrebleCrochetThreeTogether-ENUS."@en-US ;
+    skos:related vokdata:DoubleCrochetTwoTogether ;
+    skos:scopeNote "Caution: 'dc3tog' is the US abbreviation of this concept and the UK abbreviation of SingleCrochetThreeTogether (single crochet three together). 'double crochet three together' is the US name of this concept and the UK name of SingleCrochetThreeTogether (single crochet three together). 'tr3tog' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochetThreeTogether (treble crochet three together). 'treble crochet three together' is the UK name of this concept and the US name of TrebleCrochetThreeTogether."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ExtendedHalfDoubleCrochet a skos:Concept ;
@@ -126,21 +126,21 @@ vokdata:ForkedCluster a skos:Concept ;
     skos:inScheme vok:crochet-us ;
     skos:prefLabel "forked cluster"@en-GB,
         "forked cluster"@en-US ;
-    skos:related vokdata:DoubleCrochetTwoTogether-ENUS ;
+    skos:related vokdata:DoubleCrochetTwoTogether ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:FrontPostTrebleCrochet-ENUS a skos:Concept ;
+vokdata:FrontPostTrebleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-FrontPostTrebleCrochet-ENUS" ;
+    dct:identifier "crochet-us-FrontPostTrebleCrochet" ;
     dct:source <https://theunraveledmitten.com/2022/09/06/2022-stash-busting-crochet-along-part-8/> ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:AlpineStitch ;
     skos:altLabel "FPdtr"@en-GB,
         "FPtr"@en-US ;
     skos:broader vokdata:PostStitch,
-        vokdata:TrebleCrochet-ENUS ;
+        vokdata:TrebleCrochet ;
     skos:definition "treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
         "dobbelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
     skos:editorialNote "[usikker] nb; [mangler] de, es" ;
@@ -149,8 +149,8 @@ vokdata:FrontPostTrebleCrochet-ENUS a skos:Concept ;
         "front post treble crochet"@en-US,
         "reliefdobbelstav forfra"@nb ;
     skos:related vokdata:FrontPostDoubleCrochet,
-        vokdata:FrontPostDoubleTrebleCrochet-ENUS ;
-    skos:scopeNote "Caution: 'FPdtr' is the UK abbreviation of this concept and the US abbreviation of FrontPostDoubleTrebleCrochet-ENUS (front post double treble crochet). 'FPtr' is the US abbreviation of this concept and the UK abbreviation of FrontPostDoubleCrochet (front post double crochet). 'front post double treble crochet' is the UK name of this concept and the US name of FrontPostDoubleTrebleCrochet-ENUS. 'front post treble crochet' is the US name of this concept and the UK name of FrontPostDoubleCrochet (front post double crochet)."@en-US ;
+        vokdata:FrontPostDoubleTrebleCrochet ;
+    skos:scopeNote "Caution: 'FPdtr' is the UK abbreviation of this concept and the US abbreviation of FrontPostDoubleTrebleCrochet (front post double treble crochet). 'FPtr' is the US abbreviation of this concept and the UK abbreviation of FrontPostDoubleCrochet (front post double crochet). 'front post double treble crochet' is the UK name of this concept and the US name of FrontPostDoubleTrebleCrochet. 'front post treble crochet' is the US name of this concept and the UK name of FrontPostDoubleCrochet (front post double crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:HalfDoubleCrochetTwoTogether a skos:Concept ;
@@ -261,7 +261,7 @@ vokdata:SingleCrochetThreeTogether a skos:Concept ;
         "3 fastmasker sammen"@nb ;
     skos:related vokdata:Cluster,
         vokdata:Decrease ;
-    skos:scopeNote "Caution: 'dc3tog' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochetThreeTogether-ENUS (double crochet three together). 'double crochet three together' is the UK name of this concept and the US name of DoubleCrochetThreeTogether-ENUS."@en-US ;
+    skos:scopeNote "Caution: 'dc3tog' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochetThreeTogether (double crochet three together). 'double crochet three together' is the UK name of this concept and the US name of DoubleCrochetThreeTogether."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SlantingCluster a skos:Concept ;
@@ -327,11 +327,11 @@ vokdata:SpikeStitch a skos:Concept ;
         "spikemaske"@nb ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:TrebleCrochetThreeTogether-ENUS a skos:Concept ;
+vokdata:TrebleCrochetThreeTogether a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-TrebleCrochetThreeTogether-ENUS" ;
+    dct:identifier "crochet-us-TrebleCrochetThreeTogether" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:WaveAndChevron ;
@@ -348,14 +348,14 @@ vokdata:TrebleCrochetThreeTogether-ENUS a skos:Concept ;
         "3 puntos altos dobles juntos"@es,
         "3 dobbelstaver sammen"@nb ;
     skos:related vokdata:Decrease ;
-    skos:scopeNote "Caution: 'tr3tog' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochetThreeTogether-ENUS (double crochet three together). 'treble crochet three together' is the US name of this concept and the UK name of DoubleCrochetThreeTogether-ENUS (double crochet three together)."@en-US ;
+    skos:scopeNote "Caution: 'tr3tog' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochetThreeTogether (double crochet three together). 'treble crochet three together' is the US name of this concept and the UK name of DoubleCrochetThreeTogether (double crochet three together)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:TrebleCrochetTwoTogether-ENUS a skos:Concept ;
+vokdata:TrebleCrochetTwoTogether a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-TrebleCrochetTwoTogether-ENUS" ;
+    dct:identifier "crochet-us-TrebleCrochetTwoTogether" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:WaveAndChevron ;
@@ -372,7 +372,7 @@ vokdata:TrebleCrochetTwoTogether-ENUS a skos:Concept ;
         "2 puntos altos dobles juntos"@es,
         "2 dobbelstaver sammen"@nb ;
     skos:related vokdata:Decrease ;
-    skos:scopeNote "Caution: 'tr2tog' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochetTwoTogether-ENUS (double crochet two together). 'treble crochet two together' is the US name of this concept and the UK name of DoubleCrochetTwoTogether-ENUS (double crochet two together)."@en-US ;
+    skos:scopeNote "Caution: 'tr2tog' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochetTwoTogether (double crochet two together). 'treble crochet two together' is the US name of this concept and the UK name of DoubleCrochetTwoTogether (double crochet two together)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:TurningChain a skos:Concept ;
@@ -421,9 +421,9 @@ vokdata:YarnOver a skos:Concept ;
         "yarn over"@en-US,
         "lazada"@es,
         "kast"@nb ;
-    skos:related vokdata:DoubleCrochet-ENUS,
+    skos:related vokdata:DoubleCrochet,
         vokdata:HalfDoubleCrochet,
-        vokdata:TrebleCrochet-ENUS ;
+        vokdata:TrebleCrochet ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:BackLoopOnly a skos:Concept ;
@@ -457,7 +457,7 @@ vokdata:BackPostDoubleCrochet a skos:Concept ;
     xkos:isPartOf vokdata:HappyHearts ;
     skos:altLabel "BPtr"@en-GB,
         "BPdc"@en-US ;
-    skos:broader vokdata:DoubleCrochet-ENUS,
+    skos:broader vokdata:DoubleCrochet,
         vokdata:PostStitch ;
     skos:definition "double crochet worked around the post of a stitch in the row below, inserting the hook from the back, so that the stitch lies on the back of the work"@en-US,
         "stav heklet rundt stolpen på en maske i raden under med nålen stukket inn bakfra, slik at masken legger seg på baksiden av arbeidet"@nb ;
@@ -478,7 +478,7 @@ vokdata:CrossedDoubleCrochet a skos:Concept ;
     dct:identifier "crochet-us-CrossedDoubleCrochet" ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:CrossedDoubleCrochet2 ;
-    skos:broader vokdata:DoubleCrochet-ENUS ;
+    skos:broader vokdata:DoubleCrochet ;
     skos:definition "pair of double crochets in which the second is worked in front of or behind the first into a skipped stitch, so that they cross"@en-US,
         "par av staver der den andre hekles foran eller bak den første i en maske som er hoppet over, slik at stavene krysser hverandre"@nb ;
     skos:editorialNote "[usikker] de, es: termer ikke verifisert" ;
@@ -491,11 +491,11 @@ vokdata:CrossedDoubleCrochet a skos:Concept ;
     skos:scopeNote "Caution: 'crossed double crochet' is the US name of this concept and the US name of CrossedDoubleCrochet2. 'crossed treble crochet' is the UK name of this concept and the UK name of CrossedDoubleCrochet2 (crossed double crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:DoubleTrebleCrochet-ENUS a skos:Concept ;
+vokdata:DoubleTrebleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-DoubleTrebleCrochet-ENUS" ;
+    dct:identifier "crochet-us-DoubleTrebleCrochet" ;
     dct:subject "hekling"@nb ;
     skos:altLabel "trtr"@en-GB,
         "ttr"@en-GB,
@@ -512,7 +512,7 @@ vokdata:DoubleTrebleCrochet-ENUS a skos:Concept ;
         "double treble crochet"@en-US,
         "punto alto triple"@es,
         "trippelstav"@nb ;
-    skos:scopeNote "Caution: 'double treble crochet' is the US name of this concept and the UK name of TrebleCrochet-ENUS (treble crochet). 'dtr' is the US abbreviation of this concept and the UK abbreviation of TrebleCrochet-ENUS (treble crochet)."@en-US ;
+    skos:scopeNote "Caution: 'double treble crochet' is the US name of this concept and the UK name of TrebleCrochet (treble crochet). 'dtr' is the US abbreviation of this concept and the UK abbreviation of TrebleCrochet (treble crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:FoundationChain a skos:Concept ;
@@ -534,17 +534,17 @@ vokdata:FoundationChain a skos:Concept ;
     skos:related vokdata:Row ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:FrontPostDoubleTrebleCrochet-ENUS a skos:Concept ;
+vokdata:FrontPostDoubleTrebleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-FrontPostDoubleTrebleCrochet-ENUS" ;
+    dct:identifier "crochet-us-FrontPostDoubleTrebleCrochet" ;
     dct:source <https://theunraveledmitten.com/2022/01/25/2022-stash-busting-crochet-along/> ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:RaisedHerringbone ;
     skos:altLabel "FPttr"@en-GB,
         "FPdtr"@en-US ;
-    skos:broader vokdata:DoubleTrebleCrochet-ENUS,
+    skos:broader vokdata:DoubleTrebleCrochet,
         vokdata:PostStitch ;
     skos:definition "double treble crochet worked around the post of a stitch in a lower row, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
         "trippelstav heklet rundt stolpen på en maske i en rad lenger ned med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
@@ -554,7 +554,7 @@ vokdata:FrontPostDoubleTrebleCrochet-ENUS a skos:Concept ;
         "front post double treble crochet"@en-US,
         "relieftrippelstav forfra"@nb ;
     skos:related vokdata:FrontPostDoubleCrochet ;
-    skos:scopeNote "Caution: 'FPdtr' is the US abbreviation of this concept and the UK abbreviation of FrontPostTrebleCrochet-ENUS (front post treble crochet). 'front post double treble crochet' is the US name of this concept and the UK name of FrontPostTrebleCrochet-ENUS (front post treble crochet)."@en-US ;
+    skos:scopeNote "Caution: 'FPdtr' is the US abbreviation of this concept and the UK abbreviation of FrontPostTrebleCrochet (front post treble crochet). 'front post double treble crochet' is the US name of this concept and the UK name of FrontPostTrebleCrochet (front post treble crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Increase a skos:Concept ;
@@ -638,7 +638,7 @@ vokdata:SingleCrochetTwoTogether a skos:Concept ;
         "2 puntos bajos juntos"@es,
         "2 fastmasker sammen"@nb ;
     skos:related vokdata:Decrease ;
-    skos:scopeNote "Caution: 'dc2tog' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochetTwoTogether-ENUS (double crochet two together). 'double crochet two together' is the UK name of this concept and the US name of DoubleCrochetTwoTogether-ENUS."@en-US ;
+    skos:scopeNote "Caution: 'dc2tog' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochetTwoTogether (double crochet two together). 'double crochet two together' is the UK name of this concept and the US name of DoubleCrochetTwoTogether."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Bobble a skos:Concept ;
@@ -715,11 +715,11 @@ vokdata:ClusterVStitch a skos:Concept ;
         "cluster V-stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:DoubleCrochetTwoTogether-ENUS a skos:Concept ;
+vokdata:DoubleCrochetTwoTogether a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-DoubleCrochetTwoTogether-ENUS" ;
+    dct:identifier "crochet-us-DoubleCrochetTwoTogether" ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:ClusterVStitch,
         vokdata:ZigZagLozengeStitch ;
@@ -735,7 +735,7 @@ vokdata:DoubleCrochetTwoTogether-ENUS a skos:Concept ;
         "2 puntos altos juntos"@es,
         "2 staver sammen"@nb ;
     skos:related vokdata:Decrease ;
-    skos:scopeNote "Caution: 'dc2tog' is the US abbreviation of this concept and the UK abbreviation of SingleCrochetTwoTogether (single crochet two together). 'double crochet two together' is the US name of this concept and the UK name of SingleCrochetTwoTogether (single crochet two together). 'tr2tog' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochetTwoTogether-ENUS (treble crochet two together). 'treble crochet two together' is the UK name of this concept and the US name of TrebleCrochetTwoTogether-ENUS."@en-US ;
+    skos:scopeNote "Caution: 'dc2tog' is the US abbreviation of this concept and the UK abbreviation of SingleCrochetTwoTogether (single crochet two together). 'double crochet two together' is the US name of this concept and the UK name of SingleCrochetTwoTogether (single crochet two together). 'tr2tog' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochetTwoTogether (treble crochet two together). 'treble crochet two together' is the UK name of this concept and the US name of TrebleCrochetTwoTogether."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:FloretStitch a skos:Concept ;
@@ -908,11 +908,11 @@ vokdata:Shell a skos:Concept ;
     skos:related vokdata:VStitch ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:TrebleCrochet-ENUS a skos:Concept ;
+vokdata:TrebleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-TrebleCrochet-ENUS" ;
+    dct:identifier "crochet-us-TrebleCrochet" ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:LazyWaveStitch,
         vokdata:NubbyCrochetStitch,
@@ -934,7 +934,7 @@ vokdata:TrebleCrochet-ENUS a skos:Concept ;
         "treble crochet"@en-US,
         "punto alto doble"@es,
         "dobbelstav"@nb ;
-    skos:scopeNote "Caution: 'double treble crochet' is the UK name of this concept and the US name of DoubleTrebleCrochet-ENUS. 'dtr' is the UK abbreviation of this concept and the US abbreviation of DoubleTrebleCrochet-ENUS (double treble crochet). 'tr' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochet-ENUS (double crochet). 'treble crochet' is the US name of this concept and the UK name of DoubleCrochet-ENUS (double crochet)."@en-US ;
+    skos:scopeNote "Caution: 'double treble crochet' is the UK name of this concept and the US name of DoubleTrebleCrochet. 'dtr' is the UK abbreviation of this concept and the US abbreviation of DoubleTrebleCrochet (double treble crochet). 'tr' is the US abbreviation of this concept and the UK abbreviation of DoubleCrochet (double crochet). 'treble crochet' is the US name of this concept and the UK name of DoubleCrochet (double crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:AlpineStitch a skos:Concept ;
@@ -1044,7 +1044,7 @@ vokdata:FrontPostDoubleCrochet a skos:Concept ;
     dct:subject "hekling"@nb ;
     skos:altLabel "FPtr"@en-GB,
         "FPdc"@en-US ;
-    skos:broader vokdata:DoubleCrochet-ENUS,
+    skos:broader vokdata:DoubleCrochet,
         vokdata:PostStitch ;
     skos:definition "double crochet worked around the post of a stitch in the row below, inserting the hook from the front, so that the stitch lies on the front of the work"@en-US,
         "stav heklet rundt stolpen på en maske i raden under med nålen stukket inn forfra, slik at masken legger seg på forsiden av arbeidet"@nb ;
@@ -1056,7 +1056,7 @@ vokdata:FrontPostDoubleCrochet a skos:Concept ;
         "punto alto en relieve por delante"@es,
         "reliefstav forfra"@nb ;
     skos:related vokdata:BackPostDoubleCrochet ;
-    skos:scopeNote "Caution: 'FPtr' is the UK abbreviation of this concept and the US abbreviation of FrontPostTrebleCrochet-ENUS (front post treble crochet). 'front post treble crochet' is the UK name of this concept and the US name of FrontPostTrebleCrochet-ENUS."@en-US ;
+    skos:scopeNote "Caution: 'FPtr' is the UK abbreviation of this concept and the US abbreviation of FrontPostTrebleCrochet (front post treble crochet). 'front post treble crochet' is the UK name of this concept and the US name of FrontPostTrebleCrochet."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:IrisStitch a skos:Concept ;
@@ -1257,7 +1257,7 @@ vokdata:SingleCrochet a skos:Concept ;
         "single crochet"@en-US,
         "punto bajo"@es,
         "fastmaske"@nb ;
-    skos:scopeNote "Caution: 'dc' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochet-ENUS (double crochet). 'double crochet' is the UK name of this concept and the US name of DoubleCrochet-ENUS."@en-US ;
+    skos:scopeNote "Caution: 'dc' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochet (double crochet). 'double crochet' is the UK name of this concept and the US name of DoubleCrochet."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ThistleStitch a skos:Concept ;
@@ -1292,11 +1292,11 @@ vokdata:BoxedBeadStitch a skos:Concept ;
         "boxed bead stitch"@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
-vokdata:DoubleCrochet-ENUS a skos:Concept ;
+vokdata:DoubleCrochet a skos:Concept ;
     svv:tier 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
-    dct:identifier "crochet-us-DoubleCrochet-ENUS" ;
+    dct:identifier "crochet-us-DoubleCrochet" ;
     dct:subject "hekling"@nb ;
     xkos:isPartOf vokdata:AlpineStitch,
         vokdata:ArcadeStitch,
@@ -1338,7 +1338,7 @@ vokdata:DoubleCrochet-ENUS a skos:Concept ;
         "double crochet"@en-US,
         "punto alto"@es,
         "stav"@nb ;
-    skos:scopeNote "Caution: 'dc' is the US abbreviation of this concept and the UK abbreviation of SingleCrochet (single crochet). 'double crochet' is the US name of this concept and the UK name of SingleCrochet (single crochet). 'st' is the Norwegian abbreviation of this concept and the UK and US abbreviation of Stitch (stitch). 'tr' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochet-ENUS (treble crochet). 'treble crochet' is the UK name of this concept and the US name of TrebleCrochet-ENUS."@en-US ;
+    skos:scopeNote "Caution: 'dc' is the US abbreviation of this concept and the UK abbreviation of SingleCrochet (single crochet). 'double crochet' is the US name of this concept and the UK name of SingleCrochet (single crochet). 'st' is the Norwegian abbreviation of this concept and the UK and US abbreviation of Stitch (stitch). 'tr' is the UK abbreviation of this concept and the US abbreviation of TrebleCrochet (treble crochet). 'treble crochet' is the UK name of this concept and the US name of TrebleCrochet."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:LazyWaveStitch a skos:Concept ;
@@ -1584,7 +1584,7 @@ vokdata:Stitch a skos:Concept ;
         "stitch"@en-US,
         "punto"@es,
         "maske"@nb ;
-    skos:scopeNote "Caution: 'punto' is the Spanish name of this concept and the Spanish alternative name of StitchPattern (stitch pattern). 'st' is the UK and US abbreviation of this concept and the Norwegian abbreviation of DoubleCrochet-ENUS (double crochet)."@en-US ;
+    skos:scopeNote "Caution: 'punto' is the Spanish name of this concept and the Spanish alternative name of StitchPattern (stitch pattern). 'st' is the UK and US abbreviation of this concept and the Norwegian abbreviation of DoubleCrochet (double crochet)."@en-US ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:StitchPattern a skos:Concept ;

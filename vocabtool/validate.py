@@ -12,7 +12,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
 
 from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi
-from .uri import LOCAL_NAME_RE, cross_language_homonyms, expected_name
+from .uri import LOCAL_NAME_RE, expected_name
 
 STATUS_VALUES = {"kandidat", "gjeldende", "utdatert", "forkastet"}
 TIERS = {"1", "2", "3"}
@@ -34,12 +34,12 @@ class Finding:
 
 RULES = {
     "VT-ID-FORMAT": ("error", "column A must be <kortnavn>-<concept name> (formula in the template)", "template v8 col A"),
-    "VT-KORTNAVN": ("warning", "kortnavn is not 1-4 letters or digits as the template asks", "template v8"),
+    "VT-KORTNAVN": ("error", "kortnavn may only contain letters, digits and hyphens, starting with a letter or digit", "template v8"),
     "VT-ID-DUPLICATE": ("error", "ID used on more than one row", ""),
     "VT-URI-MISSING": ("error", "concept name for the URI (column B) missing; run `vocabtool uri` to generate it from the term", "S03"),
-    "VT-URI-FORMAT": ("error", "column B must hold only the CamelCase concept name (letters and digits, optionally a language suffix such as -ENUS), e.g. Rekkverk", "S03"),
+    "VT-URI-FORMAT": ("error", "column B must hold only the CamelCase concept name (letters and digits), e.g. Rekkverk", "S03"),
     "VT-URI-DUPLICATE": ("error", "concept name in column B used on more than one row, so two concepts get the same URI", ""),
-    "VT-URI-LABEL": ("info", "concept name in column B differs from the CamelCase form of the main-language term, with -<LANG> suffix where the term means another concept in another language (fine if chosen on purpose)", "S03"),
+    "VT-URI-LABEL": ("info", "concept name in column B differs from the CamelCase form of the main-language term (fine if chosen on purpose)", "S03"),
     "VT-REQ-LABEL": ("error", "prefLabel in the main language missing", ""),
     "VT-REQ-DEF": ("error", "definition in the main language missing", ""),
     "VT-REF-FORMAT": ("error", "relation value is not a concept name (v8 relations use the names in column B)", ""),
@@ -128,7 +128,6 @@ def validate(v: Vocabulary) -> list[Finding]:
     concepts = v.concepts
     LF, DF = v.label_field, v.def_field   # main-language label / definition
     if v.version == "v8":
-        homonyms = cross_language_homonyms(concepts, LF)
         uris = Counter(c.get("uri") for c in concepts if c.get("uri"))
         for c in concepts:
             u = c.get("uri")
@@ -138,14 +137,14 @@ def validate(v: Vocabulary) -> list[Finding]:
             name = u.strip()
             if not LOCAL_NAME_RE.match(name):
                 F.append(_f("VT-URI-FORMAT", c, u))
-            elif c.get(LF) and name != expected_name(c, LF, v.main_lang, homonyms):
-                F.append(_f("VT-URI-LABEL", c, f"{name} vs {expected_name(c, LF, v.main_lang, homonyms)}"))
+            elif c.get(LF) and name != expected_name(c, LF):
+                F.append(_f("VT-URI-LABEL", c, f"{name} vs {expected_name(c, LF)}"))
             if uris[u] > 1:
                 F.append(_f("VT-URI-DUPLICATE", c, u))
     keys = Counter(c.key for c in concepts)
     by_key = v.by_key()
-    if v.version == "v8" and v.kortnavn and not re.fullmatch(r"[A-Za-z0-9]{1,4}", v.kortnavn):
-        F.append(Finding("VT-KORTNAVN", "warning", None, None, None, RULES["VT-KORTNAVN"][1] + f": {v.kortnavn}", "template v8"))
+    if v.version == "v8" and v.kortnavn and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*", v.kortnavn):
+        F.append(Finding("VT-KORTNAVN", "error", None, None, None, RULES["VT-KORTNAVN"][1] + f": {v.kortnavn}", "template v8"))
 
     for c in concepts:
         if keys[c.key] > 1 and v.version != "v8":        # v8: duplicate names are VT-URI-DUPLICATE

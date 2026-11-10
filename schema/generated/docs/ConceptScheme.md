@@ -70,7 +70,7 @@ URI: [skos:ConceptScheme](http://www.w3.org/2004/02/skos/core#ConceptScheme)
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [uri](uri.md) | 1 <br/> [uri](uri.md) | Concept or scheme URI | direct |
-| [kortnavn](kortnavn.md) | 1 <br/> [String](String.md) | Short name of the vocabulary; the template asks for max 4 letters or digits (... | direct |
+| [kortnavn](kortnavn.md) | 1 <br/> [String](String.md) | Short name of the vocabulary, letters, digits and hyphens, e | direct |
 | [title](title.md) | 1 <br/> [String](String.md) |  | direct |
 | [main_language](main_language.md) | 0..1 <br/> [String](String.md) | BCP 47 tag of the language in which every concept must have a prefLabel and a... | direct |
 | [creator](creator.md) | 0..1 <br/> [String](String.md) |  | direct |
@@ -165,9 +165,8 @@ attributes:
         tag: excel_value
         value: CamelCase concept name only
     description: 'Concept or scheme URI. For concepts: <scheme URI>/<concept name>,
-      where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk,
-      or DoubleCrochet-ENUS with a language suffix when the term means another concept
-      in another language) and the tools build the URI.'
+      where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk)
+      and the tools build the URI.'
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     identifier: true
@@ -183,8 +182,8 @@ attributes:
       excel_cell:
         tag: excel_cell
         value: B14
-    description: Short name of the vocabulary; the template asks for max 4 letters
-      or digits (cell B14).
+    description: Short name of the vocabulary, letters, digits and hyphens, e.g. N101
+      or crochet-us (cell B14).
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: svv:kortnavn
@@ -193,7 +192,7 @@ attributes:
     - ConceptScheme
     range: string
     required: true
-    pattern: ^[A-Za-z0-9]{1,4}$
+    pattern: ^[A-Za-z0-9][A-Za-z0-9-]*$
   title:
     name: title
     annotations:

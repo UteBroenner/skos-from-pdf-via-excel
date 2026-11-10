@@ -50,7 +50,7 @@ Name: svv_vokabular
 | [in_scheme](in_scheme.md) | Set by the converter from the scheme URI |
 | [is_part_of](is_part_of.md) |  |
 | [issued](issued.md) | System-generated at publication |
-| [kortnavn](kortnavn.md) | Short name of the vocabulary; the template asks for max 4 letters or digits (... |
+| [kortnavn](kortnavn.md) | Short name of the vocabulary, letters, digits and hyphens, e |
 | [main_language](main_language.md) | BCP 47 tag of the language in which every concept must have a prefLabel and a... |
 | [modified](modified.md) |  |
 | [modified_by](modified_by.md) |  |

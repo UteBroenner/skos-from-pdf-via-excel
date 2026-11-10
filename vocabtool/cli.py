@@ -4,6 +4,7 @@
   migrate  <v7.xlsx> --template <v8.xlsx> --out <file.xlsx> [--kortnavn N101]
   rdf      <v8.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
   uri      <v8.xlsx> [--overwrite]        fill empty concept names (column B) from the main-language term
+  rename   <v8.xlsx> OLD NEW [OLD NEW …]  rename concepts (column B) and update relations and notes
   fit      <v8.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns;
                                           write the formulas for column A and endringshash
 """
@@ -145,6 +146,16 @@ def cmd_fit(a):
     return 0
 
 
+def cmd_rename(a):
+    from .rename import rename
+    if len(a.pairs) % 2:
+        raise SystemExit("give pairs: OLD NEW [OLD NEW …]")
+    pairs = dict(zip(a.pairs[::2], a.pairs[1::2]))
+    r = rename(a.workbook, pairs)
+    print(f"{a.workbook}: {r['names']} names, {r['relations']} relation values, {r['notes']} notes updated")
+    return 0
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="vocabtool")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -153,6 +164,7 @@ def main(argv=None):
     m.add_argument("--out", required=True); m.add_argument("--kortnavn"); m.set_defaults(fn=cmd_migrate)
     r = sub.add_parser("rdf"); r.add_argument("workbook"); r.add_argument("--out", default="out/rdf"); r.set_defaults(fn=cmd_rdf)
     u = sub.add_parser("uri"); u.add_argument("workbook"); u.add_argument("--overwrite", action="store_true"); u.set_defaults(fn=cmd_uri)
+    rn = sub.add_parser("rename"); rn.add_argument("workbook"); rn.add_argument("pairs", nargs="+"); rn.set_defaults(fn=cmd_rename)
     ft = sub.add_parser("fit"); ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
     a = p.parse_args(argv)
     return a.fn(a)

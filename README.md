@@ -64,8 +64,13 @@ acronyms written in capitals stay in capitals:
 python -m vocabtool uri path/to/workbook.xlsx
 ```
 
-Existing names are kept, and `--overwrite` regenerates all of them. Names whose term means another concept in
-another language get a language suffix (`DoubleCrochet-ENUS`). If two concepts would get the same name,
+Rename a concept. This changes column B and every relation and note that refers to it:
+
+```bash
+python -m vocabtool rename path/to/workbook.xlsx OldName NewName
+```
+
+Existing names are kept, and `--overwrite` regenerates all of them. If two concepts would get the same name,
 the second gets a number (`Name2`) and the command lists it, so you can choose a better name.
 
 Stretch the Excel table `begrepsliste`, the formatting (wrapped, top-aligned), conditional formatting and
@@ -98,7 +103,7 @@ Every concept needs a prefLabel and a definition in that language, and the label
 Any column headed `skos:prefLabel@<tag>`, `skos:altLabel@<tag>`, `skos:definition@<tag>` or `skos:scopeNote@<tag>` is read automatically.
 
 `vocabtool/clash_notes.py` drafts English scope notes for label clashes, for example
-"Caution: 'dc' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochet-ENUS (double crochet)."
+"Caution: 'dc' is the UK abbreviation of this concept and the US abbreviation of DoubleCrochet (double crochet)."
 Once a scope note names the other concept, the checker reports the clash as `VT-LABEL-NOTED` (info).
 The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, section "language extension").
 
@@ -106,10 +111,8 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 
 - **Column B (concept name) is the key.** Relations use it, and column A `dct:identifier` is the formula
   `<kortnavn>-<name>` (e.g. `N101-Rekkverk`), so nothing has to be generated or converted.
-  Renaming a concept means updating the relations that point to it.
+  Use `vocabtool rename` to rename a concept; it updates the relations and notes that point to it.
 - Column B holds only the concept name in CamelCase (letters and digits), e.g. `Rekkverk`.
-  If the main-language term is the name of a different concept in another language, the name gets the main
-  language as suffix, e.g. `DoubleCrochet-ENUS` (US *double crochet* is UK *treble crochet*).
   The tools build the URI from it: ConceptScheme URI (cell B1, `…/vokabular/<kortnavn>`) + `/` + name,
   e.g. `http://example.org/vegvesen/vokabular/N101/Rekkverk`. The vocabulary segment keeps equal names
   in different vocabularies apart.
@@ -143,9 +146,9 @@ so use one reviewer per file/domain at a time.
 | --- | --- | --- |
 | VT-ID-FORMAT | error | column A is `<kortnavn>-<concept name>` (v8) |
 | VT-ID-DUPLICATE | error | row key unique (v7; in v8 see VT-URI-DUPLICATE) |
-| VT-KORTNAVN | warning | kortnavn is 1–4 letters or digits, as the template asks |
-| VT-URI-MISSING / VT-URI-FORMAT / VT-URI-DUPLICATE | error | concept name in column B present, CamelCase letters and digits (optional language suffix such as `-ENUS`), unique (S03) |
-| VT-URI-LABEL | info | concept name differs from the expected name (CamelCase main-language term, with suffix where needed) |
+| VT-KORTNAVN | error | kortnavn: letters, digits and hyphens, starting with a letter or digit (e.g. `N101`, `crochet-us`) |
+| VT-URI-MISSING / VT-URI-FORMAT / VT-URI-DUPLICATE | error | concept name in column B present, CamelCase letters and digits, unique (S03) |
+| VT-URI-LABEL | info | concept name differs from the CamelCase form of the main-language term |
 | VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
 | VT-REF-FORMAT | error | relation values are concept names (v8) |
 | VT-REF-SELF | error | no relation to itself |
@@ -188,6 +191,7 @@ vocabtool/linkml_rdf.py      Excel -> LinkML data -> RDF, SHACL fixes
 vocabtool/template_ext.py    add language columns to the template
 vocabtool/clash_notes.py     draft scope notes for label clashes
 vocabtool/uri.py             concept names (CamelCase) and URIs
+vocabtool/rename.py          rename a concept and its references
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   Excel template v8 and v8 with language extension
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)

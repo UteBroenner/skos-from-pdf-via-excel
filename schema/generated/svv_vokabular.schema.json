@@ -343,7 +343,7 @@
                     ]
                 },
                 "uri": {
-                    "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.",
+                    "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.",
                     "format": "uri",
                     "type": "string"
                 },
@@ -403,8 +403,8 @@
                     ]
                 },
                 "kortnavn": {
-                    "description": "Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14).",
-                    "pattern": "^[A-Za-z0-9]{1,4}$",
+                    "description": "Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14).",
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$",
                     "type": "string"
                 },
                 "main_language": {
@@ -425,7 +425,7 @@
                     "type": "string"
                 },
                 "uri": {
-                    "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.",
+                    "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.",
                     "format": "uri",
                     "type": "string"
                 }
@@ -481,8 +481,8 @@
             ]
         },
         "kortnavn": {
-            "description": "Short name of the vocabulary; the template asks for max 4 letters or digits (cell B14).",
-            "pattern": "^[A-Za-z0-9]{1,4}$",
+            "description": "Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14).",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$",
             "type": "string"
         },
         "main_language": {
@@ -503,7 +503,7 @@
             "type": "string"
         },
         "uri": {
-            "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk, or DoubleCrochet-ENUS with a language suffix when the term means another concept in another language) and the tools build the URI.",
+            "description": "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI.",
             "format": "uri",
             "type": "string"
         }

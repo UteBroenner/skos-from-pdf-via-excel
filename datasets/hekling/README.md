@@ -2,8 +2,7 @@
 
 Multilingual vocabulary of crochet stitches and stitch patterns. **Short name `crochet-us`, main language en-US**
 (`hovedspråk`). URIs are `http://example.org/vegvesen/vokabular/crochet-us/<Name>`, IDs `crochet-us-<Name>`.
-`crochet-us` is longer than the 4 characters the template asks for; the checker warns (`VT-KORTNAVN`) and SHACL rejects
-it. This is a test of the rule.
+Short names may contain letters, digits and hyphens of any length; `crochet-us` was the test case for that rule.
 Other languages are nb, en-GB, de and es (Spain), and definitions are in en-US and nb.
 
 77 concepts: 49 stitches, structures and working methods, the top concept *stitch pattern*, and 27 stitch patterns.
@@ -33,8 +32,8 @@ The dataset tests these things:
 `dcat:contactPoint` is https://github.com/UteBroenner.
 
 Concept names (column B) are generated from the en-US term, e.g. `SingleCrochet`, which gives the URI
-`http://example.org/vegvesen/vokabular/HEKL/SingleCrochet`. Nine stitches whose US name is the UK name of another
-stitch carry the suffix `-ENUS`, e.g. `DoubleCrochet-ENUS` (US double crochet = UK treble crochet). The pattern *crossed double crochet* is `CrossedDoubleCrochet2`, because the stitch already has `CrossedDoubleCrochet`. This is part of the open stitch-versus-pattern decision.
+`http://example.org/vegvesen/vokabular/HEKL/SingleCrochet`. Names carry no language suffix: where a US name is the UK name of another stitch (US double crochet = UK treble crochet),
+the scope notes say so. The pattern *crossed double crochet* is `CrossedDoubleCrochet2`, because the stitch already has `CrossedDoubleCrochet`. This is part of the open stitch-versus-pattern decision.
 
 Every label clash has a draft en-US scope note (column AW) that warns about it and names the other concept.
 There are 19 concepts with notes, covering the US/UK cross-overs, Norwegian versus English `st`, Spanish *punto* and *vuelta*,
