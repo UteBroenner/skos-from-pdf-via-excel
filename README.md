@@ -185,7 +185,8 @@ so use one reviewer per file/domain at a time.
 | VT-URI-LABEL | info | concept name differs from the CamelCase form of the main-language term |
 | VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
 | VT-REF-FORMAT | error | relation values are concept names (v8) |
-| VT-PREFIX | error | no `vok:` / `kode:` prefixes in the cells of the Excel table (relations, `dct:subject`, notes); use the concept name |
+| VT-PREFIX | error | no `vok:` prefix in the cells of the Excel table (relations, `dct:subject`, notes); use the concept name |
+| VT-PREFIX-KODE | info | `kode:` references to code lists; kept until the handling of code lists is decided |
 | VT-REF-SELF | error | no relation to itself |
 | VT-CYCLE-BROADER / VT-CYCLE-PARTOF | error | no cycles |
 | VT-RELATED-CLASH | error | `related` not combined with a broader/narrower path (SKOS integrity) |

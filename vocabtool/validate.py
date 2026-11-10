@@ -17,7 +17,8 @@ from .samling import collections, sentence_problems
 
 STATUS_VALUES = {"kandidat", "gjeldende", "utdatert", "forkastet"}
 TIERS = {"1", "2", "3"}
-PREFIX_RE = re.compile(r"(?<![\w-])(?:vok|kode):(?=[A-Za-z0-9])")
+PREFIX_RE = re.compile(r"(?<![\w-])vok:(?=[A-Za-z0-9])")
+KODE_RE = re.compile(r"(?<![\w-])kode:(?=[A-Za-z0-9])")     # code-list references: kept until code lists are decided
 
 
 @dataclass
@@ -64,7 +65,8 @@ RULES = {
     "VT-STATUS-LITERAL": ("warning", "status written as RDF literal; use the plain list value", ""),
     "VT-NN-MISSING": ("info", "nn label/definition empty (left for expert)", "S06/S17/S21"),
     "VT-CONTACT": ("warning", "dcat:contactPoint missing", ""),
-    "VT-PREFIX": ("error", "no prefixes such as vok: or kode: in the Excel table; write the concept name only (vok:Rekkverk -> Rekkverk)", "template v8"),
+    "VT-PREFIX": ("error", "no vok: prefix in the Excel table; write the concept name only (vok:Rekkverk -> Rekkverk)", "template v8"),
+    "VT-PREFIX-KODE": ("info", "kode: reference to a code list; kept until the handling of code lists is decided", ""),
     "VT-COLL-MEMBERS": ("info", "collection recorded in scope notes (\"Inngår i samlingen …\"), with its members", ""),
     "VT-COLL-SINGLE": ("warning", "collection has only one member; check the spelling of the name", ""),
     "VT-COLL-SIMILAR": ("warning", "two collection names are almost the same; possibly a typo", ""),
@@ -168,6 +170,8 @@ def validate(v: Vocabulary) -> list[Finding]:
             for fld, val in c.fields.items():
                 if isinstance(val, str) and PREFIX_RE.search(val):
                     F.append(_f("VT-PREFIX", c, f"{fld} = {val[:80]!r}"))
+                if isinstance(val, str) and KODE_RE.search(val):
+                    F.append(_f("VT-PREFIX-KODE", c, f"{fld}: {', '.join(sorted(set(re.findall(r'kode:[\w-]+', val))))}"))
         if not c.get(LF):
             F.append(_f("VT-REQ-LABEL", c))
         if not c.get(DF):

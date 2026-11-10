@@ -97,4 +97,5 @@ The main changes needed:
 - S16: move `exactMatch`/`closeMatch` text to `editorialNote`?
 - S18: `dct:subject` as a concept name?
 - Code lists: shared scheme (K2/V19) or none (O3)? Each code list can now be a collection.
+  Until then, `kode:` references in the Excel table stay (reported as info, `VT-PREFIX-KODE`); `vok:` is not used in the table.
 - May the instructions be public?
