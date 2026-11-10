@@ -229,7 +229,8 @@ def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=
             elif derive_code_definitions and notation:
                 # code entry: definition from the code table (code + broader), marked as derived
                 plabel = rows[parent_name]["fields"].get(LF) if parent_name in rows else None
-                where = f"{voc_name or onto_short}{' (' + place + ')' if place else ''}"
+                # the chapter numbers are the ontology's own (e.g. V-5), not the handbook's
+                where = f"{voc_name or onto_short}{' (' + onto_short + ', ' + place.replace('kap.', 'kapittel') + ')' if place else ''}"
                 f[v.def_field] = (f"kodeverdi {notation} under «{plabel}» i {where}" if plabel
                                   else f"kodeverdi {notation} i {where}")
                 f["relationship_with_source"] = "derived-from-source"

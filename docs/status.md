@@ -55,6 +55,14 @@ The crochet example (`datasets/hekling/`) is described in its own README.
 - **Definitions of code entries** (concepts with `skos:notation`): a missing definition is a warning (`VT-REQ-DEF-CODE`),
   not an error, also in SHACL. `owl-import --derive-code-definitions` builds one from the code table, marked `[avledet]`
   (`VT-DEF-DERIVED`, info), to be replaced by a definition from the handbook where it has one.
+- **Code-list containers** (classes under "Kodeliste" without a definition) get a derived definition
+  ("kodeliste for … i V440 (v440-owl, kapittel …)", `[avledet]`). Chapter numbers in derived definitions are the
+  ontology's own (V-5 …), not the handbook's.
+- **Modelling classes** of the ontologies (e.g. byggverk, komponent, lokasjon) stay without a definition for the expert,
+  flagged `[fagekspert]` in the editorial note.
+- **Definitions from handbooks** are close paraphrases marked `[omskrivning] Definisjon fra <handbook> <chapter>.`
+  with `relationshipWithSource` `derived-from-source`; a verbatim quote is marked `[kilde] Definisjon sitert fra …`
+  with `direct-from-source`. They are kept in JSON files and applied with `set-fields` after `owl-import`.
 - **Duplicates and generic names:** keep one row per concept; a concept in several groups names all of them in the
   collection sentence. Generic names get a qualifier in V440 style: "<term>, <group>".
 
