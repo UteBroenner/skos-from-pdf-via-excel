@@ -71,6 +71,7 @@ Run as `python -m vocabtool <command>`. Details in the README.
 | `fit` | stretches the table, formatting and validation; writes the formulas |
 | `rdf` | LinkML data, SKOS Turtle (with `skos:Collection`), LinkML and SHACL validation |
 | `owl-import` | adds OWL classes as concepts, merging with existing ones (label, or a reviewed merge map) |
+| `set-fields` | writes reviewed values (e.g. definitions from a handbook) into concepts by name, from JSON |
 
 LinkML 1.12.1 has gaps that are worked around in project code: language tags, enum URIs, and three SHACL defects.
 Cross-row rules are hand-written SHACL-SPARQL. See `schema/README.md`.

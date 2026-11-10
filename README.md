@@ -167,6 +167,19 @@ python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-
 - The rows are added in hierarchy order (parent first, siblings by code), and the same input always gives the same workbook.
   The log (`<out>.owl-import.json` or `--log`) lists merged, new, skipped and linked classes and the conflicts.
 
+## Set fields
+
+Write reviewed values, e.g. definitions taken from a handbook, into concepts by name:
+
+```bash
+python -m vocabtool set-fields V441-v8.xlsx definitions-V441.json
+```
+
+The JSON maps concept names to fields: `{"Nivellement": {"def_nb": "…", "source": "https://…", "relationship_with_source": "derived-from-source"}}`.
+A field name ending in `+` appends to the current value (`"editorial_note+": "[merknad] …"`). Unknown names or fields stop the
+command before anything is written; column A, column B and the formula columns are never written. Keep the JSON next to the
+workbook: after a new `owl-import`, run `set-fields` again to restore the reviewed values.
+
 ## Collections
 
 A collection (`skos:Collection`) is recorded only in the main-language scope note of each member concept,
@@ -276,6 +289,7 @@ vocabtool/uri.py             concept names (CamelCase) and URIs
 vocabtool/rename.py          rename a concept and its references, or a collection
 vocabtool/samling.py         collections from the scope-note sentence
 vocabtool/owl_import.py      OWL classes -> concepts, merging with existing ones
+vocabtool/set_fields.py      write reviewed values into concepts by name
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   empty templates: v8 (master), v8 with language extension, v7
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)

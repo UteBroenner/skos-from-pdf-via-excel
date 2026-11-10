@@ -12,6 +12,8 @@
              [--log log.json] [--contact E-MAIL] [--kortnavn V441 --title "…"] [--keep-root]
              [--derive-code-definitions]
                                           add OWL classes as concepts, merging with existing ones
+  set-fields <v8.xlsx> <values.json> [--out <file.xlsx>]
+                                          write reviewed values (e.g. definitions) into concepts by name
 """
 from __future__ import annotations
 
@@ -189,6 +191,13 @@ def cmd_owl_import(a):
     return 0
 
 
+def cmd_set_fields(a):
+    from .set_fields import set_fields
+    r = set_fields(a.workbook, a.values, a.out)
+    print(f"{a.out or a.workbook}: {r['cells']} values written in {r['concepts']} concepts")
+    return 0
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="vocabtool")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -213,5 +222,8 @@ def main(argv=None):
     oi.add_argument("--derive-code-definitions", action="store_true",
                     help="give new code entries a definition built from code and broader, marked [avledet]")
     oi.set_defaults(fn=cmd_owl_import)
+    sf = sub.add_parser("set-fields", help="write reviewed values into concepts by name (JSON)")
+    sf.add_argument("workbook"); sf.add_argument("values", help='JSON {"<concept name>": {"<field>": "<value>"}}; "<field>+" appends')
+    sf.add_argument("--out", help="workbook to write (default: in place)"); sf.set_defaults(fn=cmd_set_fields)
     a = p.parse_args(argv)
     return a.fn(a)
