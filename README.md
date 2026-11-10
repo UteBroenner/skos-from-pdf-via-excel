@@ -156,6 +156,7 @@ python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-
   parent class → `skos:broader`; class IRI → `skos:exactMatch`; source = the ontology; editorial note with chapter and section
   and `[mangler] definisjon`. A label used by several classes gets the parent as qualifier ("fundament, pilar").
   A class without a label gets a term from its IRI, flagged in the editorial note.
+- **`--tier 1`:** sets the tier of new concepts (existing concepts keep theirs). Classes from an ontology are Tier 1.
 - **`--derive-code-definitions`:** a new code entry (a class with `kode`) without another definition gets one built from the
   code table, e.g. "kodeverdi 59 under «buebru og hvelvbru» i V440 (kap. V-6, avsnitt V-6.1)", with
   `relationshipWithSource` `derived-from-source` and `[avledet]` in the editorial note. The checker lists these as
@@ -250,6 +251,7 @@ so use one reviewer per file/domain at a time.
 | VT-LABEL-VARIANT | info | same term means different concepts in two regional variants (en-US vs en-GB); this is the difference the vocabulary documents |
 | VT-LABEL-CASE | warning | main-language prefLabel lowercase, except acronyms (S05) |
 | VT-LABEL-GROUPING | warning | heuristic: label lists several items ("… og …") and has ≥2 narrower concepts, so it is probably a table heading |
+| VT-SOURCE-REL | warning | `skosno:relationshipWithSource` is `self-composed`, `derived-from-source` or `direct-from-source` (spaces instead of hyphens are accepted) |
 | VT-STATUS / VT-STATUS-LITERAL | warning | status is one of kandidat, gjeldende, utdatert, forkastet, written as a plain value |
 | VT-TIER-INVALID | warning | tier is 1, 2 or 3 |
 | VT-CONTACT | warning | contactPoint present |

@@ -11,7 +11,8 @@ The crochet example (`datasets/hekling/`) is described in its own README.
   - `schema/`: LinkML schema, generated artefacts and cross-row SHACL
   - `templates/`: empty templates for v8 (master), v8 with language extension, and v7
   - `datasets/hekling/`: example vocabulary
-- **Not in the repository:** Statens vegvesen vocabularies (N101, V440, BRUTUS) and their outputs. They are kept in
+- **Not in the repository:** Statens vegvesen vocabularies (N101, V440, V441, BRUTUS), their ontologies, the handbook
+  texts and all outputs. They are kept in
   `samples/` and `out/`, which are ignored by git, and were removed from the history. Upload them to a session when they are needed.
 
 ## Template v8: decisions in force
@@ -63,6 +64,16 @@ The crochet example (`datasets/hekling/`) is described in its own README.
 - **Definitions from handbooks** are close paraphrases marked `[omskrivning] Definisjon fra <handbook> <chapter>.`
   with `relationshipWithSource` `derived-from-source`; a verbatim quote is marked `[kilde] Definisjon sitert fra …`
   with `direct-from-source`. They are kept in JSON files and applied with `set-fields` after `owl-import`.
+- **`skosno:relationshipWithSource`** takes one of three values: `self-composed`, `derived-from-source` (paraphrased or derived)
+  or `direct-from-source` (copied or quoted). Spaces instead of hyphens are accepted; the checker warns on other values
+  (`VT-SOURCE-REL`). RDF uses the SKOS-AP-NO concepts, e.g.
+  `https://data.norge.no/vocabulary/relationship-with-source-type#derived-from-source`.
+- **Size fields** (areal, bredde, lengde …): a field list uses the specific concepts per bridge category from V440
+  (e.g. "areal, bru", "areal, ferjeleie"), not one general concept.
+- **Code lists:** one shared code-list scheme for all vocabularies (K2/V19). To be built; until then `kode:` references stay.
+- **Tier of imported OWL classes:** 1 (`owl-import --tier 1`); existing concepts keep their tier.
+- **Concepts without a source definition** are flagged `[fagekspert]` in the editorial note for the expert.
+- **No JSON-LD output.**
 - **Duplicates and generic names:** keep one row per concept; a concept in several groups names all of them in the
   collection sentence. Generic names get a qualifier in V440 style: "<term>, <group>".
 
@@ -96,19 +107,32 @@ Cross-row rules are hand-written SHACL-SPARQL. See `schema/README.md`.
 
 ## Vocabularies
 
-| | N101 | V440 | BRUTUS |
-| --- | --- | --- | --- |
-| Concepts | 283 | 329 (12 domains) | 79 in 9 collections |
-| Code lists | not processed | 152 collections, 1,358 codes; not processed | n/a |
-| Errors | 3 (related/broader clash) | 12 (domain/source concepts with invalid names) | 48 (definition missing) |
-| Warnings | 19 references to concepts outside the workbook, 39 unlinked Tier 1 | 103, incl. 89 unlinked Tier 1, 6 table headings used as concepts, 6 homonyms | 2 (one-member collection; capital letter in the scheme row label) |
-| Other | n/a | `vok:` removed from `dct:subject` and notes; `dct:subject` still points to the old v7 names; 109 notes with `kode:`; the source is mainly a coding manual | see `out/brutus-status.md` |
+| | N101 | V440 (with OWL import) | V441 (new) | BRUTUS |
+| --- | --- | --- | --- | --- |
+| Concepts | 283 | 948 (329 before; 148 OWL classes merged, 619 added) | 158, all from the V441 ontology | 91 in 9 collections (size fields split by bridge category) |
+| Code lists | not processed | 152 collections, 1,358 codes; code values not imported | code values not imported | n/a |
+| Errors | 3 (related/broader clash) | 39: 27 modelling classes without a definition, 12 domain/source concepts with invalid names | 5 modelling classes without a definition | 20 (definition missing, flagged `[fagekspert]`) |
+| Definitions | n/a | 8 added from the handbook text, 584 derived from the code tables | 101 from the N-V441 text, 7 copied from V440, 52 derived | 20 added from V440 chapter 6 and N-V441; 20 copied from V440 for the size fields |
+| Other | n/a | 52 concepts with two broader concepts (workbook and OWL), flagged `[fagekspert]`; `vok:` removed; 109 notes with `kode:` | linked to V440 by `exactMatch` | see `out/brutus-status.md` |
 
 V440 next steps: rename the domain concepts and fix `dct:subject`; decide how to handle the table headings and homonyms;
 extract the code lists from the PDF tables by script.
 
-BRUTUS (Confluence field list, `kortnavn` `brutus`) is migrated to v8 and merged with V440. Details, open points
+BRUTUS (Confluence field list, `kortnavn` `brutus`) is migrated to v8 and merged with V440 and V441. Details, open points
 and the links to the graph pages are in `out/brutus-status.md` (local, not in git).
+
+## Work of 10 November 2026 (summary)
+
+- **Decisions:** collections in the scope-note sentence; no prefixes in the Excel table (`kode:` kept for now); merging
+  vocabularies by `exactMatch` plus copied definition, `closeMatch` for near matches; one row per concept, generic names
+  qualified; both broader concepts kept where the OWL hierarchy differs; code entries and code lists may have derived
+  definitions; modelling classes stay with the expert; workbooks stay in v8 format. Details under *Template v8: decisions in force*.
+- **Tools** (pull request #1, merged): `owl-import`, `set-fields`, collections in `check`, `rdf`, `rename` and the graph page,
+  `VT-PREFIX`, `VT-PREFIX-KODE`, `VT-REQ-DEF-CODE`, `VT-DEF-DERIVED`; fixes in `fit` and `migrate`.
+- **Vocabularies** (local): BRUTUS migrated, merged and cleaned up; the two V440 ontologies imported into V440; V441 built
+  from its ontology; definitions taken from the handbook texts (V440, N-V441, with N400, N401 and R411 checked).
+  The reviewed values are kept as JSON in `out/` and applied with `set-fields`; `out/rebuild-V440-V441.sh` rebuilds
+  V440 and V441 from the sources in the right order.
 
 ## Instructions (not yet in the repository)
 
@@ -127,12 +151,9 @@ The main changes needed:
 **Open decisions:**
 - S16: move `exactMatch`/`closeMatch` text to `editorialNote`?
 - S18: `dct:subject` as a concept name?
-- Code lists: shared scheme (K2/V19) or none (O3)? Each code list can now be a collection.
+- Code lists: build the shared code-list scheme (decided: one shared scheme, K2/V19). Each code list can be a collection.
   Until then, `kode:` references in the Excel table stay (reported as info, `VT-PREFIX-KODE`); `vok:` is not used in the table.
-- OWL import (V440, V441): where the OWL hierarchy differs from the workbook, both broader concepts are kept and
-  flagged "[fagekspert]" in the editorial note; the expert keeps one or both;
-  tiers for imported classes; definitions for the imported concepts (from the handbooks).
+- Expert review (all flagged `[fagekspert]`): the 52 concepts with two broader concepts, the modelling classes without
+  a definition, and the BRUTUS fields that none of the texts describe.
 - May the instructions be public?
-- `skosno:relationshipWithSource` value for copied definitions: is `direct-from-source` the right SKOS-AP-NO term?
-- JSON-LD output (prefixes in its `@context`, generated by LinkML): wanted?
 - The crochet example is not developed further for now.

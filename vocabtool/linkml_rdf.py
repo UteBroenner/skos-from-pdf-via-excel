@@ -82,6 +82,8 @@ def workbook_to_data(v: Vocabulary, sv: SchemaView | None = None) -> dict:
                     val = int(float(val))
                 except ValueError:
                     pass
+            elif slot_name == "relationship_with_source":
+                val = "-".join(val.strip().lower().split())       # "derived from source" -> derived-from-source
             elif slot_name == "status":
                 val = val.strip().strip('"').split('"@')[0].lower()
             if val in ([], ""):

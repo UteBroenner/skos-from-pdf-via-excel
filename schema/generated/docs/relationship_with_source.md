@@ -5,6 +5,11 @@ search:
 
 # Slot: relationship_with_source 
 
+
+_How the definition relates to its source (SKOS-AP-NO). In Excel the value may also be written with spaces ("derived from source"); the converter writes the hyphenated form._
+
+
+
 <div data-search-exclude markdown="1">
 
 
@@ -33,7 +38,7 @@ URI: [skosno:relationshipWithSource](https://data.norge.no/vocabulary/skosno#rel
 
 | Property | Value |
 | --- | --- |
-| Range | [String](String.md) |
+| Range | [RelationshipWithSource](RelationshipWithSource.md) |
 | Domain Of | [Concept](Concept.md) |
 | Slot URI | [skosno:relationshipWithSource](https://data.norge.no/vocabulary/skosno#relationshipWithSource) |
 
@@ -90,12 +95,15 @@ annotations:
   excel_name:
     tag: excel_name
     value: forhold_til_kilde
+description: How the definition relates to its source (SKOS-AP-NO). In Excel the value
+  may also be written with spaces ("derived from source"); the converter writes the
+  hyphenated form.
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: skosno:relationshipWithSource
 domain_of:
 - Concept
-range: string
+range: RelationshipWithSource
 
 ```
 </details></div>
