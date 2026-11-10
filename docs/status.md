@@ -117,7 +117,8 @@ The main changes needed:
 - S18: `dct:subject` as a concept name?
 - Code lists: shared scheme (K2/V19) or none (O3)? Each code list can now be a collection.
   Until then, `kode:` references in the Excel table stay (reported as info, `VT-PREFIX-KODE`); `vok:` is not used in the table.
-- OWL import (V440, V441): broader conflicts between the OWL hierarchy and the workbook (kept as in the workbook);
+- OWL import (V440, V441): where the OWL hierarchy differs from the workbook, both broader concepts are kept and
+  flagged "[fagekspert]" in the editorial note; the expert keeps one or both;
   tiers for imported classes; definitions for the imported concepts (from the handbooks).
 - May the instructions be public?
 - `skosno:relationshipWithSource` value for copied definitions: is `direct-from-source` the right SKOS-AP-NO term?

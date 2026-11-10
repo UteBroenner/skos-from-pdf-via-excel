@@ -146,8 +146,10 @@ python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-
 ```
 
 - **Merge:** a class whose Norwegian label (or an alt label) is already in the workbook is merged into that concept, when only one class
-  in the file uses the label. The concept gets the class IRI in `skos:exactMatch`; code, English label and broader are filled
-  only where empty. Differences are listed as conflicts in the log and are never overwritten.
+  in the file uses the label. The concept gets the class IRI in `skos:exactMatch`; code and English label are filled
+  only where empty, and a different code is listed as a conflict in the log, never overwritten.
+  If the OWL parent differs from the concept's broader, both are kept in `skos:broader` and the editorial note says
+  "[fagekspert] To overbegreper: … (arbeidsbok) og … (OWL-hierarki). Behold ett eller begge."
 - **Reviewed merges:** `--merge-map map.json` (`{"<class IRI>": "<concept name>"}`) merges spelling or wording variants,
   e.g. classes with the same code. The class label is recorded in the editorial note.
 - **New concepts:** label from `rdfs:label@no` (first letter lower case unless an acronym) and `@en`; `kode` → `skos:notation`;

@@ -177,7 +177,11 @@ def cmd_owl_import(a):
     print(f"{a.out}: {len(log['merged'])} classes merged, {len(log['new'])} new concepts, "
           f"{len(log['linked'])} linked to {a.link or '-'}, {len(log['skipped'])} skipped")
     if log["conflicts"]:
-        print(f"  conflicts kept as in the workbook: {dict(Counter(c['field'] for c in log['conflicts']))}")
+        n = Counter(c["field"] for c in log["conflicts"])
+        if n.get("broader"):
+            print(f"  {n['broader']} concepts with a different OWL parent: both broader concepts kept, flagged [fagekspert]")
+        if n.get("notation"):
+            print(f"  {n['notation']} codes differ from the OWL kode: kept as in the workbook")
     print(f"  log: {log_path}")
     return 0
 

@@ -5,8 +5,9 @@ Merging (an existing concept is the same as a class):
   label is used by only one class in the file; or
 - a reviewed merge map (JSON: class IRI -> concept name) for spelling or wording variants, e.g. classes with the
   same code. The class label is then recorded in the editorial note.
-A merged concept gets the class IRI in skos:exactMatch. Notation (from `kode`), English label and broader are
-filled only where empty; differences are listed as conflicts in the log, never overwritten.
+A merged concept gets the class IRI in skos:exactMatch. Notation (from `kode`) and English label are filled only
+where empty; a different notation is listed as a conflict in the log, never overwritten. A different parent class
+is added as a second broader concept and flagged for the expert in the editorial note ("[fagekspert] To overbegreper: …").
 
 New concepts (one row per class):
 - label from rdfs:label@no/nb (first letter lower case unless an acronym), English label from @en; a class
@@ -190,7 +191,15 @@ def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=
                 if parent_name and not r["broader"]:
                     f["broader"] = parent_name; r["broader"] = [parent_name]; filled.append("broader")
                 elif parent_name and parent_name not in r["broader"]:
-                    log["conflicts"].append({"concept": name_of[i], "field": "broader", "workbook": r["broader"], "owl": parent_name, "iri": i})
+                    # different hierarchies: keep both broader concepts and flag them for the expert
+                    log["conflicts"].append({"concept": name_of[i], "field": "broader", "workbook": list(r["broader"]), "owl": parent_name, "iri": i})
+                    before = ", ".join(r["broader"])
+                    r["broader"].append(parent_name)
+                    f["broader"] = ", ".join(r["broader"])
+                    f["editorial_note"] = ((f.get("editorial_note") or "") +
+                                           f" [fagekspert] To overbegreper: {before} (arbeidsbok) og {parent_name} "
+                                           f"(OWL-hierarki, {onto_short}). Behold ett eller begge.").strip()
+                    filled += ["broader", "editorial_note"]
                 if d.get("fuzzy"):
                     f["editorial_note"] = ((f.get("editorial_note") or "") +
                                            f" [merknad] OWL-klasse: «{(d['no'] or '').strip()}» ({i.rsplit('#', 1)[-1]}).").strip()
