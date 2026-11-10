@@ -63,7 +63,7 @@ concept must have a prefLabel and a definition. LinkML cannot make "required" de
 1. **exactMatch / closeMatch hold text, not IRIs** (N101: 228 values, e.g. `IFC4.3: IfcPavement`, `NS-EN 1317-7`).
    They are reported but not written to RDF. Options: real IRIs (the IFC 4.3 and CityGML classes have them,
    standards do not), or move the text to `skos:editorialNote` / `skos:note`.
-2. **`dct:subject` contains `vok:N101` as text** in N101. The template allows "rdf:langString or skos:Concept",
+2. **`dct:subject` contained `vok:N101` as text** in N101 (v8 uses no prefixes; the checker now reports them as `VT-PREFIX`). The template allows "rdf:langString or skos:Concept",
    but one column cannot carry both cleanly. Decide on one.
 3. **`dcat:contactPoint` as a plain e-mail string.** DCAT expects a `vcard:Kind` resource (e.g. `[ a vcard:Organization ; vcard:hasEmail <mailto:…> ]`).
    This is kept simple for now.

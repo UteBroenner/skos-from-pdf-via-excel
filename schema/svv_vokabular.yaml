@@ -22,7 +22,6 @@ prefixes:
   skosno: https://data.norge.no/vocabulary/skosno#
   adms: http://www.w3.org/ns/adms#
   owl: http://www.w3.org/2002/07/owl#
-  vok: http://example.org/vegvesen/vokabular/
   svv: http://example.org/vegvesen/vokabular/def#
   concept_status: http://publications.europa.eu/resource/authority/concept-status/
 

@@ -4,7 +4,6 @@
 @prefix xkos: <http://rdf-vocabulary.ddialliance.org/xkos#> .
 @prefix svv: <http://example.org/vegvesen/vokabular/def#> .
 @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
-@prefix vok: <http://example.org/vegvesen/vokabular/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .

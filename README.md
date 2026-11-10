@@ -168,6 +168,8 @@ Store `endringshash` in a multi-line text column. The value is long, and single-
 If two people edit the same file between imports, every change is attributed to the last one,
 so use one reviewer per file/domain at a time.
 - `skos:broader`, `xkos:isPartOf` and `skos:related` contain **concept names** (column B), separated by commas.
+- v8 uses no prefixes: concept names stand alone (`Rekkverk`, not `vok:Rekkverk`), in relations, `dct:subject` and notes.
+  The `PREFIX vok` row is gone from the templates.
 - Header row = the row with `skos:prefLabel@nb`. In v8 the following row holds the technical names.
 - Code lists (`kodeverk` sheet) are not read.
 
@@ -182,6 +184,7 @@ so use one reviewer per file/domain at a time.
 | VT-URI-LABEL | info | concept name differs from the CamelCase form of the main-language term |
 | VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
 | VT-REF-FORMAT | error | relation values are concept names (v8) |
+| VT-PREFIX | error | no `vok:` / `kode:` prefixes in any v8 cell (relations, `dct:subject`, notes); use the concept name |
 | VT-REF-SELF | error | no relation to itself |
 | VT-CYCLE-BROADER / VT-CYCLE-PARTOF | error | no cycles |
 | VT-RELATED-CLASH | error | `related` not combined with a broader/narrower path (SKOS integrity) |

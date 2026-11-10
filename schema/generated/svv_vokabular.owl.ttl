@@ -1,7 +1,6 @@
 @prefix concept_status: <http://publications.europa.eu/resource/authority/concept-status/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix svv: <http://example.org/vegvesen/vokabular/def#> .
-@prefix vok: <http://example.org/vegvesen/vokabular/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -14,24 +13,24 @@ svv:Collection a owl:Class ;
 	rdfs:subClassOf _:c14n108 , _:c14n11 , _:c14n123 , _:c14n137 , _:c14n141 , _:c14n150 , _:c14n156 , _:c14n160 , _:c14n167 , _:c14n173 , _:c14n176 , _:c14n182 , _:c14n186 , _:c14n188 , _:c14n192 , _:c14n23 , _:c14n26 , _:c14n42 , _:c14n62 , _:c14n69 , _:c14n74 , _:c14n83 , _:c14n86 , _:c14n9 , _:c14n97 , _:c14n98 ;
 	skos:definition "A group of concepts, recorded in the main-language scope note of each member (\"Inngår i samlingen X.\" / \"Inngår i samlingene X, Y.\"). There is no Excel row for the collection itself. URI <scheme URI>/samling/<CamelCase name>; the label is the name as written. Unordered and not nested." ;
 	skos:exactMatch skos:Collection ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:Concept a owl:Class ;
 	rdfs:label "Concept" ;
 	rdfs:subClassOf _:c14n0 , _:c14n1 , _:c14n102 , _:c14n103 , _:c14n105 , _:c14n110 , _:c14n111 , _:c14n112 , _:c14n114 , _:c14n117 , _:c14n118 , _:c14n119 , _:c14n12 , _:c14n120 , _:c14n121 , _:c14n122 , _:c14n124 , _:c14n125 , _:c14n126 , _:c14n127 , _:c14n128 , _:c14n129 , _:c14n13 , _:c14n130 , _:c14n131 , _:c14n132 , _:c14n135 , _:c14n136 , _:c14n138 , _:c14n139 , _:c14n140 , _:c14n142 , _:c14n143 , _:c14n145 , _:c14n146 , _:c14n147 , _:c14n149 , _:c14n15 , _:c14n151 , _:c14n152 , _:c14n153 , _:c14n154 , _:c14n155 , _:c14n157 , _:c14n158 , _:c14n159 , _:c14n16 , _:c14n161 , _:c14n162 , _:c14n163 , _:c14n164 , _:c14n166 , _:c14n169 , _:c14n17 , _:c14n171 , _:c14n172 , _:c14n174 , _:c14n178 , _:c14n179 , _:c14n18 , _:c14n181 , _:c14n183 , _:c14n184 , _:c14n185 , _:c14n189 , _:c14n19 , _:c14n190 , _:c14n191 , _:c14n195 , _:c14n196 , _:c14n197 , _:c14n199 , _:c14n2 , _:c14n20 , _:c14n21 , _:c14n22 , _:c14n24 , _:c14n25 , _:c14n27 , _:c14n28 , _:c14n29 , _:c14n3 , _:c14n30 , _:c14n32 , _:c14n33 , _:c14n34 , _:c14n35 , _:c14n36 , _:c14n37 , _:c14n38 , _:c14n39 , _:c14n4 , _:c14n40 , _:c14n41 , _:c14n43 , _:c14n44 , _:c14n46 , _:c14n48 , _:c14n49 , _:c14n5 , _:c14n50 , _:c14n51 , _:c14n53 , _:c14n54 , _:c14n55 , _:c14n56 , _:c14n57 , _:c14n58 , _:c14n6 , _:c14n60 , _:c14n61 , _:c14n63 , _:c14n64 , _:c14n65 , _:c14n66 , _:c14n67 , _:c14n68 , _:c14n7 , _:c14n70 , _:c14n71 , _:c14n73 , _:c14n75 , _:c14n76 , _:c14n79 , _:c14n8 , _:c14n80 , _:c14n84 , _:c14n85 , _:c14n87 , _:c14n88 , _:c14n89 , _:c14n90 , _:c14n91 , _:c14n92 , _:c14n94 , _:c14n95 , _:c14n96 , _:c14n99 ;
 	skos:definition "One row in the vokabular sheet (row 23 onwards)." ;
 	skos:exactMatch skos:Concept ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:ConceptScheme a owl:Class ;
 	rdfs:label "ConceptScheme" ;
 	rdfs:subClassOf _:c14n101 , _:c14n104 , _:c14n107 , _:c14n109 , _:c14n113 , _:c14n115 , _:c14n116 , _:c14n133 , _:c14n134 , _:c14n14 , _:c14n148 , _:c14n168 , _:c14n170 , _:c14n175 , _:c14n180 , _:c14n187 , _:c14n193 , _:c14n194 , _:c14n198 , _:c14n47 , _:c14n72 , _:c14n77 , _:c14n78 , _:c14n81 , _:c14n93 ;
 	skos:definition "One vocabulary = one Excel workbook (vokabular sheet, rows 1-16)." ;
 	skos:exactMatch skos:ConceptScheme ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:ConceptStatus a owl:Class ;
 	rdfs:label "ConceptStatus" ;
 	owl:unionOf _:c14n144 ;
 	skos:definition "Status values from the template's statusliste, mapped to the EU concept-status authority table." ;
-	skos:inScheme vok:def\/schema ;
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> ;
 	linkml:permissible_values concept_status:CANDIDATE , concept_status:CURRENT , concept_status:DEPRECATED , concept_status:RETIRED .
 svv:alt_label_de svv:excel_column "AT"@de ;
 	svv:excel_name "tillat_term_tysk"@de ;
@@ -41,7 +40,7 @@ svv:alt_label_de svv:excel_column "AT"@de ;
 	<http://schema.org/inLanguage> "de"@de ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_de"@de ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:alt_label_en svv:excel_column "L"@en ;
 	svv:excel_name "tillat_term_engelsk"@en ;
 	svv:requirement "anbefalt"@en ;
@@ -49,7 +48,7 @@ svv:alt_label_en svv:excel_column "L"@en ;
 	<http://schema.org/inLanguage> "en"@en ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_en"@en ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:alt_label_en_gb svv:excel_column "AS"@en-gb ;
 	svv:excel_name "tillat_term_engelsk_gb"@en-gb ;
 	svv:requirement "valgfri"@en-gb ;
@@ -58,7 +57,7 @@ svv:alt_label_en_gb svv:excel_column "AS"@en-gb ;
 	<http://schema.org/inLanguage> "en-GB"@en-gb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_en_gb"@en-gb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:alt_label_en_us svv:excel_column "AR"@en-us ;
 	svv:excel_name "tillat_term_engelsk_us"@en-us ;
 	svv:requirement "valgfri"@en-us ;
@@ -67,7 +66,7 @@ svv:alt_label_en_us svv:excel_column "AR"@en-us ;
 	<http://schema.org/inLanguage> "en-US"@en-us ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_en_us"@en-us ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:alt_label_es svv:excel_column "AU"@es ;
 	svv:excel_name "tillat_term_spansk"@es ;
 	svv:requirement "valgfri"@es ;
@@ -76,7 +75,7 @@ svv:alt_label_es svv:excel_column "AU"@es ;
 	<http://schema.org/inLanguage> "es"@es ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_es"@es ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:alt_label_nb svv:excel_column "J"@nb ;
 	svv:excel_name "tillat_term_bokmål"@nb ;
 	svv:requirement "anbefalt"@nb ;
@@ -84,7 +83,7 @@ svv:alt_label_nb svv:excel_column "J"@nb ;
 	<http://schema.org/inLanguage> "nb"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_nb"@nb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:alt_label_nn svv:excel_column "K"@nn ;
 	svv:excel_name "tillat_term_nynorsk"@nn ;
 	svv:requirement "anbefalt"@nn ;
@@ -92,12 +91,12 @@ svv:alt_label_nn svv:excel_column "K"@nn ;
 	<http://schema.org/inLanguage> "nn"@nn ;
 	a owl:DatatypeProperty ;
 	rdfs:label "alt_label_nn"@nn ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:audience svv:excel_column "M" ;
 	svv:excel_name "målgruppe" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "audience" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:broader svv:excel_column "U" ;
 	svv:excel_name "har_overbegrep" ;
 	svv:excel_value "concept name (column B)" ;
@@ -105,26 +104,26 @@ svv:broader svv:excel_column "U" ;
 	a owl:ObjectProperty ;
 	rdfs:label "broader" ;
 	rdfs:range svv:Concept ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:close_match svv:excel_column "Z" ;
 	svv:excel_name "har_nært_samsvar_med" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "close_match" ;
 	rdfs:range xsd:anyURI ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:collections svv:rdf_skip true ;
 	a owl:ObjectProperty ;
 	rdfs:label "collections" ;
 	rdfs:range svv:Collection ;
 	skos:definition "Container slot for the data file only. Not written to RDF; the collections are written as resources of their own. Built from the scope-note sentence, not from a column." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:concepts svv:rdf_skip true ;
 	a owl:ObjectProperty ;
 	rdfs:label "concepts" ;
 	rdfs:range svv:Concept ;
 	skos:definition "Container slot for the data file only. Not written to RDF; the RDF writer emits skos:inScheme on each concept instead." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:contact_point svv:excel_column "AA" ;
 	svv:excel_name "kontaktpunkt" ;
 	svv:requirement "obligatorisk" ;
@@ -132,14 +131,14 @@ svv:contact_point svv:excel_column "AA" ;
 	rdfs:label "contact_point" ;
 	rdfs:range _:c14n31 ;
 	skos:definition "E-mail address or web address. Vegvesen vocabularies use datagovernance@vegvesen.no (fixed value in the field instructions); the schema accepts any address." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:created svv:excel_column "AC" ;
 	svv:excel_name "dato_opprettet" ;
 	svv:requirement "anbefalt" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "created" ;
 	rdfs:range xsd:date ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:created_by svv:excel_column "AD" ;
 	svv:excel_name "opprettet_av" ;
 	svv:hidden true ;
@@ -147,24 +146,24 @@ svv:created_by svv:excel_column "AD" ;
 	rdfs:label "created_by" ;
 	rdfs:range _:c14n177 ;
 	skos:definition "Hidden column; template formula = dct:creator of the vocabulary (cell B16)." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:creator svv:excel_cell "B16" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "creator" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:data_structure_label svv:excel_column "AL" ;
 	svv:excel_name "datastrukturterm" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "data_structure_label" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:definition_en svv:excel_column "H"@en ;
 	svv:excel_name "definisjon_engelsk"@en ;
 	svv:requirement "valgfri"@en ;
 	<http://schema.org/inLanguage> "en"@en ;
 	a owl:DatatypeProperty ;
 	rdfs:label "definition_en"@en ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:definition_en_us svv:excel_column "AV"@en-us ;
 	svv:excel_name "definisjon_engelsk_us"@en-us ;
 	svv:requirement "valgfri"@en-us ;
@@ -172,7 +171,7 @@ svv:definition_en_us svv:excel_column "AV"@en-us ;
 	<http://schema.org/inLanguage> "en-US"@en-us ;
 	a owl:DatatypeProperty ;
 	rdfs:label "definition_en_us"@en-us ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:definition_nb svv:excel_column "G"@nb ;
 	svv:excel_name "definisjon_bokmål"@nb ;
 	svv:requirement "obligatorisk"@nb ;
@@ -180,40 +179,40 @@ svv:definition_nb svv:excel_column "G"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "definition_nb"@nb ;
 	skos:definition "Required when the main language is nb (SHACL rule)."@nb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:definition_nn svv:excel_column "I"@nn ;
 	svv:excel_name "definisjon_nynorsk"@nn ;
 	svv:requirement "obligatorisk"@nn ;
 	<http://schema.org/inLanguage> "nn"@nn ;
 	a owl:DatatypeProperty ;
 	rdfs:label "definition_nn"@nn ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:editorial_note svv:excel_column "Q" ;
 	svv:excel_name "merknad_til_etableringmåte" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "editorial_note" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:end_date svv:excel_column "AK" ;
 	svv:excel_name "gjelder_til_og_med" ;
 	svv:requirement "anbefalt" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "end_date" ;
 	rdfs:range xsd:date ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:exact_match svv:excel_column "Y" ;
 	svv:excel_name "har_eksakt_samsvar_med" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "exact_match" ;
 	rdfs:range xsd:anyURI ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:example svv:excel_column "R" ;
 	svv:excel_name "eksempel" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "example" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:hidden_label svv:excel_column "T"@nb ;
 	svv:excel_name "frarådd_term"@nb ;
 	svv:requirement "valgfri"@nb ;
@@ -221,7 +220,7 @@ svv:hidden_label svv:excel_column "T"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "hidden_label"@nb ;
 	skos:definition "Discouraged term, e.g. a common misspelling."@nb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:identifier svv:excel_column "A" ;
 	svv:excel_name "intern_identifikator" ;
 	svv:requirement "obligatorisk" ;
@@ -229,12 +228,12 @@ svv:identifier svv:excel_column "A" ;
 	rdfs:label "identifier" ;
 	rdfs:range _:c14n59 ;
 	skos:definition "<kortnavn>-<concept name>, e.g. N101-Rekkverk (formula in column A). Relations in Excel use the concept name." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:in_scheme a owl:DatatypeProperty ;
 	rdfs:label "in_scheme" ;
 	rdfs:range xsd:anyURI ;
 	skos:definition "Set by the converter from the scheme URI." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:is_part_of svv:excel_column "V" ;
 	svv:excel_name "er_del_av" ;
 	svv:excel_value "concept name (column B)" ;
@@ -242,49 +241,49 @@ svv:is_part_of svv:excel_column "V" ;
 	a owl:ObjectProperty ;
 	rdfs:label "is_part_of" ;
 	rdfs:range svv:Concept ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:issued svv:excel_cell "B18" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "issued" ;
 	rdfs:range xsd:date ;
 	skos:definition "System-generated at publication." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:kortnavn svv:excel_cell "B14" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "kortnavn" ;
 	rdfs:range _:c14n100 ;
 	skos:definition "Short name of the vocabulary, letters, digits and hyphens, e.g. N101 or crochet-us (cell B14)." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:main_language svv:excel_label "hovedspråk" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "main_language" ;
 	skos:definition "BCP 47 tag of the language in which every concept must have a prefLabel and a definition (scheme row \"hovedspråk\"; default nb). Enforced by SHACL (shapes/cross_row.shacl.ttl)." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:member svv:excel_source "scope note sentence: Inngår i samlingen/samlingene …" ;
 	a owl:ObjectProperty ;
 	rdfs:label "member" ;
 	rdfs:range svv:Concept ;
 	skos:definition "Concepts whose main-language scope note names the collection." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:modified svv:excel_column "AE" ;
 	svv:excel_name "dato_sist_endret" ;
 	svv:requirement "anbefalt" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "modified" ;
 	rdfs:range xsd:date ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:modified_by svv:excel_column "AF" ;
 	svv:excel_name "sist_endret_av" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "modified_by" ;
 	rdfs:range _:c14n52 ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:notation svv:excel_column "F" ;
 	svv:excel_name "notasjon_eller_kode" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "notation" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:pref_label_de svv:excel_column "AP"@de ;
 	svv:excel_name "anbefalt_term_tysk"@de ;
 	svv:requirement "valgfri"@de ;
@@ -292,14 +291,14 @@ svv:pref_label_de svv:excel_column "AP"@de ;
 	<http://schema.org/inLanguage> "de"@de ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_de"@de ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:pref_label_en svv:excel_column "D"@en ;
 	svv:excel_name "anbefalt_term_engelsk"@en ;
 	svv:requirement "valgfri"@en ;
 	<http://schema.org/inLanguage> "en"@en ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_en"@en ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:pref_label_en_gb svv:excel_column "AO"@en-gb ;
 	svv:excel_name "anbefalt_term_engelsk_gb"@en-gb ;
 	svv:requirement "valgfri"@en-gb ;
@@ -307,7 +306,7 @@ svv:pref_label_en_gb svv:excel_column "AO"@en-gb ;
 	<http://schema.org/inLanguage> "en-GB"@en-gb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_en_gb"@en-gb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:pref_label_en_us svv:excel_column "AN"@en-us ;
 	svv:excel_name "anbefalt_term_engelsk_us"@en-us ;
 	svv:requirement "valgfri"@en-us ;
@@ -315,7 +314,7 @@ svv:pref_label_en_us svv:excel_column "AN"@en-us ;
 	<http://schema.org/inLanguage> "en-US"@en-us ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_en_us"@en-us ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:pref_label_es svv:excel_column "AQ"@es ;
 	svv:excel_name "anbefalt_term_spansk"@es ;
 	svv:requirement "valgfri"@es ;
@@ -323,7 +322,7 @@ svv:pref_label_es svv:excel_column "AQ"@es ;
 	<http://schema.org/inLanguage> "es"@es ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_es"@es ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:pref_label_nb svv:excel_column "C"@nb ;
 	svv:excel_name "anbefalt_term_bokmål"@nb ;
 	svv:requirement "obligatorisk"@nb ;
@@ -331,7 +330,7 @@ svv:pref_label_nb svv:excel_column "C"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_nb"@nb ;
 	skos:definition "Recommended term, bokmål. Lowercase except acronyms (S05). Required when the main language is nb (SHACL rule)."@nb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:pref_label_nn svv:excel_column "E"@nn ;
 	svv:excel_name "anbefalt_term_nynorsk"@nn ;
 	svv:requirement "obligatorisk"@nn ;
@@ -339,12 +338,12 @@ svv:pref_label_nn svv:excel_column "E"@nn ;
 	a owl:DatatypeProperty ;
 	rdfs:label "pref_label_nn"@nn ;
 	skos:definition "Obligatory in the template, but left empty by extraction for the expert (S06)."@nn ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:publisher svv:excel_cell "B17" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "publisher" ;
 	skos:definition "System-generated at publication." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:related svv:excel_column "W" ;
 	svv:excel_name "er_relatert_til" ;
 	svv:excel_value "concept name (column B)" ;
@@ -353,26 +352,26 @@ svv:related svv:excel_column "W" ;
 	a owl:ObjectProperty ;
 	rdfs:label "related" ;
 	rdfs:range svv:Concept ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:relation_role svv:excel_column "X"@nb ;
 	svv:excel_name "relasjonsrolle"@nb ;
 	svv:requirement "anbefalt"@nb ;
 	<http://schema.org/inLanguage> "nb"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "relation_role"@nb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:relationship_with_source svv:excel_column "O" ;
 	svv:excel_name "forhold_til_kilde" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "relationship_with_source" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:scope_note svv:excel_column "P"@nb ;
 	svv:excel_name "merknad"@nb ;
 	svv:requirement "anbefalt"@nb ;
 	<http://schema.org/inLanguage> "nb"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "scope_note"@nb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:scope_note_en_us svv:excel_column "AW"@en-us ;
 	svv:excel_name "merknad_engelsk_us"@en-us ;
 	svv:requirement "valgfri"@en-us ;
@@ -381,28 +380,28 @@ svv:scope_note_en_us svv:excel_column "AW"@en-us ;
 	a owl:DatatypeProperty ;
 	rdfs:label "scope_note_en_us"@en-us ;
 	skos:definition "Usage note in US English, e.g. a warning that a term means another concept elsewhere."@en-us ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:source svv:excel_column "N" ;
 	svv:excel_name "kilde" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "source" ;
 	rdfs:range xsd:anyURI ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:start_date svv:excel_column "AJ" ;
 	svv:excel_name "gjelder_fra_og_med" ;
 	svv:requirement "anbefalt" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "start_date" ;
 	rdfs:range xsd:date ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:status svv:excel_column "AI" ;
 	svv:excel_name "status" ;
 	svv:requirement "anbefalt" ;
 	a owl:ObjectProperty ;
 	rdfs:label "status" ;
 	rdfs:range svv:ConceptStatus ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:subject svv:excel_column "S"@nb ;
 	svv:excel_name "fagområde"@nb ;
 	svv:requirement "anbefalt"@nb ;
@@ -410,7 +409,7 @@ svv:subject svv:excel_column "S"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "subject"@nb ;
 	skos:definition "Subject area. Template allows rdf:langString or skos:Concept; modelled as text for now."@nb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:tier svv:excel_column "AO (base template), AY (language extension): always the last column, outside the Excel table" ;
 	svv:excel_name "tier" ;
 	svv:requirement "internt" ;
@@ -418,12 +417,12 @@ svv:tier svv:excel_column "AO (base template), AY (language extension): always t
 	rdfs:label "tier" ;
 	rdfs:range _:c14n106 ;
 	skos:definition "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:title svv:excel_cell "B15"@nb ;
 	<http://schema.org/inLanguage> "nb"@nb ;
 	a owl:DatatypeProperty ;
 	rdfs:label "title"@nb ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:uri svv:excel_column "B" ;
 	svv:excel_name "begrep" ;
 	svv:excel_value "CamelCase concept name only" ;
@@ -431,26 +430,26 @@ svv:uri svv:excel_column "B" ;
 	rdfs:label "uri" ;
 	rdfs:range xsd:anyURI ;
 	skos:definition "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI." ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:value_range svv:excel_column "AM" ;
 	svv:excel_name "verdiområde" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "value_range" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:version_info svv:excel_column "AG" ;
 	svv:excel_name "versjonsnummer" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "version_info" ;
-	skos:inScheme vok:def\/schema .
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
 svv:version_notes svv:excel_column "AH" ;
 	svv:excel_name "versjonsnote" ;
 	svv:requirement "valgfri" ;
 	a owl:DatatypeProperty ;
 	rdfs:label "version_notes" ;
-	skos:inScheme vok:def\/schema .
-vok:def\/schema.owl.ttl dct:license "CC-BY-4.0" ;
+	skos:inScheme <http://example.org/vegvesen/vokabular/def/schema> .
+<http://example.org/vegvesen/vokabular/def/schema.owl.ttl> dct:license "CC-BY-4.0" ;
 	dct:title "SKOS-vokabular (Excel-mal v8)" ;
 	pav:version "0.1.0" ;
 	a owl:Ontology ;

@@ -1,6 +1,6 @@
 # LinkML / SHACL report: HEKL-v8.xlsx
 
-77 concepts · 1526 triples · SHACL conforms: **True**
+77 concepts · 0 collections · 1526 triples · SHACL conforms: **True**
 
 ## LinkML validation (0 issues)
 
