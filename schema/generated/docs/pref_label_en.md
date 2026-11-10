@@ -21,6 +21,7 @@ URI: [skos:prefLabel](http://www.w3.org/2004/02/skos/core#prefLabel)
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [Concept](Concept.md) | One row in the vokabular sheet (row 23 onwards) |  no  |
+| [Collection](Collection.md) | A group of concepts, recorded in the main-language scope note of each member ... |  no  |
 
 
 
@@ -34,7 +35,7 @@ URI: [skos:prefLabel](http://www.w3.org/2004/02/skos/core#prefLabel)
 | Property | Value |
 | --- | --- |
 | Range | [String](String.md) |
-| Domain Of | [Concept](Concept.md) |
+| Domain Of | [Concept](Concept.md), [Collection](Collection.md) |
 | Slot URI | [skos:prefLabel](http://www.w3.org/2004/02/skos/core#prefLabel) |
 
 
@@ -100,6 +101,7 @@ rank: 1000
 slot_uri: skos:prefLabel
 domain_of:
 - Concept
+- Collection
 range: string
 
 ```

@@ -107,5 +107,25 @@ svv:MainLanguageShape
               OPTIONAL { $this skos:inScheme/svv:mainLanguage ?ml }
               BIND (LCASE(COALESCE(STR(?ml), "nb")) AS ?lang)
               FILTER NOT EXISTS { $this skos:definition ?d . FILTER (LCASE(LANG(?d)) = ?lang) }
+              FILTER NOT EXISTS { $this skos:notation ?code }
+            }""" ;
+    ] .
+
+# Code entries (concepts with skos:notation) without a definition: warning, not violation.
+# Code-table entries often have no definition in the source (decision of 10 November 2026).
+svv:CodeDefinitionShape
+    a sh:NodeShape ;
+    sh:targetClass skos:Concept ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "VT-REQ-DEF-CODE: code entry without a definition in the main language" ;
+        sh:prefixes svv:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+              $this skos:notation ?code .
+              OPTIONAL { $this skos:inScheme/svv:mainLanguage ?ml }
+              BIND (LCASE(COALESCE(STR(?ml), "nb")) AS ?lang)
+              FILTER NOT EXISTS { $this skos:definition ?d . FILTER (LCASE(LANG(?d)) = ?lang) }
             }""" ;
     ] .

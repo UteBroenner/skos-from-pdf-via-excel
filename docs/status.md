@@ -11,7 +11,7 @@ The crochet example (`datasets/hekling/`) is described in its own README.
   - `schema/`: LinkML schema, generated artefacts and cross-row SHACL
   - `templates/`: empty templates for v8 (master), v8 with language extension, and v7
   - `datasets/hekling/`: example vocabulary
-- **Not in the repository:** Statens vegvesen vocabularies (N101, V440) and their outputs. They are kept in
+- **Not in the repository:** Statens vegvesen vocabularies (N101, V440, BRUTUS) and their outputs. They are kept in
   `samples/` and `out/`, which are ignored by git, and were removed from the history. Upload them to a session when they are needed.
 
 ## Template v8: decisions in force
@@ -35,7 +35,36 @@ The crochet example (`datasets/hekling/`) is described in its own README.
   definition and scope-note columns per language. The checks follow the main language.
 - **Label clashes** (the same term for different concepts) are documented in a scope note that names the other concept.
   The checker then reports them as info.
-- **Concepts are not deleted.** Set the status to `forkastet` instead.
+- **Concepts are not deleted.** Set the status to `forkastet` instead. Exception: rows in a draft that has
+  never been imported may be deleted (e.g. section headings that became collections).
+- **Collections** are recorded only in the main-language scope note: "Inngår i samlingen X." /
+  "Inngår i samlingene X, Y." The tools build `skos:Collection` (URI `…/<kortnavn>/samling/<Name>`) and `skos:member`.
+  There is no collection sheet, so nothing can diverge. `dct:subject` is for subject areas only.
+  - The sentence is Norwegian only, whatever the main language. Collections are unordered and not nested.
+  - Name as written = `skos:prefLabel` of the collection; names are separated by commas, not "og".
+  - The checker reports one-member collections, near-identical names, unreadable sentences and the sentence
+    in another language's scope note (`VT-COLL-*`). The graph page shows collections as squares.
+- **Prefixes:** none in the Excel table (relations, `dct:subject`, notes): write `Rekkverk`, not `vok:Rekkverk`
+  (`VT-PREFIX`, error). The hidden PREFIX rows of the template stay, and the machine-readable artefacts
+  (LinkML schema and data, Turtle) keep their prefixes. `kode:` references stay until code lists are decided
+  (`VT-PREFIX-KODE`, info).
+- **Merging with another vocabulary** (decided for BRUTUS and V440): the vocabulary stays its own. Exact matches get
+  `skos:exactMatch` to the other concept's URI, its definition copied, `dct:source` = that URI,
+  `skosno:relationshipWithSource` = `direct-from-source` (value still to be confirmed against SKOS-AP-NO) and an editorial
+  note "[kilde] Definisjon kopiert fra V440 (<name>)." Close matches get `skos:closeMatch` only, with no definition copied.
+- **Definitions of code entries** (concepts with `skos:notation`): a missing definition is a warning (`VT-REQ-DEF-CODE`),
+  not an error, also in SHACL. `owl-import --derive-code-definitions` builds one from the code table, marked `[avledet]`
+  (`VT-DEF-DERIVED`, info), to be replaced by a definition from the handbook where it has one.
+- **Code-list containers** (classes under "Kodeliste" without a definition) get a derived definition
+  ("kodeliste for … i V440 (v440-owl, kapittel …)", `[avledet]`). Chapter numbers in derived definitions are the
+  ontology's own (V-5 …), not the handbook's.
+- **Modelling classes** of the ontologies (e.g. byggverk, komponent, lokasjon) stay without a definition for the expert,
+  flagged `[fagekspert]` in the editorial note.
+- **Definitions from handbooks** are close paraphrases marked `[omskrivning] Definisjon fra <handbook> <chapter>.`
+  with `relationshipWithSource` `derived-from-source`; a verbatim quote is marked `[kilde] Definisjon sitert fra …`
+  with `direct-from-source`. They are kept in JSON files and applied with `set-fields` after `owl-import`.
+- **Duplicates and generic names:** keep one row per concept; a concept in several groups names all of them in the
+  collection sentence. Generic names get a qualifier in V440 style: "<term>, <group>".
 
 ## Tools
 
@@ -43,12 +72,14 @@ Run as `python -m vocabtool <command>`. Details in the README.
 
 | Command | Purpose |
 | --- | --- |
-| `check` | VT rules, report (`.md`, `.json`) and interactive graph page |
-| `migrate` | v7 → v8; keeps the v7 names, relations become names |
+| `check` | VT rules, report (`.md`, `.json`) and interactive graph page (with collections) |
+| `migrate` | v7 → v8; keeps the v7 names, relations become names. Only for real v7 files: workbooks are kept in v8 format, and `migrate` is not extended for mixed layouts |
 | `uri` | fills missing concept names |
-| `rename` | renames a concept and every relation and note that refers to it |
+| `rename` | renames a concept and every relation and note that refers to it; `--collection` renames a collection |
 | `fit` | stretches the table, formatting and validation; writes the formulas |
-| `rdf` | LinkML data, SKOS Turtle, LinkML and SHACL validation |
+| `rdf` | LinkML data, SKOS Turtle (with `skos:Collection`), LinkML and SHACL validation |
+| `owl-import` | adds OWL classes as concepts, merging with existing ones (label, or a reviewed merge map) |
+| `set-fields` | writes reviewed values (e.g. definitions from a handbook) into concepts by name, from JSON |
 
 LinkML 1.12.1 has gaps that are worked around in project code: language tags, enum URIs, and three SHACL defects.
 Cross-row rules are hand-written SHACL-SPARQL. See `schema/README.md`.
@@ -65,16 +96,19 @@ Cross-row rules are hand-written SHACL-SPARQL. See `schema/README.md`.
 
 ## Vocabularies
 
-| | N101 | V440 |
-| --- | --- | --- |
-| Concepts | 283 | 329 (12 domains) |
-| Code lists | not processed | 152 collections, 1,358 codes; not processed |
-| Errors | 3 (related/broader clash) | 12 (domain/source concepts with invalid names) |
-| Warnings | 19 references to concepts outside the workbook, 39 unlinked Tier 1 | 89 unlinked Tier 1, 6 table headings used as concepts, 6 homonyms |
-| Other | n/a | `dct:subject` still points to the old v7 names; the source is mainly a coding manual |
+| | N101 | V440 | BRUTUS |
+| --- | --- | --- | --- |
+| Concepts | 283 | 329 (12 domains) | 79 in 9 collections |
+| Code lists | not processed | 152 collections, 1,358 codes; not processed | n/a |
+| Errors | 3 (related/broader clash) | 12 (domain/source concepts with invalid names) | 48 (definition missing) |
+| Warnings | 19 references to concepts outside the workbook, 39 unlinked Tier 1 | 103, incl. 89 unlinked Tier 1, 6 table headings used as concepts, 6 homonyms | 2 (one-member collection; capital letter in the scheme row label) |
+| Other | n/a | `vok:` removed from `dct:subject` and notes; `dct:subject` still points to the old v7 names; 109 notes with `kode:`; the source is mainly a coding manual | see `out/brutus-status.md` |
 
 V440 next steps: rename the domain concepts and fix `dct:subject`; decide how to handle the table headings and homonyms;
 extract the code lists from the PDF tables by script.
+
+BRUTUS (Confluence field list, `kortnavn` `brutus`) is migrated to v8 and merged with V440. Details, open points
+and the links to the graph pages are in `out/brutus-status.md` (local, not in git).
 
 ## Instructions (not yet in the repository)
 
@@ -93,5 +127,12 @@ The main changes needed:
 **Open decisions:**
 - S16: move `exactMatch`/`closeMatch` text to `editorialNote`?
 - S18: `dct:subject` as a concept name?
-- Code lists: shared scheme (K2/V19) or none (O3)?
+- Code lists: shared scheme (K2/V19) or none (O3)? Each code list can now be a collection.
+  Until then, `kode:` references in the Excel table stay (reported as info, `VT-PREFIX-KODE`); `vok:` is not used in the table.
+- OWL import (V440, V441): where the OWL hierarchy differs from the workbook, both broader concepts are kept and
+  flagged "[fagekspert]" in the editorial note; the expert keeps one or both;
+  tiers for imported classes; definitions for the imported concepts (from the handbooks).
 - May the instructions be public?
+- `skosno:relationshipWithSource` value for copied definitions: is `direct-from-source` the right SKOS-AP-NO term?
+- JSON-LD output (prefixes in its `@context`, generated by LinkML): wanted?
+- The crochet example is not developed further for now.

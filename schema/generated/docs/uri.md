@@ -27,6 +27,7 @@ URI: [svv:uri](http://example.org/vegvesen/vokabular/def#uri)
 | --- | --- | --- |
 | [ConceptScheme](ConceptScheme.md) | One vocabulary = one Excel workbook (vokabular sheet, rows 1-16) |  no  |
 | [Concept](Concept.md) | One row in the vokabular sheet (row 23 onwards) |  no  |
+| [Collection](Collection.md) | A group of concepts, recorded in the main-language scope note of each member ... |  no  |
 
 
 
@@ -40,7 +41,7 @@ URI: [svv:uri](http://example.org/vegvesen/vokabular/def#uri)
 | Property | Value |
 | --- | --- |
 | Range | [uri](uri.md) |
-| Domain Of | [ConceptScheme](ConceptScheme.md), [Concept](Concept.md) |
+| Domain Of | [ConceptScheme](ConceptScheme.md), [Concept](Concept.md), [Collection](Collection.md) |
 ### Cardinality and Requirements
 
 | Property | Value |
@@ -67,6 +68,7 @@ URI: [svv:uri](http://example.org/vegvesen/vokabular/def#uri)
 | [Concept](Concept.md) | [exact_match](exact_match.md) | range | [uri](uri.md) |
 | [Concept](Concept.md) | [close_match](close_match.md) | range | [uri](uri.md) |
 | [Concept](Concept.md) | [in_scheme](in_scheme.md) | range | [uri](uri.md) |
+| [Collection](Collection.md) | [uri](uri.md) | range | [uri](uri.md) |
 
 
 
@@ -134,6 +136,7 @@ identifier: true
 domain_of:
 - ConceptScheme
 - Concept
+- Collection
 range: uri
 required: true
 

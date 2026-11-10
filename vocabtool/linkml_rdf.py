@@ -88,8 +88,17 @@ def workbook_to_data(v: Vocabulary, sv: SchemaView | None = None) -> dict:
                 continue
             rec[slot_name] = val
         concepts.append(rec)
-    return {"uri": scheme_uri, "kortnavn": v.kortnavn, "title": v.title, "main_language": v.main_lang,
+    # collections: from the main-language scope-note sentence ("Inngår i samlingen X.")
+    from .samling import collections, collection_uri
+    label_slot = FIELD_TO_SLOT.get(v.label_field)
+    cols = [{"uri": collection_uri(scheme_uri, col.name), **({label_slot: col.label} if label_slot else {}),
+             "member": [id_to_uri[k] for k in col.members]}
+            for col in collections(v).values()]
+    data = {"uri": scheme_uri, "kortnavn": v.kortnavn, "title": v.title, "main_language": v.main_lang,
             "concepts": concepts}
+    if cols:
+        data["collections"] = cols
+    return data
 
 
 # ---------------------------------------------------------------- data -> RDF
@@ -136,9 +145,11 @@ def data_to_graph(data: dict, sv: SchemaView | None = None, skipped: list | None
         return Literal(str(v), lang=slot.in_language) if slot.in_language else Literal(str(v))
 
     scheme = URIRef(data["uri"])
-    emit(scheme, "ConceptScheme", {k: v for k, v in data.items() if k not in ("uri", "concepts")})
+    emit(scheme, "ConceptScheme", {k: v for k, v in data.items() if k not in ("uri", "concepts", "collections")})
     for c in data.get("concepts", []):
         emit(URIRef(c["uri"]), "Concept", {k: v for k, v in c.items() if k != "uri"})
+    for c in data.get("collections", []):
+        emit(URIRef(c["uri"]), "Collection", {k: v for k, v in c.items() if k != "uri"})
     return g
 
 

@@ -72,6 +72,13 @@ Rename a concept. This changes column B and every relation and note that refers 
 python -m vocabtool rename path/to/workbook.xlsx OldName NewName
 ```
 
+Rename a collection. This changes the name in every collection sentence (see *Collections* below) and nothing else.
+A concept rename leaves those sentences alone:
+
+```bash
+python -m vocabtool rename path/to/workbook.xlsx --collection "Old name" "New name"
+```
+
 Existing names are kept, and `--overwrite` regenerates all of them. If two concepts would get the same name,
 the second gets a number (`Name2`) and the command lists it, so you can choose a better name.
 
@@ -124,6 +131,77 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
   `endringshash` (formula: `TEXTJOIN` of the row content without ID, dates and persons) is the last column inside
   the table, and `tier` is the last column, outside it. `vocabtool fit` writes both formulas for all table rows.
 
+## OWL import
+
+Add the classes of OWL ontologies (Turtle) as concepts to a v8 workbook. Classes that are already concepts are merged:
+
+```bash
+python -m vocabtool owl-import V440-v8.xlsx v440-owl.ttl v440-brudata-owl.ttl --out V440-v8-owl.xlsx --contact datagovernance@vegvesen.no
+```
+
+Start a new vocabulary from the empty template, and copy definitions from another vocabulary where a label matches:
+
+```bash
+python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-owl.ttl --out V441-v8.xlsx --kortnavn V441 --title "Hb V441" --link V440-v8-owl.xlsx
+```
+
+- **Merge:** a class whose Norwegian label (or an alt label) is already in the workbook is merged into that concept, when only one class
+  in the file uses the label. The concept gets the class IRI in `skos:exactMatch`; code and English label are filled
+  only where empty, and a different code is listed as a conflict in the log, never overwritten.
+  If the OWL parent differs from the concept's broader, both are kept in `skos:broader` and the editorial note says
+  "[fagekspert] To overbegreper: … (arbeidsbok) og … (OWL-hierarki). Behold ett eller begge."
+- **Reviewed merges:** `--merge-map map.json` (`{"<class IRI>": "<concept name>"}`) merges spelling or wording variants,
+  e.g. classes with the same code. The class label is recorded in the editorial note.
+- **New concepts:** label from `rdfs:label@no` (first letter lower case unless an acronym) and `@en`; `kode` → `skos:notation`;
+  parent class → `skos:broader`; class IRI → `skos:exactMatch`; source = the ontology; editorial note with chapter and section
+  and `[mangler] definisjon`. A label used by several classes gets the parent as qualifier ("fundament, pilar").
+  A class without a label gets a term from its IRI, flagged in the editorial note.
+- **`--derive-code-definitions`:** a new code entry (a class with `kode`) without another definition gets one built from the
+  code table, e.g. "kodeverdi 59 under «buebru og hvelvbru» i V440 (kap. V-6, avsnitt V-6.1)", with
+  `relationshipWithSource` `derived-from-source` and `[avledet]` in the editorial note. The checker lists these as
+  `VT-DEF-DERIVED` (info), so an expert can replace them with a real definition.
+- **`--link`:** a new concept whose label matches one concept with a definition in the other workbook gets `skos:exactMatch` to it,
+  its definition copied and that concept as source (`direct-from-source`).
+- **Skipped:** deprecated classes and the technical root (the single top class of a file); `--keep-root` keeps the root.
+  Code values (individuals) and properties are not imported.
+- The rows are added in hierarchy order (parent first, siblings by code), and the same input always gives the same workbook.
+  The log (`<out>.owl-import.json` or `--log`) lists merged, new, skipped and linked classes and the conflicts.
+
+## Set fields
+
+Write reviewed values, e.g. definitions taken from a handbook, into concepts by name:
+
+```bash
+python -m vocabtool set-fields V441-v8.xlsx definitions-V441.json
+```
+
+The JSON maps concept names to fields: `{"Nivellement": {"def_nb": "…", "source": "https://…", "relationship_with_source": "derived-from-source"}}`.
+A field name ending in `+` appends to the current value (`"editorial_note+": "[merknad] …"`). Unknown names or fields stop the
+command before anything is written; column A, column B and the formula columns are never written. Keep the JSON next to the
+workbook: after a new `owl-import`, run `set-fields` again to restore the reviewed values.
+
+## Collections
+
+A collection (`skos:Collection`) is recorded only in the main-language scope note of each member concept,
+with a fixed sentence:
+
+> Inngår i samlingen Hoveddata.
+> Inngår i samlingene Skader, Inspeksjon.
+
+- Use `samlingen` for one collection and `samlingene` for several. Separate names with commas, not "og",
+  because "og" can be part of a name (`Arkiv og dokumentasjon`). End the sentence with a full stop.
+- Write the name as you would say it. The tools build the URI from its CamelCase form:
+  `…/vokabular/<kortnavn>/samling/Hoveddata`. The name as written becomes the collection's `skos:prefLabel`.
+- Only the main-language scope note is read (column `skos:scopeNote@<hovedspråk>`). The sentence stays
+  in the published scope note, so readers see it too.
+- Collections are unordered and not nested, and have no definition, source or status of their own.
+  Code lists can still be sorted by `skos:notation`.
+- `dct:subject` is for subject areas only, not for collections.
+
+The checker lists each collection with its members (`VT-COLL-MEMBERS`) and reports likely mistakes:
+one member only, almost identical names, one name spelled two ways, a sentence it cannot read, and the sentence
+in a scope note of another language. `rdf` writes the collections with `skos:member`.
+
 ## Power Automate import (planned design)
 
 The import stamps `dato_sist_endret` / `sist_endret_av` only on concepts whose content changed:
@@ -139,6 +217,9 @@ Store `endringshash` in a multi-line text column. The value is long, and single-
 If two people edit the same file between imports, every change is attributed to the last one,
 so use one reviewer per file/domain at a time.
 - `skos:broader`, `xkos:isPartOf` and `skos:related` contain **concept names** (column B), separated by commas.
+- No prefixes in the Excel table: concept names stand alone (`Rekkverk`, not `vok:Rekkverk`), in relations,
+  `dct:subject` and notes. The hidden PREFIX rows above the table stay; the machine-readable artefacts
+  (LinkML schema and data, RDF Turtle) use prefixes as usual.
 - Header row = the row with `skos:prefLabel@nb`. In v8 the following row holds the technical names.
 - Code lists (`kodeverk` sheet) are not read.
 
@@ -152,7 +233,11 @@ so use one reviewer per file/domain at a time.
 | VT-URI-MISSING / VT-URI-FORMAT / VT-URI-DUPLICATE | error | concept name in column B present, CamelCase letters and digits, unique (S03) |
 | VT-URI-LABEL | info | concept name differs from the CamelCase form of the main-language term |
 | VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
+| VT-REQ-DEF-CODE | warning | code entry (has `skos:notation`) without a definition: code-table entries often have none in the source |
+| VT-DEF-DERIVED | info | definition derived from the code table (`[avledet]`), not quoted from the source; check it |
 | VT-REF-FORMAT | error | relation values are concept names (v8) |
+| VT-PREFIX | error | no `vok:` prefix in the cells of the Excel table (relations, `dct:subject`, notes); use the concept name |
+| VT-PREFIX-KODE | info | `kode:` references to code lists; kept until the handling of code lists is decided |
 | VT-REF-SELF | error | no relation to itself |
 | VT-CYCLE-BROADER / VT-CYCLE-PARTOF | error | no cycles |
 | VT-RELATED-CLASH | error | `related` not combined with a broader/narrower path (SKOS integrity) |
@@ -168,6 +253,14 @@ so use one reviewer per file/domain at a time.
 | VT-STATUS / VT-STATUS-LITERAL | warning | status is one of kandidat, gjeldende, utdatert, forkastet, written as a plain value |
 | VT-TIER-INVALID | warning | tier is 1, 2 or 3 |
 | VT-CONTACT | warning | contactPoint present |
+| VT-COLL-SINGLE | warning | a collection has only one member (often a misspelt name) |
+| VT-COLL-SIMILAR | warning | two collection names are almost the same (`Vegnettstilknytning` / `Vegnetstilknytning`) |
+| VT-COLL-SPELLING | warning | one collection is written in more than one way (`Hoveddata` / `hoveddata`); the first spelling becomes the label |
+| VT-COLL-SYNTAX | warning | the main-language scope note mentions a collection, but not in the fixed sentence |
+| VT-COLL-OTHER-LANG | warning | a collection sentence in a scope note in another language; only the main-language note is read |
+| VT-COLL-MEMBERS | info | each collection with its members |
+| VT-COLL-FORM | info | `samlingen` used with several names, or `samlingene` with one |
+| VT-COLL-CONCEPT | info | a collection has the same name as a concept; if that row is only a heading, set its status to `forkastet` |
 | VT-TIER-EMPTY / VT-NN-MISSING | info | expected gaps (source concepts; nn left for the expert, only when the main language is nb) |
 
 ## Graph page
@@ -193,7 +286,10 @@ vocabtool/linkml_rdf.py      Excel -> LinkML data -> RDF, SHACL fixes
 vocabtool/template_ext.py    add language columns to the template
 vocabtool/clash_notes.py     draft scope notes for label clashes
 vocabtool/uri.py             concept names (CamelCase) and URIs
-vocabtool/rename.py          rename a concept and its references
+vocabtool/rename.py          rename a concept and its references, or a collection
+vocabtool/samling.py         collections from the scope-note sentence
+vocabtool/owl_import.py      OWL classes -> concepts, merging with existing ones
+vocabtool/set_fields.py      write reviewed values into concepts by name
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   empty templates: v8 (master), v8 with language extension, v7
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)

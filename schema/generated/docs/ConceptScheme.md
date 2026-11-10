@@ -24,6 +24,17 @@ URI: [skos:ConceptScheme](http://www.w3.org/2004/02/skos/core#ConceptScheme)
  classDiagram
     class ConceptScheme
     click ConceptScheme href "../ConceptScheme/"
+      ConceptScheme : collections
+        
+          
+    
+        
+        
+        ConceptScheme --> "*" Collection : collections
+        click Collection href "../Collection/"
+    
+
+        
       ConceptScheme : concepts
         
           
@@ -77,6 +88,7 @@ URI: [skos:ConceptScheme](http://www.w3.org/2004/02/skos/core#ConceptScheme)
 | [publisher](publisher.md) | 0..1 <br/> [String](String.md) | System-generated at publication | direct |
 | [issued](issued.md) | 0..1 <br/> [Date](Date.md) | System-generated at publication | direct |
 | [concepts](concepts.md) | * <br/> [Concept](Concept.md) | Container slot for the data file only | direct |
+| [collections](collections.md) | * <br/> [Collection](Collection.md) | Container slot for the data file only | direct |
 
 
 
@@ -138,6 +150,7 @@ slots:
 - publisher
 - issued
 - concepts
+- collections
 class_uri: skos:ConceptScheme
 tree_root: true
 
@@ -174,6 +187,7 @@ attributes:
     domain_of:
     - ConceptScheme
     - Concept
+    - Collection
     range: uri
     required: true
   kortnavn:
@@ -279,6 +293,25 @@ attributes:
     domain_of:
     - ConceptScheme
     range: Concept
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  collections:
+    name: collections
+    annotations:
+      rdf_skip:
+        tag: rdf_skip
+        value: true
+    description: Container slot for the data file only. Not written to RDF; the collections
+      are written as resources of their own. Built from the scope-note sentence, not
+      from a column.
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    rank: 1000
+    slot_uri: svv:collections
+    owner: ConceptScheme
+    domain_of:
+    - ConceptScheme
+    range: Collection
     multivalued: true
     inlined: true
     inlined_as_list: true

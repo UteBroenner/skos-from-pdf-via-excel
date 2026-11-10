@@ -5,8 +5,15 @@
   rdf      <v8.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
   uri      <v8.xlsx> [--overwrite]        fill empty concept names (column B) from the main-language term
   rename   <v8.xlsx> OLD NEW [OLD NEW …]  rename concepts (column B) and update relations and notes
+           --collection OLD NEW            rename a collection in the scope-note sentences ("Inngår i samlingen …")
   fit      <v8.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns;
                                           write the formulas for column A and endringshash
+  owl-import <v8.xlsx> <owl.ttl> [...] --out <file.xlsx> [--link V440.xlsx] [--merge-map map.json]
+             [--log log.json] [--contact E-MAIL] [--kortnavn V441 --title "…"] [--keep-root]
+             [--derive-code-definitions]
+                                          add OWL classes as concepts, merging with existing ones
+  set-fields <v8.xlsx> <values.json> [--out <file.xlsx>]
+                                          write reviewed values (e.g. definitions) into concepts by name
 """
 from __future__ import annotations
 
@@ -91,7 +98,7 @@ def cmd_rdf(a):
     conforms, sres = shacl_validate(g, shapes)
     short = lambda u: u.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
     lines = [f"# LinkML / SHACL report: {v.path.name}", "",
-             f"{len(data['concepts'])} concepts · {len(g)} triples · SHACL conforms: **{conforms}**", "",
+             f"{len(data['concepts'])} concepts · {len(data.get('collections', []))} collections · {len(g)} triples · SHACL conforms: **{conforms}**", "",
              f"## LinkML validation ({len(lres)} issues)", ""]
     lines += [f"- {r.message}" for r in lres[:200]]
     lines += ["", f"## Values not written to RDF ({len(skipped)}, not IRIs)", "", "| Concept | Slot | Value |", "| --- | --- | --- |"]
@@ -100,7 +107,7 @@ def cmd_rdf(a):
     for r in sorted(sres, key=lambda r: (r["severity"] != "Violation", r["focus"])):
         lines.append(f"| {r['severity']} | {short(r['focus'])} | {short(r['path'])} | {short(r['value'])} | {r['message'][:120].replace('|', '/')} |")
     (out / f"{stem}-shacl-report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"{v.path.name}: {len(data['concepts'])} concepts, {len(g)} triples")
+    print(f"{v.path.name}: {len(data['concepts'])} concepts, {len(data.get('collections', []))} collections, {len(g)} triples")
     print(f"  LinkML validation: {len(lres)} issues")
     print(f"  not written to RDF (not IRIs): {len(skipped)}")
     c = Counter((r["severity"], r["message"].split(":")[0][:60] if r["message"].startswith("VT-") else r["component"].replace("ConstraintComponent", "") + " " + short(r["path"])) for r in sres)
@@ -137,7 +144,7 @@ def cmd_uri(a):
 
 def cmd_fit(a):
     import openpyxl
-    from .template_ext import fit_table
+    from .template_ext import fit_table, apply_formulas
     wb = openpyxl.load_workbook(a.workbook)
     r = fit_table(wb)
     apply_formulas(wb)
@@ -147,12 +154,47 @@ def cmd_fit(a):
 
 
 def cmd_rename(a):
-    from .rename import rename
+    from .rename import rename, rename_collection
+    if a.collection:
+        if len(a.pairs) != 2:
+            raise SystemExit("give one pair: --collection OLD NEW")
+        r = rename_collection(a.workbook, *a.pairs)
+        print(f"{a.workbook}: collection renamed in {r['notes']} scope notes")
+        return 0
     if len(a.pairs) % 2:
         raise SystemExit("give pairs: OLD NEW [OLD NEW …]")
     pairs = dict(zip(a.pairs[::2], a.pairs[1::2]))
     r = rename(a.workbook, pairs)
     print(f"{a.workbook}: {r['names']} names, {r['relations']} relation values, {r['notes']} notes updated")
+    return 0
+
+
+def cmd_owl_import(a):
+    import json
+    from collections import Counter
+    from .owl_import import owl_import
+    log = owl_import(a.workbook, a.owl, a.out, link=a.link, merge_map=a.merge_map, contact=a.contact,
+                     keep_root=a.keep_root, kortnavn=a.kortnavn, title=a.title,
+                     derive_code_definitions=a.derive_code_definitions)
+    log_path = Path(a.log or Path(a.out).with_suffix(".owl-import.json"))
+    log_path.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"{a.out}: {len(log['merged'])} classes merged, {len(log['new'])} new concepts, "
+          f"{len(log['linked'])} linked to {a.link or '-'}, {len(log['derived'])} code definitions derived, "
+          f"{len(log['skipped'])} skipped")
+    if log["conflicts"]:
+        n = Counter(c["field"] for c in log["conflicts"])
+        if n.get("broader"):
+            print(f"  {n['broader']} concepts with a different OWL parent: both broader concepts kept, flagged [fagekspert]")
+        if n.get("notation"):
+            print(f"  {n['notation']} codes differ from the OWL kode: kept as in the workbook")
+    print(f"  log: {log_path}")
+    return 0
+
+
+def cmd_set_fields(a):
+    from .set_fields import set_fields
+    r = set_fields(a.workbook, a.values, a.out)
+    print(f"{a.out or a.workbook}: {r['cells']} values written in {r['concepts']} concepts")
     return 0
 
 
@@ -164,7 +206,24 @@ def main(argv=None):
     m.add_argument("--out", required=True); m.add_argument("--kortnavn"); m.set_defaults(fn=cmd_migrate)
     r = sub.add_parser("rdf"); r.add_argument("workbook"); r.add_argument("--out", default="out/rdf"); r.set_defaults(fn=cmd_rdf)
     u = sub.add_parser("uri"); u.add_argument("workbook"); u.add_argument("--overwrite", action="store_true"); u.set_defaults(fn=cmd_uri)
-    rn = sub.add_parser("rename"); rn.add_argument("workbook"); rn.add_argument("pairs", nargs="+"); rn.set_defaults(fn=cmd_rename)
+    rn = sub.add_parser("rename"); rn.add_argument("workbook"); rn.add_argument("pairs", nargs="+")
+    rn.add_argument("--collection", action="store_true", help="rename a collection, not a concept"); rn.set_defaults(fn=cmd_rename)
     ft = sub.add_parser("fit"); ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
+    oi = sub.add_parser("owl-import", help="add OWL classes as concepts, merging with existing ones")
+    oi.add_argument("workbook", help="v8 workbook (an empty template for a new vocabulary)")
+    oi.add_argument("owl", nargs="+", help="OWL files (Turtle), imported in this order")
+    oi.add_argument("--out", required=True, help="workbook to write")
+    oi.add_argument("--link", help="other v8 workbook: copy definitions of exact label matches (merge rule)")
+    oi.add_argument("--merge-map", help="JSON {class IRI: concept name} for reviewed merges of variant labels")
+    oi.add_argument("--log", help="log file (default: <out>.owl-import.json)")
+    oi.add_argument("--contact", help="dcat:contactPoint for new concepts")
+    oi.add_argument("--kortnavn"); oi.add_argument("--title")
+    oi.add_argument("--keep-root", action="store_true", help="import the single top class of a file too")
+    oi.add_argument("--derive-code-definitions", action="store_true",
+                    help="give new code entries a definition built from code and broader, marked [avledet]")
+    oi.set_defaults(fn=cmd_owl_import)
+    sf = sub.add_parser("set-fields", help="write reviewed values into concepts by name (JSON)")
+    sf.add_argument("workbook"); sf.add_argument("values", help='JSON {"<concept name>": {"<field>": "<value>"}}; "<field>+" appends')
+    sf.add_argument("--out", help="workbook to write (default: in place)"); sf.set_defaults(fn=cmd_set_fields)
     a = p.parse_args(argv)
     return a.fn(a)

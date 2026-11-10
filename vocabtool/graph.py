@@ -8,6 +8,7 @@ from pathlib import Path
 
 from .reader import Vocabulary, label_fields, split_multi
 from .validate import Finding
+from .samling import collections
 
 TEMPLATE = Path(__file__).with_name("graph_template.html")
 EDGE_TYPE = {"broader": "broader", "is_part_of": "isPartOf", "related": "related"}
@@ -51,6 +52,13 @@ def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
                     edges.append({"s": c.key, "t": t, "type": typ})
                 elif t != c.key:
                     dangling.append({"s": c.key, "t": t, "type": typ})
+    # collections (from the scope-note sentence) as nodes of their own, linked to their members
+    for col in collections(v).values():
+        cid = f"samling/{col.name}"
+        nodes.append({"id": cid, "kind": "collection", "label": col.label, "tier": "c", "sheet": "samling",
+                      "def": "", "defs": {}, "alt": "", "name": cid, "labels": {v.main_lang: col.label}, "alts": {},
+                      "notes": [], "issues": []})
+        edges += [{"s": k, "t": cid, "type": "member"} for k in col.members]
     return {
         "meta": {"title": v.title, "kortnavn": v.kortnavn, "version": v.version, "file": v.path.name,
                  "generated": date.today().isoformat(),
