@@ -142,37 +142,37 @@ skos:Collection a sh:NodeShape ;
     rdfs:comment "A group of concepts, recorded in the main-language scope note of each member (\"Inngår i samlingen X.\" / \"Inngår i samlingene X, Y.\"). There is no Excel row for the collection itself. URI <scheme URI>/samling/<CamelCase name>; the label is the name as written. Unordered and not nested." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:name "pref_label_nn" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
-        [ sh:name "pref_label_en_us" ;
+    sh:property [ sh:name "pref_label_en_us" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:prefLabel ],
         [ sh:name "pref_label_nb" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "pref_label_en_gb" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
         [ sh:name "pref_label_en" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
                     sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
-        [ sh:name "pref_label_es" ;
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:prefLabel ],
+        [ sh:name "pref_label_nn" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
+            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
         [ sh:name "pref_label_de" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
+        [ sh:name "pref_label_en_gb" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
+        [ sh:name "pref_label_es" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
         [ sh:class skos:Concept ;
             sh:description "Concepts whose main-language scope note names the collection." ;
             sh:minCount 1 ;
@@ -197,22 +197,68 @@ skos:Concept a sh:NodeShape ;
     rdfs:comment "One row in the vokabular sheet (row 23 onwards)." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:name "modified_by" ;
-            sh:path dct:contributor ;
-            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
-        [ sh:name "pref_label_en" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
-                    sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
+    sh:property [ sh:maxCount 2 ;
+            sh:path dct:contributor ],
+        [ sh:name "alt_label_en_gb" ;
+            sh:path skos:altLabel ],
         [ sh:name "alt_label_nn" ;
             sh:path skos:altLabel ],
+        [ sh:name "definition_en_us" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
+        [ sh:name "definition_en" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
+                    sh:not [ sh:languageIn ( "en-US" ) ] ] ],
+        [ sh:name "pref_label_en_gb" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
+        [ sh:name "pref_label_es" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
+        [ sh:name "alt_label_en_us" ;
+            sh:path skos:altLabel ],
+        [ sh:name "alt_label_es" ;
+            sh:path skos:altLabel ],
+        [ sh:name "alt_label_de" ;
+            sh:path skos:altLabel ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" ) ;
+            sh:path skos:definition ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:prefLabel ],
         [ sh:name "pref_label_nn" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
+        [ sh:name "scope_note" ;
+            sh:path skos:scopeNote ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:altLabel ],
+        [ sh:name "alt_label_en" ;
+            sh:path skos:altLabel ],
+        [ sh:name "pref_label_de" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
+        [ sh:name "definition_nb" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
         [ sh:name "alt_label_nb" ;
             sh:path skos:altLabel ],
+        [ sh:name "created_by" ;
+            sh:path dct:contributor ;
+            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
+        [ sh:name "pref_label_nb" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
         [ sh:name "scope_note_en_us" ;
             sh:path skos:scopeNote ;
             sh:qualifiedMaxCount 1 ;
@@ -221,66 +267,20 @@ skos:Concept a sh:NodeShape ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:name "pref_label_nb" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "alt_label_en" ;
-            sh:path skos:altLabel ],
-        [ sh:name "pref_label_es" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
-        [ sh:languageIn ( "en-US" "nb" ) ;
-            sh:path skos:scopeNote ],
-        [ sh:name "alt_label_es" ;
-            sh:path skos:altLabel ],
-        [ sh:name "definition_en" ;
-            sh:path skos:definition ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
-                    sh:not [ sh:languageIn ( "en-US" ) ] ] ],
-        [ sh:name "alt_label_de" ;
-            sh:path skos:altLabel ],
-        [ sh:name "created_by" ;
-            sh:path dct:contributor ;
-            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
-        [ sh:maxCount 2 ;
-            sh:path dct:contributor ],
-        [ sh:name "scope_note" ;
-            sh:path skos:scopeNote ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "pref_label_de" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
-        [ sh:name "pref_label_en_gb" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:prefLabel ],
-        [ sh:name "definition_en_us" ;
-            sh:path skos:definition ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:name "alt_label_en_us" ;
-            sh:path skos:altLabel ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" ) ;
-            sh:path skos:definition ],
         [ sh:name "definition_nn" ;
             sh:path skos:definition ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
-        [ sh:name "definition_nb" ;
-            sh:path skos:definition ;
+        [ sh:name "modified_by" ;
+            sh:path dct:contributor ;
+            sh:pattern "^[^@\\s]+@vegvesen\\.no$" ],
+        [ sh:name "pref_label_en" ;
+            sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:altLabel ],
-        [ sh:name "alt_label_en_gb" ;
-            sh:path skos:altLabel ],
+            sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
+                    sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
+        [ sh:languageIn ( "en-US" "nb" ) ;
+            sh:path skos:scopeNote ],
         [ sh:datatype rdf:langString ;
             sh:description "Discouraged term, e.g. a common misspelling."@nb ;
             sh:languageIn ( "nb" ) ;

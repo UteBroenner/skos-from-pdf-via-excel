@@ -64,7 +64,7 @@ RULES = {
     "VT-STATUS-LITERAL": ("warning", "status written as RDF literal; use the plain list value", ""),
     "VT-NN-MISSING": ("info", "nn label/definition empty (left for expert)", "S06/S17/S21"),
     "VT-CONTACT": ("warning", "dcat:contactPoint missing", ""),
-    "VT-PREFIX": ("error", "v8 does not use prefixes such as vok: or kode:; write the concept name only (vok:Rekkverk -> Rekkverk)", "template v8"),
+    "VT-PREFIX": ("error", "no prefixes such as vok: or kode: in the Excel table; write the concept name only (vok:Rekkverk -> Rekkverk)", "template v8"),
     "VT-COLL-MEMBERS": ("info", "collection recorded in scope notes (\"Inngår i samlingen …\"), with its members", ""),
     "VT-COLL-SINGLE": ("warning", "collection has only one member; check the spelling of the name", ""),
     "VT-COLL-SIMILAR": ("warning", "two collection names are almost the same; possibly a typo", ""),
