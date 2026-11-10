@@ -7,7 +7,7 @@
 :root {
   --bg: #eef2f1; --surface: #ffffff; --ink: #16211f; --muted: #5a6966; --line: #d3dcd9;
   --accent: #2c6e62;
-  --broader: #1f5fa8; --partof: #a8650a; --related: #7d6aa6;
+  --broader: #1f5fa8; --partof: #a8650a; --related: #7d6aa6; --member: #3f7d3a;
   --t1: #2c6e62; --t2: #8c9c98; --t3: #c0cac7; --t0: #d9dfdd;
   --err: #c0392b; --warn: #c88a12;
   --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
@@ -15,11 +15,11 @@
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #111816; --surface: #19221f; --ink: #e2eae8; --muted: #93a39f; --line: #2b3633;
-  --accent: #63b8a6; --broader: #6fa8ea; --partof: #e3a54a; --related: #b4a5d8;
+  --accent: #63b8a6; --broader: #6fa8ea; --partof: #e3a54a; --related: #b4a5d8; --member: #86c47e;
   --t1: #63b8a6; --t2: #6d7d79; --t3: #4a5653; --t0: #38423f; --err: #ef6f5f; --warn: #e9b44c; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #111816; --surface: #19221f; --ink: #e2eae8; --muted: #93a39f; --line: #2b3633;
-  --accent: #63b8a6; --broader: #6fa8ea; --partof: #e3a54a; --related: #b4a5d8;
+  --accent: #63b8a6; --broader: #6fa8ea; --partof: #e3a54a; --related: #b4a5d8; --member: #86c47e;
   --t1: #63b8a6; --t2: #6d7d79; --t3: #4a5653; --t0: #38423f; --err: #ef6f5f; --warn: #e9b44c; color-scheme: dark }
 [hidden] { display: none !important; }
 html, body { height: 100%; }
@@ -39,6 +39,7 @@ label.tg input { accent-color: var(--accent); margin: 0; }
 .sw.broader { border-color: var(--broader); }
 .sw.partof { border-color: var(--partof); border-top-style: dashed; }
 .sw.related { border-color: var(--related); border-top-style: dotted; border-top-width: 3px; }
+.sw.member { border-color: var(--member); border-top-width: 1.5px; }
 .search { position: relative; }
 .search input { font: inherit; padding: 5px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); width: 15em; max-width: 60vw; }
 .search ul { position: absolute; z-index: 5; top: 100%; left: 0; margin: 4px 0 0; padding: 4px 0; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; min-width: 100%; max-width: 80vw; box-shadow: 0 6px 18px rgb(0 0 0 / .12); }
@@ -101,6 +102,7 @@ table.langs tr:first-child td { border-top: 0; }
     <label class="tg"><input type="checkbox" id="r-broader" checked><span class="sw broader"></span>broader</label>
     <label class="tg"><input type="checkbox" id="r-partof" checked><span class="sw partof"></span>isPartOf</label>
     <label class="tg"><input type="checkbox" id="r-related" checked><span class="sw related"></span>related</label>
+    <label class="tg" id="r-member-wrap"><input type="checkbox" id="r-member" checked><span class="sw member"></span>collection</label>
   </div>
   <div class="group">
     <span class="lbl">Tier</span>
@@ -143,7 +145,7 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
   const edges = DATA.edges.filter(e => byId.has(e.s) && byId.has(e.t)).map(e => ({ ...e, a: byId.get(e.s), b: byId.get(e.t) }));
   const dangling = DATA.dangling || [];
   const sheets = [...new Set(nodes.map(n => n.sheet))];
-  const TYPES = { broader: 'r-broader', isPartOf: 'r-partof', related: 'r-related' };
+  const TYPES = { broader: 'r-broader', isPartOf: 'r-partof', related: 'r-related', member: 'r-member' };
   const LANGS = (DATA.meta.langs && DATA.meta.langs.length) ? DATA.meta.langs : ['nb'];
   let LANG = LANGS[0];
   const lbl = n => (n.labels && n.labels[LANG]) || (LANG === LANGS[0] ? n.label : n.label + ' ·');
@@ -156,9 +158,13 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
   $('src').textContent = `${DATA.meta.file} · template ${DATA.meta.version} · generated ${DATA.meta.generated}`;
   const cnt = t => edges.filter(e => e.type === t).length;
   const t1 = nodes.filter(n => n.tier === '1').length;
+  const nColl = nodes.filter(n => n.kind === 'collection').length;
+  if (!nColl) $('r-member-wrap').hidden = true;
+  // nothing in Tier 1 (e.g. a field list without tiers): show all tiers
+  if (!t1) for (const id of ['t-1', 't-2', 't-3', 't-0']) $(id).checked = true;
   const issueNodes = nodes.filter(n => n.issues.some(i => i[0] !== 'info')).length;
   $('stats').innerHTML = [
-    ['concepts', nodes.length], ['Tier 1', t1], ['broader', cnt('broader')], ['isPartOf', cnt('isPartOf')],
+    ['concepts', nodes.length - nColl], ...(nColl ? [['collections', nColl]] : []), ['Tier 1', t1], ['broader', cnt('broader')], ['isPartOf', cnt('isPartOf')],
     ['related', cnt('related')], ['links to missing concepts', dangling.length], ['concepts with issues', issueNodes]
   ].map(([k, v]) => `<span><b>${v}</b> ${k}</span>`).join('');
   if (sheets.length < 2) $('o-tab-wrap').hidden = true;
@@ -167,7 +173,7 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
   let C = {};
   const readTokens = () => {
     const cs = getComputedStyle(document.documentElement);
-    for (const k of ['bg','surface','ink','muted','line','accent','broader','partof','related','t1','t2','t3','t0','err','warn'])
+    for (const k of ['bg','surface','ink','muted','line','accent','broader','partof','related','member','t1','t2','t3','t0','err','warn'])
       C[k] = cs.getPropertyValue('--' + k).trim();
     draw();
   };
@@ -178,7 +184,7 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
   const st = { k: 1, ox: 0, oy: 0, sel: null, hover: null, alpha: 1 };
   const opt = () => ({
     types: Object.fromEntries(Object.entries(TYPES).map(([t, id]) => [t, $(id).checked])),
-    tiers: { '1': $('t-1').checked, '2': $('t-2').checked, '3': $('t-3').checked, '': $('t-0').checked },
+    tiers: { '1': $('t-1').checked, '2': $('t-2').checked, '3': $('t-3').checked, '': $('t-0').checked, 'c': $('r-member').checked },
     hideIsolated: $('o-isolated').checked, issues: $('o-issues').checked, byTab: $('o-tab').checked,
     depth: +$('focus').value,
   });
@@ -203,7 +209,7 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
   }
 
   // ---------- layout (force-directed, no library) ----------
-  const SPRING = { broader: [38, .5], isPartOf: [48, .35], related: [85, .08] };
+  const SPRING = { broader: [38, .5], isPartOf: [48, .35], related: [85, .08], member: [60, .3] };
   function seed() {
     const n = nodes.length;
     nodes.forEach((p, i) => { const r = 14 * Math.sqrt(i + 1), a = i * 2.39996; p.x = r * Math.cos(a); p.y = r * Math.sin(a); p.vx = p.vy = 0; });
@@ -240,7 +246,7 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
   const radius = n => 3.2 + Math.sqrt(n.deg) * 1.7 + (n === st.sel ? 2 : 0);
   const toScreen = (x, y) => [x * st.k + st.ox + W / 2, y * st.k + st.oy + H / 2];
   const toWorld = (sx, sy) => [(sx - W / 2 - st.ox) / st.k, (sy - H / 2 - st.oy) / st.k];
-  const nodeFill = n => O.byTab ? tabColour(sheets.indexOf(n.sheet)) : (C['t' + (n.tier || '0')] || C.t0);
+  const nodeFill = n => n.kind === 'collection' ? C.member : O.byTab ? tabColour(sheets.indexOf(n.sheet)) : (C['t' + (n.tier || '0')] || C.t0);
   const sev = n => n.issues.some(i => i[0] === 'error') ? 'err' : n.issues.some(i => i[0] === 'warning') ? 'warn' : null;
 
   function arrow(x1, y1, x2, y2, r, size) {
@@ -256,13 +262,13 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
     const dim = st.sel && O.depth === 0;
     for (const e of visE) {
       const [x1, y1] = toScreen(e.a.x, e.a.y), [x2, y2] = toScreen(e.b.x, e.b.y);
-      const col = e.type === 'broader' ? C.broader : e.type === 'isPartOf' ? C.partof : C.related;
+      const col = e.type === 'broader' ? C.broader : e.type === 'isPartOf' ? C.partof : e.type === 'member' ? C.member : C.related;
       const hot = st.sel && (e.a === st.sel || e.b === st.sel);
       ctx.globalAlpha = dim && !hot ? .12 : hot ? 1 : .7;
-      ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = hot ? 2 : e.type === 'related' ? 1.1 : 1.4;
+      ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = hot ? 2 : e.type === 'related' || e.type === 'member' ? 1.1 : 1.4;
       ctx.setLineDash(e.type === 'isPartOf' ? [6, 4] : e.type === 'related' ? [1.5, 3] : []);
       ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.setLineDash([]);
-      if (e.type !== 'related' && st.k > .35) arrow(x1, y1, x2, y2, radius(e.b) * Math.min(1.4, Math.max(.7, st.k)), hot ? 8 : 6);
+      if (e.type !== 'related' && e.type !== 'member' && st.k > .35) arrow(x1, y1, x2, y2, radius(e.b) * Math.min(1.4, Math.max(.7, st.k)), hot ? 8 : 6);
     }
     ctx.globalAlpha = 1;
     const labelled = [];
@@ -270,11 +276,11 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
       const [x, y] = toScreen(n.x, n.y); if (x < -40 || y < -40 || x > W + 40 || y > H + 40) continue;
       const r = radius(n) * Math.min(1.4, Math.max(.7, st.k));
       ctx.globalAlpha = dim && n !== st.sel && !near.has(n) ? .25 : 1;
-      ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fillStyle = nodeFill(n); ctx.fill();
+      ctx.beginPath(); if (n.kind === 'collection') ctx.rect(x - r, y - r, 2 * r, 2 * r); else ctx.arc(x, y, r, 0, 7); ctx.fillStyle = nodeFill(n); ctx.fill();
       const s = O.issues && sev(n);
       if (s) { ctx.lineWidth = 2; ctx.strokeStyle = C[s]; ctx.beginPath(); ctx.arc(x, y, r + 2.2, 0, 7); ctx.stroke(); }
       if (n === st.sel) { ctx.lineWidth = 2.5; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.arc(x, y, r + 4.5, 0, 7); ctx.stroke(); }
-      if (n === st.sel || n === st.hover || near.has(n) || st.k > 1.5 || n.deg >= 7 || (O.depth > 0 && st.sel && visN.size < 60)) labelled.push([n, x, y, r]);
+      if (n.kind === 'collection' || n === st.sel || n === st.hover || near.has(n) || st.k > 1.5 || n.deg >= 7 || (O.depth > 0 && st.sel && visN.size < 60)) labelled.push([n, x, y, r]);
     }
     ctx.globalAlpha = 1; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
     for (const [n, x, y, r] of labelled) {
@@ -324,22 +330,28 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
   function relList(title, sw, items) {
     if (!items.length) return '';
     return `<h3><span class="sw ${sw}"></span>${title} <span>(${items.length})</span></h3><ul>` + items.map(it =>
-      it.node ? `<li><a class="rel" data-id="${esc(it.node.id)}">${esc(lbl(it.node))}</a> <span class="chip${it.node.tier === '1' ? ' t1' : ''}">T${esc(it.node.tier || '–')}</span></li>`
+      it.node ? `<li><a class="rel" data-id="${esc(it.node.id)}">${esc(lbl(it.node))}</a> ${it.node.kind === 'collection' ? '' : `<span class="chip${it.node.tier === '1' ? ' t1' : ''}">T${esc(it.node.tier || '–')}</span>`}</li>`
               : `<li class="missing">${esc(it.id)} · not in this workbook</li>`).join('') + '</ul>';
   }
   function renderPanel() {
     const p = $('panel'), n = st.sel;
     if (!n) {
-      const top = [...nodes].filter(x => x.tier === '1').sort((a, b) => b.degAll - a.degAll).slice(0, 8);
+      const pool = nodes.filter(x => x.tier === '1'); const top = (pool.length ? pool : nodes.filter(x => x.kind !== 'collection')).sort((a, b) => b.degAll - a.degAll).slice(0, 8);
       p.innerHTML = `<div class="empty"><h2>Select a concept</h2><p>Click a node or search above. The panel shows its definition, all relations (also those hidden by filters) and validation findings.</p>
-        <h3>Most connected Tier 1 concepts</h3><ul>${top.map(x => `<li><a class="rel" data-id="${esc(x.id)}">${esc(lbl(x))}</a> <span class="note">${x.degAll} links</span></li>`).join('')}</ul>
-        <h3>Reading the graph</h3><ul class="note"><li>Arrow points to the broader concept or the whole.</li><li>Ring: <span style="color:var(--err)">error</span> or <span style="color:var(--warn)">warning</span> from validation.</li></ul></div>`;
+        <h3>Most connected ${pool.length ? 'Tier 1 ' : ''}concepts</h3><ul>${top.map(x => `<li><a class="rel" data-id="${esc(x.id)}">${esc(lbl(x))}</a> <span class="note">${x.degAll} links</span></li>`).join('')}</ul>
+        <h3>Reading the graph</h3><ul class="note"><li>Arrow points to the broader concept or the whole.</li>${nColl ? '<li>Squares are collections (from the scope note: «Inngår i samlingen …»).</li>' : ''}<li>Ring: <span style="color:var(--err)">error</span> or <span style="color:var(--warn)">warning</span> from validation.</li></ul></div>`;
       return;
     }
     const out = t => edges.filter(e => e.a === n && e.type === t).map(e => ({ node: e.b }));
     const inn = t => edges.filter(e => e.b === n && e.type === t).map(e => ({ node: e.a }));
     const dang = t => dangling.filter(d => d.s === n.id && d.type === t).map(d => ({ id: d.t }));
     const rel = [...out('related'), ...inn('related')];
+    if (n.kind === 'collection') {
+      p.innerHTML = `<h2>${esc(lbl(n))}</h2><div class="idline"><span>${esc(n.id)}</span><span class="chip">collection</span></div>
+        <p class="note">skos:Collection, built from «Inngår i samlingen ${esc(n.label)}.» in the members' scope notes.</p>
+        ${relList('Members', 'member', inn('member'))}`;
+      return;
+    }
     const issues = n.issues.filter(i => i[0] !== 'info');
     const info = n.issues.filter(i => i[0] === 'info');
     const langRows = LANGS.filter(t => (n.labels && n.labels[t]) || (n.alts && n.alts[t])).map(t =>
@@ -355,11 +367,12 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
       ${relList('Is part of', 'partof', [...out('isPartOf'), ...dang('isPartOf')])}
       ${relList('Has part', 'partof', inn('isPartOf'))}
       ${relList('Related', 'related', [...rel, ...dang('related')])}
+      ${relList('Member of', 'member', out('member'))}
       ${issues.length ? '<h3>Validation</h3>' + issues.map(i => `<div class="issue ${i[0]}"><code>${esc(i[1])}</code> ${esc(i[2])}</div>`).join('') : ''}
       ${info.length ? `<p class="note">${info.map(i => esc(i[2])).join('; ')}</p>` : ''}`;
   }
   $('panel').addEventListener('click', ev => { const a = ev.target.closest('a.rel'); if (!a) return; const n = byId.get(a.dataset.id); if (!n) return;
-    if (!visN.has(n)) { $('t-' + (n.tier || '0')).checked = true; }
+    if (!visN.has(n)) { $(n.kind === 'collection' ? 'r-member' : 't-' + (n.tier || '0')).checked = true; }
     select(n); });
 
   // ---------- search ----------
@@ -371,15 +384,15 @@ const DATA = {"meta": {"title": "Heklemasker – flerspråklig vokabular (testda
     hitList = nodes.filter(n => hay(n).includes(s))
       .sort((a, b) => (norm(lbl(a)).startsWith(s) ? 0 : 1) - (norm(lbl(b)).startsWith(s) ? 0 : 1) || lbl(a).localeCompare(lbl(b))).slice(0, 10);
     hi = 0; hits.hidden = !hitList.length;
-    hits.innerHTML = hitList.map((n, i) => `<li data-i="${i}" class="${i === hi ? 'on' : ''}">${esc(lbl(n))}<span class="id">${esc(n.id)} · T${esc(n.tier || '–')}</span></li>`).join('');
+    hits.innerHTML = hitList.map((n, i) => `<li data-i="${i}" class="${i === hi ? 'on' : ''}">${esc(lbl(n))}<span class="id">${esc(n.id)}${n.kind === 'collection' ? '' : ` · T${esc(n.tier || '–')}`}</span></li>`).join('');
   }
-  const choose = i => { const n = hitList[i]; if (!n) return; if (!O.tiers[n.tier || '']) $('t-' + (n.tier || '0')).checked = true; q.value = ''; hits.hidden = true; select(n); };
+  const choose = i => { const n = hitList[i]; if (!n) return; if (!O.tiers[n.tier || '']) $(n.kind === 'collection' ? 'r-member' : 't-' + (n.tier || '0')).checked = true; q.value = ''; hits.hidden = true; select(n); };
   q.addEventListener('input', showHits);
   q.addEventListener('keydown', ev => { if (ev.key === 'Enter') { choose(hi); } else if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') { ev.preventDefault(); hi = (hi + (ev.key === 'ArrowDown' ? 1 : -1) + hitList.length) % hitList.length; showHits.call(); [...hits.children].forEach((li, i) => li.classList.toggle('on', i === hi)); } else if (ev.key === 'Escape') hits.hidden = true; });
   hits.addEventListener('mousedown', ev => { const li = ev.target.closest('li'); if (li) choose(+li.dataset.i); });
 
   // ---------- controls ----------
-  for (const id of ['r-broader', 'r-partof', 'r-related', 't-1', 't-2', 't-3', 't-0', 'o-isolated', 'focus'])
+  for (const id of ['r-broader', 'r-partof', 'r-related', 'r-member', 't-1', 't-2', 't-3', 't-0', 'o-isolated', 'focus'])
     $(id).addEventListener('change', () => { computeVisible(); reheat(.5); setTimeout(fit, 500); });
   for (const id of ['o-issues', 'o-tab']) $(id).addEventListener('change', () => { O = opt(); draw(); });
   $('fit').addEventListener('click', fit);
