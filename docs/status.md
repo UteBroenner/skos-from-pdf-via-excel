@@ -91,6 +91,7 @@ Run as `python -m vocabtool <command>`. Details in the README.
 | `rdf` | LinkML data, SKOS Turtle (with `skos:Collection`), LinkML and SHACL validation |
 | `owl-import` | adds OWL classes as concepts, merging with existing ones (label, or a reviewed merge map) |
 | `set-fields` | writes reviewed values (e.g. definitions from a handbook) into concepts by name, from JSON |
+| `extract prepare` / `extract collect` | extraction from text: chapters and prompts for one agent per chapter; record and quote check, new rows |
 
 LinkML 1.12.1 has gaps that are worked around in project code: language tags, enum URIs, and three SHACL defects.
 Cross-row rules are hand-written SHACL-SPARQL. See `schema/README.md`.
@@ -147,6 +148,12 @@ The main changes needed:
 - **Validation tables:** replace most V rules with references to the VT rules.
 - **Conversion rules:** reduce to the decisions the script implements.
 - **Still to implement:** `dct:publisher` and `dct:issued` defaults.
+
+**Extraction pilot (18 November 2026):** N-V441 chapter 5 extracted by one agent from its prompt alone
+(about 84,000 tokens). 11 records, all quotes found in the text; all 9 measure types found with sections, 7 definitions close
+to the reference set, 2 left empty where the chapter gives no general definition; one extra term (bæreevne, used but not
+defined). The three sub-kinds of maintenance were not extracted because the text has no terms for them (in the reference
+they come from the ontology). Details in `out/pilot/` (local).
 
 **Open decisions:**
 - S16: move `exactMatch`/`closeMatch` text to `editorialNote`?

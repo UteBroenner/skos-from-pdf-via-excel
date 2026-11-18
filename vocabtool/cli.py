@@ -12,6 +12,10 @@
              [--log log.json] [--contact E-MAIL] [--kortnavn V441 --title "…"] [--keep-root]
              [--derive-code-definitions] [--tier 1]
                                           add OWL classes as concepts, merging with existing ones
+  extract prepare <text.txt> --out DIR --instructions FILE --kortnavn K --title T [--known v8.xlsx …] [--only kap5 …]
+                                          split the text into chapters and write one prompt per chapter (manifest.json)
+  extract collect <DIR>/manifest.json <v8.xlsx> --out <file.xlsx> --source URL [--contact E-MAIL]
+                                          check the agents' JSON records (schema, quotes) and add the concepts
   set-fields <v8.xlsx> <values.json> [--out <file.xlsx>]
                                           write reviewed values (e.g. definitions) into concepts by name
 """
@@ -191,6 +195,24 @@ def cmd_owl_import(a):
     return 0
 
 
+def cmd_extract(a):
+    from .extract import prepare, collect, report_md
+    if a.step == "prepare":
+        m = prepare(a.input, a.out, a.instructions, a.kortnavn, a.title, a.known or (), a.only)
+        print(f"{len(m)} chapters -> {a.out}/manifest.json")
+        for c in m:
+            print(f"  {c['id']:<10} {c['title'][:45]:<45} {c['chars']:>7} chars, prompt {c['prompt_chars']:>7}"
+                  f"{'  (result exists)' if c['done'] else ''}")
+        return 0
+    r = collect(a.input, a.workbook, a.out, a.source, a.contact, a.kortnavn, a.title)
+    rep = Path(a.out).with_suffix(".extract-report.md")
+    rep.write_text(report_md(r), encoding="utf-8")
+    print(f"{a.out}: {len(r['accepted'])} concepts added, {len(r['rejected'])} rejected, "
+          f"{len(r['existing'])} already there, {len(r['unresolved_relations'])} relations not resolved")
+    print(f"  report: {rep}")
+    return 0
+
+
 def cmd_set_fields(a):
     from .set_fields import set_fields
     r = set_fields(a.workbook, a.values, a.out)
@@ -223,6 +245,18 @@ def main(argv=None):
     oi.add_argument("--derive-code-definitions", action="store_true",
                     help="give new code entries a definition built from code and broader, marked [avledet]")
     oi.set_defaults(fn=cmd_owl_import)
+    ex = sub.add_parser("extract", help="extract concepts from text, one agent per chapter (prepare / collect)")
+    ex.add_argument("step", choices=["prepare", "collect"])
+    ex.add_argument("input", help="prepare: the text file; collect: manifest.json")
+    ex.add_argument("workbook", nargs="?", help="collect: v8 workbook to add to (an empty template for a new vocabulary)")
+    ex.add_argument("--out", required=True, help="prepare: working directory; collect: workbook to write")
+    ex.add_argument("--instructions", help="prepare: field-instruction file included in every prompt")
+    ex.add_argument("--kortnavn"); ex.add_argument("--title")
+    ex.add_argument("--known", nargs="*", help="prepare: v8 workbooks whose terms are listed as existing")
+    ex.add_argument("--only", nargs="*", help="prepare: only these chapter ids, e.g. kap5")
+    ex.add_argument("--source", help="collect: IRI of the source document (dct:source)")
+    ex.add_argument("--contact", help="collect: dcat:contactPoint for new concepts")
+    ex.set_defaults(fn=cmd_extract)
     sf = sub.add_parser("set-fields", help="write reviewed values into concepts by name (JSON)")
     sf.add_argument("workbook"); sf.add_argument("values", help='JSON {"<concept name>": {"<field>": "<value>"}}; "<field>+" appends')
     sf.add_argument("--out", help="workbook to write (default: in place)"); sf.set_defaults(fn=cmd_set_fields)

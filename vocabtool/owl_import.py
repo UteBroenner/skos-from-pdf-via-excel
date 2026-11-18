@@ -49,8 +49,8 @@ def lower_first(t: str | None) -> str | None:
     t = re.sub(r"\s+", " ", (t or "").strip())
     if not t:
         return t
-    w = re.split(r"[\s/,(]", t, maxsplit=1)[0]
-    letters = [ch for ch in w if ch.isalpha()]
+    head = re.split(r"[\s,(-]", t, maxsplit=1)[0]     # "G/S areal", "ROS-analyse": the acronym is the start
+    letters = [ch for ch in head if ch.isalpha()]
     return t if len(letters) >= 2 and all(ch.isupper() for ch in letters) else t[0].lower() + t[1:]
 
 

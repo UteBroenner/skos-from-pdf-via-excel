@@ -168,6 +168,34 @@ python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-
 - The rows are added in hierarchy order (parent first, siblings by code), and the same input always gives the same workbook.
   The log (`<out>.owl-import.json` or `--log`) lists merged, new, skipped and linked classes and the conflicts.
 
+## Extraction from text
+
+Extract concepts from a text file (e.g. a PDF converted to TXT), one LLM agent per chapter:
+
+```bash
+python -m vocabtool extract prepare source.txt --out work/ --instructions SKOS-felt-instruksjer.md --kortnavn V441 --title "N-V441 Bruinspeksjon"
+```
+
+`prepare` splits the text into chapters by its headings ("5Tiltak", "Tillegg B"; the table of contents before chapter 1 is
+skipped) and writes, per chapter, the chapter text, a prompt and an entry in `work/manifest.json` with its size. The prompt
+contains the chapter, the field instructions given with `--instructions`, the terms of `--known` workbooks (so the agent links
+to them instead of creating them again) and the record format. `--only kap5` limits the run to some chapters.
+
+Each prompt is then given to one agent, which writes a JSON list of records to `work/results/<chapter>.json`
+(term, section, verbatim quote, definition, quote/paraphrase/none, tier, alt labels, code, broader/isPartOf/related by term,
+cue words, uncertainty). In Claude Code the coordinating session starts one subagent per chapter; chapters that already
+have a result are skipped, so a run can stop (e.g. at a usage limit) and continue later.
+
+```bash
+python -m vocabtool extract collect work/manifest.json templates/SKOS-Excel-mal-v8-for-import.xlsx --out V441.xlsx --source https://… --contact …
+```
+
+`collect` checks every record against the format and rejects it if its quote is not in the chapter. A definition marked as a
+quote that is not verbatim is kept as a paraphrase. Names, relations (terms resolved to names), source, `relationshipWithSource`,
+flags (`[kilde]`, `[omskrivning]`, `[mangler]`, `[usikker]`), status, contact point and date are written by code. Terms already in
+the workbook are not added again. The report (`<out>.extract-report.md`) lists accepted, rejected and existing terms and
+relations that could not be resolved.
+
 ## Set fields
 
 Write reviewed values, e.g. definitions taken from a handbook, into concepts by name:
@@ -292,6 +320,7 @@ vocabtool/rename.py          rename a concept and its references, or a collectio
 vocabtool/samling.py         collections from the scope-note sentence
 vocabtool/owl_import.py      OWL classes -> concepts, merging with existing ones
 vocabtool/set_fields.py      write reviewed values into concepts by name
+vocabtool/extract.py         extraction from text: chapters, prompts, record checks, new rows
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
 templates/                   empty templates: v8 (master), v8 with language extension, v7
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)
