@@ -12,9 +12,10 @@
              [--log log.json] [--contact E-MAIL] [--kortnavn V441 --title "…"] [--keep-root]
              [--derive-code-definitions] [--tier 1]
                                           add OWL classes as concepts, merging with existing ones
-  extract prepare <text.txt> --out DIR --instructions FILE --kortnavn K --title T [--known v8.xlsx …] [--only kap5 …]
+  extract prepare <text.txt> --out DIR --instructions FILE --kortnavn K --title T [--known v8.xlsx …] [--only ch5 …]
+                  [--level 2] [--min-chars N] [--appendix-words W,…] [--start-line N] [--prompt-template FILE]
                                           split the text into chapters and write one prompt per chapter (manifest.json)
-  extract collect <DIR>/manifest.json <v8.xlsx> --out <file.xlsx> --source URL [--contact E-MAIL]
+  extract collect <DIR>/manifest.json <v8.xlsx> --out <file.xlsx> --source URL [--contact E-MAIL] [--link v8.xlsx …]
                                           check the agents' JSON records (schema, quotes) and add the concepts
   set-fields <v8.xlsx> <values.json> [--out <file.xlsx>]
                                           write reviewed values (e.g. definitions) into concepts by name
@@ -198,17 +199,23 @@ def cmd_owl_import(a):
 def cmd_extract(a):
     from .extract import prepare, collect, report_md
     if a.step == "prepare":
-        m = prepare(a.input, a.out, a.instructions, a.kortnavn, a.title, a.known or (), a.only)
-        print(f"{len(m)} chapters -> {a.out}/manifest.json")
+        m = prepare(a.input, a.out, a.instructions, a.kortnavn, a.title, a.known or (), a.only, level=a.level,
+                    appendix_words=tuple(a.appendix_words.split(",")), start_line=a.start_line,
+                    min_chars=a.min_chars, prompt_template=a.prompt_template)
+        print(f"{len(m)} chunks -> {a.out}/manifest.json")
         for c in m:
             print(f"  {c['id']:<10} {c['title'][:45]:<45} {c['chars']:>7} chars, prompt {c['prompt_chars']:>7}"
                   f"{'  (result exists)' if c['done'] else ''}")
         return 0
-    r = collect(a.input, a.workbook, a.out, a.source, a.contact, a.kortnavn, a.title)
+    r = collect(a.input, a.workbook, a.out, a.source, a.contact, a.kortnavn, a.title, a.link or ())
     rep = Path(a.out).with_suffix(".extract-report.md")
     rep.write_text(report_md(r), encoding="utf-8")
     print(f"{a.out}: {len(r['accepted'])} concepts added, {len(r['rejected'])} rejected, "
-          f"{len(r['existing'])} already there, {len(r['unresolved_relations'])} relations not resolved")
+          f"{len(r['existing'])} already there, {len(r['duplicates'])} repeated, {len(r['linked'])} linked, "
+          f"{len(r['unresolved_relations'])} relations not resolved")
+    if r["suggestions"]:
+        print(f"  {len(r['suggestions'])} definitions for existing concepts: {Path(a.out).with_suffix('.suggestions.json')}"
+              " (review, then apply with set-fields)")
     print(f"  report: {rep}")
     return 0
 
@@ -253,7 +260,13 @@ def main(argv=None):
     ex.add_argument("--instructions", help="prepare: field-instruction file included in every prompt")
     ex.add_argument("--kortnavn"); ex.add_argument("--title")
     ex.add_argument("--known", nargs="*", help="prepare: v8 workbooks whose terms are listed as existing")
-    ex.add_argument("--only", nargs="*", help="prepare: only these chapter ids, e.g. kap5")
+    ex.add_argument("--only", nargs="*", help="prepare: only these chunk ids, e.g. ch5 appB.3")
+    ex.add_argument("--level", type=int, default=1, help="prepare: split at chapters (1) or sections (2, 3)")
+    ex.add_argument("--min-chars", type=int, default=0, help="prepare: merge shorter chunks into the next one of the same chapter")
+    ex.add_argument("--appendix-words", default="Tillegg,Vedlegg,Appendix,Annex", help="prepare: words that start an appendix heading")
+    ex.add_argument("--start-line", type=int, help="prepare: ignore everything before this line")
+    ex.add_argument("--prompt-template", help="prepare: own prompt template with the same {placeholders}")
+    ex.add_argument("--link", nargs="*", help="collect: other v8 vocabularies to link to (merge rule)")
     ex.add_argument("--source", help="collect: IRI of the source document (dct:source)")
     ex.add_argument("--contact", help="collect: dcat:contactPoint for new concepts")
     ex.set_defaults(fn=cmd_extract)

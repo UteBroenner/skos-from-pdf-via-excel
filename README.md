@@ -176,10 +176,20 @@ Extract concepts from a text file (e.g. a PDF converted to TXT), one LLM agent p
 python -m vocabtool extract prepare source.txt --out work/ --instructions SKOS-felt-instruksjer.md --kortnavn V441 --title "N-V441 Bruinspeksjon"
 ```
 
-`prepare` splits the text into chapters by its headings ("5Tiltak", "Tillegg B"; the table of contents before chapter 1 is
-skipped) and writes, per chapter, the chapter text, a prompt and an entry in `work/manifest.json` with its size. The prompt
-contains the chapter, the field instructions given with `--instructions`, the terms of `--known` workbooks (so the agent links
-to them instead of creating them again) and the record format. `--only kap5` limits the run to some chapters.
+`prepare` splits the text into chunks and writes, per chunk, the text, a prompt and an entry in `work/manifest.json` with its size.
+
+- **Headings:** numbered headings with or without a space after the number ("5Tiltak", "5 Tiltak", "2.5.3 Hovedinspeksjon"),
+  and appendices starting with one of `--appendix-words` (default `Tillegg,Vedlegg,Appendix,Annex`) followed by a letter,
+  with sections "B.3". Lines ending in a page number are table-of-contents entries; lines such as "1. Lov om …" or ending
+  with a full stop are list items, not headings.
+- **Order:** a chapter is accepted only after the previous one (5 after 4), a section only inside its chapter and after the
+  previous section. If chapter 1 appears again before chapter 2, everything before it is dropped (foreword, table of
+  contents); numbered lines in tables ("4 Aluminium" after chapter 7) are ignored. `--start-line N` skips the start explicitly.
+- **Size:** `--level 2` splits at sections (5.2, B.3) instead of chapters; `--min-chars N` merges short sections into the next
+  one of the same chapter. `--only ch5 appB.3` limits the run to some chunks.
+- **Prompt:** the chunk, the field instructions given with `--instructions`, the terms of `--known` workbooks (so the agent
+  does not create them again) and the record format. `--prompt-template FILE` replaces the built-in Norwegian prompt; it uses the
+  placeholders `{title_doc} {kortnavn} {number} {title} {text} {known} {instructions} {fields} {result_path}`.
 
 Each prompt is then given to one agent, which writes a JSON list of records to `work/results/<chapter>.json`
 (term, section, verbatim quote, definition, quote/paraphrase/none, tier, alt labels, code, broader/isPartOf/related by term,
@@ -192,9 +202,18 @@ python -m vocabtool extract collect work/manifest.json templates/SKOS-Excel-mal-
 
 `collect` checks every record against the format and rejects it if its quote is not in the chapter. A definition marked as a
 quote that is not verbatim is kept as a paraphrase. Names, relations (terms resolved to names), source, `relationshipWithSource`,
-flags (`[kilde]`, `[omskrivning]`, `[mangler]`, `[usikker]`), status, contact point and date are written by code. Terms already in
-the workbook are not added again. The report (`<out>.extract-report.md`) lists accepted, rejected and existing terms and
-relations that could not be resolved.
+flags (`[kilde]`, `[omskrivning]`, `[mangler]`, `[usikker]`), status, contact point and date are written by code. Terms are compared
+regardless of case, spaces, hyphens and slashes ("ROS-analyse" = "ROS analyse").
+
+- **Existing terms** are not added again. If the existing concept has no definition and the record has one, it is written to
+  `<out>.suggestions.json` in `set-fields` format, for review.
+- **Repeated terms** in one run are added once.
+- **`--link v8.xlsx …`:** a new term that matches exactly one concept in another vocabulary gets `skos:exactMatch` to it; if that
+  concept has a definition from a source (not `[avledet]`), the definition is copied with that concept as source (merge rule).
+  Relation targets found only in a linked vocabulary are reported and noted as `[usikker]`.
+
+The report (`<out>.extract-report.md`) lists accepted, rejected, existing, repeated and linked terms, quote definitions kept
+as paraphrase, and relations that could not be resolved.
 
 ## Set fields
 
