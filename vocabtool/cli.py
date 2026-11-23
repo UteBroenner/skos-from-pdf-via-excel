@@ -149,12 +149,13 @@ def cmd_uri(a):
 
 def cmd_fit(a):
     import openpyxl
-    from .template_ext import fit_table, apply_formulas
+    from .template_ext import fit_table, apply_formulas, requirement_colours
     wb = openpyxl.load_workbook(a.workbook)
-    r = fit_table(wb)
     apply_formulas(wb)
+    r = fit_table(wb)
+    changed = requirement_colours(wb)
     wb.save(a.workbook)
-    print(f"{a.workbook}: {r}")
+    print(f"{a.workbook}: {r}" + (f"; colours set by requirement level in {len(changed)} cells" if changed else ""))
     return 0
 
 

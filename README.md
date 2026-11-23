@@ -88,6 +88,10 @@ Power Automate reads only what is inside the table.
 The `tier` column (always last) stays outside the table.
 `migrate` and `uri` do this automatically:
 
+`fit` also colours the requirement row, the property row and the technical-name row by the requirement level in the
+requirement row (obligatorisk, anbefalt, valgfri, internt; systemgenerert like internt). It uses the colours the template
+itself uses most for each level, so the theme (branding) colours are kept; only fill and font colour change.
+
 ```bash
 python -m vocabtool fit path/to/workbook.xlsx
 ```
@@ -98,7 +102,7 @@ Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `
 .venv/bin/python -m vocabtool rdf out/N101-v8.xlsx --out out/rdf
 ```
 
-Add language columns to the template. They are inserted after column AM, and `tier` moves to the last column,
+Add language columns to the template. They are inserted in front of `endringshash`, which stays the last column of the table, and `tier` stays the last column,
 outside the Excel table. It is internal and is not imported. Columns A–AM keep their letters:
 
 ```bash

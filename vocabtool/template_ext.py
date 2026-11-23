@@ -58,12 +58,16 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
     # keep 'tier' (internal, not imported) as the last column, outside the Excel table:
     # new columns are inserted in front of it
     tier_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "tier"), None)
+    hash_col = next((c.column for c in ws[hdr + 1] if c.value == "endringshash"), None)
     n_new = sum(1 for kind_langs in (langs, langs, def_langs, scope_langs) for lang in kind_langs)
-    if tier_col and tier_col == max(c.column for c in ws[hdr] if c.value not in (None, "")) and n_new:
-        tier_width = ws.column_dimensions[get_column_letter(tier_col)].width
-        ws.insert_cols(tier_col, n_new)
-        ws.column_dimensions[get_column_letter(tier_col + n_new)].width = tier_width or 10
-        col = tier_col
+    # new columns go in front of endringshash (the last table column) or, without it, in front of tier
+    at = hash_col or (tier_col if tier_col and tier_col == max(c.column for c in ws[hdr] if c.value not in (None, "")) else None)
+    if at and n_new:
+        widths = {k: ws.column_dimensions[get_column_letter(k)].width for k in range(at, ws.max_column + 1)}
+        ws.insert_cols(at, n_new)
+        for k, w in widths.items():
+            ws.column_dimensions[get_column_letter(k + n_new)].width = w or 10
+        col = at
     first_new = get_column_letter(col)
     style_src = ws.cell(hdr, 3)          # prefLabel@nb header as style model
     tech_src = ws.cell(tech, 3)
@@ -83,8 +87,8 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
             ws.cell(desc, col).value = ("tillat term [0..n]" if sep else f"definisjon ({lang})" if kind == "def"
                                         else f"merknad om bruk ({lang})" if kind == "scope"
                                         else f"anbefalt term ({lang}), maks én")
-            for r, src_cell in ((hdr, style_src), (tech, tech_src)):
-                ws.cell(r, col)._style = copy.copy(src_cell._style)
+            for r, src_cell in ((hdr, style_src), (tech, tech_src), (desc, ws.cell(desc, 3))):
+                ws.cell(r, col)._style = copy.copy(src_cell._style)       # colours follow the level below
             ws.column_dimensions[letter].width = ws.column_dimensions["C"].width or 22
             added.append(f"{letter}: {header}")
             col += 1
@@ -98,9 +102,61 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
         for c in ws[r]:
             if isinstance(c.value, str) and "TEXTJOIN" in c.value and "$AM" in c.value and f",vokabular!${first_new}" not in c.value:
                 c.value = re.sub(r"(vokabular!\$[AC](\d+):\$AM\d+)", rf"\1,vokabular!${first_new}\2:${last}\2", c.value)
+    if hash_col:                 # current templates: the table, the hash formula and the colours are rebuilt
+        fit_table(wb)
+        apply_formulas(wb)
+    requirement_colours(wb)
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
     wb.save(dst)
     return added
+
+
+def _colour(cell) -> tuple:
+    f, fo = cell.fill, cell.font
+    fg = f.fgColor if f.fill_type else None
+    fc = fo.color
+    return (f.fill_type, fg.type if fg else None, (fg.theme if fg.type == "theme" else fg.rgb) if fg else None,
+            round(fg.tint or 0, 3) if fg else 0, fo.b,
+            (fc.theme if fc.type == "theme" else fc.rgb) if fc else None, round(fc.tint or 0, 3) if fc else 0)
+
+
+def requirement_colours(wb, sheet: str = "vokabular") -> list[str]:
+    """Colour the requirement row, the property row and the technical-name row by the requirement level.
+
+    The level is the text in the requirement row (obligatorisk, anbefalt, valgfri, internt, systemgenerert). For each
+    level the colouring the template uses most often for that level is the model. Only fill and font colour (and bold)
+    are copied, so the template's own theme (branding) colours are kept and borders, alignment and widths stay as
+    they are. systemgenerert is coloured like internt. Columns without a level are left as they are.
+    Returns the cells that changed.
+    """
+    from collections import Counter
+    ws = wb[sheet]
+    hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
+    rows = (hdr - 3, hdr, hdr + 1)                     # requirement, property, technical name
+    last = max(c.column for c in ws[hdr] if c.value not in (None, ""))
+    level = {c: str(ws.cell(hdr - 3, c).value or "").strip().lower() for c in range(1, last + 1)}
+    sig = lambda c: tuple(_colour(ws.cell(r, c)) for r in rows)
+    model = {}
+    for lv in set(level.values()) - {""}:
+        cols = [c for c in level if level[c] == lv]
+        common = Counter(sig(c) for c in cols).most_common(1)[0][0]
+        model[lv] = next(c for c in cols if sig(c) == common)
+    if "internt" in model:
+        model["systemgenerert"] = model["internt"]
+    changed = []
+    for c, lv in level.items():
+        m = model.get(lv)
+        if not m or m == c:
+            continue
+        for r in rows:
+            src, dst = ws.cell(r, m), ws.cell(r, c)
+            if _colour(src) != _colour(dst):
+                dst.fill = copy.copy(src.fill)
+                font = copy.copy(dst.font)
+                font.color, font.b = copy.copy(src.font.color), src.font.b
+                dst.font = font
+                changed.append(dst.coordinate)
+    return changed
 
 
 def fit_table(wb, sheet: str = "vokabular") -> dict:
@@ -217,8 +273,9 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
             ws.insert_cols(last, 1)
             ws.column_dimensions[get_column_letter(last + 1)].width = width or 10
             hash_col = last
-        for r, src in ((hdr, ws.cell(hdr, 3)), (tech, ws.cell(tech, 3)), (hdr - 3, ws.cell(hdr - 3, 3))):
-            ws.cell(r, hash_col)._style = copy.copy(src._style)
+        model = hash_col + 1 if normalise_header(ws.cell(hdr, hash_col + 1).value) == "tier" else 3
+        for r in (hdr, tech, hdr - 3, hdr - 2):     # systemgenerert: same style as the internal tier column
+            ws.cell(r, hash_col)._style = copy.copy(ws.cell(r, model)._style)
         ws.cell(hdr, hash_col).value = HASH_COLUMN
         ws.cell(tech, hash_col).value = HASH_COLUMN
         ws.cell(hdr - 3, hash_col).value = "systemgenerert"
