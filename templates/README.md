@@ -20,18 +20,21 @@ SKOS-AP-NO (row 20). Row 24 is orange also for columns that are obligatory in St
 (M–P and AG–AI). The tools colour only the columns they add (language columns, `endringshash`); the template's own
 columns keep their colours.
 
-## Value lists (sheet `lister`)
+## Value lists and dropdowns
 
-| Column | Named range | Values (code, URI) |
+| Column | Dropdown values | Codes and URIs (sheet `lister`, named range) |
 | --- | --- | --- |
-| AI status | `statusliste` | kandidat, gjeldende, utdatert, forkastet (EU concept-status CANDIDATE, CURRENT, DEPRECATED, RETIRED) |
-| M målgruppe | `malgruppeliste` | allmennheten, spesialist (data.norge.no audience-type public, specialist) |
-| O forhold til kilde | `kildeforholdliste` | basert på kilde, egendefinert, sitat fra kilde (relationship-with-source-type derived-from-source, self-composed, direct-from-source) |
+| AI status | kandidat, gjeldende, utdatert, forkastet | EU concept-status CANDIDATE, CURRENT, DEPRECATED, RETIRED (`statusliste`) |
+| M målgruppe | allmennheten, spesialist | data.norge.no audience-type public, specialist (`malgruppeliste`) |
+| O forhold til kilde | basert på kilde, egendefinert, sitat fra kilde | relationship-with-source-type derived-from-source, self-composed, direct-from-source (`kildeforholdliste`) |
+| `tier` (AO; AY in the language template) | 1, 2, 3 | – |
 
-The lists are defined once in `vocabtool/lists.py`. Every tool that saves a workbook writes the sheet `lister`, the
-named ranges and the dropdowns again. Reason: openpyxl drops dropdowns stored in Excel's newer format, which Excel uses
-for lists on another sheet. The tools write them in the classic format, which Excel and Excel online show the same way.
+The dropdowns hold their values directly, not a reference to the `lister` sheet, so they still work when rows are
+copied to another workbook or the hidden sheet is removed. The `lister` sheet documents the code and URI behind each
+label. All of it is defined once in `vocabtool/lists.py`, and every tool that saves a workbook writes the dropdowns and
+the `lister` sheet again. Reason: openpyxl, which the tools use, drops dropdowns stored in Excel's newer format.
+
 A value outside the list gives a warning in Excel, not a block, so nynorsk or English codes (`basert på kjelde`,
 `derived-from-source`) can still be entered; the checker accepts them, and the tools write them as the list label
-(`sitat fra kilde`, `basert på kilde`) when they save the file, to match the dropdown and the SharePoint choice columns. `tests/test_lists.py` checks the lists against
-the schema enums.
+(`sitat fra kilde`, `basert på kilde`) when they save the file, to match the dropdown and the SharePoint choice columns.
+`tests/test_lists.py` checks the lists against the schema enums.

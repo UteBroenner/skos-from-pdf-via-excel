@@ -45,7 +45,8 @@ def test_dropdowns_survive_save():
             save_workbook(wb, out)
         wb = openpyxl.load_workbook(out)
         dvs = {str(dv.sqref).split(":")[0][:-2]: dv.formula1 for dv in wb["vokabular"].data_validations.dataValidation}
-        assert dvs == {"AI": "statusliste", "M": "malgruppeliste", "O": "kildeforholdliste"}
+        assert dvs == {"AI": '"kandidat,gjeldende,utdatert,forkastet"', "M": '"allmennheten,spesialist"',
+                       "O": '"basert på kilde,egendefinert,sitat fra kilde"', "AO": '"1,2,3"'}
         assert wb["lister"].sheet_state == "hidden"
 
 

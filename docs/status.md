@@ -38,8 +38,9 @@ v9 replaces v8 (23 November 2026). The columns are the same; the tools read v8 a
   - AD `opprettet_av` = B16 `dct:creator` for rows with a name (hidden)
 - **`tier`** is the last column, outside the table. It is internal and not imported.
 - **Value lists:** status, målgruppe and forhold til kilde, defined in `vocabtool/lists.py` and matching the schema
-  enums (`ConceptStatus`, `Audience`, `RelationshipWithSource`). The tools rewrite the lists and dropdowns on every
-  save (openpyxl drops Excel's newer dropdown format). A value outside the list is a warning in Excel. Recognised values are written as the list label (`direct-from-source` → `sitat fra kilde`, `basert på kjelde` → `basert på kilde`). The checker reports
+  enums (`ConceptStatus`, `Audience`, `RelationshipWithSource`). The dropdowns (also `tier`: 1, 2, 3) hold their
+  values directly, so they survive copying rows; the tools rewrite them on every save (openpyxl drops Excel's newer
+  dropdown format). A value outside the list is a warning in Excel. Recognised values are written as the list label (`direct-from-source` → `sitat fra kilde`, `basert på kjelde` → `basert på kilde`). The checker reports
   unknown målgruppe values (`VT-AUDIENCE`); the RDF uses the audience-type URIs.
 - **Colours:** rows 20 and 23 follow the SKOS-AP-NO level; row 24 is orange also where Statens vegvesen makes a field
   obligatory (M–P, AG–AI). The tools colour only the columns they add.

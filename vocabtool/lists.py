@@ -1,9 +1,12 @@
 """Value lists of the template (hidden sheet 'lister') and their dropdowns in the vokabular sheet.
 
-The lists are defined here once; the 'lister' sheet, the named ranges and the dropdowns are written from this
+The lists are defined here once; the dropdowns, the 'lister' sheet and its named ranges are written from this
 definition every time a tool saves a workbook (save_workbook). Reason: openpyxl, which the tools use, drops data
-validations stored in Excel's newer extension format when it saves a file. The dropdowns are therefore written in
-the classic format, which Excel, Excel online and SharePoint handle the same way, and which survives openpyxl.
+validations stored in Excel's newer extension format when it saves a file.
+
+The dropdowns hold their values directly ("kandidat,gjeldende,utdatert,forkastet"), not a reference to the
+'lister' sheet. They work wherever the rows are copied (another workbook, a SharePoint export), and do not break when
+the hidden sheet or a named range is removed. The 'lister' sheet documents the codes and URIs behind each label.
 
 The values must match the enums in schema/svv_vokabular.yaml (ConceptStatus, Audience, RelationshipWithSource);
 tests/test_lists.py checks this.
@@ -39,6 +42,23 @@ LISTS = [
         ("sitat fra kilde", "direct-from-source", "https://data.norge.no/vocabulary/relationship-with-source-type#direct-from-source"),
     ]),
 ]
+
+# internal column outside the table (not imported): dropdown only, no codes or URIs
+TIER = ("tier", ("1", "2", "3"))
+
+
+def _dropdown(ws, c, first, last, values):
+    """Replace any dropdown on column c by one with the given values, for rows first..last."""
+    for dv in list(ws.data_validations.dataValidation):
+        if any(rng.min_col <= c <= rng.max_col for rng in dv.sqref.ranges):
+            ws.data_validations.dataValidation.remove(dv)
+    dv = DataValidation(type="list", formula1='"' + ",".join(values) + '"', allow_blank=True, showDropDown=False,
+                        showErrorMessage=True, showInputMessage=True, errorStyle="warning",
+                        errorTitle="Verdi utenfor listen", error="Velg en verdi fra listen.")
+    letter = get_column_letter(c)
+    dv.add(f"{letter}{first}:{letter}{last}")
+    ws.add_data_validation(dv)
+    return letter
 
 
 def _to_label(prop, rows, value):
@@ -92,23 +112,16 @@ def ensure_lists(wb, sheet: str = "vokabular") -> list[str]:
         c = cols.get(prop)
         if not c:
             continue
-        letter = get_column_letter(c)
         for r in range(first, last + 1):
             cell = ws.cell(r, c)
             if isinstance(cell.value, str) and cell.value.strip():
                 label = _to_label(prop, rows, cell.value)
                 if label and label != cell.value:
                     cell.value = label
-        # replace any dropdown on this column
-        for dv in list(ws.data_validations.dataValidation):
-            if any(rng.min_col <= c <= rng.max_col for rng in dv.sqref.ranges):
-                ws.data_validations.dataValidation.remove(dv)
-        dv = DataValidation(type="list", formula1=name, allow_blank=True, showDropDown=False,
-                            showErrorMessage=True, showInputMessage=True, errorStyle="warning",
-                            errorTitle="Verdi utenfor listen", error="Velg en verdi fra listen.")
-        dv.add(f"{letter}{first}:{letter}{last}")
-        ws.add_data_validation(dv)
-        done.append(letter)
+        done.append(_dropdown(ws, c, first, last, [label for label, _, _ in rows]))
+    tier_col = cols.get(TIER[0])
+    if tier_col:
+        done.append(_dropdown(ws, tier_col, first, last, TIER[1]))
     return done
 
 

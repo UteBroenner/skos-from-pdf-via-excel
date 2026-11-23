@@ -94,8 +94,9 @@ requirement row, the property row and the technical-name row of those columns by
 colours the template uses most for that level (theme colours, so the branding is kept). The template's own columns keep
 their colours, which deliberately differ in places (see `templates/README.md`).
 
-Value lists: every tool that saves a workbook writes the hidden sheet `lister`, the named ranges and the dropdowns for
-målgruppe (M), forhold til kilde (O) and status (AI) again, from `vocabtool/lists.py`. openpyxl, which the tools use,
+Value lists: every tool that saves a workbook writes the dropdowns for målgruppe (M), forhold til kilde (O), status
+(AI) and `tier` again, with the values in the dropdown itself, and the hidden sheet `lister` with the codes and URIs,
+from `vocabtool/lists.py`. openpyxl, which the tools use,
 drops dropdowns stored in Excel's newer format; the tools write them in the classic format.
 
 ```bash
