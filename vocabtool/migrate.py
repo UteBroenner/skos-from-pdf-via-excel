@@ -54,13 +54,13 @@ def _v7_scheme_value(path, prop: str):
 
 
 def _template_columns(ws, hdr_row):
-    cols, contrib = {}, 0
+    cols = {}
     for cell in ws[hdr_row]:
         h = normalise_header(cell.value)
-        if h == "dct:contributor":
-            if contrib < len(CONTRIBUTOR_FIELDS):
-                cols[CONTRIBUTOR_FIELDS[contrib]] = cell.column
-            contrib += 1
+        if h == "dct:contributor":                  # see reader.CONTRIBUTOR_FIELDS
+            free = [f for f in CONTRIBUTOR_FIELDS if f not in cols]
+            if free:
+                cols[free[0]] = cell.column
         elif h in PROPERTY_MAP:
             cols.setdefault(PROPERTY_MAP[h], cell.column)
     return cols

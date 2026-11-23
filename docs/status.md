@@ -46,6 +46,7 @@ v9 replaces v8 (23 November 2026). The columns are the same; the tools read v8 a
   the name (`foaf:name`). Intended properties: AB `prov:qualifiedAttribution [ prov:agent …; prov:hadRole begrepseier ]`,
   AD `dct:creator` (AF `sist_endret_av` stays `dct:contributor`). Persons are **not** converted to RDF; only
   `dcat:contactPoint` is kept. The schema records the properties for documentation (`rdf: skipped`).
+  Property row: AB `prov:Person`, AD `dct:creator` (v8 files with `dct:contributor?` in AD are still read).
 - **Colours:** rows 20 and 23 follow the SKOS-AP-NO level; row 24 is orange also where Statens vegvesen makes a field
   obligatory (M–P, AG–AI). The tools colour only the columns they add.
 - **The table covers all rows and columns in use.** Power Automate reads only the table.

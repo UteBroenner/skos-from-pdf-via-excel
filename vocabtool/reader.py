@@ -43,6 +43,8 @@ PROPERTY_MAP = {
     "skos:closeMatch": "close_match",
     "dcat:contactPoint": "contact_point",
     "dct:created": "created",
+    "dct:creator": "created_by",        # v9 AD opprettet_av (v8: "dct:contributor?")
+    "prov:Person": "owner",             # v9 AB begrepseier
     "dct:modified": "modified",
     "owl:versionInfo": "version_info",
     "adms:versionNotes": "version_notes",
@@ -58,7 +60,8 @@ PROPERTY_MAP = {
 # columns whose property row holds no property (v8/v9): mapped by the technical name in the row below
 TECHNICAL_NAME_MAP = {"begrepseier": "owner"}      # AB: a prov:Person, written as a name
 
-# dct:contributor appears twice in v8/v9 (created by / modified by), once in v7.
+# dct:contributor: v8 has it twice (AD created by, AF modified by), v7 once (created by), v9 once (AF; AD is
+# dct:creator). Each occurrence takes the first of these fields not yet mapped.
 CONTRIBUTOR_FIELDS = ["created_by", "modified_by"]
 
 SCHEME_BASE = "http://example.org/vegvesen/vokabular/"   # template v8/v9 cell B1: CONCAT(SCHEME_BASE, kortnavn)
@@ -242,14 +245,14 @@ def read_workbook(path: str | Path) -> Vocabulary:
         if not meta:
             meta = _scheme_meta(ws)
 
-        colmap, skipped, contrib = {}, [], 0
+        colmap, skipped = {}, []
         for idx, h in enumerate(headers):
             if not h:
                 continue
             if h == "dct:contributor":
-                if contrib < len(CONTRIBUTOR_FIELDS):
-                    colmap[CONTRIBUTOR_FIELDS[contrib]] = idx
-                contrib += 1
+                free = [f for f in CONTRIBUTOR_FIELDS if f not in colmap]
+                if free:
+                    colmap[free[0]] = idx
             elif h in PROPERTY_MAP:
                 colmap.setdefault(PROPERTY_MAP[h], idx)
             elif lang_column_field(h):
