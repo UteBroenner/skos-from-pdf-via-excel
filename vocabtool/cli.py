@@ -1,18 +1,23 @@
 """Command line: python -m vocabtool <command> ...
 
   check    <workbook.xlsx> [--out DIR]          validate; writes report (.md + .json) and graph (.html)
-  migrate  <v7.xlsx> --template <v8.xlsx> --out <file.xlsx> [--kortnavn N101]
-  rdf      <v8.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
-  uri      <v8.xlsx> [--overwrite]        fill empty concept names (column B) from the main-language term
-  rename   <v8.xlsx> OLD NEW [OLD NEW …]  rename concepts (column B) and update relations and notes
+  migrate  <v7.xlsx> --template <v9.xlsx> --out <file.xlsx> [--kortnavn N101]
+  rdf      <v9.xlsx> [--out DIR]          LinkML route: data (.yaml), RDF (.ttl), LinkML + SHACL report (.md)
+  uri      <v9.xlsx> [--overwrite]        fill empty concept names (column B) from the main-language term
+  rename   <v9.xlsx> OLD NEW [OLD NEW …]  rename concepts (column B) and update relations and notes
            --collection OLD NEW            rename a collection in the scope-note sentences ("Inngår i samlingen …")
-  fit      <v8.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns;
-                                          write the formulas for column A and endringshash
-  owl-import <v8.xlsx> <owl.ttl> [...] --out <file.xlsx> [--link V440.xlsx] [--merge-map map.json]
+  fit      <v9.xlsx>                      stretch the Excel table, formatting and validation to all rows and columns;
+                                          write the formulas (A, B, opprettet_av, endringshash), the value lists and the dropdowns
+  owl-import <v9.xlsx> <owl.ttl> [...] --out <file.xlsx> [--link V440.xlsx] [--merge-map map.json]
              [--log log.json] [--contact E-MAIL] [--kortnavn V441 --title "…"] [--keep-root]
              [--derive-code-definitions] [--tier 1]
                                           add OWL classes as concepts, merging with existing ones
-  set-fields <v8.xlsx> <values.json> [--out <file.xlsx>]
+  extract prepare <text.txt> --out DIR --instructions FILE --kortnavn K --title T [--known v9.xlsx …] [--only ch5 …]
+                  [--level 2] [--min-chars N] [--appendix-words W,…] [--start-line N] [--prompt-template FILE]
+                                          split the text into chapters and write one prompt per chapter (manifest.json)
+  extract collect <DIR>/manifest.json <v9.xlsx> --out <file.xlsx> --source URL [--contact E-MAIL] [--link v9.xlsx …]
+                                          check the agents' JSON records (schema, quotes) and add the concepts
+  set-fields <v9.xlsx> <values.json> [--out <file.xlsx>]
                                           write reviewed values (e.g. definitions) into concepts by name
 """
 from __future__ import annotations
@@ -67,13 +72,13 @@ def cmd_migrate(a):
         print(f"{len(r['unresolved_relations'])} relation targets not in the workbook, kept as written:")
         for i, f, t in r["unresolved_relations"]:
             print(f"  {i} {f} -> {t}")
-    if r["fields_without_v8_column"]:
-        print("fields with no v8 column (not migrated):", ", ".join(r["fields_without_v8_column"]))
+    if r["fields_without_column"]:
+        print("fields with no v9 column (not migrated):", ", ".join(r["fields_without_column"]))
     if r["change_note_moved_to_version_notes"]:
         print(f"{r['change_note_moved_to_version_notes']} skos:changeNote values moved to adms:versionNotes")
     map_path = Path(a.out).with_suffix(".namemap.json")
     map_path.write_text(json.dumps(r["name_map"], ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"v7 URI -> v8 name map: {map_path}")
+    print(f"v7 URI -> v9 name map: {map_path}")
     return 0
 
 
@@ -134,7 +139,8 @@ def cmd_uri(a):
         ws.cell(by_key[key].row, 2).value = name
     fit_table(wb)
     apply_formulas(wb)
-    wb.save(a.workbook)
+    from .lists import save_workbook
+    save_workbook(wb, a.workbook)
     print(f"{len(names)} concept names written to column B of {a.workbook}"
           + (f" (URI e.g. {concept_uri(v.scheme_uri, next(iter(names.values())))})" if names and v.scheme_uri else ""))
     for key, base, name in collisions:
@@ -145,10 +151,11 @@ def cmd_uri(a):
 def cmd_fit(a):
     import openpyxl
     from .template_ext import fit_table, apply_formulas
+    from .lists import save_workbook
     wb = openpyxl.load_workbook(a.workbook)
-    r = fit_table(wb)
     apply_formulas(wb)
-    wb.save(a.workbook)
+    r = fit_table(wb)
+    save_workbook(wb, a.workbook)          # also writes the value lists and dropdowns
     print(f"{a.workbook}: {r}")
     return 0
 
@@ -191,6 +198,30 @@ def cmd_owl_import(a):
     return 0
 
 
+def cmd_extract(a):
+    from .extract import prepare, collect, report_md
+    if a.step == "prepare":
+        m = prepare(a.input, a.out, a.instructions, a.kortnavn, a.title, a.known or (), a.only, level=a.level,
+                    appendix_words=tuple(a.appendix_words.split(",")), start_line=a.start_line,
+                    min_chars=a.min_chars, prompt_template=a.prompt_template)
+        print(f"{len(m)} chunks -> {a.out}/manifest.json")
+        for c in m:
+            print(f"  {c['id']:<10} {c['title'][:45]:<45} {c['chars']:>7} chars, prompt {c['prompt_chars']:>7}"
+                  f"{'  (result exists)' if c['done'] else ''}")
+        return 0
+    r = collect(a.input, a.workbook, a.out, a.source, a.contact, a.kortnavn, a.title, a.link or ())
+    rep = Path(a.out).with_suffix(".extract-report.md")
+    rep.write_text(report_md(r), encoding="utf-8")
+    print(f"{a.out}: {len(r['accepted'])} concepts added, {len(r['rejected'])} rejected, "
+          f"{len(r['existing'])} already there, {len(r['duplicates'])} repeated, {len(r['linked'])} linked, "
+          f"{len(r['unresolved_relations'])} relations not resolved")
+    if r["suggestions"]:
+        print(f"  {len(r['suggestions'])} definitions for existing concepts: {Path(a.out).with_suffix('.suggestions.json')}"
+              " (review, then apply with set-fields)")
+    print(f"  report: {rep}")
+    return 0
+
+
 def cmd_set_fields(a):
     from .set_fields import set_fields
     r = set_fields(a.workbook, a.values, a.out)
@@ -210,10 +241,10 @@ def main(argv=None):
     rn.add_argument("--collection", action="store_true", help="rename a collection, not a concept"); rn.set_defaults(fn=cmd_rename)
     ft = sub.add_parser("fit"); ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
     oi = sub.add_parser("owl-import", help="add OWL classes as concepts, merging with existing ones")
-    oi.add_argument("workbook", help="v8 workbook (an empty template for a new vocabulary)")
+    oi.add_argument("workbook", help="v9 workbook (an empty template for a new vocabulary)")
     oi.add_argument("owl", nargs="+", help="OWL files (Turtle), imported in this order")
     oi.add_argument("--out", required=True, help="workbook to write")
-    oi.add_argument("--link", help="other v8 workbook: copy definitions of exact label matches (merge rule)")
+    oi.add_argument("--link", help="other v9 workbook: copy definitions of exact label matches (merge rule)")
     oi.add_argument("--merge-map", help="JSON {class IRI: concept name} for reviewed merges of variant labels")
     oi.add_argument("--log", help="log file (default: <out>.owl-import.json)")
     oi.add_argument("--contact", help="dcat:contactPoint for new concepts")
@@ -223,6 +254,24 @@ def main(argv=None):
     oi.add_argument("--derive-code-definitions", action="store_true",
                     help="give new code entries a definition built from code and broader, marked [avledet]")
     oi.set_defaults(fn=cmd_owl_import)
+    ex = sub.add_parser("extract", help="extract concepts from text, one agent per chapter (prepare / collect)")
+    ex.add_argument("step", choices=["prepare", "collect"])
+    ex.add_argument("input", help="prepare: the text file; collect: manifest.json")
+    ex.add_argument("workbook", nargs="?", help="collect: v9 workbook to add to (an empty template for a new vocabulary)")
+    ex.add_argument("--out", required=True, help="prepare: working directory; collect: workbook to write")
+    ex.add_argument("--instructions", help="prepare: field-instruction file included in every prompt")
+    ex.add_argument("--kortnavn"); ex.add_argument("--title")
+    ex.add_argument("--known", nargs="*", help="prepare: v9 workbooks whose terms are listed as existing")
+    ex.add_argument("--only", nargs="*", help="prepare: only these chunk ids, e.g. ch5 appB.3")
+    ex.add_argument("--level", type=int, default=1, help="prepare: split at chapters (1) or sections (2, 3)")
+    ex.add_argument("--min-chars", type=int, default=0, help="prepare: merge shorter chunks into the next one of the same chapter")
+    ex.add_argument("--appendix-words", default="Tillegg,Vedlegg,Appendix,Annex", help="prepare: words that start an appendix heading")
+    ex.add_argument("--start-line", type=int, help="prepare: ignore everything before this line")
+    ex.add_argument("--prompt-template", help="prepare: own prompt template with the same {placeholders}")
+    ex.add_argument("--link", nargs="*", help="collect: other v9 vocabularies to link to (merge rule)")
+    ex.add_argument("--source", help="collect: IRI of the source document (dct:source)")
+    ex.add_argument("--contact", help="collect: dcat:contactPoint for new concepts")
+    ex.set_defaults(fn=cmd_extract)
     sf = sub.add_parser("set-fields", help="write reviewed values into concepts by name (JSON)")
     sf.add_argument("workbook"); sf.add_argument("values", help='JSON {"<concept name>": {"<field>": "<value>"}}; "<field>+" appends')
     sf.add_argument("--out", help="workbook to write (default: in place)"); sf.set_defaults(fn=cmd_set_fields)

@@ -64,7 +64,7 @@ URI: [skos:altLabel](http://www.w3.org/2004/02/skos/core#altLabel)
 | excel_column | AR |
 | excel_name | tillat_term_engelsk_us |
 | requirement | valgfri |
-| template | v8-lang-ext |
+| template | v9-lang-ext |
 | separator | , |
 
 
@@ -105,7 +105,7 @@ annotations:
     value: valgfri
   template:
     tag: template
-    value: v8-lang-ext
+    value: v9-lang-ext
   separator:
     tag: separator
     value: ','

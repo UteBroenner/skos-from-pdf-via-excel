@@ -57,7 +57,7 @@ URI: [skos:definition](http://www.w3.org/2004/02/skos/core#definition)
 | excel_column | AV |
 | excel_name | definisjon_engelsk_us |
 | requirement | valgfri |
-| template | v8-lang-ext |
+| template | v9-lang-ext |
 
 
 
@@ -97,7 +97,7 @@ annotations:
     value: valgfri
   template:
     tag: template
-    value: v8-lang-ext
+    value: v9-lang-ext
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 in_language: en-US
 rank: 1000

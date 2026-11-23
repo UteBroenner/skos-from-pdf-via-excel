@@ -62,7 +62,7 @@ URI: [skos:scopeNote](http://www.w3.org/2004/02/skos/core#scopeNote)
 | excel_column | AW |
 | excel_name | merknad_engelsk_us |
 | requirement | valgfri |
-| template | v8-lang-ext |
+| template | v9-lang-ext |
 
 
 
@@ -102,7 +102,7 @@ annotations:
     value: valgfri
   template:
     tag: template
-    value: v8-lang-ext
+    value: v9-lang-ext
 description: Usage note in US English, e.g. a warning that a term means another concept
   elsewhere.
 from_schema: http://example.org/vegvesen/vokabular/def/schema

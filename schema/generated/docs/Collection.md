@@ -273,7 +273,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: en-US
     rank: 1000
@@ -297,7 +297,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: en-GB
     rank: 1000
@@ -321,7 +321,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: de
     rank: 1000
@@ -345,7 +345,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: es
     rank: 1000

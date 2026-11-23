@@ -1,4 +1,4 @@
-"""Add the classes of OWL ontologies as concepts to a v8 workbook, merging with existing concepts.
+"""Add the classes of OWL ontologies as concepts to a v9 workbook, merging with existing concepts.
 
 Merging (an existing concept is the same as a class):
 - same main-language label or alt label (normalised: case, spaces, punctuation, text in parentheses), and the
@@ -20,7 +20,7 @@ New concepts (one row per class):
 - --derive-code-definitions: a new concept with a code and no other definition gets one built from the code table,
   e.g. "kodeverdi 59 under «buebru og hvelvbru» i V440 (kap. V-6, avsnitt V-6.1)", relationshipWithSource
   derived-from-source and "[avledet]" in the editorial note (checker: VT-DEF-DERIVED, info)
-- --link <v8 workbook>: a new concept whose label matches exactly one concept with a definition there gets
+- --link <v9 workbook>: a new concept whose label matches exactly one concept with a definition there gets
   exactMatch to it, its definition copied, source = that concept and relationshipWithSource direct-from-source
 
 Skipped: deprecated classes, and the technical root (the single top class of a file, e.g. "Rotobjekt for v440"),
@@ -39,6 +39,7 @@ from rdflib import Graph, Literal, OWL, RDF, RDFS, URIRef
 from .reader import read_workbook, normalise_header
 from .template_ext import fit_table, apply_formulas
 from .uri import local_name
+from .lists import save_workbook
 
 
 def norm(s) -> str:
@@ -49,8 +50,8 @@ def lower_first(t: str | None) -> str | None:
     t = re.sub(r"\s+", " ", (t or "").strip())
     if not t:
         return t
-    w = re.split(r"[\s/,(]", t, maxsplit=1)[0]
-    letters = [ch for ch in w if ch.isalpha()]
+    head = re.split(r"[\s,(-]", t, maxsplit=1)[0]     # "G/S areal", "ROS-analyse": the acronym is the start
+    letters = [ch for ch in head if ch.isalpha()]
     return t if len(letters) >= 2 and all(ch.isupper() for ch in letters) else t[0].lower() + t[1:]
 
 
@@ -249,5 +250,5 @@ def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=
                 ws.cell(r["row"], col[fld]).value = r["fields"].get(fld)
     fit_table(wb)
     apply_formulas(wb)
-    wb.save(out)
+    save_workbook(wb, out)
     return log

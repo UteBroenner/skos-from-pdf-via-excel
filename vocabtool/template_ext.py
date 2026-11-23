@@ -1,6 +1,6 @@
-"""Add language columns (prefLabel / altLabel) to the v8 template.
+"""Add language columns (prefLabel / altLabel) to the template (v9; v8 has the same columns).
 
-New columns are appended after the last used column, so existing v8 column
+New columns are appended after the last used column, so existing column
 letters (and SharePoint column mappings) stay unchanged. The change-hash
 formula is extended to include the new columns.
 """
@@ -14,6 +14,8 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 
 from .reader import normalise_header
+from .uri import name_formula
+from .lists import save_workbook
 
 LANG_NAMES_NB = {"en-US": "engelsk_us", "en-GB": "engelsk_gb", "de": "tysk", "es": "spansk",
                  "sv": "svensk", "da": "dansk", "fr": "fransk"}
@@ -58,12 +60,16 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
     # keep 'tier' (internal, not imported) as the last column, outside the Excel table:
     # new columns are inserted in front of it
     tier_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "tier"), None)
+    hash_col = next((c.column for c in ws[hdr + 1] if c.value == "endringshash"), None)
     n_new = sum(1 for kind_langs in (langs, langs, def_langs, scope_langs) for lang in kind_langs)
-    if tier_col and tier_col == max(c.column for c in ws[hdr] if c.value not in (None, "")) and n_new:
-        tier_width = ws.column_dimensions[get_column_letter(tier_col)].width
-        ws.insert_cols(tier_col, n_new)
-        ws.column_dimensions[get_column_letter(tier_col + n_new)].width = tier_width or 10
-        col = tier_col
+    # new columns go in front of endringshash (the last table column) or, without it, in front of tier
+    at = hash_col or (tier_col if tier_col and tier_col == max(c.column for c in ws[hdr] if c.value not in (None, "")) else None)
+    if at and n_new:
+        widths = {k: ws.column_dimensions[get_column_letter(k)].width for k in range(at, ws.max_column + 1)}
+        ws.insert_cols(at, n_new)
+        for k, w in widths.items():
+            ws.column_dimensions[get_column_letter(k + n_new)].width = w or 10
+        col = at
     first_new = get_column_letter(col)
     style_src = ws.cell(hdr, 3)          # prefLabel@nb header as style model
     tech_src = ws.cell(tech, 3)
@@ -83,8 +89,8 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
             ws.cell(desc, col).value = ("tillat term [0..n]" if sep else f"definisjon ({lang})" if kind == "def"
                                         else f"merknad om bruk ({lang})" if kind == "scope"
                                         else f"anbefalt term ({lang}), maks én")
-            for r, src_cell in ((hdr, style_src), (tech, tech_src)):
-                ws.cell(r, col)._style = copy.copy(src_cell._style)
+            for r, src_cell in ((hdr, style_src), (tech, tech_src), (desc, ws.cell(desc, 3))):
+                ws.cell(r, col)._style = copy.copy(src_cell._style)       # colours follow the level below
             ws.column_dimensions[letter].width = ws.column_dimensions["C"].width or 22
             added.append(f"{letter}: {header}")
             col += 1
@@ -98,9 +104,70 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
         for c in ws[r]:
             if isinstance(c.value, str) and "TEXTJOIN" in c.value and "$AM" in c.value and f",vokabular!${first_new}" not in c.value:
                 c.value = re.sub(r"(vokabular!\$[AC](\d+):\$AM\d+)", rf"\1,vokabular!${first_new}\2:${last}\2", c.value)
+    new_cols = list(range(openpyxl.utils.column_index_from_string(first_new), col))
+    if hash_col:                 # current templates: the table and the formulas are rebuilt
+        fit_table(wb)
+        apply_formulas(wb)
+        new_cols.append(next(c.column for c in ws[tech] if c.value == HASH_COLUMN))
+    requirement_colours(wb, columns=new_cols)
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
-    wb.save(dst)
+    save_workbook(wb, dst)
     return added
+
+
+def _colour(cell) -> tuple:
+    f, fo = cell.fill, cell.font
+    fg = f.fgColor if f.fill_type else None
+    fc = fo.color
+    return (f.fill_type, fg.type if fg else None, (fg.theme if fg.type == "theme" else fg.rgb) if fg else None,
+            round(fg.tint or 0, 3) if fg else 0, fo.b,
+            (fc.theme if fc.type == "theme" else fc.rgb) if fc else None, round(fc.tint or 0, 3) if fc else 0)
+
+
+def requirement_colours(wb, sheet: str = "vokabular", columns=None) -> list[str]:
+    """Colour the requirement row, the property row and the technical-name row of the given columns
+    (column numbers) by the requirement level.
+
+    Only columns the tools add (language columns, endringshash) or name explicitly are coloured: the template's own
+    columns keep their colours, which may deliberately differ from the level in the requirement row (e.g. columns
+    that are obligatory in Statens vegvesen but optional in SKOS-AP-NO are orange in the technical-name row).
+
+    The level is the text in the requirement row (obligatorisk, anbefalt, valgfri, internt, systemgenerert). For each
+    level the colouring the template uses most often for that level is the model. Only fill and font colour (and bold)
+    are copied, so the template's own theme (branding) colours are kept and borders, alignment and widths stay as
+    they are. systemgenerert is coloured like internt. Columns without a level are left as they are.
+    Returns the cells that changed.
+    """
+    from collections import Counter
+    ws = wb[sheet]
+    hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
+    rows = (hdr - 3, hdr, hdr + 1)                     # requirement, property, technical name
+    last = max(c.column for c in ws[hdr] if c.value not in (None, ""))
+    level = {c: str(ws.cell(hdr - 3, c).value or "").strip().lower() for c in range(1, last + 1)}
+    sig = lambda c: tuple(_colour(ws.cell(r, c)) for r in rows)
+    model = {}
+    for lv in set(level.values()) - {""}:
+        cols = [c for c in level if level[c] == lv]
+        common = Counter(sig(c) for c in cols).most_common(1)[0][0]
+        model[lv] = next(c for c in cols if sig(c) == common)
+    if "internt" in model:
+        model["systemgenerert"] = model["internt"]
+    changed = []
+    for c, lv in level.items():
+        if columns is not None and c not in columns:
+            continue
+        m = model.get(lv)
+        if not m or m == c:
+            continue
+        for r in rows:
+            src, dst = ws.cell(r, m), ws.cell(r, c)
+            if _colour(src) != _colour(dst):
+                dst.fill = copy.copy(src.fill)
+                font = copy.copy(dst.font)
+                font.color, font.b = copy.copy(src.font.color), src.font.b
+                dst.font = font
+                changed.append(dst.coordinate)
+    return changed
 
 
 def fit_table(wb, sheet: str = "vokabular") -> dict:
@@ -147,12 +214,17 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
                           for i, col in enumerate(range(1, last_col + 1))]
         out[t.name] = t.ref
 
-    # formatting: top-aligned, wrapped text in every data cell
+    # formatting: top-aligned, wrapped text in every data cell; endringshash is not wrapped (its long text would
+    # make every row tall) and its column is wide
+    hash_col = next((c.column for c in ws[tech] if c.value == HASH_COLUMN), None)
     for r in range(first, last_row + 1):
         for col in range(1, last_col + 1):
             c = ws.cell(r, col)
             al = _copy(c.alignment)
-            c.alignment = Alignment(horizontal=al.horizontal, vertical="top", wrap_text=True)
+            c.alignment = Alignment(horizontal=al.horizontal, vertical="top", wrap_text=col != hash_col)
+    if hash_col:
+        dim = ws.column_dimensions[get_column_letter(hash_col)]
+        dim.width = max(dim.width or 0, HASH_WIDTH)
 
     # conditional formatting and data validation down to the last row
     def stretch(ref: str) -> str:
@@ -182,6 +254,9 @@ def hide_column(wb, technical_name: str, sheet: str = "vokabular") -> str | None
 
 
 HASH_COLUMN = "endringshash"
+HASH_WIDTH = 100
+TIER_DESCRIPTION = ("1 = fysiske objekter, romlige begreper og målbare egenskaper; 2 = prosesser og tilstander; "
+                    "3 = normative krav. Internt, importeres ikke.")
 GOVERNANCE = {"intern_identifikator", "dato_opprettet", "opprettet_av", "dato_sist_endret", "sist_endret_av", HASH_COLUMN}
 
 
@@ -199,6 +274,9 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
     """Write the two formula columns for every row of the Excel table:
 
     - column A (dct:identifier) = <kortnavn>-<concept name>, e.g. N101-Rekkverk
+    - column B (concept name) = CamelCase of the bokmål term (see uri.name_formula), where B is empty or already a
+      formula; a name typed into B is kept
+    - opprettet_av = dct:creator of the scheme (cell B of the row 'dct:creator'), for rows with a concept name
     - endringshash = TEXTJOIN of the row content (all table columns except ID, created/modified
       date and person, and the hash itself); Power Automate compares it with the List to find changed rows.
     The endringshash column is added before a trailing 'tier' if the template has none.
@@ -217,23 +295,38 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
             ws.insert_cols(last, 1)
             ws.column_dimensions[get_column_letter(last + 1)].width = width or 10
             hash_col = last
-        for r, src in ((hdr, ws.cell(hdr, 3)), (tech, ws.cell(tech, 3)), (hdr - 3, ws.cell(hdr - 3, 3))):
-            ws.cell(r, hash_col)._style = copy.copy(src._style)
+        model = hash_col + 1 if normalise_header(ws.cell(hdr, hash_col + 1).value) == "tier" else 3
+        for r in (hdr, tech, hdr - 3, hdr - 2):     # systemgenerert: same style as the internal tier column
+            ws.cell(r, hash_col)._style = copy.copy(ws.cell(r, model)._style)
         ws.cell(hdr, hash_col).value = HASH_COLUMN
         ws.cell(tech, hash_col).value = HASH_COLUMN
         ws.cell(hdr - 3, hash_col).value = "systemgenerert"
         ws.column_dimensions[get_column_letter(hash_col)].width = 20
+        fit_table(wb, sheet)       # the new column must be inside the Excel table, or Power Automate does not see it
     ws.cell(hdr - 2, hash_col).value = ("formel: radens innhold uten ID, datoer og personer; brukes av Power Automate "
                                         "for å finne endrede begreper – ikke rediger")
     ws.cell(hdr - 2, 1).value = "genereres: <kortnavn>-<begrepsnavn>, f.eks. N101-Rekkverk – ikke rediger"
+    tier_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "tier"), None)
+    if tier_col:
+        ws.cell(hdr - 2, tier_col).value = TIER_DESCRIPTION
+        dim = ws.column_dimensions[get_column_letter(tier_col)]
+        dim.width = max(dim.width or 0, 30)
     t = next(iter(ws.tables.values()))
     end_col = openpyxl.utils.column_index_from_string(re.match(r"[A-Z]+", t.ref.split(":")[1]).group(0))
     last_row = int(re.search(r"(\d+)$", t.ref).group(1))
     content = [c for c in range(1, end_col + 1) if ws.cell(tech, c).value and ws.cell(tech, c).value not in GOVERNANCE]
+    label_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "skos:prefLabel@nb"), None)
+    creator_col = next((c.column for c in ws[tech] if c.value == "opprettet_av"), None)
+    creator_row = next((r for r in range(1, hdr) if normalise_header(ws.cell(r, 1).value) == "dct:creator"), None)
     for r in range(first, last_row + 1):
         parts = ",".join(f"${get_column_letter(a)}{r}:${get_column_letter(b)}{r}" if a != b else f"${get_column_letter(a)}{r}"
                          for a, b in _ranges(content))
         ws.cell(r, 1).value = f'=IF(${"B"}{r}="","",$B${k_row}&"-"&$B{r})'
+        b = ws.cell(r, 2)
+        if label_col and (b.value is None or (isinstance(b.value, str) and b.value.startswith("="))):
+            b.value = name_formula(f"{get_column_letter(label_col)}{r}")      # a typed name is kept
+        if creator_col and creator_row:
+            ws.cell(r, creator_col).value = f'=IF($B{r}="","",$B${creator_row})'
         ws.cell(r, hash_col).value = f'=IF($B{r}="","",_xlfn.TEXTJOIN("|",FALSE,{parts}))'
     return {"rows": f"{first}-{last_row}", "hash_column": get_column_letter(hash_col),
             "hash_covers": ",".join(f"{get_column_letter(a)}:{get_column_letter(b)}" for a, b in _ranges(content))}

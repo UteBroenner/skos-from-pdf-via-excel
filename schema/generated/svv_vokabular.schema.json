@@ -1,5 +1,14 @@
 {
     "$defs": {
+        "Audience": {
+            "description": "Values of dct:audience (SKOS-AP-NO audience-type); the template's malgruppeliste has the bokm\u00e5l labels allmennheten (public) and spesialist (specialist).",
+            "enum": [
+                "public",
+                "specialist"
+            ],
+            "title": "Audience",
+            "type": "string"
+        },
         "Collection": {
             "additionalProperties": false,
             "description": "A group of concepts, recorded in the main-language scope note of each member (\"Inng\u00e5r i samlingen X.\" / \"Inng\u00e5r i samlingene X, Y.\"). There is no Excel row for the collection itself. URI <scheme URI>/samling/<CamelCase name>; the label is the name as written. Unordered and not nested.",
@@ -137,9 +146,13 @@
                     ]
                 },
                 "audience": {
-                    "type": [
-                        "string",
-                        "null"
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Audience"
+                        },
+                        {
+                            "type": "null"
+                        }
                     ]
                 },
                 "broader": {
@@ -175,8 +188,7 @@
                     ]
                 },
                 "created_by": {
-                    "description": "Hidden column; template formula = dct:creator of the vocabulary (cell B16).",
-                    "pattern": "^[^@\\s]+@vegvesen\\.no$",
+                    "description": "Opprettet av: a prov:Person, written as the name (foaf:name); hidden column, template formula = dct:creator of the vocabulary (cell B16). Persons are not converted to RDF; only dcat:contactPoint is kept.",
                     "type": [
                         "string",
                         "null"
@@ -280,6 +292,7 @@
                     ]
                 },
                 "modified_by": {
+                    "description": "Sist endret av (person). Persons are not converted to RDF; only dcat:contactPoint is kept.",
                     "pattern": "^[^@\\s]+@vegvesen\\.no$",
                     "type": [
                         "string",
@@ -287,6 +300,13 @@
                     ]
                 },
                 "notation": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "owner": {
+                    "description": "Begrepseier: a prov:Person, written as the name (foaf:name). Intended RDF form: prov:qualifiedAttribution [ prov:agent <person> ; prov:hadRole begrepseier ]. Persons are not converted to RDF (decision 23 November 2026); only dcat:contactPoint is kept.",
                     "type": [
                         "string",
                         "null"

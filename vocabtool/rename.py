@@ -14,6 +14,7 @@ import openpyxl
 from .reader import read_workbook, RELATION_FIELDS, split_multi
 from .uri import LOCAL_NAME_RE, local_name
 from .samling import collections, rename_in_text, outside_sentences, scope_note_field
+from .lists import save_workbook
 
 NOTE_PREFIXES = ("scope_note", "editorial_note")
 
@@ -48,7 +49,7 @@ def rename(path: str, renames: dict[str, str]) -> dict:
                 if new_text != c.get(fld):
                     ws.cell(c.row, col).value = new_text
                     counts["notes"] += 1
-    wb.save(path)
+    save_workbook(wb, path)
     return counts
 
 
@@ -73,5 +74,5 @@ def rename_collection(path: str, old: str, new: str) -> dict:
             if new_text != text:
                 ws.cell(c.row, col).value = new_text
                 n += 1
-    wb.save(path)
+    save_workbook(wb, path)
     return {"notes": n}

@@ -1,4 +1,4 @@
-"""Write reviewed values into concepts of a v8 workbook, by concept name (column B).
+"""Write reviewed values into concepts of a v9 workbook, by concept name (column B).
 
 Input JSON: {"<concept name>": {"<field>": "<value>", ...}, ...}
 Fields are the reader's field names (def_nb, source, relationship_with_source, editorial_note, scope_note, ...).
@@ -14,6 +14,7 @@ import openpyxl
 
 from .reader import read_workbook
 from .template_ext import fit_table, apply_formulas
+from .lists import save_workbook
 
 PROTECTED = {"identifier", "change_hash", "created_by", "uri"}
 
@@ -48,5 +49,5 @@ def set_fields(workbook, values: dict | str | Path, out=None) -> dict:
             n += 1
     fit_table(wb)
     apply_formulas(wb)
-    wb.save(out or workbook)
+    save_workbook(wb, out or workbook)
     return {"concepts": len(values), "cells": n}

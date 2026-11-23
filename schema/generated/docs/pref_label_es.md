@@ -58,7 +58,7 @@ URI: [skos:prefLabel](http://www.w3.org/2004/02/skos/core#prefLabel)
 | excel_column | AQ |
 | excel_name | anbefalt_term_spansk |
 | requirement | valgfri |
-| template | v8-lang-ext |
+| template | v9-lang-ext |
 
 
 
@@ -98,7 +98,7 @@ annotations:
     value: valgfri
   template:
     tag: template
-    value: v8-lang-ext
+    value: v9-lang-ext
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 in_language: es
 rank: 1000

@@ -11,7 +11,7 @@ import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
 
-from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi
+from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi, source_relation, audience
 from .uri import LOCAL_NAME_RE, expected_name
 from .samling import collections, sentence_problems
 
@@ -37,8 +37,8 @@ class Finding:
 
 
 RULES = {
-    "VT-ID-FORMAT": ("error", "column A must be <kortnavn>-<concept name> (formula in the template)", "template v8 col A"),
-    "VT-KORTNAVN": ("error", "kortnavn may only contain letters, digits and hyphens, starting with a letter or digit", "template v8"),
+    "VT-ID-FORMAT": ("error", "column A must be <kortnavn>-<concept name> (formula in the template)", "template col A"),
+    "VT-KORTNAVN": ("error", "kortnavn may only contain letters, digits and hyphens, starting with a letter or digit", "template v9"),
     "VT-ID-DUPLICATE": ("error", "ID used on more than one row", ""),
     "VT-URI-MISSING": ("error", "concept name for the URI (column B) missing; run `vocabtool uri` to generate it from the term", "S03"),
     "VT-URI-FORMAT": ("error", "column B must hold only the CamelCase concept name (letters and digits), e.g. Rekkverk", "S03"),
@@ -48,7 +48,7 @@ RULES = {
     "VT-REQ-DEF": ("error", "definition in the main language missing", ""),
     "VT-REQ-DEF-CODE": ("warning", "code entry (has skos:notation) without a definition in the main language; code-table entries often have none in the source", ""),
     "VT-DEF-DERIVED": ("info", "definition derived from the code table, not quoted from the source ([avledet] in the editorial note); check it", ""),
-    "VT-REF-FORMAT": ("error", "relation value is not a concept name (v8 relations use the names in column B)", ""),
+    "VT-REF-FORMAT": ("error", "relation value is not a concept name (v8/v9 relations use the names in column B)", ""),
     "VT-REF-DANGLING": ("warning", "relation target not found in this workbook", ""),
     "VT-REF-SELF": ("error", "concept relates to itself", ""),
     "VT-CYCLE-BROADER": ("error", "cycle in skos:broader", "SKOS"),
@@ -64,12 +64,13 @@ RULES = {
     "VT-LABEL-VARIANT": ("info", "term means a different concept in another regional variant of the language (e.g. en-US vs en-GB)", ""),
     "VT-LABEL-CASE": ("warning", "main-language prefLabel starts with a capital letter (not an acronym)", "S05"),
     "VT-LABEL-GROUPING": ("warning", "label lists several things and has narrower concepts; possibly a table heading, not a concept", ""),
-    "VT-SOURCE-REL": ("warning", "skosno:relationshipWithSource is not self-composed, derived-from-source or direct-from-source", "SKOS-AP-NO"),
+    "VT-SOURCE-REL": ("warning", "skosno:relationshipWithSource is not self-composed / egendefinert, derived-from-source / basert på kilde or direct-from-source / sitat fra kilde", "SKOS-AP-NO"),
     "VT-STATUS": ("warning", "status not in statusliste", ""),
+    "VT-AUDIENCE": ("warning", "dct:audience is not allmennheten / public or spesialist / specialist (malgruppeliste)", "SKOS-AP-NO"),
     "VT-STATUS-LITERAL": ("warning", "status written as RDF literal; use the plain list value", ""),
     "VT-NN-MISSING": ("info", "nn label/definition empty (left for expert)", "S06/S17/S21"),
     "VT-CONTACT": ("warning", "dcat:contactPoint missing", ""),
-    "VT-PREFIX": ("error", "no vok: prefix in the Excel table; write the concept name only (vok:Rekkverk -> Rekkverk)", "template v8"),
+    "VT-PREFIX": ("error", "no vok: prefix in the Excel table; write the concept name only (vok:Rekkverk -> Rekkverk)", "template v9"),
     "VT-PREFIX-KODE": ("info", "kode: reference to a code list; kept until the handling of code lists is decided", ""),
     "VT-COLL-MEMBERS": ("info", "collection recorded in scope notes (\"Inngår i samlingen …\"), with its members", ""),
     "VT-COLL-SINGLE": ("warning", "collection has only one member; check the spelling of the name", ""),
@@ -144,7 +145,7 @@ def validate(v: Vocabulary) -> list[Finding]:
     F: list[Finding] = []
     concepts = v.concepts
     LF, DF = v.label_field, v.def_field   # main-language label / definition
-    if v.version == "v8":
+    if v.current:
         uris = Counter(c.get("uri") for c in concepts if c.get("uri"))
         for c in concepts:
             u = c.get("uri")
@@ -160,17 +161,17 @@ def validate(v: Vocabulary) -> list[Finding]:
                 F.append(_f("VT-URI-DUPLICATE", c, u))
     keys = Counter(c.key for c in concepts)
     by_key = v.by_key()
-    if v.version == "v8" and not v.kortnavn:
-        F.append(Finding("VT-KORTNAVN", "error", None, None, None, "kortnavn (short name of the vocabulary) is empty", "template v8"))
-    elif v.version == "v8" and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*", v.kortnavn):
-        F.append(Finding("VT-KORTNAVN", "error", None, None, None, RULES["VT-KORTNAVN"][1] + f": {v.kortnavn}", "template v8"))
+    if v.current and not v.kortnavn:
+        F.append(Finding("VT-KORTNAVN", "error", None, None, None, "kortnavn (short name of the vocabulary) is empty", "template v9"))
+    elif v.current and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*", v.kortnavn):
+        F.append(Finding("VT-KORTNAVN", "error", None, None, None, RULES["VT-KORTNAVN"][1] + f": {v.kortnavn}", "template v9"))
 
     for c in concepts:
-        if keys[c.key] > 1 and v.version != "v8":        # v8: duplicate names are VT-URI-DUPLICATE
+        if keys[c.key] > 1 and not v.current:        # v8/v9: duplicate names are VT-URI-DUPLICATE
             F.append(_f("VT-ID-DUPLICATE", c, c.key))
-        if v.version == "v8" and v.kortnavn and c.get("uri") and c.get("identifier") != f"{v.kortnavn}-{c.get('uri').strip()}":
+        if v.current and v.kortnavn and c.get("uri") and c.get("identifier") != f"{v.kortnavn}-{c.get('uri').strip()}":
             F.append(_f("VT-ID-FORMAT", c, f"{c.get('identifier')} (expected {v.kortnavn}-{c.get('uri').strip()})"))
-        if v.version == "v8":
+        if v.current:
             for fld, val in c.fields.items():
                 if isinstance(val, str) and PREFIX_RE.search(val):
                     F.append(_f("VT-PREFIX", c, f"{fld} = {val[:80]!r}"))
@@ -195,8 +196,11 @@ def validate(v: Vocabulary) -> list[Finding]:
             F.append(_f("VT-STATUS-LITERAL", c, raw_st))
         elif st and st not in STATUS_VALUES:
             F.append(_f("VT-STATUS", c, st))
+        aud = c.get("audience")
+        if aud and not audience(aud):
+            F.append(_f("VT-AUDIENCE", c, aud))
         rel = c.get("relationship_with_source")
-        if rel and "-".join(rel.strip().lower().split()) not in SOURCE_RELATIONS:
+        if rel and not source_relation(rel):
             F.append(_f("VT-SOURCE-REL", c, rel))
         if not c.get("contact_point"):
             F.append(_f("VT-CONTACT", c))
@@ -208,7 +212,7 @@ def validate(v: Vocabulary) -> list[Finding]:
             for t in c.relations.get(fld, []):
                 if t == c.key:
                     F.append(_f("VT-REF-SELF", c, prop))
-                elif v.version == "v8" and not LOCAL_NAME_RE.match(t):
+                elif v.current and not LOCAL_NAME_RE.match(t):
                     F.append(_f("VT-REF-FORMAT", c, f"{prop} = {t!r}"))
                 elif t not in by_key:
                     F.append(_f("VT-REF-DANGLING", c, f"{prop} -> {t}"))
