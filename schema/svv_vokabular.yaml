@@ -21,6 +21,8 @@ prefixes:
   euvoc: http://publications.europa.eu/ontology/euvoc#
   skosno: https://data.norge.no/vocabulary/skosno#
   adms: http://www.w3.org/ns/adms#
+  prov: http://www.w3.org/ns/prov#
+  foaf: http://xmlns.com/foaf/0.1/
   owl: http://www.w3.org/2002/07/owl#
   vok: http://example.org/vegvesen/vokabular/
   svv: http://example.org/vegvesen/vokabular/def#
@@ -81,6 +83,7 @@ classes:
       - exact_match
       - close_match
       - contact_point
+      - owner
       - created
       - created_by
       - modified
@@ -373,11 +376,19 @@ slots:
     slot_uri: dct:created
     range: date
     annotations: {excel_column: AC, excel_name: dato_opprettet, requirement: anbefalt}
+  owner:
+    slot_uri: prov:qualifiedAttribution
+    description: >-
+      Begrepseier: a prov:Person, written as the name (foaf:name). Intended RDF form:
+      prov:qualifiedAttribution [ prov:agent <person> ; prov:hadRole begrepseier ]. Persons are not converted to RDF
+      (decision 23 November 2026); only dcat:contactPoint is kept.
+    annotations: {excel_column: AB, excel_name: begrepseier, rdf: skipped}
   created_by:
-    slot_uri: dct:contributor
-    pattern: "^[^@\\s]+@vegvesen\\.no$"
-    description: Hidden column; template formula = dct:creator of the vocabulary (cell B16).
-    annotations: {excel_column: AD, excel_name: opprettet_av, hidden: true}
+    slot_uri: dct:creator
+    description: >-
+      Opprettet av: a prov:Person, written as the name (foaf:name); hidden column, template formula = dct:creator of the
+      vocabulary (cell B16). Persons are not converted to RDF; only dcat:contactPoint is kept.
+    annotations: {excel_column: AD, excel_name: opprettet_av, hidden: true, rdf: skipped}
   modified:
     slot_uri: dct:modified
     range: date
@@ -385,7 +396,8 @@ slots:
   modified_by:
     slot_uri: dct:contributor
     pattern: "^[^@\\s]+@vegvesen\\.no$"
-    annotations: {excel_column: AF, excel_name: sist_endret_av}
+    description: Sist endret av (person). Persons are not converted to RDF; only dcat:contactPoint is kept.
+    annotations: {excel_column: AF, excel_name: sist_endret_av, rdf: skipped}
   version_info:
     slot_uri: owl:versionInfo
     annotations: {excel_column: AG, excel_name: versjonsnummer, requirement: valgfri}

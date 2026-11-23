@@ -36,7 +36,8 @@ FIELD_TO_SLOT = {
     "editorial_note": "editorial_note", "example": "example", "subject": "subject", "hidden_nb": "hidden_label",
     "broader": "broader", "is_part_of": "is_part_of", "related": "related", "relation_role": "relation_role",
     "exact_match": "exact_match", "close_match": "close_match", "contact_point": "contact_point",
-    "created": "created", "created_by": "created_by", "modified": "modified", "modified_by": "modified_by",
+    # persons (begrepseier, opprettet_av, sist_endret_av) are not converted; only the contact point is kept
+    "created": "created", "modified": "modified",
     "version_info": "version_info", "version_notes": "version_notes", "status": "status",
     "start_date": "start_date", "end_date": "end_date", "data_structure_label": "data_structure_label",
     "value_range": "value_range", "tier": "tier",

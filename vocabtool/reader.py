@@ -55,6 +55,9 @@ PROPERTY_MAP = {
     "tier": "tier",
     "endringshash": "change_hash",      # system column, formula over the row content
 }
+# columns whose property row holds no property (v8/v9): mapped by the technical name in the row below
+TECHNICAL_NAME_MAP = {"begrepseier": "owner"}      # AB: a prov:Person, written as a name
+
 # dct:contributor appears twice in v8/v9 (created by / modified by), once in v7.
 CONTRIBUTOR_FIELDS = ["created_by", "modified_by"]
 
@@ -251,6 +254,8 @@ def read_workbook(path: str | Path) -> Vocabulary:
                 colmap.setdefault(PROPERTY_MAP[h], idx)
             elif lang_column_field(h):
                 colmap.setdefault(lang_column_field(h), idx)
+            elif is_v8 and idx < len(next_row) and next_row[idx] in TECHNICAL_NAME_MAP:
+                colmap.setdefault(TECHNICAL_NAME_MAP[next_row[idx]], idx)
             else:
                 skipped.append(h)
         columns[ws.title] = {k: openpyxl.utils.get_column_letter(i + 1) for k, i in colmap.items()}

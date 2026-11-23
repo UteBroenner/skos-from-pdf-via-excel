@@ -5,6 +5,11 @@ search:
 
 # Slot: modified_by 
 
+
+_Sist endret av (person). Persons are not converted to RDF; only dcat:contactPoint is kept._
+
+
+
 <div data-search-exclude markdown="1">
 
 
@@ -63,6 +68,7 @@ URI: [dct:contributor](http://purl.org/dc/terms/contributor)
 | --- | --- |
 | excel_column | AF |
 | excel_name | sist_endret_av |
+| rdf | skipped |
 
 
 
@@ -97,6 +103,11 @@ annotations:
   excel_name:
     tag: excel_name
     value: sist_endret_av
+  rdf:
+    tag: rdf
+    value: skipped
+description: Sist endret av (person). Persons are not converted to RDF; only dcat:contactPoint
+  is kept.
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
 slot_uri: dct:contributor

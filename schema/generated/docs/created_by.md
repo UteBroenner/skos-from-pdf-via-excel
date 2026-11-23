@@ -6,7 +6,7 @@ search:
 # Slot: created_by 
 
 
-_Hidden column; template formula = dct:creator of the vocabulary (cell B16)._
+_Opprettet av: a prov:Person, written as the name (foaf:name); hidden column, template formula = dct:creator of the vocabulary (cell B16). Persons are not converted to RDF; only dcat:contactPoint is kept._
 
 
 
@@ -14,7 +14,7 @@ _Hidden column; template formula = dct:creator of the vocabulary (cell B16)._
 
 
 
-URI: [dct:contributor](http://purl.org/dc/terms/contributor)
+URI: [dct:creator](http://purl.org/dc/terms/creator)
 <!-- no inheritance hierarchy -->
 
 
@@ -40,14 +40,7 @@ URI: [dct:contributor](http://purl.org/dc/terms/contributor)
 | --- | --- |
 | Range | [String](String.md) |
 | Domain Of | [Concept](Concept.md) |
-| Slot URI | [dct:contributor](http://purl.org/dc/terms/contributor) |
-### Value Constraints
-
-| Property | Value |
-| --- | --- |
-| Regex Pattern | `^[^@\s]+@vegvesen\.no$` |
-
-
+| Slot URI | [dct:creator](http://purl.org/dc/terms/creator) |
 
 
 
@@ -69,6 +62,7 @@ URI: [dct:contributor](http://purl.org/dc/terms/contributor)
 | excel_column | AD |
 | excel_name | opprettet_av |
 | hidden | True |
+| rdf | skipped |
 
 
 
@@ -85,7 +79,7 @@ URI: [dct:contributor](http://purl.org/dc/terms/contributor)
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | dct:contributor |
+| self | dct:creator |
 | native | svv:created_by |
 
 
@@ -106,15 +100,18 @@ annotations:
   hidden:
     tag: hidden
     value: true
-description: Hidden column; template formula = dct:creator of the vocabulary (cell
-  B16).
+  rdf:
+    tag: rdf
+    value: skipped
+description: 'Opprettet av: a prov:Person, written as the name (foaf:name); hidden
+  column, template formula = dct:creator of the vocabulary (cell B16). Persons are
+  not converted to RDF; only dcat:contactPoint is kept.'
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
-slot_uri: dct:contributor
+slot_uri: dct:creator
 domain_of:
 - Concept
 range: string
-pattern: ^[^@\s]+@vegvesen\.no$
 
 ```
 </details></div>

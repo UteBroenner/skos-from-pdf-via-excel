@@ -109,6 +109,8 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
         
       Concept : notation
         
+      Concept : owner
+        
       Concept : pref_label_de
         
       Concept : pref_label_en
@@ -224,10 +226,11 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [exact_match](exact_match.md) | * <br/> [uri](uri.md) |  | direct |
 | [close_match](close_match.md) | * <br/> [uri](uri.md) |  | direct |
 | [contact_point](contact_point.md) | 1 <br/> [String](String.md) | E-mail address or web address | direct |
+| [owner](owner.md) | 0..1 <br/> [String](String.md) | Begrepseier: a prov:Person, written as the name (foaf:name) | direct |
 | [created](created.md) | 0..1 <br/> [Date](Date.md) |  | direct |
-| [created_by](created_by.md) | 0..1 <br/> [String](String.md) | Hidden column; template formula = dct:creator of the vocabulary (cell B16) | direct |
+| [created_by](created_by.md) | 0..1 <br/> [String](String.md) | Opprettet av: a prov:Person, written as the name (foaf:name); hidden column, ... | direct |
 | [modified](modified.md) | 0..1 <br/> [Date](Date.md) |  | direct |
-| [modified_by](modified_by.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [modified_by](modified_by.md) | 0..1 <br/> [String](String.md) | Sist endret av (person) | direct |
 | [version_info](version_info.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [version_notes](version_notes.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [status](status.md) | 0..1 <br/> [ConceptStatus](ConceptStatus.md) |  | direct |
@@ -338,6 +341,7 @@ slots:
 - exact_match
 - close_match
 - contact_point
+- owner
 - created
 - created_by
 - modified
@@ -951,6 +955,29 @@ attributes:
     range: string
     required: true
     pattern: ^([^@\s]+@[^@\s]+\.[A-Za-z]{2,}|https?://\S+)$
+  owner:
+    name: owner
+    annotations:
+      excel_column:
+        tag: excel_column
+        value: AB
+      excel_name:
+        tag: excel_name
+        value: begrepseier
+      rdf:
+        tag: rdf
+        value: skipped
+    description: 'Begrepseier: a prov:Person, written as the name (foaf:name). Intended
+      RDF form: prov:qualifiedAttribution [ prov:agent <person> ; prov:hadRole begrepseier
+      ]. Persons are not converted to RDF (decision 23 November 2026); only dcat:contactPoint
+      is kept.'
+    from_schema: http://example.org/vegvesen/vokabular/def/schema
+    rank: 1000
+    slot_uri: prov:qualifiedAttribution
+    owner: Concept
+    domain_of:
+    - Concept
+    range: string
   created:
     name: created
     annotations:
@@ -982,16 +1009,19 @@ attributes:
       hidden:
         tag: hidden
         value: true
-    description: Hidden column; template formula = dct:creator of the vocabulary (cell
-      B16).
+      rdf:
+        tag: rdf
+        value: skipped
+    description: 'Opprettet av: a prov:Person, written as the name (foaf:name); hidden
+      column, template formula = dct:creator of the vocabulary (cell B16). Persons
+      are not converted to RDF; only dcat:contactPoint is kept.'
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
-    slot_uri: dct:contributor
+    slot_uri: dct:creator
     owner: Concept
     domain_of:
     - Concept
     range: string
-    pattern: ^[^@\s]+@vegvesen\.no$
   modified:
     name: modified
     annotations:
@@ -1020,6 +1050,11 @@ attributes:
       excel_name:
         tag: excel_name
         value: sist_endret_av
+      rdf:
+        tag: rdf
+        value: skipped
+    description: Sist endret av (person). Persons are not converted to RDF; only dcat:contactPoint
+      is kept.
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
     slot_uri: dct:contributor

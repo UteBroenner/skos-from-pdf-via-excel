@@ -188,8 +188,7 @@
                     ]
                 },
                 "created_by": {
-                    "description": "Hidden column; template formula = dct:creator of the vocabulary (cell B16).",
-                    "pattern": "^[^@\\s]+@vegvesen\\.no$",
+                    "description": "Opprettet av: a prov:Person, written as the name (foaf:name); hidden column, template formula = dct:creator of the vocabulary (cell B16). Persons are not converted to RDF; only dcat:contactPoint is kept.",
                     "type": [
                         "string",
                         "null"
@@ -293,6 +292,7 @@
                     ]
                 },
                 "modified_by": {
+                    "description": "Sist endret av (person). Persons are not converted to RDF; only dcat:contactPoint is kept.",
                     "pattern": "^[^@\\s]+@vegvesen\\.no$",
                     "type": [
                         "string",
@@ -300,6 +300,13 @@
                     ]
                 },
                 "notation": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "owner": {
+                    "description": "Begrepseier: a prov:Person, written as the name (foaf:name). Intended RDF form: prov:qualifiedAttribution [ prov:agent <person> ; prov:hadRole begrepseier ]. Persons are not converted to RDF (decision 23 November 2026); only dcat:contactPoint is kept.",
                     "type": [
                         "string",
                         "null"

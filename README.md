@@ -150,6 +150,8 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
   Column A, `dct:identifier`, stays the short form `<kortnavn>-<name>`; the full URI is only built in the RDF.
 - Value lists on the hidden sheet `lister`: status (AI), målgruppe (M), forhold til kilde (O), see `templates/README.md`.
   The template has no `kodeverk` sheet for now.
+- Persons (`begrepseier` AB, `opprettet_av` AD, `sist_endret_av` AF) are names in Excel and are not converted to RDF;
+  only `dcat:contactPoint` is. The intended properties are documented in the schema.
 
 ## OWL import
 

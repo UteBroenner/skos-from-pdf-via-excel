@@ -36,7 +36,7 @@ Name: svv_vokabular
 | [concepts](concepts.md) | Container slot for the data file only |
 | [contact_point](contact_point.md) | E-mail address or web address |
 | [created](created.md) |  |
-| [created_by](created_by.md) | Hidden column; template formula = dct:creator of the vocabulary (cell B16) |
+| [created_by](created_by.md) | Opprettet av: a prov:Person, written as the name (foaf:name); hidden column, ... |
 | [creator](creator.md) |  |
 | [data_structure_label](data_structure_label.md) |  |
 | [definition_en](definition_en.md) |  |
@@ -56,8 +56,9 @@ Name: svv_vokabular
 | [main_language](main_language.md) | BCP 47 tag of the language in which every concept must have a prefLabel and a... |
 | [member](member.md) | Concepts whose main-language scope note names the collection |
 | [modified](modified.md) |  |
-| [modified_by](modified_by.md) |  |
+| [modified_by](modified_by.md) | Sist endret av (person) |
 | [notation](notation.md) |  |
+| [owner](owner.md) | Begrepseier: a prov:Person, written as the name (foaf:name) |
 | [pref_label_de](pref_label_de.md) |  |
 | [pref_label_en](pref_label_en.md) |  |
 | [pref_label_en_gb](pref_label_en_gb.md) |  |
