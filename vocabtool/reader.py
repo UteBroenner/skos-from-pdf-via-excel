@@ -92,6 +92,23 @@ def label_fields(fields) -> dict[str, str]:
     return out
 
 
+# skosno:relationshipWithSource: SKOS-AP-NO code for every way the template allows to write it
+# (English code with hyphens or spaces, bokmål, nynorsk)
+SOURCE_RELATION_VALUES = {
+    "self-composed": "self-composed", "egendefinert": "self-composed", "eigendefinert": "self-composed",
+    "derived-from-source": "derived-from-source", "basert på kilde": "derived-from-source", "basert på kjelde": "derived-from-source",
+    "direct-from-source": "direct-from-source", "sitat fra kilde": "direct-from-source", "sitat frå kjelde": "direct-from-source",
+}
+
+
+def source_relation(value):
+    """'derived from source', 'Basert på kilde', 'sitat frå kjelde' -> SKOS-AP-NO code; None if not recognised."""
+    if not value:
+        return None
+    v = " ".join(str(value).strip().lower().split())
+    return SOURCE_RELATION_VALUES.get(v) or SOURCE_RELATION_VALUES.get(v.replace(" ", "-"))
+
+
 def normalise_header(value) -> str:
     s = re.sub(r"\s+", "", str(value or ""))
     return s.split("(")[0].rstrip("?")
@@ -195,7 +212,9 @@ def read_workbook(path: str | Path) -> Vocabulary:
             continue
         # v8 has a second header row with technical names (intern_identifikator, ...)
         next_row = [normalise_header(c.value) for c in ws[hdr_row + 1]]
-        is_v8 = "intern_identifikator" in next_row or headers[0] == "dct:identifier"
+        # v8 has the row of technical names (intern_identifikator) under the properties; v7 has not, whatever the
+        # column order (v7 files exist with dct:identifier in A and URI in B, or the other way round)
+        is_v8 = "intern_identifikator" in next_row
         version = version or ("v8" if is_v8 else "v7")
         first_data = hdr_row + 2 if "intern_identifikator" in next_row else hdr_row + 1
         if not meta:

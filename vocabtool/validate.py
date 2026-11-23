@@ -11,7 +11,7 @@ import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
 
-from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi
+from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi, source_relation
 from .uri import LOCAL_NAME_RE, expected_name
 from .samling import collections, sentence_problems
 
@@ -64,7 +64,7 @@ RULES = {
     "VT-LABEL-VARIANT": ("info", "term means a different concept in another regional variant of the language (e.g. en-US vs en-GB)", ""),
     "VT-LABEL-CASE": ("warning", "main-language prefLabel starts with a capital letter (not an acronym)", "S05"),
     "VT-LABEL-GROUPING": ("warning", "label lists several things and has narrower concepts; possibly a table heading, not a concept", ""),
-    "VT-SOURCE-REL": ("warning", "skosno:relationshipWithSource is not self-composed, derived-from-source or direct-from-source", "SKOS-AP-NO"),
+    "VT-SOURCE-REL": ("warning", "skosno:relationshipWithSource is not self-composed / egendefinert, derived-from-source / basert på kilde or direct-from-source / sitat fra kilde", "SKOS-AP-NO"),
     "VT-STATUS": ("warning", "status not in statusliste", ""),
     "VT-STATUS-LITERAL": ("warning", "status written as RDF literal; use the plain list value", ""),
     "VT-NN-MISSING": ("info", "nn label/definition empty (left for expert)", "S06/S17/S21"),
@@ -196,7 +196,7 @@ def validate(v: Vocabulary) -> list[Finding]:
         elif st and st not in STATUS_VALUES:
             F.append(_f("VT-STATUS", c, st))
         rel = c.get("relationship_with_source")
-        if rel and "-".join(rel.strip().lower().split()) not in SOURCE_RELATIONS:
+        if rel and not source_relation(rel):
             F.append(_f("VT-SOURCE-REL", c, rel))
         if not c.get("contact_point"):
             F.append(_f("VT-CONTACT", c))

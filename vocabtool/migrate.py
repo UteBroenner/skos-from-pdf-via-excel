@@ -38,6 +38,19 @@ def _strip_prefix(key: str) -> str:
     return _PREFIX_RE.sub("", key, count=1)
 
 
+def _v7_scheme_value(path, prop: str):
+    """Value of a scheme row (e.g. dct:creator) in the v7 vocabulary sheet; None if absent or a placeholder."""
+    wb = openpyxl.load_workbook(path, data_only=True)
+    for ws in wb.worksheets:
+        if ws.title.strip().lower() in ("kodeverk", "lister"):
+            continue
+        for r in range(1, 25):
+            if normalise_header(ws.cell(r, 1).value) == prop:
+                v = ws.cell(r, 2).value
+                return None if v is None or str(v).strip().startswith("<") or str(v).strip() in ("pending", "") else str(v).strip()
+    return None
+
+
 def _v8_columns(ws, hdr_row):
     cols, contrib = {}, 0
     for cell in ws[hdr_row]:
@@ -76,8 +89,8 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
             ws.cell(r, 2).value = kortnavn
         elif a == "dct:title":
             ws.cell(r, 2).value = title or v7.title
-        elif a == "dct:creator" and v7.concepts:
-            pass
+        elif a == "dct:creator":
+            ws.cell(r, 2).value = _v7_scheme_value(src, "dct:creator")
 
     name_of = {c.key: _strip_prefix(c.key) for c in v7.concepts}   # vok:Rekkverk -> Rekkverk
     unresolved, fallback_used, dropped = [], 0, set()

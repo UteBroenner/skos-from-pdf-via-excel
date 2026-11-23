@@ -223,6 +223,7 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
         ws.cell(tech, hash_col).value = HASH_COLUMN
         ws.cell(hdr - 3, hash_col).value = "systemgenerert"
         ws.column_dimensions[get_column_letter(hash_col)].width = 20
+        fit_table(wb, sheet)       # the new column must be inside the Excel table, or Power Automate does not see it
     ws.cell(hdr - 2, hash_col).value = ("formel: radens innhold uten ID, datoer og personer; brukes av Power Automate "
                                         "for å finne endrede begreper – ikke rediger")
     ws.cell(hdr - 2, 1).value = "genereres: <kortnavn>-<begrepsnavn>, f.eks. N101-Rekkverk – ikke rediger"

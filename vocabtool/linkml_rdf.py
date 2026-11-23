@@ -21,7 +21,7 @@ from rdflib.namespace import RDF, XSD, SH
 
 from linkml_runtime.utils.schemaview import SchemaView
 
-from .reader import Vocabulary, read_workbook, split_multi
+from .reader import Vocabulary, read_workbook, split_multi, source_relation
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = ROOT / "schema" / "svv_vokabular.yaml"
@@ -83,7 +83,7 @@ def workbook_to_data(v: Vocabulary, sv: SchemaView | None = None) -> dict:
                 except ValueError:
                     pass
             elif slot_name == "relationship_with_source":
-                val = "-".join(val.strip().lower().split())       # "derived from source" -> derived-from-source
+                val = source_relation(val) or val                 # "basert på kilde" -> derived-from-source
             elif slot_name == "status":
                 val = val.strip().strip('"').split('"@')[0].lower()
             if val in ([], ""):
