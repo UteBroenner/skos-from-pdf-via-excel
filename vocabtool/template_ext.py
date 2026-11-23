@@ -214,12 +214,17 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
                           for i, col in enumerate(range(1, last_col + 1))]
         out[t.name] = t.ref
 
-    # formatting: top-aligned, wrapped text in every data cell
+    # formatting: top-aligned, wrapped text in every data cell; endringshash is not wrapped (its long text would
+    # make every row tall) and its column is wide
+    hash_col = next((c.column for c in ws[tech] if c.value == HASH_COLUMN), None)
     for r in range(first, last_row + 1):
         for col in range(1, last_col + 1):
             c = ws.cell(r, col)
             al = _copy(c.alignment)
-            c.alignment = Alignment(horizontal=al.horizontal, vertical="top", wrap_text=True)
+            c.alignment = Alignment(horizontal=al.horizontal, vertical="top", wrap_text=col != hash_col)
+    if hash_col:
+        dim = ws.column_dimensions[get_column_letter(hash_col)]
+        dim.width = max(dim.width or 0, HASH_WIDTH)
 
     # conditional formatting and data validation down to the last row
     def stretch(ref: str) -> str:
@@ -249,6 +254,9 @@ def hide_column(wb, technical_name: str, sheet: str = "vokabular") -> str | None
 
 
 HASH_COLUMN = "endringshash"
+HASH_WIDTH = 100
+TIER_DESCRIPTION = ("1 = fysiske objekter, romlige begreper og målbare egenskaper; 2 = prosesser og tilstander; "
+                    "3 = normative krav. Internt, importeres ikke.")
 GOVERNANCE = {"intern_identifikator", "dato_opprettet", "opprettet_av", "dato_sist_endret", "sist_endret_av", HASH_COLUMN}
 
 
@@ -298,6 +306,11 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
     ws.cell(hdr - 2, hash_col).value = ("formel: radens innhold uten ID, datoer og personer; brukes av Power Automate "
                                         "for å finne endrede begreper – ikke rediger")
     ws.cell(hdr - 2, 1).value = "genereres: <kortnavn>-<begrepsnavn>, f.eks. N101-Rekkverk – ikke rediger"
+    tier_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "tier"), None)
+    if tier_col:
+        ws.cell(hdr - 2, tier_col).value = TIER_DESCRIPTION
+        dim = ws.column_dimensions[get_column_letter(tier_col)]
+        dim.width = max(dim.width or 0, 30)
     t = next(iter(ws.tables.values()))
     end_col = openpyxl.utils.column_index_from_string(re.match(r"[A-Z]+", t.ref.split(":")[1]).group(0))
     last_row = int(re.search(r"(\d+)$", t.ref).group(1))
