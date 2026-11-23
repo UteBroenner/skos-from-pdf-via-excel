@@ -125,7 +125,13 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
 - **Column B (concept name) is the key.** Relations use it, and column A `dct:identifier` is the formula
   `<kortnavn>-<name>` (e.g. `N101-Rekkverk`), so nothing has to be generated or converted.
   Use `vocabtool rename` to rename a concept; it updates the relations and notes that point to it.
-- Column B holds only the concept name in CamelCase (letters and digits), e.g. `Rekkverk`.
+- Column B holds only the concept name in CamelCase (letters and digits), e.g. `Rekkverk`. In the template it is a
+  formula over the bokmål term in column C (Excel 365/2021, `LET`; up to 20 words), following the same rule as the tools:
+  æ → ae, ø → o, å → aa, ä → ae, ö → oe, ü → ue, ß → ss and common accents removed; words split at spaces and
+  punctuation; each word capitalised, the rest lower case; words written fully in capitals (acronyms) kept
+  (`CE-merket produkt` → `CEMerketProdukt`). A name typed into B replaces the formula, e.g. for a qualifier or
+  when two terms give the same name. `fit` writes the formula only into empty or formula cells; files saved by the
+  tools have no cached result, so the tools compute the name from the term in the same way.
   The tools build the URI from it: ConceptScheme URI (cell B1, `…/vokabular/<kortnavn>`) + `/` + name,
   e.g. `http://example.org/vegvesen/vokabular/N101/Rekkverk`. The vocabulary segment keeps equal names
   in different vocabularies apart.

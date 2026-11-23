@@ -22,7 +22,8 @@ The crochet example (`datasets/hekling/`) is described in its own README.
   - Requirement row 20, description row 21 (with merged cells), property row 23.
   - Technical names in row 24 (the header of the Excel table `begrepsliste`); data from row 25.
 - **Column B (concept name) is the key.**
-  - CamelCase from the main-language term (æ → ae, ø → o, å → aa; acronyms stay in capitals). No language suffix.
+  - CamelCase from the main-language term (æ → ae, ø → o, å → aa, ö → oe; acronyms stay in capitals). No language suffix.
+  - Generated in the template by a formula over column C (Excel 365/2021); a typed name replaces the formula.
   - URI = ConceptScheme URI (B1, `…/vokabular/<kortnavn>`) + `/` + name, e.g. `…/vokabular/N101/Rekkverk`.
   - Relations (`skos:broader`, `xkos:isPartOf`, `skos:related`) are written as concept names, comma-separated.
 - **Formula columns:**

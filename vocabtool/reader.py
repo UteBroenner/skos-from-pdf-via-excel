@@ -248,6 +248,16 @@ def read_workbook(path: str | Path) -> Vocabulary:
             rels = {f: split_multi(rec.get(f)) for f in RELATION_FIELDS}
             concepts.append(Concept(key=key.strip(), sheet=ws.title, row=r_idx, fields=rec, relations=rels))
 
+    # v8 column B may be a formula over the bokmål term; files saved by tools have no cached value: compute the name
+    if version == "v8" and any(not c.fields.get("uri") and c.fields.get("label_nb") for c in concepts):
+        from .uri import local_name
+        wbf = openpyxl.load_workbook(path)
+        for c in concepts:
+            if not c.fields.get("uri") and c.fields.get("label_nb") and "uri" in columns.get(c.sheet, {}):
+                cell = wbf[c.sheet][f"{columns[c.sheet]['uri']}{c.row}"]
+                if isinstance(cell.value, str) and cell.value.startswith("="):
+                    c.fields["uri"] = local_name(c.fields["label_nb"])
+                    c.key = c.fields["uri"]
     kortnavn = meta.get("kortnavn")
     if kortnavn and kortnavn.startswith("<"):
         kortnavn = None

@@ -14,6 +14,7 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 
 from .reader import normalise_header
+from .uri import name_formula
 
 LANG_NAMES_NB = {"en-US": "engelsk_us", "en-GB": "engelsk_gb", "de": "tysk", "es": "spansk",
                  "sv": "svensk", "da": "dansk", "fr": "fransk"}
@@ -255,6 +256,8 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
     """Write the two formula columns for every row of the Excel table:
 
     - column A (dct:identifier) = <kortnavn>-<concept name>, e.g. N101-Rekkverk
+    - column B (concept name) = CamelCase of the bokmål term (see uri.name_formula), where B is empty or already a
+      formula; a name typed into B is kept
     - endringshash = TEXTJOIN of the row content (all table columns except ID, created/modified
       date and person, and the hash itself); Power Automate compares it with the List to find changed rows.
     The endringshash column is added before a trailing 'tier' if the template has none.
@@ -288,10 +291,14 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
     end_col = openpyxl.utils.column_index_from_string(re.match(r"[A-Z]+", t.ref.split(":")[1]).group(0))
     last_row = int(re.search(r"(\d+)$", t.ref).group(1))
     content = [c for c in range(1, end_col + 1) if ws.cell(tech, c).value and ws.cell(tech, c).value not in GOVERNANCE]
+    label_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "skos:prefLabel@nb"), None)
     for r in range(first, last_row + 1):
         parts = ",".join(f"${get_column_letter(a)}{r}:${get_column_letter(b)}{r}" if a != b else f"${get_column_letter(a)}{r}"
                          for a, b in _ranges(content))
         ws.cell(r, 1).value = f'=IF(${"B"}{r}="","",$B${k_row}&"-"&$B{r})'
+        b = ws.cell(r, 2)
+        if label_col and (b.value is None or (isinstance(b.value, str) and b.value.startswith("="))):
+            b.value = name_formula(f"{get_column_letter(label_col)}{r}")      # a typed name is kept
         ws.cell(r, hash_col).value = f'=IF($B{r}="","",_xlfn.TEXTJOIN("|",FALSE,{parts}))'
     return {"rows": f"{first}-{last_row}", "hash_column": get_column_letter(hash_col),
             "hash_covers": ",".join(f"{get_column_letter(a)}:{get_column_letter(b)}" for a, b in _ranges(content))}

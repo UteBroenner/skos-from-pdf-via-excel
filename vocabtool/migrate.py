@@ -1,7 +1,8 @@
 """Migrate a v7 workbook into the v8 template.
 
 - Column A (dct:identifier) is the template formula <kortnavn>-<concept name>.
-- Keeps the v7 concept name: vok:Rekkverk -> "Rekkverk" in column B (a value, not a formula).
+- Keeps the v7 concept name: vok:Rekkverk -> "Rekkverk" in column B (a value, replacing the template's name formula;
+  empty rows keep the formula, so new concepts get their name from the term).
   The full URI is then <ConceptScheme URI>/Rekkverk, e.g. …/vokabular/N101/Rekkverk.
 - Rewrites broader / isPartOf / related from v7 prefixed URIs (vok:X) to concept names (X).
   Targets not found in the workbook are kept unchanged and reported.
@@ -138,8 +139,8 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
                 except ValueError:
                     pass
             cur = ws.cell(r, cols[f]).value
-            if isinstance(cur, str) and cur.startswith("="):
-                continue           # template formula (e.g. opprettet_av = dct:creator) wins
+            if isinstance(cur, str) and cur.startswith("=") and f != "uri":
+                continue           # template formula (e.g. opprettet_av = dct:creator) wins; the v7 name replaces the B formula
             ws.cell(r, cols[f]).value = val
             if f in DATE_FIELDS and isinstance(val, datetime):
                 ws.cell(r, cols[f]).number_format = "yyyy-mm-dd"
@@ -152,6 +153,8 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
                          if isinstance(c.value, str) and c.value.startswith("=")}
     for r in range(last_template_row + 1, n_last + 1):
         for col, f in template_formulas.items():
+            if col == cols.get("uri") and ws.cell(r, col).value not in (None, ""):
+                continue       # keep the v7 name
             ws.cell(r, col).value = re.sub(rf"(\$?[A-Z]{{1,3}}){last_template_row}\b", rf"\g<1>{r}", f)
     if n_last > last_template_row:
         for dv in ws.data_validations.dataValidation:
