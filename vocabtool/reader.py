@@ -1,4 +1,4 @@
-"""Read SKOS vocabulary workbooks (template v7 and v8) into plain records.
+"""Read SKOS vocabulary workbooks (template v7, v8 and v9) into plain records.
 
 Code lists (the `kodeverk` sheet) are deliberately ignored.
 """
@@ -14,9 +14,9 @@ import openpyxl
 # Normalised header (property) -> canonical field name.
 # Headers are normalised by removing whitespace and any "(separator=...)" suffix.
 PROPERTY_MAP = {
-    "URI": "uri",                       # v7: prefixed name (vok:X) is the row key; v8: concept name
-    "skos:Concept": "uri",              # v8 (owner's layout): column B header for the concept name
-    "dct:identifier": "identifier",     # v8: row key (kortnavn-0001); v7: usually empty
+    "URI": "uri",                       # v7: prefixed name (vok:X) is the row key; v8/v9: concept name
+    "skos:Concept": "uri",              # v8/v9 (owner's layout): column B header for the concept name
+    "dct:identifier": "identifier",     # v8/v9: row key (kortnavn-0001); v7: usually empty
     "skos:prefLabel@nb": "label_nb",
     "skos:prefLabel@en": "label_en",
     "skos:prefLabel@nn": "label_nn",
@@ -55,10 +55,10 @@ PROPERTY_MAP = {
     "tier": "tier",
     "endringshash": "change_hash",      # system column, formula over the row content
 }
-# dct:contributor appears twice in v8 (created by / modified by), once in v7.
+# dct:contributor appears twice in v8/v9 (created by / modified by), once in v7.
 CONTRIBUTOR_FIELDS = ["created_by", "modified_by"]
 
-SCHEME_BASE = "http://example.org/vegvesen/vokabular/"   # template v8 cell B1: CONCAT(SCHEME_BASE, kortnavn)
+SCHEME_BASE = "http://example.org/vegvesen/vokabular/"   # template v8/v9 cell B1: CONCAT(SCHEME_BASE, kortnavn)
 RELATION_FIELDS = {"broader": "skos:broader", "is_part_of": "xkos:isPartOf", "related": "skos:related"}
 EXCLUDED_SHEETS = {"kodeverk", "lister"}
 
@@ -94,6 +94,20 @@ def label_fields(fields) -> dict[str, str]:
 
 # skosno:relationshipWithSource: SKOS-AP-NO code for every way the template allows to write it
 # (English code with hyphens or spaces, bokmål, nynorsk)
+# template versions with the current column layout (v9 = v8 + value lists on the sheet 'lister')
+CURRENT = ("v8", "v9")
+
+# dct:audience: audience-type code (data.norge.no) for the bokmål list value or the code
+AUDIENCE_VALUES = {"allmennheten": "public", "public": "public", "spesialist": "specialist", "specialist": "specialist"}
+
+
+def audience(value):
+    """'Allmennheten', 'spesialist', 'public' -> audience-type code; None if not recognised."""
+    if not value:
+        return None
+    return AUDIENCE_VALUES.get(" ".join(str(value).strip().lower().split()))
+
+
 SOURCE_RELATION_VALUES = {
     "self-composed": "self-composed", "egendefinert": "self-composed", "eigendefinert": "self-composed",
     "derived-from-source": "derived-from-source", "basert på kilde": "derived-from-source", "basert på kjelde": "derived-from-source",
@@ -131,7 +145,7 @@ def as_text(value):
 
 @dataclass
 class Concept:
-    key: str                 # ID used for relations (v8: dct:identifier, v7: prefixed URI)
+    key: str                 # ID used for relations (v8/v9: dct:identifier, v7: prefixed URI)
     sheet: str
     row: int
     fields: dict = field(default_factory=dict)
@@ -152,7 +166,7 @@ class Concept:
 @dataclass
 class Vocabulary:
     path: Path
-    version: str             # "v8" or "v7"
+    version: str             # "v9", "v8" (same columns, no value lists) or "v7"
     kortnavn: str | None
     title: str | None
     scheme_uri: str | None
@@ -160,6 +174,11 @@ class Vocabulary:
     columns: dict            # sheet -> {canonical field: column letter}
     unmapped_headers: dict   # sheet -> [header]
     main_lang: str = "nb"    # scheme row "hovedspråk"; default nb (Vegvesen convention)
+
+    @property
+    def current(self) -> bool:
+        """Current column layout (v8 or v9)."""
+        return self.version in CURRENT
 
     @property
     def label_field(self) -> str:
@@ -210,12 +229,12 @@ def read_workbook(path: str | Path) -> Vocabulary:
         hdr_row, headers = _find_header_row(ws)
         if hdr_row is None:
             continue
-        # v8 has a second header row with technical names (intern_identifikator, ...)
+        # v8/v9 have a second header row with technical names (intern_identifikator, ...)
         next_row = [normalise_header(c.value) for c in ws[hdr_row + 1]]
-        # v8 has the row of technical names (intern_identifikator) under the properties; v7 has not, whatever the
+        # v8/v9 have the row of technical names (intern_identifikator) under the properties; v7 has not, whatever the
         # column order (v7 files exist with dct:identifier in A and URI in B, or the other way round)
         is_v8 = "intern_identifikator" in next_row
-        version = version or ("v8" if is_v8 else "v7")
+        version = version or ((("v9" if "lister" in wb.sheetnames else "v8")) if is_v8 else "v7")
         first_data = hdr_row + 2 if "intern_identifikator" in next_row else hdr_row + 1
         if not meta:
             meta = _scheme_meta(ws)
@@ -237,7 +256,7 @@ def read_workbook(path: str | Path) -> Vocabulary:
         columns[ws.title] = {k: openpyxl.utils.get_column_letter(i + 1) for k, i in colmap.items()}
         unmapped[ws.title] = skipped
 
-        key_field = "uri"   # v7: vok:Name in column A; v8: concept name in column B (column A is a formula)
+        key_field = "uri"   # v7: vok:Name in column A; v8/v9: concept name in column B (column A is a formula)
         for r_idx, row in enumerate(ws.iter_rows(min_row=first_data, values_only=True), start=first_data):
             rec = {k: as_text(row[i]) if i < len(row) else None for k, i in colmap.items()}
             # a row counts as a concept if it has an ID, a name, or any label / definition (any language)
@@ -248,8 +267,8 @@ def read_workbook(path: str | Path) -> Vocabulary:
             rels = {f: split_multi(rec.get(f)) for f in RELATION_FIELDS}
             concepts.append(Concept(key=key.strip(), sheet=ws.title, row=r_idx, fields=rec, relations=rels))
 
-    # v8 column B may be a formula over the bokmål term; files saved by tools have no cached value: compute the name
-    if version == "v8" and any(not c.fields.get("uri") and c.fields.get("label_nb") for c in concepts):
+    # v8/v9 column B may be a formula over the bokmål term; files saved by tools have no cached value: compute the name
+    if version in CURRENT and any(not c.fields.get("uri") and c.fields.get("label_nb") for c in concepts):
         from .uri import local_name
         wbf = openpyxl.load_workbook(path)
         for c in concepts:
@@ -261,15 +280,15 @@ def read_workbook(path: str | Path) -> Vocabulary:
     kortnavn = meta.get("kortnavn")
     if kortnavn and kortnavn.startswith("<"):
         kortnavn = None
-    if not kortnavn and version != "v8" and meta.get("scheme_uri") and not str(meta["scheme_uri"]).startswith("="):
+    if not kortnavn and version not in CURRENT and meta.get("scheme_uri") and not str(meta["scheme_uri"]).startswith("="):
         kortnavn = str(meta["scheme_uri"]).rstrip("/").rsplit("/", 1)[-1]
-    # v8: column A is the formula <kortnavn>-<name>; files saved by tools have no cached value
-    if version == "v8" and kortnavn:
+    # v8/v9: column A is the formula <kortnavn>-<name>; files saved by tools have no cached value
+    if version in CURRENT and kortnavn:
         for c in concepts:
             if not c.fields.get("identifier") and c.fields.get("uri"):
                 c.fields["identifier"] = f"{kortnavn}-{c.fields['uri'].strip()}"
     scheme_uri = as_text(meta.get("scheme_uri"))
-    # v8 B1 is a formula; a missing or stale cached value (e.g. ".../<kortnavn>") is rebuilt from kortnavn
+    # v8/v9 B1 is a formula; a missing or stale cached value (e.g. ".../<kortnavn>") is rebuilt from kortnavn
     if kortnavn and (not scheme_uri or scheme_uri.startswith("=") or not scheme_uri.rstrip("/").endswith("/" + kortnavn)):
         scheme_uri = SCHEME_BASE + kortnavn
     return Vocabulary(path=path, version=version or "unknown", kortnavn=kortnavn,

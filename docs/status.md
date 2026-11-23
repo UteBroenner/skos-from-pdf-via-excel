@@ -9,15 +9,21 @@ The crochet example (`datasets/hekling/`) is described in its own README.
 - Contents:
   - `vocabtool/`: Python tools
   - `schema/`: LinkML schema, generated artefacts and cross-row SHACL
-  - `templates/`: empty templates for v8 (master), v8 with language extension, and v7
+  - `templates/`: empty templates for v9 (master), v9 with language extension, and v7
   - `datasets/hekling/`: example vocabulary
 - **Not in the repository:** Statens vegvesen vocabularies (N101, V440, V441, BRUTUS), their ontologies, the handbook
   texts and all outputs. They are kept in
   `samples/` and `out/`, which are ignored by git, and were removed from the history. Upload them to a session when they are needed.
 
-## Template v8: decisions in force
+## Template v9: decisions in force
 
-- **Master:** `templates/SKOS-Excel-mal-v8-for-import.xlsx` (the owner's layout).
+v9 replaces v8 (23 November 2026). The columns are the same; the tools read v8 and v9 files.
+
+- **Master:** `templates/SKOS-Excel-mal-v9-for-import.xlsx`, built from the owner's SharePoint v9 file.
+  - Changes against v8: value lists on the hidden sheet `lister` with dropdowns in M (målgruppe), O (forhold til kilde)
+    and AI (status); no `kodeverk` sheet (dropped for now); B21 says B is generated from the term.
+  - Kept from v8 (missing in the owner's file): formulas in A and B, `endringshash` (AN), AD = B16; `tier` in AO.
+  - `dct:identifier` stays short (`N101-Rekkverk`); the URI is built in the RDF only. No numbered identifiers.
   - Scheme rows: B14 `kortnavn`, B15 title, B16 `dct:creator`, B17 publisher, B18 issued.
   - Requirement row 20, description row 21 (with merged cells), property row 23.
   - Technical names in row 24 (the header of the Excel table `begrepsliste`); data from row 25.
@@ -29,8 +35,14 @@ The crochet example (`datasets/hekling/`) is described in its own README.
 - **Formula columns:**
   - column A `dct:identifier` = `<kortnavn>-<name>`
   - `endringshash` = `TEXTJOIN` of the row content without ID, dates and persons
-  - AD `opprettet_av` = B16 (hidden)
+  - AD `opprettet_av` = B16 `dct:creator` for rows with a name (hidden)
 - **`tier`** is the last column, outside the table. It is internal and not imported.
+- **Value lists:** status, målgruppe and forhold til kilde, defined in `vocabtool/lists.py` and matching the schema
+  enums (`ConceptStatus`, `Audience`, `RelationshipWithSource`). The tools rewrite the lists and dropdowns on every
+  save (openpyxl drops Excel's newer dropdown format). A value outside the list is a warning in Excel. Recognised values are written as the list label (`direct-from-source` → `sitat fra kilde`, `basert på kjelde` → `basert på kilde`). The checker reports
+  unknown målgruppe values (`VT-AUDIENCE`); the RDF uses the audience-type URIs.
+- **Colours:** rows 20 and 23 follow the SKOS-AP-NO level; row 24 is orange also where Statens vegvesen makes a field
+  obligatory (M–P, AG–AI). The tools colour only the columns they add.
 - **The table covers all rows and columns in use.** Power Automate reads only the table.
 - **`kortnavn`:** letters, digits and hyphens, any length (e.g. `N101`, `crochet-us`).
 - **Language extension** (optional template): a `hovedspråk` row (main language; default nb) and label, abbreviation,
@@ -85,7 +97,7 @@ Run as `python -m vocabtool <command>`. Details in the README.
 | Command | Purpose |
 | --- | --- |
 | `check` | VT rules, report (`.md`, `.json`) and interactive graph page (with collections) |
-| `migrate` | v7 → v8; keeps the v7 names, relations become names. Only for real v7 files: workbooks are kept in v8 format, and `migrate` is not extended for mixed layouts |
+| `migrate` | v7 → v9; keeps the v7 names, relations become names. Only for real v7 files: workbooks are kept in the current format (v8 or v9), and `migrate` is not extended for mixed layouts |
 | `uri` | fills missing concept names |
 | `rename` | renames a concept and every relation and note that refers to it; `--collection` renames a collection |
 | `fit` | stretches the table, formatting and validation; writes the formulas |
@@ -128,7 +140,7 @@ and the links to the graph pages are in `out/brutus-status.md` (local, not in gi
 - **Decisions:** collections in the scope-note sentence; no prefixes in the Excel table (`kode:` kept for now); merging
   vocabularies by `exactMatch` plus copied definition, `closeMatch` for near matches; one row per concept, generic names
   qualified; both broader concepts kept where the OWL hierarchy differs; code entries and code lists may have derived
-  definitions; modelling classes stay with the expert; workbooks stay in v8 format. Details under *Template v8: decisions in force*.
+  definitions; modelling classes stay with the expert; workbooks stay in the current format (v9). Details under *Template v9: decisions in force*.
 - **Tools** (pull request #1, merged): `owl-import`, `set-fields`, collections in `check`, `rdf`, `rename` and the graph page,
   `VT-PREFIX`, `VT-PREFIX-KODE`, `VT-REQ-DEF-CODE`, `VT-DEF-DERIVED`; fixes in `fit` and `migrate`.
 - **Vocabularies** (local): BRUTUS migrated, merged and cleaned up; the two V440 ontologies imported into V440; V441 built
@@ -137,6 +149,10 @@ and the links to the graph pages are in `out/brutus-status.md` (local, not in gi
   V440 and V441 from the sources in the right order.
 
 ## Instructions (not yet in the repository)
+
+Local instruction files (in `out/method/`, not in git): `claude-prosjekt-instruksjoner-v9.md` and `SKOS-felt-instruksjer-v9.md`
+(v9 value lists; P = `skos:editorialNote`, Q = `skos:scopeNote@nb` as in the master). The extraction part of the methodology
+document is still to be updated.
 
 The v7 instruction files were reviewed against v8: project instructions, `SKOS-felt-instruksjer-v7` and
 `RDF-Turtle-felt-konverteringsregler-v7`. The prompt template v4.7 is missing.

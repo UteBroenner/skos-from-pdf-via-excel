@@ -1,6 +1,6 @@
 """Readable concept URIs: <ConceptScheme URI>/<LocalName>.
 
-Column B of template v8 holds only the local name (e.g. "Rekkverk"); the full URI is
+Column B of template v9 holds only the local name (e.g. "Rekkverk"); the full URI is
 the ConceptScheme URI (cell B1) + "/" + the name, put together by the tools.
 
 The local name is the main-language prefLabel in CamelCase, transliterated to

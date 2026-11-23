@@ -2,7 +2,7 @@
 
     prepare  TXT -> chapters or sections (one file each) + one prompt per chunk + manifest.json
     (run)    an agent per chapter reads its prompt and writes <chapter id>.json (records, see RECORD_FIELDS)
-    collect  records -> schema check, quote check -> new rows in a v8 workbook + report
+    collect  records -> schema check, quote check -> new rows in a v9 workbook + report
 
 The content rules come from a field-instruction file given at prepare time, so no project-specific
 rules live in this module. The agents only do judgement work; names, formulas, fixed fields,
@@ -20,6 +20,7 @@ import openpyxl
 from .reader import read_workbook, normalise_header
 from .template_ext import fit_table, apply_formulas
 from .uri import local_name
+from .lists import save_workbook
 
 # ---------------------------------------------------------------- split
 # Numbered headings, with or without a space after the number: "5Tiltak", "5 Tiltak", "2.5.3Hovedinspeksjon".
@@ -240,7 +241,7 @@ def collect(manifest_path, workbook, out, source, contact=None, kortnavn=None, t
     - A term already in the workbook is not added again. If that concept has no definition and the record has
       one, the definition is written to <out>.suggestions.json (set-fields format) for review instead.
     - A term that appears twice in the run is added once; the repeat is reported.
-    - link_workbooks: other v8 vocabularies. A new term that matches exactly one concept there gets
+    - link_workbooks: other v9 vocabularies. A new term that matches exactly one concept there gets
       skos:exactMatch to it and, if that concept has a definition from a source (not derived), its definition is
       copied with that concept as dct:source (merge rule). Relation targets found only there are reported.
     """
@@ -375,7 +376,7 @@ def collect(manifest_path, workbook, out, source, contact=None, kortnavn=None, t
         report["accepted"].append({"chapter": ch["id"], "term": term, "concept": name, "section": r["section"]})
     fit_table(wb)
     apply_formulas(wb)
-    wb.save(out)
+    save_workbook(wb, out)
     if report["suggestions"]:
         Path(out).with_suffix(".suggestions.json").write_text(json.dumps(report["suggestions"], ensure_ascii=False, indent=1), encoding="utf-8")
     return report

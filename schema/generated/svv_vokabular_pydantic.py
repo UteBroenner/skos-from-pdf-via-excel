@@ -69,20 +69,22 @@ class LinkMLMeta(RootModel):
 linkml_meta = LinkMLMeta({'default_prefix': 'svv',
      'default_range': 'string',
      'description': 'Model of one vocabulary (skos:ConceptScheme) and its concepts '
-                    'as captured in SKOS-Excel-mal-v8. Code lists (kodeverk) are '
-                    'not modelled here. Each slot is annotated with its v8 Excel '
-                    'column (excel_column) and the technical column name in row 22 '
-                    '(excel_name), which is also intended as the SharePoint List '
-                    'internal column name. Language tags (in_language) and enum '
-                    "meanings are applied by the project's RDF writer "
-                    '(vocabtool/linkml_rdf.py); the standard LinkML RDF dumper '
-                    'ignores them.',
+                    'as captured in SKOS-Excel-mal-v9 (same columns as v8). Code '
+                    'lists (kodeverk) are not modelled here. Each slot is '
+                    'annotated with its v9 Excel column (excel_column) and the '
+                    'technical column name in row 22 (excel_name), which is also '
+                    'intended as the SharePoint List internal column name. '
+                    'Language tags (in_language) and enum meanings are applied by '
+                    "the project's RDF writer (vocabtool/linkml_rdf.py); the "
+                    'standard LinkML RDF dumper ignores them.',
      'id': 'http://example.org/vegvesen/vokabular/def/schema',
      'imports': ['linkml:types'],
      'license': 'CC-BY-4.0',
      'name': 'svv_vokabular',
      'prefixes': {'adms': {'prefix_prefix': 'adms',
                            'prefix_reference': 'http://www.w3.org/ns/adms#'},
+                  'audience_type': {'prefix_prefix': 'audience_type',
+                                    'prefix_reference': 'https://data.norge.no/vocabulary/audience-type#'},
                   'concept_status': {'prefix_prefix': 'concept_status',
                                      'prefix_reference': 'http://publications.europa.eu/resource/authority/concept-status/'},
                   'dcat': {'prefix_prefix': 'dcat',
@@ -108,7 +110,15 @@ linkml_meta = LinkMLMeta({'default_prefix': 'svv',
                   'xkos': {'prefix_prefix': 'xkos',
                            'prefix_reference': 'http://rdf-vocabulary.ddialliance.org/xkos#'}},
      'source_file': 'schema/svv_vokabular.yaml',
-     'title': 'SKOS-vokabular (Excel-mal v8)'} )
+     'title': 'SKOS-vokabular (Excel-mal v9)'} )
+
+class Audience(str, Enum):
+    """
+    Values of dct:audience (SKOS-AP-NO audience-type); the template's malgruppeliste has the bokmål labels allmennheten (public) and spesialist (specialist).
+    """
+    public = "public"
+    specialist = "specialist"
+
 
 class RelationshipWithSource(str, Enum):
     """
@@ -278,7 +288,7 @@ class Concept(ConfiguredBaseModel):
          'domain_of': ['Concept'],
          'in_language': 'nn',
          'slot_uri': 'skos:altLabel'} })
-    audience: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'M'},
+    audience: Optional[Audience] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'M'},
                          'excel_name': {'tag': 'excel_name', 'value': 'målgruppe'}},
          'domain_of': ['Concept'],
          'slot_uri': 'dct:audience'} })
@@ -439,7 +449,7 @@ class Concept(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept', 'Collection'],
          'in_language': 'en-US',
          'slot_uri': 'skos:prefLabel'} })
@@ -447,7 +457,7 @@ class Concept(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_gb'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept', 'Collection'],
          'in_language': 'en-GB',
          'slot_uri': 'skos:prefLabel'} })
@@ -455,7 +465,7 @@ class Concept(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_tysk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept', 'Collection'],
          'in_language': 'de',
          'slot_uri': 'skos:prefLabel'} })
@@ -463,7 +473,7 @@ class Concept(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_spansk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept', 'Collection'],
          'in_language': 'es',
          'slot_uri': 'skos:prefLabel'} })
@@ -472,7 +482,7 @@ class Concept(ConfiguredBaseModel):
                                         'value': 'tillat_term_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
                          'separator': {'tag': 'separator', 'value': ','},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:altLabel'} })
@@ -481,7 +491,7 @@ class Concept(ConfiguredBaseModel):
                                         'value': 'tillat_term_engelsk_gb'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
                          'separator': {'tag': 'separator', 'value': ','},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept'],
          'in_language': 'en-GB',
          'slot_uri': 'skos:altLabel'} })
@@ -490,7 +500,7 @@ class Concept(ConfiguredBaseModel):
                                         'value': 'tillat_term_tysk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
                          'separator': {'tag': 'separator', 'value': ','},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept'],
          'in_language': 'de',
          'slot_uri': 'skos:altLabel'} })
@@ -499,7 +509,7 @@ class Concept(ConfiguredBaseModel):
                                         'value': 'tillat_term_spansk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
                          'separator': {'tag': 'separator', 'value': ','},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept'],
          'in_language': 'es',
          'slot_uri': 'skos:altLabel'} })
@@ -507,7 +517,7 @@ class Concept(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'definisjon_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:definition'} })
@@ -515,7 +525,7 @@ class Concept(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'merknad_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept'],
          'in_language': 'en-US',
          'slot_uri': 'skos:scopeNote'} })
@@ -613,7 +623,7 @@ class Collection(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_us'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept', 'Collection'],
          'in_language': 'en-US',
          'slot_uri': 'skos:prefLabel'} })
@@ -621,7 +631,7 @@ class Collection(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_gb'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept', 'Collection'],
          'in_language': 'en-GB',
          'slot_uri': 'skos:prefLabel'} })
@@ -629,7 +639,7 @@ class Collection(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_tysk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept', 'Collection'],
          'in_language': 'de',
          'slot_uri': 'skos:prefLabel'} })
@@ -637,7 +647,7 @@ class Collection(ConfiguredBaseModel):
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_spansk'},
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'},
-                         'template': {'tag': 'template', 'value': 'v8-lang-ext'}},
+                         'template': {'tag': 'template', 'value': 'v9-lang-ext'}},
          'domain_of': ['Concept', 'Collection'],
          'in_language': 'es',
          'slot_uri': 'skos:prefLabel'} })

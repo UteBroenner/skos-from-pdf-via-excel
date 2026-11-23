@@ -40,6 +40,15 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
         
       Concept : audience
         
+          
+    
+        
+        
+        Concept --> "0..1" Audience : audience
+        click Audience href "../Audience/"
+    
+
+        
       Concept : broader
         
           
@@ -200,7 +209,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [alt_label_nb](alt_label_nb.md) | * <br/> [String](String.md) |  | direct |
 | [alt_label_en](alt_label_en.md) | * <br/> [String](String.md) |  | direct |
 | [alt_label_nn](alt_label_nn.md) | * <br/> [String](String.md) |  | direct |
-| [audience](audience.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [audience](audience.md) | 0..1 <br/> [Audience](Audience.md) |  | direct |
 | [source](source.md) | 0..1 <br/> [uri](uri.md) |  | direct |
 | [relationship_with_source](relationship_with_source.md) | 0..1 <br/> [RelationshipWithSource](RelationshipWithSource.md) | How the definition relates to its source (SKOS-AP-NO) | direct |
 | [scope_note](scope_note.md) | 0..1 <br/> [String](String.md) |  | direct |
@@ -647,7 +656,7 @@ attributes:
     owner: Concept
     domain_of:
     - Concept
-    range: string
+    range: Audience
   source:
     name: source
     annotations:
@@ -1191,7 +1200,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: en-US
     rank: 1000
@@ -1215,7 +1224,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: en-GB
     rank: 1000
@@ -1239,7 +1248,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: de
     rank: 1000
@@ -1263,7 +1272,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: es
     rank: 1000
@@ -1287,7 +1296,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
       separator:
         tag: separator
         value: ','
@@ -1314,7 +1323,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
       separator:
         tag: separator
         value: ','
@@ -1341,7 +1350,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
       separator:
         tag: separator
         value: ','
@@ -1368,7 +1377,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
       separator:
         tag: separator
         value: ','
@@ -1395,7 +1404,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     in_language: en-US
     rank: 1000
@@ -1418,7 +1427,7 @@ attributes:
         value: valgfri
       template:
         tag: template
-        value: v8-lang-ext
+        value: v9-lang-ext
     description: Usage note in US English, e.g. a warning that a term means another
       concept elsewhere.
     from_schema: http://example.org/vegvesen/vokabular/def/schema

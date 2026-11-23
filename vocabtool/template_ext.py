@@ -1,6 +1,6 @@
-"""Add language columns (prefLabel / altLabel) to the v8 template.
+"""Add language columns (prefLabel / altLabel) to the template (v9; v8 has the same columns).
 
-New columns are appended after the last used column, so existing v8 column
+New columns are appended after the last used column, so existing column
 letters (and SharePoint column mappings) stay unchanged. The change-hash
 formula is extended to include the new columns.
 """
@@ -15,6 +15,7 @@ from openpyxl.utils import get_column_letter
 
 from .reader import normalise_header
 from .uri import name_formula
+from .lists import save_workbook
 
 LANG_NAMES_NB = {"en-US": "engelsk_us", "en-GB": "engelsk_gb", "de": "tysk", "es": "spansk",
                  "sv": "svensk", "da": "dansk", "fr": "fransk"}
@@ -103,12 +104,14 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
         for c in ws[r]:
             if isinstance(c.value, str) and "TEXTJOIN" in c.value and "$AM" in c.value and f",vokabular!${first_new}" not in c.value:
                 c.value = re.sub(r"(vokabular!\$[AC](\d+):\$AM\d+)", rf"\1,vokabular!${first_new}\2:${last}\2", c.value)
-    if hash_col:                 # current templates: the table, the hash formula and the colours are rebuilt
+    new_cols = list(range(openpyxl.utils.column_index_from_string(first_new), col))
+    if hash_col:                 # current templates: the table and the formulas are rebuilt
         fit_table(wb)
         apply_formulas(wb)
-    requirement_colours(wb)
+        new_cols.append(next(c.column for c in ws[tech] if c.value == HASH_COLUMN))
+    requirement_colours(wb, columns=new_cols)
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
-    wb.save(dst)
+    save_workbook(wb, dst)
     return added
 
 
@@ -121,8 +124,13 @@ def _colour(cell) -> tuple:
             (fc.theme if fc.type == "theme" else fc.rgb) if fc else None, round(fc.tint or 0, 3) if fc else 0)
 
 
-def requirement_colours(wb, sheet: str = "vokabular") -> list[str]:
-    """Colour the requirement row, the property row and the technical-name row by the requirement level.
+def requirement_colours(wb, sheet: str = "vokabular", columns=None) -> list[str]:
+    """Colour the requirement row, the property row and the technical-name row of the given columns
+    (column numbers) by the requirement level.
+
+    Only columns the tools add (language columns, endringshash) or name explicitly are coloured: the template's own
+    columns keep their colours, which may deliberately differ from the level in the requirement row (e.g. columns
+    that are obligatory in Statens vegvesen but optional in SKOS-AP-NO are orange in the technical-name row).
 
     The level is the text in the requirement row (obligatorisk, anbefalt, valgfri, internt, systemgenerert). For each
     level the colouring the template uses most often for that level is the model. Only fill and font colour (and bold)
@@ -146,6 +154,8 @@ def requirement_colours(wb, sheet: str = "vokabular") -> list[str]:
         model["systemgenerert"] = model["internt"]
     changed = []
     for c, lv in level.items():
+        if columns is not None and c not in columns:
+            continue
         m = model.get(lv)
         if not m or m == c:
             continue
@@ -258,6 +268,7 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
     - column A (dct:identifier) = <kortnavn>-<concept name>, e.g. N101-Rekkverk
     - column B (concept name) = CamelCase of the bokmål term (see uri.name_formula), where B is empty or already a
       formula; a name typed into B is kept
+    - opprettet_av = dct:creator of the scheme (cell B of the row 'dct:creator'), for rows with a concept name
     - endringshash = TEXTJOIN of the row content (all table columns except ID, created/modified
       date and person, and the hash itself); Power Automate compares it with the List to find changed rows.
     The endringshash column is added before a trailing 'tier' if the template has none.
@@ -292,6 +303,8 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
     last_row = int(re.search(r"(\d+)$", t.ref).group(1))
     content = [c for c in range(1, end_col + 1) if ws.cell(tech, c).value and ws.cell(tech, c).value not in GOVERNANCE]
     label_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "skos:prefLabel@nb"), None)
+    creator_col = next((c.column for c in ws[tech] if c.value == "opprettet_av"), None)
+    creator_row = next((r for r in range(1, hdr) if normalise_header(ws.cell(r, 1).value) == "dct:creator"), None)
     for r in range(first, last_row + 1):
         parts = ",".join(f"${get_column_letter(a)}{r}:${get_column_letter(b)}{r}" if a != b else f"${get_column_letter(a)}{r}"
                          for a, b in _ranges(content))
@@ -299,6 +312,8 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
         b = ws.cell(r, 2)
         if label_col and (b.value is None or (isinstance(b.value, str) and b.value.startswith("="))):
             b.value = name_formula(f"{get_column_letter(label_col)}{r}")      # a typed name is kept
+        if creator_col and creator_row:
+            ws.cell(r, creator_col).value = f'=IF($B{r}="","",$B${creator_row})'
         ws.cell(r, hash_col).value = f'=IF($B{r}="","",_xlfn.TEXTJOIN("|",FALSE,{parts}))'
     return {"rows": f"{first}-{last_row}", "hash_column": get_column_letter(hash_col),
             "hash_covers": ",".join(f"{get_column_letter(a)}:{get_column_letter(b)}" for a, b in _ranges(content))}

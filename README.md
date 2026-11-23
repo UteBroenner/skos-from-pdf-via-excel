@@ -16,9 +16,9 @@ Current state, decisions and next steps: [`docs/status.md`](docs/status.md).
 
 | Folder | Content | Status |
 | --- | --- | --- |
-| `vocabtool/` | Python tools: check, v7→v8 migration, graph, LinkML/RDF conversion, language columns, clash notes | in repository |
-| `schema/` | LinkML schema for template v8, generated artefacts (JSON Schema, Pydantic, SHACL, OWL, docs), cross-row SHACL rules | in repository |
-| `templates/` | Empty Excel templates: v8 (master), v8 with language extension, and v7 (previous version), see `templates/README.md` | in repository |
+| `vocabtool/` | Python tools: check, v7→v9 migration, graph, LinkML/RDF conversion, language columns, clash notes | in repository |
+| `schema/` | LinkML schema for template v9, generated artefacts (JSON Schema, Pydantic, SHACL, OWL, docs), cross-row SHACL rules | in repository |
+| `templates/` | Empty Excel templates: v9 (master), v9 with language extension, and v7 (previous version), see `templates/README.md` | in repository |
 | `datasets/hekling/` | Example vocabulary: 77 crochet stitches and stitch patterns, main language en-US, with check reports, graph and RDF in `out/` | in repository |
 | `instructions/` | Extraction instructions (project instructions, prompt template, SKOS field instructions, RDF conversion rules) | **not yet added** |
 | `samples/`, `out/` | Your own (e.g. Vegvesen) workbooks and their outputs | local only, ignored by git |
@@ -46,11 +46,11 @@ python -m vocabtool check path/to/workbook.xlsx --out out
 
 The exit code is 1 if there are errors, so the command can be used as a gate.
 
-Migrate a v7 workbook into the v8 template. This keeps the v7 concept name in column B (`vok:Rekkverk` → `Rekkverk`)
+Migrate a v7 workbook into the v9 template. This keeps the v7 concept name in column B (`vok:Rekkverk` → `Rekkverk`)
 and rewrites relations from `vok:X` to names (`X`):
 
 ```bash
-python -m vocabtool migrate samples/N101-v7.xlsx --template templates/SKOS-Excel-mal-v8-for-import.xlsx --out out/N101-v8.xlsx
+python -m vocabtool migrate samples/N101-v7.xlsx --template templates/SKOS-Excel-mal-v9-for-import.xlsx --out out/N101-v9.xlsx
 ```
 
 Relation targets that are not in the workbook are kept as names and listed. The checker reports them as
@@ -83,14 +83,20 @@ Existing names are kept, and `--overwrite` regenerates all of them. If two conce
 the second gets a number (`Name2`) and the command lists it, so you can choose a better name.
 
 Stretch the Excel table `begrepsliste`, the formatting (wrapped, top-aligned), conditional formatting and
-data validation to all rows and columns in use, and write the formulas for column A and `endringshash`.
+data validation to all rows and columns in use, and write the formulas (A, B, `opprettet_av`, `endringshash`), the
+value lists and the dropdowns.
 Power Automate reads only what is inside the table.
 The `tier` column (always last) stays outside the table.
 `migrate` and `uri` do this automatically:
 
-`fit` also colours the requirement row, the property row and the technical-name row by the requirement level in the
-requirement row (obligatorisk, anbefalt, valgfri, internt; systemgenerert like internt). It uses the colours the template
-itself uses most for each level, so the theme (branding) colours are kept; only fill and font colour change.
+`fit` does not change colours. When the tools add columns (language columns, `endringshash`), they colour the
+requirement row, the property row and the technical-name row of those columns by the requirement level, using the
+colours the template uses most for that level (theme colours, so the branding is kept). The template's own columns keep
+their colours, which deliberately differ in places (see `templates/README.md`).
+
+Value lists: every tool that saves a workbook writes the hidden sheet `lister`, the named ranges and the dropdowns for
+målgruppe (M), forhold til kilde (O) and status (AI) again, from `vocabtool/lists.py`. openpyxl, which the tools use,
+drops dropdowns stored in Excel's newer format; the tools write them in the classic format.
 
 ```bash
 python -m vocabtool fit path/to/workbook.xlsx
@@ -99,14 +105,14 @@ python -m vocabtool fit path/to/workbook.xlsx
 Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `schema/README.md`):
 
 ```bash
-.venv/bin/python -m vocabtool rdf out/N101-v8.xlsx --out out/rdf
+.venv/bin/python -m vocabtool rdf out/N101-v9.xlsx --out out/rdf
 ```
 
 Add language columns to the template. They are inserted in front of `endringshash`, which stays the last column of the table, and `tier` stays the last column,
 outside the Excel table. It is internal and is not imported. Columns A–AM keep their letters:
 
 ```bash
-.venv/bin/python -c "from vocabtool.template_ext import extend_template as e; print(e('templates/SKOS-Excel-mal-v8-for-import.xlsx', 'templates/SKOS-Excel-mal-v8-lang-ext.xlsx', ['en-US','en-GB','de','es'], ['en-US']))"
+.venv/bin/python -c "from vocabtool.template_ext import extend_template as e; print(e('templates/SKOS-Excel-mal-v9-for-import.xlsx', 'templates/SKOS-Excel-mal-v9-lang-ext.xlsx', ['en-US','en-GB','de','es'], ['en-US'], scope_langs=['en-US']))"
 ```
 
 The extended template also has a scheme row `hovedspråk` (main language; default `nb`).
@@ -120,7 +126,7 @@ Any column headed `skos:prefLabel@<tag>`, `skos:altLabel@<tag>`, `skos:definitio
 Once a scope note names the other concept, the checker reports the clash as `VT-LABEL-NOTED` (info).
 The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, section "language extension").
 
-## Conventions assumed for v8
+## Conventions assumed for v9 (and v8, which has the same columns)
 
 - **Column B (concept name) is the key.** Relations use it, and column A `dct:identifier` is the formula
   `<kortnavn>-<name>` (e.g. `N101-Rekkverk`), so nothing has to be generated or converted.
@@ -135,15 +141,18 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
   The tools build the URI from it: ConceptScheme URI (cell B1, `…/vokabular/<kortnavn>`) + `/` + name,
   e.g. `http://example.org/vegvesen/vokabular/N101/Rekkverk`. The vocabulary segment keeps equal names
   in different vocabularies apart.
-- Layout of the master template (`templates/SKOS-Excel-mal-v8-for-import.xlsx`): scheme rows 14–18 (B14 `kortnavn`,
+- Layout of the master template (`templates/SKOS-Excel-mal-v9-for-import.xlsx`): scheme rows 14–18 (B14 `kortnavn`,
   B15 title, B16 `dct:creator`), requirement row 20, description row 21, property row 23, technical names in row 24
-  (the Excel table header), data from row 25. Column AD (`opprettet_av`) is hidden and filled by formula from B16.
+  (the Excel table header), data from row 25. Column AD (`opprettet_av`) is hidden and filled by formula from B16 for rows with a name.
   `endringshash` (formula: `TEXTJOIN` of the row content without ID, dates and persons) is the last column inside
-  the table, and `tier` is the last column, outside it. `vocabtool fit` writes both formulas for all table rows.
+  the table, and `tier` is the last column, outside it. `vocabtool fit` writes the formulas for all table rows.
+  Column A, `dct:identifier`, stays the short form `<kortnavn>-<name>`; the full URI is only built in the RDF.
+- Value lists on the hidden sheet `lister`: status (AI), målgruppe (M), forhold til kilde (O), see `templates/README.md`.
+  The template has no `kodeverk` sheet for now.
 
 ## OWL import
 
-Add the classes of OWL ontologies (Turtle) as concepts to a v8 workbook. Classes that are already concepts are merged:
+Add the classes of OWL ontologies (Turtle) as concepts to a v9 workbook. Classes that are already concepts are merged:
 
 ```bash
 python -m vocabtool owl-import V440-v8.xlsx v440-owl.ttl v440-brudata-owl.ttl --out V440-v8-owl.xlsx --contact datagovernance@vegvesen.no
@@ -152,7 +161,7 @@ python -m vocabtool owl-import V440-v8.xlsx v440-owl.ttl v440-brudata-owl.ttl --
 Start a new vocabulary from the empty template, and copy definitions from another vocabulary where a label matches:
 
 ```bash
-python -m vocabtool owl-import templates/SKOS-Excel-mal-v8-for-import.xlsx v441-owl.ttl --out V441-v8.xlsx --kortnavn V441 --title "Hb V441" --link V440-v8-owl.xlsx
+python -m vocabtool owl-import templates/SKOS-Excel-mal-v9-for-import.xlsx v441-owl.ttl --out V441.xlsx --kortnavn V441 --title "Hb V441" --link V440-v8-owl.xlsx
 ```
 
 - **Merge:** a class whose Norwegian label (or an alt label) is already in the workbook is merged into that concept, when only one class
@@ -207,7 +216,7 @@ cue words, uncertainty). In Claude Code the coordinating session starts one suba
 have a result are skipped, so a run can stop (e.g. at a usage limit) and continue later.
 
 ```bash
-python -m vocabtool extract collect work/manifest.json templates/SKOS-Excel-mal-v8-for-import.xlsx --out V441.xlsx --source https://… --contact …
+python -m vocabtool extract collect work/manifest.json templates/SKOS-Excel-mal-v9-for-import.xlsx --out V441.xlsx --source https://… --contact …
 ```
 
 `collect` checks every record against the format and rejects it if its quote is not in the chapter. A definition marked as a
@@ -218,7 +227,7 @@ regardless of case, spaces, hyphens and slashes ("ROS-analyse" = "ROS analyse").
 - **Existing terms** are not added again. If the existing concept has no definition and the record has one, it is written to
   `<out>.suggestions.json` in `set-fields` format, for review.
 - **Repeated terms** in one run are added once.
-- **`--link v8.xlsx …`:** a new term that matches exactly one concept in another vocabulary gets `skos:exactMatch` to it; if that
+- **`--link v9.xlsx …`:** a new term that matches exactly one concept in another vocabulary gets `skos:exactMatch` to it; if that
   concept has a definition from a source (not `[avledet]`), the definition is copied with that concept as source (merge rule).
   Relation targets found only in a linked vocabulary are reported and noted as `[usikker]`.
 
@@ -230,7 +239,7 @@ as paraphrase, and relations that could not be resolved.
 Write reviewed values, e.g. definitions taken from a handbook, into concepts by name:
 
 ```bash
-python -m vocabtool set-fields V441-v8.xlsx definitions-V441.json
+python -m vocabtool set-fields V441.xlsx definitions-V441.json
 ```
 
 The JSON maps concept names to fields: `{"Nivellement": {"def_nb": "…", "source": "https://…", "relationship_with_source": "derived-from-source"}}`.
@@ -278,22 +287,22 @@ so use one reviewer per file/domain at a time.
 - No prefixes in the Excel table: concept names stand alone (`Rekkverk`, not `vok:Rekkverk`), in relations,
   `dct:subject` and notes. The hidden PREFIX rows above the table stay; the machine-readable artefacts
   (LinkML schema and data, RDF Turtle) use prefixes as usual.
-- Header row = the row with `skos:prefLabel@nb`. In v8 the following row holds the technical names.
-- Code lists (`kodeverk` sheet) are not read.
+- Header row = the row with `skos:prefLabel@nb`. In v8/v9 the following row holds the technical names.
+- Code lists (`kodeverk` sheet) and the value lists (`lister` sheet) are not read as concepts.
 
 ## Rules
 
 | Rule | Severity | Check |
 | --- | --- | --- |
-| VT-ID-FORMAT | error | column A is `<kortnavn>-<concept name>` (v8) |
-| VT-ID-DUPLICATE | error | row key unique (v7; in v8 see VT-URI-DUPLICATE) |
+| VT-ID-FORMAT | error | column A is `<kortnavn>-<concept name>` (v8/v9) |
+| VT-ID-DUPLICATE | error | row key unique (v7; in v8/v9 see VT-URI-DUPLICATE) |
 | VT-KORTNAVN | error | kortnavn: letters, digits and hyphens, starting with a letter or digit (e.g. `N101`, `crochet-us`) |
 | VT-URI-MISSING / VT-URI-FORMAT / VT-URI-DUPLICATE | error | concept name in column B present, CamelCase letters and digits, unique (S03) |
 | VT-URI-LABEL | info | concept name differs from the CamelCase form of the main-language term |
 | VT-REQ-LABEL / VT-REQ-DEF | error | prefLabel and definition present in the main language (`hovedspråk`, default nb) |
 | VT-REQ-DEF-CODE | warning | code entry (has `skos:notation`) without a definition: code-table entries often have none in the source |
 | VT-DEF-DERIVED | info | definition derived from the code table (`[avledet]`), not quoted from the source; check it |
-| VT-REF-FORMAT | error | relation values are concept names (v8) |
+| VT-REF-FORMAT | error | relation values are concept names (v8/v9) |
 | VT-PREFIX | error | no `vok:` prefix in the cells of the Excel table (relations, `dct:subject`, notes); use the concept name |
 | VT-PREFIX-KODE | info | `kode:` references to code lists; kept until the handling of code lists is decided |
 | VT-REF-SELF | error | no relation to itself |
@@ -309,6 +318,7 @@ so use one reviewer per file/domain at a time.
 | VT-LABEL-CASE | warning | main-language prefLabel lowercase, except acronyms (S05) |
 | VT-LABEL-GROUPING | warning | heuristic: label lists several items ("… og …") and has ≥2 narrower concepts, so it is probably a table heading |
 | VT-SOURCE-REL | warning | `skosno:relationshipWithSource` is `self-composed`, `derived-from-source` or `direct-from-source`; spaces instead of hyphens and the template's Norwegian labels (`egendefinert`/`eigendefinert`, `basert på kilde`/`basert på kjelde`, `sitat fra kilde`/`sitat frå kjelde`) are accepted |
+| VT-AUDIENCE | warning | `dct:audience` is `allmennheten`/`public` or `spesialist`/`specialist`; the RDF uses the data.norge.no audience-type URIs |
 | VT-STATUS / VT-STATUS-LITERAL | warning | status is one of kandidat, gjeldende, utdatert, forkastet, written as a plain value |
 | VT-TIER-INVALID | warning | tier is 1, 2 or 3 |
 | VT-CONTACT | warning | contactPoint present |
@@ -336,13 +346,14 @@ shows all labels, definitions and scope notes.
 ## Layout
 
 ```
-vocabtool/reader.py          read v7/v8 workbooks into records
+vocabtool/reader.py          read v7/v8/v9 workbooks into records
 vocabtool/validate.py        rules above
-vocabtool/migrate.py         v7 -> v8
+vocabtool/migrate.py         v7 -> v9
 vocabtool/graph.py           graph data + page
 vocabtool/graph_template.html
 vocabtool/linkml_rdf.py      Excel -> LinkML data -> RDF, SHACL fixes
-vocabtool/template_ext.py    add language columns to the template
+vocabtool/template_ext.py    add language columns, formulas, table size
+vocabtool/lists.py           value lists and dropdowns (sheet lister), written on every save
 vocabtool/clash_notes.py     draft scope notes for label clashes
 vocabtool/uri.py             concept names (CamelCase) and URIs
 vocabtool/rename.py          rename a concept and its references, or a collection
@@ -351,7 +362,8 @@ vocabtool/owl_import.py      OWL classes -> concepts, merging with existing ones
 vocabtool/set_fields.py      write reviewed values into concepts by name
 vocabtool/extract.py         extraction from text: chapters, prompts, record checks, new rows
 schema/                      LinkML schema, generated artefacts, cross-row SHACL
-templates/                   empty templates: v8 (master), v8 with language extension, v7
+templates/                   empty templates: v9 (master), v9 with language extension, v7
+tests/                       tests (value lists against the schema)
 datasets/hekling/            example dataset: crochet stitches and patterns (en-US main; nb, en-GB, de, es)
 datasets/hekling/out/        its check report, graph, YAML and Turtle
 samples/                     your workbooks (not in git)

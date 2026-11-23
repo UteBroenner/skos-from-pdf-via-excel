@@ -33,7 +33,7 @@ URI: [dct:audience](http://purl.org/dc/terms/audience)
 
 | Property | Value |
 | --- | --- |
-| Range | [String](String.md) |
+| Range | [Audience](Audience.md) |
 | Domain Of | [Concept](Concept.md) |
 | Slot URI | [dct:audience](http://purl.org/dc/terms/audience) |
 
@@ -95,7 +95,7 @@ rank: 1000
 slot_uri: dct:audience
 domain_of:
 - Concept
-range: string
+range: Audience
 
 ```
 </details></div>

@@ -1,4 +1,4 @@
-"""Migrate a v7 workbook into the v8 template.
+"""Migrate a v7 workbook into the v9 template.
 
 - Column A (dct:identifier) is the template formula <kortnavn>-<concept name>.
 - Keeps the v7 concept name: vok:Rekkverk -> "Rekkverk" in column B (a value, replacing the template's name formula;
@@ -21,9 +21,10 @@ from openpyxl.utils import get_column_letter
 
 from .reader import read_workbook, normalise_header, PROPERTY_MAP, CONTRIBUTOR_FIELDS, RELATION_FIELDS
 from .template_ext import uri_as_value, fit_table, apply_formulas
+from .lists import save_workbook
 
 DATE_FIELDS = {"created", "modified", "start_date", "end_date"}
-# v7 fields without a v8 column, and where they go
+# v7 fields without a v9 column, and where they go
 FALLBACK = {"change_note": "version_notes"}
 
 
@@ -52,7 +53,7 @@ def _v7_scheme_value(path, prop: str):
     return None
 
 
-def _v8_columns(ws, hdr_row):
+def _template_columns(ws, hdr_row):
     cols, contrib = {}, 0
     for cell in ws[hdr_row]:
         h = normalise_header(cell.value)
@@ -79,7 +80,7 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
     ws = wb["vokabular"]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
     first = hdr + 2
-    cols = _v8_columns(ws, hdr)
+    cols = _template_columns(ws, hdr)
     last_template_row = max(r for r in range(first, ws.max_row + 1)
                             if any(isinstance(c.value, str) and c.value.startswith("=") for c in ws[r]))
 
@@ -168,12 +169,12 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
     fit_table(wb)              # table, formatting and validation cover all rows and columns
     apply_formulas(wb)         # column A = <kortnavn>-<name>, endringshash
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
-    wb.save(dst)
+    save_workbook(wb, dst)
     return {
         "source": str(src), "target": str(dst), "kortnavn": kortnavn,
         "concepts": len(v7.concepts), "rows": f"{first}-{n_last}",
         "unresolved_relations": unresolved,
         "change_note_moved_to_version_notes": fallback_used,
-        "fields_without_v8_column": sorted(dropped),
+        "fields_without_column": sorted(dropped),
         "name_map": name_of,
     }

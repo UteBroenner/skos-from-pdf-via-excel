@@ -1,26 +1,26 @@
 # LinkML schema and RDF route
 
-`svv_vokabular.yaml` models template v8 (vokabular sheet; code lists excluded).
+`svv_vokabular.yaml` models template v9 (vokabular sheet; code lists excluded; v8 has the same columns).
 Collections (`Collection`, `skos:member`) have no column: the converter builds them from the scope-note sentence
 "Inngår i samlingen X." (see the main README, *Collections*).
 For every slot it records:
 
 - `slot_uri`: the RDF property;
 - `in_language`: the language tag;
-- `annotations.excel_column` / `excel_name`: the v8 column letter and technical name from row 22, which is also intended as the SharePoint column name;
+- `annotations.excel_column` / `excel_name`: the v9 column letter and technical name from row 24, which is also intended as the SharePoint column name;
 - `annotations.requirement`: obligatorisk / anbefalt / valgfri.
 
 ## Pipeline
 
 ```
-v8 Excel ──reader──> LinkML data (YAML) ──linkml validate──> report
+v9 Excel ──reader──> LinkML data (YAML) ──linkml validate──> report
                           │
                           └──project RDF writer──> Turtle ──pySHACL (generated + fixed + cross-row shapes)──> report
 ```
 
 ```bash
 ./schema/generate.sh                                     # regenerate artefacts after editing the schema
-.venv/bin/python -m vocabtool rdf out/N101-v8.xlsx --out out/rdf
+.venv/bin/python -m vocabtool rdf out/N101-v9.xlsx --out out/rdf
 ```
 
 ## Generated artefacts (`generated/`)

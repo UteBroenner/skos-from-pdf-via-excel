@@ -1,4 +1,4 @@
-"""Excel (v8) -> LinkML data (YAML) -> RDF Turtle, plus SHACL validation.
+"""Excel (v8/v9) -> LinkML data (YAML) -> RDF Turtle, plus SHACL validation.
 
 The LinkML schema (schema/svv_vokabular.yaml) is the single source of truth.
 This module adds what the standard LinkML tooling (1.12) does not do:
@@ -21,7 +21,7 @@ from rdflib.namespace import RDF, XSD, SH
 
 from linkml_runtime.utils.schemaview import SchemaView
 
-from .reader import Vocabulary, read_workbook, split_multi, source_relation
+from .reader import Vocabulary, read_workbook, split_multi, source_relation, audience
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = ROOT / "schema" / "svv_vokabular.yaml"
@@ -40,7 +40,7 @@ FIELD_TO_SLOT = {
     "version_info": "version_info", "version_notes": "version_notes", "status": "status",
     "start_date": "start_date", "end_date": "end_date", "data_structure_label": "data_structure_label",
     "value_range": "value_range", "tier": "tier",
-    # language extension (v8-lang-ext)
+    # language extension (lang-ext template)
     "label_en_us": "pref_label_en_us", "label_en_gb": "pref_label_en_gb", "label_de": "pref_label_de",
     "label_es": "pref_label_es", "alt_en_us": "alt_label_en_us", "alt_en_gb": "alt_label_en_gb",
     "alt_de": "alt_label_de", "alt_es": "alt_label_es", "def_en_us": "definition_en_us", "scope_note_en_us": "scope_note_en_us",
@@ -55,10 +55,10 @@ def schemaview() -> SchemaView:
 
 # ---------------------------------------------------------------- Excel -> data
 def workbook_to_data(v: Vocabulary, sv: SchemaView | None = None) -> dict:
-    """Build a LinkML instance (dict) of ConceptScheme from a v8 workbook."""
+    """Build a LinkML instance (dict) of ConceptScheme from a v8/v9 workbook."""
     sv = sv or schemaview()
-    if v.version != "v8":
-        raise ValueError("LinkML conversion expects a v8 workbook (relations as IDs); migrate v7 first")
+    if not v.current:
+        raise ValueError("LinkML conversion expects a v8/v9 workbook (relations as names); migrate v7 first")
     from .uri import concept_uri, local_name
     scheme_uri = v.scheme_uri or f"{BASE}{v.kortnavn}"
     # column B holds the concept name; without one, fall back to the CamelCase term (the checker reports it)
@@ -84,6 +84,8 @@ def workbook_to_data(v: Vocabulary, sv: SchemaView | None = None) -> dict:
                     pass
             elif slot_name == "relationship_with_source":
                 val = source_relation(val) or val                 # "basert på kilde" -> derived-from-source
+            elif slot_name == "audience":
+                val = audience(val) or val                         # "allmennheten" -> public
             elif slot_name == "status":
                 val = val.strip().strip('"').split('"@')[0].lower()
             if val in ([], ""):
