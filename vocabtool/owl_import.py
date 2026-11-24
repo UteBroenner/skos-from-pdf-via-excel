@@ -43,10 +43,12 @@ from .lists import save_workbook
 
 
 def norm(s) -> str:
+    """Label match key: text in parentheses removed; case, spaces, hyphens, slashes and commas ignored."""
     return re.sub(r"[\s\-/,]+", " ", re.sub(r"\(.*?\)", "", str(s or ""))).strip().lower()
 
 
 def lower_first(t: str | None) -> str | None:
+    """Lower-case first letter, unless the term starts with an acronym (G/S areal, ROS-analyse)."""
     t = re.sub(r"\s+", " ", (t or "").strip())
     if not t:
         return t
@@ -56,6 +58,7 @@ def lower_first(t: str | None) -> str | None:
 
 
 def _label(g, x, langs):
+    """The first rdfs:label of x in the first of langs that has one."""
     ls = [l for l in g.objects(x, RDFS.label) if isinstance(l, Literal)]
     for lang in langs:
         hit = [str(l) for l in ls if (l.language or "") == lang]
@@ -82,6 +85,27 @@ def read_classes(path) -> tuple[str, dict]:
 
 def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=None, keep_root=False,
                kortnavn=None, title=None, derive_code_definitions=False, concept_type=None) -> dict:
+    """Add the classes of OWL ontologies to a workbook as concepts, merging with existing concepts.
+
+    The merge, link and flag rules are described in the module docstring.
+
+    Args:
+        workbook: the workbook to add to (an empty template for a new vocabulary).
+        owls: OWL files (Turtle), imported in this order.
+        out: the workbook to write.
+        link: another workbook; a new concept whose label matches exactly one concept with a definition there
+            gets exactMatch to it and its definition copied (merge rule).
+        merge_map: {class IRI: concept name} (dict or JSON file) for reviewed merges of variant labels.
+        contact: dcat:contactPoint for new concepts.
+        keep_root: also import the single top class of a file.
+        kortnavn: kortnavn for a new vocabulary.
+        title: dct:title for a new vocabulary.
+        derive_code_definitions: give new code entries a definition built from code and broader, marked [avledet].
+        concept_type: type (1, 2 or 3) for new concepts; existing concepts keep theirs.
+
+    Returns:
+        A log dict: merged, new, linked, derived, skipped, conflicts.
+    """
     v = read_workbook(workbook)
     wb = openpyxl.load_workbook(workbook)
     ws = wb["vokabular"]
@@ -133,6 +157,7 @@ def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=
             counts[norm(d["label"])] = counts.get(norm(d["label"]), 0) + 1
 
         def parent_of(d):
+            """The concept name of the first imported parent class, or None."""
             ps = [keep[p] for p in d["parents"] if p in keep]
             return ps[0] if ps else None
 
@@ -161,6 +186,7 @@ def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=
 
         # stable, readable order: depth-first from the top classes, siblings by code, then label
         def sort_key(d):
+            """Order of new rows: by code (numbers padded), then label, then IRI."""
             k = d["kode"] if d["kode"] not in (None, "-") else ""
             return (re.sub(r"\d+", lambda m: m.group(0).zfill(6), k) if k else "~", d["label"], d["iri"])
         children = {}

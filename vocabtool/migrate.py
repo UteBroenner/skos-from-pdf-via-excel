@@ -23,6 +23,7 @@ from .reader import read_workbook, normalise_header, PROPERTY_MAP, CONTRIBUTOR_F
 from .template_ext import uri_as_value, fit_table, apply_formulas
 from .lists import save_workbook
 
+# fields written as dates
 DATE_FIELDS = {"created", "modified", "start_date", "end_date"}
 # v7 fields without a v9 column, and where they go
 FALLBACK = {"change_note": "version_notes"}
@@ -54,6 +55,7 @@ def _v7_scheme_value(path, prop: str):
 
 
 def _template_columns(ws, hdr_row):
+    """{canonical field: column number} for the header row of the target template."""
     cols = {}
     for cell in ws[hdr_row]:
         h = normalise_header(cell.value)
@@ -68,6 +70,25 @@ def _template_columns(ws, hdr_row):
 
 def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: str | None = None,
             title: str | None = None) -> dict:
+    """Copy a v7 workbook into the v9 template.
+
+    The v7 concept names are kept in column B (vok:Rekkverk -> Rekkverk); relations become names; skos:changeNote
+    moves to adms:versionNotes; dct:creator is copied to the scheme rows. Only real v7 files are accepted.
+
+    Args:
+        src: the v7 workbook.
+        template: the v9 template.
+        dst: the workbook to write.
+        kortnavn: short name (letters, digits, hyphens); default: from the v7 scheme URI.
+        title: dct:title; default: from the v7 workbook.
+
+    Returns:
+        A report dict: concepts, target, rows, kortnavn, name_map, unresolved_relations, fields_without_column,
+        change_note_moved_to_version_notes.
+
+    Raises:
+        ValueError: the source is not v7, or kortnavn is missing or invalid.
+    """
     v7 = read_workbook(src)
     if v7.version != "v7":
         raise ValueError(f"{src} is not a v7 workbook (detected {v7.version})")

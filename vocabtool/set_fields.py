@@ -16,10 +16,26 @@ from .reader import read_workbook
 from .template_ext import fit_table, apply_formulas
 from .lists import save_workbook
 
+# fields set-fields does not write: formulas and the concept name (use rename)
 PROTECTED = {"identifier", "change_hash", "created_by", "uri"}
 
 
 def set_fields(workbook, values: dict | str | Path, out=None) -> dict:
+    """Write reviewed values into concepts by concept name.
+
+    Args:
+        workbook: the workbook.
+        values: {concept name: {field: value}} or a JSON file with it. A field name ending in "+" appends to the
+            cell (with a space) instead of replacing it. Protected fields (identifier, change hash, opprettet_av,
+            concept name) cannot be set.
+        out: the workbook to write; default: in place.
+
+    Returns:
+        Counts: cells, concepts.
+
+    Raises:
+        ValueError: unknown concept names, unknown fields or protected fields (nothing is written).
+    """
     if not isinstance(values, dict):
         values = json.loads(Path(values).read_text(encoding="utf-8"))
     v = read_workbook(workbook)

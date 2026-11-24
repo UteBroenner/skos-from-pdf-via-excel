@@ -21,6 +21,7 @@ _TRANSLIT = {"æ": "ae", "Æ": "Ae", "ø": "o", "Ø": "O", "å": "aa", "Å": "Aa
 
 
 def ascii_fold(text: str) -> str:
+    """Transliterate to ASCII: æ -> ae, ø -> o, å -> aa, ä -> ae, ö -> oe, ü -> ue, ß -> ss; other accents dropped."""
     text = "".join(_TRANSLIT.get(ch, ch) for ch in text)
     return unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
 
@@ -30,6 +31,7 @@ def local_name(label: str) -> str:
     except acronyms (all capitals, e.g. CE, IP, NIB), which are kept as written."""
     words = re.split(r"[^A-Za-z0-9]+", ascii_fold(label or ""))
     def word(w):
+        """Capitalise one word; a word of two or more capital letters (an acronym) is kept."""
         letters = [ch for ch in w if ch.isalpha()]
         if len(letters) >= 2 and all(ch.isupper() for ch in letters):
             return w
@@ -51,6 +53,7 @@ def expected_name(c, label_field: str) -> str:
 
 
 def concept_uri(scheme_uri: str, name: str) -> str:
+    """<ConceptScheme URI>/<name>."""
     return scheme_uri.rstrip("/") + "/" + name
 
 

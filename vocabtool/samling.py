@@ -21,13 +21,23 @@ from dataclasses import dataclass, field
 from .reader import Vocabulary, field_for
 from .uri import local_name
 
+# the collection sentence: «Inngår i samlingen X.» or «Inngår i samlingene X, Y.»
 SENTENCE_RE = re.compile(r"Inngår i samling(?P<form>en|ene)\s+(?P<names>[^.\n]+?)\s*\.(?=\s|$)")
 MENTION_RE = re.compile(r"\bsamling", re.IGNORECASE)          # main language: looks like an attempt
+# collection sentences in other languages (only the main-language note is read)
 OTHER_LANG_RE = re.compile(r"inng[åa]r i samling|part of the collection|teil der sammlung|parte de la colecci", re.IGNORECASE)
 
 
 @dataclass
 class Collection:
+    """A skos:Collection built from the scope-note sentences.
+
+    Attributes:
+        name: CamelCase local name (URI part).
+        label: the name as first written (skos:prefLabel of the collection).
+        members: concept keys, in workbook order.
+        spellings: all spellings seen (VT-COLL-SPELLING when more than one).
+    """
     name: str                       # CamelCase local name (URI part)
     label: str                      # name as first written
     members: list[str] = field(default_factory=list)   # concept keys, in workbook order
@@ -35,6 +45,7 @@ class Collection:
 
 
 def scope_note_field(v: Vocabulary) -> str:
+    """The main-language scope-note field, where the collection sentence is read."""
     return "scope_note" if v.main_lang == "nb" else field_for("scope_note", v.main_lang)
 
 
@@ -47,6 +58,7 @@ def parse_sentence(text: str | None) -> list[tuple[str, str]]:
 
 
 def collection_uri(scheme_uri: str, name: str) -> str:
+    """<ConceptScheme URI>/samling/<name>."""
     return scheme_uri.rstrip("/") + "/samling/" + name
 
 
@@ -86,6 +98,7 @@ def sentence_problems(v: Vocabulary):
 def rename_in_text(text: str, old: str, new: str) -> str:
     """Rename collection `old` (as written, or its CamelCase name) to `new` inside the sentences only."""
     def fix(m):
+        """Replace the old collection name in one matched sentence."""
         names = [n.strip() for n in m.group("names").split(",")]
         names = [new if (n == old or local_name(n) == local_name(old)) else n for n in names]
         return f"Inngår i samling{m.group('form')} {', '.join(names)}."

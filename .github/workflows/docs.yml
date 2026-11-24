@@ -1,0 +1,32 @@
+# Keeps the API reference (docs/api/, generated from the docstrings) in step with the code, and runs the tests.
+name: docs and tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  api-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # standard library only: the code is read, not imported
+      - name: docs/api is up to date
+        run: python tools/gen_api_docs.py --check
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: install the dependencies the tests need
+        run: pip install "openpyxl==3.1.5" "PyYAML==6.0.3"
+      - name: tests
+        run: |
+          python tests/test_lists.py
+          python tests/test_type.py

@@ -9,11 +9,13 @@ from collections import defaultdict
 
 from .reader import Vocabulary, label_fields, split_multi
 
+# language tag -> name used in the note text
 TAG_NAMES = {"en-US": "US", "en-GB": "UK", "en": "English", "nb": "Norwegian", "nn": "Nynorsk",
              "de": "German", "es": "Spanish", "sv": "Swedish", "da": "Danish", "fr": "French"}
 
 
 def _kind(field: str, term: str) -> str:
+    """Kind of term for the note text: name (prefLabel), abbreviation or alternative name."""
     if field.startswith("label_"):
         return "name"
     letters = [ch for ch in term.lower() if ch.isalpha()]
@@ -32,6 +34,12 @@ def _who(tags_kinds: set) -> str:
 
 
 def clash_notes(v: Vocabulary) -> dict[str, str]:
+    """Draft scope notes for terms that several concepts use.
+
+    Returns:
+        {concept key: note text}; each note names the other concept(s) by ID, so the checker reports the clash as
+        documented (VT-LABEL-NOTED).
+    """
     by_key = v.by_key()
     uses = defaultdict(lambda: defaultdict(set))   # term -> key -> {(tag, kind)}
     shown = {}                                      # lowercase term -> spelling as first written

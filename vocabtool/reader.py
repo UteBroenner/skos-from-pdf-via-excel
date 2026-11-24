@@ -66,7 +66,9 @@ TECHNICAL_NAME_MAP = {"begrepseier": "owner"}      # AB: a prov:Person, written 
 CONTRIBUTOR_FIELDS = ["created_by", "modified_by"]
 
 SCHEME_BASE = "http://example.org/vegvesen/vokabular/"   # template v8/v9 cell B1: CONCAT(SCHEME_BASE, kortnavn)
+# relation fields (concept names, comma-separated) -> SKOS / XKOS property
 RELATION_FIELDS = {"broader": "skos:broader", "is_part_of": "xkos:isPartOf", "related": "skos:related"}
+# sheets that hold no concepts: code lists (not processed yet) and the value lists
 EXCLUDED_SHEETS = {"kodeverk", "lister"}
 
 
@@ -99,8 +101,6 @@ def label_fields(fields) -> dict[str, str]:
     return out
 
 
-# skosno:relationshipWithSource: SKOS-AP-NO code for every way the template allows to write it
-# (English code with hyphens or spaces, bokmål, nynorsk)
 # template versions with the current column layout (v9 = v8 + value lists on the sheet 'lister')
 CURRENT = ("v8", "v9")
 
@@ -115,6 +115,8 @@ def audience(value):
     return AUDIENCE_VALUES.get(" ".join(str(value).strip().lower().split()))
 
 
+# skosno:relationshipWithSource: SKOS-AP-NO code for every way the template allows to write it
+# (English code with hyphens or spaces, bokmål, nynorsk)
 SOURCE_RELATION_VALUES = {
     "self-composed": "self-composed", "egendefinert": "self-composed", "eigendefinert": "self-composed",
     "derived-from-source": "derived-from-source", "basert på kilde": "derived-from-source", "basert på kjelde": "derived-from-source",
@@ -131,17 +133,23 @@ def source_relation(value):
 
 
 def normalise_header(value) -> str:
+    """Header text without whitespace, a "(separator=...)" suffix or a trailing "?".
+
+    Example: 'skos:altLabel @nb (separator=",")' -> 'skos:altLabel@nb'.
+    """
     s = re.sub(r"\s+", "", str(value or ""))
     return s.split("(")[0].rstrip("?")
 
 
 def split_multi(value) -> list[str]:
+    """Split a multi-value cell at commas, semicolons and line breaks; empty parts are dropped."""
     if value is None:
         return []
     return [p.strip() for p in re.split(r"[,;\n]", str(value)) if p.strip()]
 
 
 def as_text(value):
+    """Cell value as stripped text (dates as ISO 8601, YYYY-MM-DD); None for empty cells."""
     if value is None:
         return None
     if isinstance(value, (datetime, date)):
@@ -152,17 +160,28 @@ def as_text(value):
 
 @dataclass
 class Concept:
-    key: str                 # ID used for relations (v8/v9: dct:identifier, v7: prefixed URI)
+    """One row of the vokabular sheet.
+
+    Attributes:
+        key: the row key used by relations: the concept name in column B (v8/v9) or the prefixed URI (v7).
+        sheet: sheet name.
+        row: row number in the sheet (1-based, as in Excel).
+        fields: canonical field name -> cell text (see PROPERTY_MAP), e.g. label_nb, def_nb, broader.
+        relations: relation field (broader, is_part_of, related) -> list of target keys.
+    """
+    key: str                 # row key used by relations (v8/v9: concept name in column B, v7: prefixed URI)
     sheet: str
     row: int
     fields: dict = field(default_factory=dict)
     relations: dict = field(default_factory=dict)   # field -> list of target keys
 
     def get(self, name, default=None):
+        """Field value by canonical name, like dict.get."""
         return self.fields.get(name, default)
 
     @property
     def type(self) -> str | None:
+        """The type column as text: "1", "2" or "3" (a stored 2.0 becomes "2"); None when empty."""
         t = self.fields.get("type")
         if t is None:
             return None
@@ -172,6 +191,19 @@ class Concept:
 
 @dataclass
 class Vocabulary:
+    """A workbook as read by read_workbook.
+
+    Attributes:
+        path: the workbook file.
+        version: "v9" (v8 columns plus the sheet lister), "v8", "v7" or "unknown".
+        kortnavn: short name of the vocabulary (cell B14 in v8/v9), e.g. N101.
+        title: dct:title of the scheme.
+        scheme_uri: ConceptScheme URI, http://example.org/vegvesen/vokabular/<kortnavn>.
+        concepts: the concepts in workbook order.
+        columns: sheet -> {canonical field: column letter}.
+        unmapped_headers: sheet -> headers that map to no field.
+        main_lang: the scheme row "hovedspråk" (default nb); label and definition checks use it.
+    """
     path: Path
     version: str             # "v9", "v8" (same columns, no value lists) or "v7"
     kortnavn: str | None
@@ -189,17 +221,21 @@ class Vocabulary:
 
     @property
     def label_field(self) -> str:
+        """Field of the main-language prefLabel, e.g. label_nb or label_en_us."""
         return field_for("label", self.main_lang)
 
     @property
     def def_field(self) -> str:
+        """Field of the main-language definition, e.g. def_nb."""
         return field_for("def", self.main_lang)
 
     def by_key(self) -> dict[str, Concept]:
+        """{row key: Concept}."""
         return {c.key: c for c in self.concepts}
 
 
 def _find_header_row(ws, max_scan=40):
+    """Row number and normalised headers of the row that holds skos:prefLabel@nb (None, None if absent)."""
     for r in range(1, min(ws.max_row, max_scan) + 1):
         vals = [normalise_header(c.value) for c in ws[r]]
         if "skos:prefLabel@nb" in vals:
@@ -208,6 +244,7 @@ def _find_header_row(ws, max_scan=40):
 
 
 def _scheme_meta(ws):
+    """Scheme rows above the table: ConceptScheme URI, kortnavn, dct:title, hovedspråk."""
     meta = {}
     for r in range(1, 20):
         a = normalise_header(ws.cell(r, 1).value)
@@ -224,6 +261,18 @@ def _scheme_meta(ws):
 
 
 def read_workbook(path: str | Path) -> Vocabulary:
+    """Read a vocabulary workbook (template v7, v8 or v9) into a Vocabulary.
+
+    Sheets named kodeverk or lister are skipped. A row counts as a concept if it has an ID, a concept name, or any
+    label or definition. Formula columns saved by the tools have no cached value, so the concept name (column B) and
+    the identifier (column A) are computed from the term and kortnavn in the same way as the template formulas.
+
+    Args:
+        path: the .xlsx file.
+
+    Returns:
+        The Vocabulary.
+    """
     path = Path(path)
     wb = openpyxl.load_workbook(path, data_only=True)
     concepts: list[Concept] = []

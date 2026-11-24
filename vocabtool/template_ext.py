@@ -1,8 +1,11 @@
-"""Add language columns (prefLabel / altLabel) to the template (v9; v8 has the same columns).
+"""Template upkeep: language columns, formulas, the Excel table and header colours.
 
-New columns are appended after the last used column, so existing column
-letters (and SharePoint column mappings) stay unchanged. The change-hash
-formula is extended to include the new columns.
+- extend_template: add language columns (prefLabel, altLabel, definition, scope note); they are inserted in front of
+  endringshash, so the columns A–AM keep their letters (and their SharePoint column mappings)
+- apply_formulas: the formulas in A (identifier), B (concept name), opprettet_av and endringshash
+- fit_table: stretch the Excel table, formatting, conditional formatting and dropdowns to all rows in use
+- requirement_colours: colour the header rows of added columns by requirement level
+- uri_as_value, hide_column: helpers for migrate and older layouts
 """
 from __future__ import annotations
 
@@ -17,19 +20,23 @@ from .reader import normalise_header
 from .uri import name_formula
 from .lists import save_workbook
 
+# language tag -> Norwegian name used in the technical names of added columns
 LANG_NAMES_NB = {"en-US": "engelsk_us", "en-GB": "engelsk_gb", "de": "tysk", "es": "spansk",
                  "sv": "svensk", "da": "dansk", "fr": "fransk"}
 
 
 def lang_field(lang: str) -> str:
+    """Field suffix for a language tag: en-US -> en_us."""
     return lang.lower().replace("-", "_")
 
 
 def uri_as_value(wb) -> int:
-    """Column B (URI) holds only the concept name instead of the formula B1&"/"&A.
+    """Remove the old v8 formula B1&"/"&A from column B, so B holds the concept name as a value.
 
-    The change hash (column AN) then covers A:AM, so a changed URI is detected too.
-    Returns the number of formulas removed.
+    Used by migrate. Only the original v8 example text in the description row is replaced.
+
+    Returns:
+        The number of formulas removed.
     """
     ws = wb["vokabular"]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
@@ -51,6 +58,22 @@ def uri_as_value(wb) -> int:
 
 def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_langs: list[str] = (),
                     main_lang: str | None = None, scope_langs: list[str] = ()) -> list[str]:
+    """Write a copy of the template with language columns added.
+
+    Columns are inserted in front of endringshash (or the type column), with the style of column C; the description
+    row and the row hovedspråk (main language) are filled in. Formulas, table and colours are rebuilt.
+
+    Args:
+        src: the template.
+        dst: the file to write.
+        langs: languages for prefLabel and altLabel columns, e.g. ["en-US", "de"].
+        def_langs: languages for definition columns.
+        main_lang: value of the row hovedspråk (default nb).
+        scope_langs: languages for scope-note columns.
+
+    Returns:
+        The columns added, as "<letter>: <header>".
+    """
     wb = openpyxl.load_workbook(src)
     ws = wb["vokabular"]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
@@ -116,6 +139,7 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
 
 
 def _colour(cell) -> tuple:
+    """Fill and font colour of a cell, for comparing colourings."""
     f, fo = cell.fill, cell.font
     fg = f.fgColor if f.fill_type else None
     fc = fo.color
@@ -228,6 +252,7 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
 
     # conditional formatting and data validation down to the last row
     def stretch(ref: str) -> str:
+        """A range reference with its last row moved down to the end of the table."""
         return " ".join(re.sub(r"(\$?[A-Z]+\$?)(\d+)$", lambda m: m.group(1) + str(max(int(m.group(2)), last_row)), part)
                         if ":" in part else part for part in ref.split())
     old = ws.conditional_formatting
@@ -253,15 +278,20 @@ def hide_column(wb, technical_name: str, sheet: str = "vokabular") -> str | None
 
 
 
+# technical name of the change-hash column (last column of the Excel table)
 HASH_COLUMN = "endringshash"
+# minimum width of the hash column; its text is not wrapped, so rows stay one line high
 HASH_WIDTH = 100
 TYPE_HEADERS = ("type", "tier")      # the internal column was called tier before 24 November 2026
+# description of the type values, written in the description row of the type column
 TYPE_DESCRIPTION = ("1 = fysiske objekter, romlige begreper og målbare egenskaper; 2 = prosesser og tilstander; "
                     "3 = normative krav. Internt, importeres ikke.")
+# columns left out of the change hash: ID, dates, persons and the hash itself
 GOVERNANCE = {"intern_identifikator", "dato_opprettet", "opprettet_av", "dato_sist_endret", "sist_endret_av", HASH_COLUMN}
 
 
 def _ranges(cols: list[int]) -> list[tuple[int, int]]:
+    """Column numbers as (first, last) runs: [1, 2, 3, 5] -> [(1, 3), (5, 5)]."""
     out = []
     for c in sorted(cols):
         if out and c == out[-1][1] + 1:
@@ -272,15 +302,20 @@ def _ranges(cols: list[int]) -> list[tuple[int, int]]:
 
 
 def apply_formulas(wb, sheet: str = "vokabular") -> dict:
-    """Write the two formula columns for every row of the Excel table:
+    """Write the formula columns for every row of the Excel table.
 
     - column A (dct:identifier) = <kortnavn>-<concept name>, e.g. N101-Rekkverk
-    - column B (concept name) = CamelCase of the bokmål term (see uri.name_formula), where B is empty or already a
+    - column B (concept name) = CamelCase of the bokmål term (uri.name_formula), where B is empty or already a
       formula; a name typed into B is kept
-    - opprettet_av = dct:creator of the scheme (cell B of the row 'dct:creator'), for rows with a concept name
-    - endringshash = TEXTJOIN of the row content (all table columns except ID, created/modified
-      date and person, and the hash itself); Power Automate compares it with the List to find changed rows.
-    The endringshash column is added before a trailing 'type' if the template has none.
+    - opprettet_av = the scheme's dct:creator (B16), for rows with a concept name
+    - endringshash = TEXTJOIN of the row content (all table columns except ID, dates and persons); Power Automate
+      compares it with the List to find changed rows
+
+    The endringshash column is added in front of a trailing type column if the template has none. The type header
+    is written as "type" (former name: tier) with the description of types 1, 2 and 3.
+
+    Returns:
+        rows, hash_column and the columns the hash covers.
     """
     ws = wb[sheet]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")

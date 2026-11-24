@@ -16,10 +16,26 @@ from .uri import LOCAL_NAME_RE, local_name
 from .samling import collections, rename_in_text, outside_sentences, scope_note_field
 from .lists import save_workbook
 
+# note fields (any language) in which concept names are replaced
 NOTE_PREFIXES = ("scope_note", "editorial_note")
 
 
 def rename(path: str, renames: dict[str, str]) -> dict:
+    """Rename concepts and update every reference to them.
+
+    Changes the name in column B and the same name in relations (broader, isPartOf, related) and in scope and
+    editorial notes (any language). Collection sentences ("Inngår i samlingen X.") are left alone.
+
+    Args:
+        path: the workbook, changed in place.
+        renames: {old name: new name}.
+
+    Returns:
+        Counts: names, relations, notes.
+
+    Raises:
+        ValueError: an old name does not exist, a new name is not CamelCase, or it is already used.
+    """
     v = read_workbook(path)
     names = {c.get("uri") for c in v.concepts if c.get("uri")}
     for old, new in renames.items():
