@@ -1,6 +1,6 @@
 # Project status
 
-As of 23 November 2026. This is a summary of the work so far, for picking up the work in a new session.
+As of 24 November 2026. This is a summary of the work so far, for picking up the work in a new session.
 The crochet example (`datasets/hekling/`) is described in its own README.
 
 ## Repository
@@ -140,6 +140,22 @@ Cross-row rules are hand-written SHACL-SPARQL. See `schema/README.md`.
 V440 next steps: rename the domain concepts and fix `dct:subject`; decide how to handle the table headings and homonyms;
 extract the code lists from the PDF tables by script.
 
+**DLVN — Definisjonsliste vegnormaler (2024)** (local, `out/dlvn/`): the definitions list shared by all handbooks
+(vegnormaler), source <https://www.vegvesen.no/fag/publikasjoner/handboker/definisjoner/>. It belongs in the methodology:
+handbook vocabularies should link to it.
+- 849 concepts in template v9, read from the PDF print of the page by column position; all 849 entries also match the
+  text export. Terms and definitions are quoted verbatim; målgruppe allmennheten, forhold til kilde «sitat fra kilde»,
+  status gjeldende, version note «Definisjonslisten er sist oppdatert januar 2024»; creator «utebro & Claude»;
+  contact point deliberately empty (849 SHACL violations until it is set).
+- 49 terms split: "/" and ";" variants and abbreviations in brackets became `skos:altLabel` (original wording in the
+  editorial note).
+- Flagged `[fagekspert]`: 8 terms with two definitions (16 rows; second name ends in 2), 16 definitions with several
+  meanings, 17 entries that only refer to another term.
+- Type (proposed by KI): 667 × 1, 152 × 2, 30 × 3; 43 marked `[usikker]`.
+- 0 errors. Open: the list says January 2024, the page footer says "Sist oppdatert: 20. august 2025".
+- Rebuild: `out/dlvn/src/` (parse and build scripts, records, type lists).
+- Next: link the handbook vocabularies (V440, V441, BRUTUS) to DLVN.
+
 BRUTUS (Confluence field list, `kortnavn` `brutus`) is migrated to v8 and merged with V440 and V441. Details, open points
 and the links to the graph pages are in `out/brutus-status.md` (local, not in git).
 
@@ -176,6 +192,19 @@ and the links to the graph pages are in `out/brutus-status.md` (local, not in gi
   cell D34 should be TRUE).
 - **Open:** whether the checker should report missing values in the SVV-obligatory columns (M–P, AG–AI); the extraction
   part of the methodology document.
+
+## Work of 24 November 2026 (summary)
+
+- **Pull request #5 (merged):** the internal column `tier` is now `type`; the values 1, 2, 3 are unchanged.
+  - Templates: header `type` (AO; AY in the language template). Workbooks with a `tier` header are still read, and the
+    tools rename the header when they save.
+  - Checker: `VT-TYPE-EMPTY`, `VT-TYPE-INVALID`, `VT-TYPE1-ISOLATED`, `VT-TYPE1-BROADER-NON-TYPE1` (were `VT-TIER-*`,
+    `VT-T1-*`); schema slot and cross-row SHACL use `svv:type`.
+  - `owl-import --type` (`--tier` still accepted); extraction records use `type`.
+  - Open: `svv:type` may be confused with `rdf:type`; `svv:begrepstype` would be clearer.
+- **DLVN** built from the shared definitions list (see *Vocabularies*).
+- **Methodology document:** first update to v9 as tracked changes with 24 comments (`out/method/PoV_Rekkverk-metodikk-v9.docx`,
+  local); the owner is rewriting it. It should add DLVN, and say "type" instead of "Tier".
 
 ## Instructions (not yet in the repository)
 
