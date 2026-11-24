@@ -3,10 +3,10 @@ search:
   boost: 5.0
 ---
 
-# Slot: tier 
+# Slot: type 
 
 
-_1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes._
+_1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only type 1 becomes OWL classes. Called tier before 24 November 2026._
 
 
 
@@ -14,7 +14,7 @@ _1 = physical objects, spatial concepts, measurable properties; 2 = processes an
 
 
 
-URI: [svv:tier](http://example.org/vegvesen/vokabular/def#tier)
+URI: [svv:type](http://example.org/vegvesen/vokabular/def#type)
 <!-- no inheritance hierarchy -->
 
 
@@ -40,7 +40,7 @@ URI: [svv:tier](http://example.org/vegvesen/vokabular/def#tier)
 | --- | --- |
 | Range | [Integer](Integer.md) |
 | Domain Of | [Concept](Concept.md) |
-| Slot URI | [svv:tier](http://example.org/vegvesen/vokabular/def#tier) |
+| Slot URI | [svv:type](http://example.org/vegvesen/vokabular/def#type) |
 ### Value Constraints
 
 | Property | Value |
@@ -68,7 +68,7 @@ URI: [svv:tier](http://example.org/vegvesen/vokabular/def#tier)
 | property | value |
 | --- | --- |
 | excel_column | AO (base template), AY (language extension): always the last column, outside the Excel table |
-| excel_name | tier |
+| excel_name | type |
 | requirement | internt |
 
 
@@ -86,8 +86,8 @@ URI: [svv:tier](http://example.org/vegvesen/vokabular/def#tier)
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | svv:tier |
-| native | svv:tier |
+| self | svv:type |
+| native | svv:type |
 
 
 
@@ -96,7 +96,7 @@ URI: [svv:tier](http://example.org/vegvesen/vokabular/def#tier)
 
 <details>
 ```yaml
-name: tier
+name: type
 annotations:
   excel_column:
     tag: excel_column
@@ -104,15 +104,16 @@ annotations:
       the Excel table'
   excel_name:
     tag: excel_name
-    value: tier
+    value: type
   requirement:
     tag: requirement
     value: internt
 description: 1 = physical objects, spatial concepts, measurable properties; 2 = processes
-  and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.
+  and states; 3 = normative requirements. Only type 1 becomes OWL classes. Called
+  tier before 24 November 2026.
 from_schema: http://example.org/vegvesen/vokabular/def/schema
 rank: 1000
-slot_uri: svv:tier
+slot_uri: svv:type
 domain_of:
 - Concept
 range: integer

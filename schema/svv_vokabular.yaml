@@ -95,7 +95,7 @@ classes:
       - end_date
       - data_structure_label
       - value_range
-      - tier
+      - type
       - pref_label_en_us
       - pref_label_en_gb
       - pref_label_de
@@ -253,7 +253,7 @@ slots:
     description: Discouraged term, e.g. a common misspelling.
     annotations: {excel_column: T, excel_name: frarådd_term, requirement: valgfri}
 
-  # ---------- language extension (template v9-lang-ext, columns AN-AW; endringshash AX, tier AY) ----------
+  # ---------- language extension (template v9-lang-ext, columns AN-AW; endringshash AX, type AY) ----------
   pref_label_en_us:
     slot_uri: skos:prefLabel
     in_language: en-US
@@ -422,13 +422,13 @@ slots:
   value_range:
     slot_uri: skosno:valueRange
     annotations: {excel_column: AM, excel_name: verdiområde, requirement: valgfri}
-  tier:
-    slot_uri: svv:tier
+  type:
+    slot_uri: svv:type
     range: integer
     minimum_value: 1
     maximum_value: 3
-    description: 1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.
-    annotations: {excel_column: "AO (base template), AY (language extension): always the last column, outside the Excel table", excel_name: tier, requirement: internt}
+    description: 1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only type 1 becomes OWL classes. Called tier before 24 November 2026.
+    annotations: {excel_column: "AO (base template), AY (language extension): always the last column, outside the Excel table", excel_name: type, requirement: internt}
 
 enums:
   Audience:

@@ -16,7 +16,7 @@ New concepts (one row per class):
   ("fundament, pilar"), in both languages
 - notation = `kode`, broader = parent class, exactMatch = class IRI, source = ontology IRI,
   editorial note with chapter/section (`kapittel`, `avsnitt`) and "[mangler] definisjon"
-- status kandidat, created today, contact point if given; tier if given (e.g. 1: the classes become OWL classes)
+- status kandidat, created today, contact point if given; type if given (e.g. 1: the classes become OWL classes)
 - --derive-code-definitions: a new concept with a code and no other definition gets one built from the code table,
   e.g. "kodeverdi 59 under «buebru og hvelvbru» i V440 (kap. V-6, avsnitt V-6.1)", relationshipWithSource
   derived-from-source and "[avledet]" in the editorial note (checker: VT-DEF-DERIVED, info)
@@ -81,7 +81,7 @@ def read_classes(path) -> tuple[str, dict]:
 
 
 def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=None, keep_root=False,
-               kortnavn=None, title=None, derive_code_definitions=False, tier=None) -> dict:
+               kortnavn=None, title=None, derive_code_definitions=False, concept_type=None) -> dict:
     v = read_workbook(workbook)
     wb = openpyxl.load_workbook(workbook)
     ws = wb["vokabular"]
@@ -218,7 +218,7 @@ def owl_import(workbook, owls: list, out, *, link=None, merge_map=None, contact=
                 note += " [merknad] Ingen rdfs:label i ontologien; termen er laget fra IRI-en."
             f = {"uri": name_of[i], LF: d["label"], EN: en, "notation": notation, "broader": parent_name,
                  "exact_match": i, "source": ont, "editorial_note": note, "status": "kandidat",
-                 "contact_point": contact, "created": today, "tier": tier}
+                 "contact_point": contact, "created": today, "type": concept_type}
             hits = link_idx.get(norm(d["label"]), [])
             if lv and len(hits) == 1 and hits[0].get(lv.def_field):
                 t = hits[0]

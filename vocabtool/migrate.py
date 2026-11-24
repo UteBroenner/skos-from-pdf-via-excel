@@ -126,8 +126,8 @@ def migrate(src: str | Path, template: str | Path, dst: str | Path, kortnavn: st
         m = re.fullmatch(r'"([^"]*)"@\w+', (rec.get("status") or "").strip())
         if m:
             rec["status"] = m.group(1)
-        if c.tier:
-            rec["tier"] = int(c.tier) if c.tier.isdigit() else c.tier
+        if c.type:
+            rec["type"] = int(c.type) if c.type.isdigit() else c.type
         for f, val in rec.items():
             if val is None:
                 continue

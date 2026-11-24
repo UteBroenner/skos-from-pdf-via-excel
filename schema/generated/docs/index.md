@@ -76,8 +76,8 @@ Name: svv_vokabular
 | [start_date](start_date.md) |  |
 | [status](status.md) |  |
 | [subject](subject.md) | Subject area |
-| [tier](tier.md) | 1 = physical objects, spatial concepts, measurable properties; 2 = processes ... |
 | [title](title.md) |  |
+| [type](type.md) | 1 = physical objects, spatial concepts, measurable properties; 2 = processes ... |
 | [uri](uri.md) | Concept or scheme URI |
 | [value_range](value_range.md) |  |
 | [version_info](version_info.md) |  |

@@ -427,8 +427,8 @@
                         "null"
                     ]
                 },
-                "tier": {
-                    "description": "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.",
+                "type": {
+                    "description": "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only type 1 becomes OWL classes. Called tier before 24 November 2026.",
                     "maximum": 3,
                     "minimum": 1,
                     "type": [

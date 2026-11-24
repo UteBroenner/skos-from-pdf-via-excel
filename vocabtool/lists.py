@@ -43,8 +43,8 @@ LISTS = [
     ]),
 ]
 
-# internal column outside the table (not imported): dropdown only, no codes or URIs
-TIER = ("tier", ("1", "2", "3"))
+# internal column outside the table (not imported): dropdown only, no codes or URIs ("tier" before 24 November 2026)
+TYPE = (("type", "tier"), ("1", "2", "3"))
 
 
 def _dropdown(ws, c, first, last, values):
@@ -119,9 +119,9 @@ def ensure_lists(wb, sheet: str = "vokabular") -> list[str]:
                 if label and label != cell.value:
                     cell.value = label
         done.append(_dropdown(ws, c, first, last, [label for label, _, _ in rows]))
-    tier_col = cols.get(TIER[0])
-    if tier_col:
-        done.append(_dropdown(ws, tier_col, first, last, TIER[1]))
+    type_col = next((cols[h] for h in TYPE[0] if h in cols), None)
+    if type_col:
+        done.append(_dropdown(ws, type_col, first, last, TYPE[1]))
     return done
 
 

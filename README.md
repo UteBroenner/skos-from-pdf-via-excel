@@ -86,7 +86,7 @@ Stretch the Excel table `begrepsliste`, the formatting (wrapped, top-aligned), c
 data validation to all rows and columns in use, and write the formulas (A, B, `opprettet_av`, `endringshash`), the
 value lists and the dropdowns.
 Power Automate reads only what is inside the table.
-The `tier` column (always last) stays outside the table.
+The `type` column (always last; called `tier` before 24 November 2026) stays outside the table.
 `migrate` and `uri` do this automatically:
 
 `fit` does not change colours. When the tools add columns (language columns, `endringshash`), they colour the
@@ -95,7 +95,7 @@ colours the template uses most for that level (theme colours, so the branding is
 their colours, which deliberately differ in places (see `templates/README.md`).
 
 Value lists: every tool that saves a workbook writes the dropdowns for målgruppe (M), forhold til kilde (O), status
-(AI) and `tier` again, with the values in the dropdown itself, and the hidden sheet `lister` with the codes and URIs,
+(AI) and `type` again, with the values in the dropdown itself, and the hidden sheet `lister` with the codes and URIs,
 from `vocabtool/lists.py`. openpyxl, which the tools use,
 drops dropdowns stored in Excel's newer format; the tools write them in the classic format.
 
@@ -109,7 +109,7 @@ Convert to LinkML data and RDF Turtle, and validate with LinkML and SHACL (see `
 .venv/bin/python -m vocabtool rdf out/N101-v9.xlsx --out out/rdf
 ```
 
-Add language columns to the template. They are inserted in front of `endringshash`, which stays the last column of the table, and `tier` stays the last column,
+Add language columns to the template. They are inserted in front of `endringshash`, which stays the last column of the table, and `type` stays the last column,
 outside the Excel table. It is internal and is not imported. Columns A–AM keep their letters:
 
 ```bash
@@ -146,7 +146,7 @@ The LinkML schema needs a slot per language (see `schema/svv_vokabular.yaml`, se
   B15 title, B16 `dct:creator`), requirement row 20, description row 21, property row 23, technical names in row 24
   (the Excel table header), data from row 25. Column AD (`opprettet_av`) is hidden and filled by formula from B16 for rows with a name.
   `endringshash` (formula: `TEXTJOIN` of the row content without ID, dates and persons) is the last column inside
-  the table, and `tier` is the last column, outside it. `vocabtool fit` writes the formulas for all table rows.
+  the table, and `type` is the last column, outside it. `vocabtool fit` writes the formulas for all table rows.
   Column A, `dct:identifier`, stays the short form `<kortnavn>-<name>`; the full URI is only built in the RDF.
 - Value lists on the hidden sheet `lister`: status (AI), målgruppe (M), forhold til kilde (O), see `templates/README.md`.
   The template has no `kodeverk` sheet for now.
@@ -178,7 +178,7 @@ python -m vocabtool owl-import templates/SKOS-Excel-mal-v9-for-import.xlsx v441-
   parent class → `skos:broader`; class IRI → `skos:exactMatch`; source = the ontology; editorial note with chapter and section
   and `[mangler] definisjon`. A label used by several classes gets the parent as qualifier ("fundament, pilar").
   A class without a label gets a term from its IRI, flagged in the editorial note.
-- **`--tier 1`:** sets the tier of new concepts (existing concepts keep theirs). Classes from an ontology are Tier 1.
+- **`--type 1`:** sets the type of new concepts (existing concepts keep theirs). Classes from an ontology are type 1. `--tier` still works.
 - **`--derive-code-definitions`:** a new code entry (a class with `kode`) without another definition gets one built from the
   code table, e.g. "kodeverdi 59 under «buebru og hvelvbru» i V440 (kap. V-6, avsnitt V-6.1)", with
   `relationshipWithSource` `derived-from-source` and `[avledet]` in the editorial note. The checker lists these as
@@ -214,7 +214,7 @@ python -m vocabtool extract prepare source.txt --out work/ --instructions SKOS-f
   placeholders `{title_doc} {kortnavn} {number} {title} {text} {known} {instructions} {fields} {result_path}`.
 
 Each prompt is then given to one agent, which writes a JSON list of records to `work/results/<chapter>.json`
-(term, section, verbatim quote, definition, quote/paraphrase/none, tier, alt labels, code, broader/isPartOf/related by term,
+(term, section, verbatim quote, definition, quote/paraphrase/none, type, alt labels, code, broader/isPartOf/related by term,
 cue words, uncertainty). In Claude Code the coordinating session starts one subagent per chapter; chapters that already
 have a result are skipped, so a run can stop (e.g. at a usage limit) and continue later.
 
@@ -312,8 +312,8 @@ so use one reviewer per file/domain at a time.
 | VT-CYCLE-BROADER / VT-CYCLE-PARTOF | error | no cycles |
 | VT-RELATED-CLASH | error | `related` not combined with a broader/narrower path (SKOS integrity) |
 | VT-REF-DANGLING | warning | relation target exists in the workbook |
-| VT-T1-ISOLATED | warning | Tier 1 concept has at least one link |
-| VT-T1-BROADER-NON-T1 | warning | broader of a Tier 1 concept is Tier 1 (OWL rule O4) |
+| VT-TYPE1-ISOLATED | warning | type 1 concept has at least one link |
+| VT-TYPE1-BROADER-NON-TYPE1 | warning | broader of a type 1 concept is type 1 (OWL rule O4) |
 | VT-LABEL-DUPLICATE | warning | main-language prefLabel unique |
 | VT-LABEL-HOMONYM | warning | same term (any label or abbreviation, any language) on different concepts, e.g. US/UK *double crochet* |
 | VT-LABEL-NOTED | info | a label clash (homonym, variant or duplicate) that the concept's scope note documents by naming the other concept's ID |
@@ -323,7 +323,7 @@ so use one reviewer per file/domain at a time.
 | VT-SOURCE-REL | warning | `skosno:relationshipWithSource` is `self-composed`, `derived-from-source` or `direct-from-source`; spaces instead of hyphens and the template's Norwegian labels (`egendefinert`/`eigendefinert`, `basert på kilde`/`basert på kjelde`, `sitat fra kilde`/`sitat frå kjelde`) are accepted |
 | VT-AUDIENCE | warning | `dct:audience` is `allmennheten`/`public` or `spesialist`/`specialist`; the RDF uses the data.norge.no audience-type URIs |
 | VT-STATUS / VT-STATUS-LITERAL | warning | status is one of kandidat, gjeldende, utdatert, forkastet, written as a plain value |
-| VT-TIER-INVALID | warning | tier is 1, 2 or 3 |
+| VT-TYPE-INVALID | warning | type is 1, 2 or 3 |
 | VT-CONTACT | warning | contactPoint present |
 | VT-COLL-SINGLE | warning | a collection has only one member (often a misspelt name) |
 | VT-COLL-SIMILAR | warning | two collection names are almost the same (`Vegnettstilknytning` / `Vegnetstilknytning`) |
@@ -333,13 +333,13 @@ so use one reviewer per file/domain at a time.
 | VT-COLL-MEMBERS | info | each collection with its members |
 | VT-COLL-FORM | info | `samlingen` used with several names, or `samlingene` with one |
 | VT-COLL-CONCEPT | info | a collection has the same name as a concept; if that row is only a heading, set its status to `forkastet` |
-| VT-TIER-EMPTY / VT-NN-MISSING | info | expected gaps (source concepts; nn left for the expert, only when the main language is nb) |
+| VT-TYPE-EMPTY / VT-NN-MISSING | info | expected gaps (source concepts; nn left for the expert, only when the main language is nb) |
 
 ## Graph page
 
 The graph page is a single HTML file and loads no JavaScript libraries.
 Google Fonts are optional and fall back to system fonts when offline.
-In the page you can filter by relation type and tier, search by label or concept name,
+In the page you can filter by relation type and concept type, search by label or concept name,
 show a concept's 1–3 step neighbourhood, and mark validation findings.
 The side panel lists all relations, including inverse ones (narrower, has part)
 and targets that are missing from the workbook.

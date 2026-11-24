@@ -170,7 +170,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
         
       Concept : subject
         
-      Concept : tier
+      Concept : type
         
       Concept : uri
         
@@ -238,7 +238,7 @@ URI: [skos:Concept](http://www.w3.org/2004/02/skos/core#Concept)
 | [end_date](end_date.md) | 0..1 <br/> [Date](Date.md) |  | direct |
 | [data_structure_label](data_structure_label.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [value_range](value_range.md) | 0..1 <br/> [String](String.md) |  | direct |
-| [tier](tier.md) | 0..1 <br/> [Integer](Integer.md) | 1 = physical objects, spatial concepts, measurable properties; 2 = processes ... | direct |
+| [type](type.md) | 0..1 <br/> [Integer](Integer.md) | 1 = physical objects, spatial concepts, measurable properties; 2 = processes ... | direct |
 | [pref_label_en_us](pref_label_en_us.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [pref_label_en_gb](pref_label_en_gb.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [pref_label_de](pref_label_de.md) | 0..1 <br/> [String](String.md) |  | direct |
@@ -353,7 +353,7 @@ slots:
 - end_date
 - data_structure_label
 - value_range
-- tier
+- type
 - pref_label_en_us
 - pref_label_en_gb
 - pref_label_de
@@ -1196,8 +1196,8 @@ attributes:
     domain_of:
     - Concept
     range: string
-  tier:
-    name: tier
+  type:
+    name: type
     annotations:
       excel_column:
         tag: excel_column
@@ -1205,16 +1205,16 @@ attributes:
           outside the Excel table'
       excel_name:
         tag: excel_name
-        value: tier
+        value: type
       requirement:
         tag: requirement
         value: internt
     description: 1 = physical objects, spatial concepts, measurable properties; 2
-      = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL
-      classes.
+      = processes and states; 3 = normative requirements. Only type 1 becomes OWL
+      classes. Called tier before 24 November 2026.
     from_schema: http://example.org/vegvesen/vokabular/def/schema
     rank: 1000
-    slot_uri: svv:tier
+    slot_uri: svv:type
     owner: Concept
     domain_of:
     - Concept

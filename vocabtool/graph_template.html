@@ -105,7 +105,7 @@ table.langs tr:first-child td { border-top: 0; }
     <label class="tg" id="r-member-wrap"><input type="checkbox" id="r-member" checked><span class="sw member"></span>collection</label>
   </div>
   <div class="group">
-    <span class="lbl">Tier</span>
+    <span class="lbl">Type</span>
     <label class="tg"><input type="checkbox" id="t-1" checked>1</label>
     <label class="tg"><input type="checkbox" id="t-2">2</label>
     <label class="tg"><input type="checkbox" id="t-3">3</label>
@@ -157,14 +157,14 @@ const DATA = /*__DATA__*/null;
   $('title').textContent = DATA.meta.title || DATA.meta.kortnavn || 'Vocabulary';
   $('src').textContent = `${DATA.meta.file} · template ${DATA.meta.version} · generated ${DATA.meta.generated}`;
   const cnt = t => edges.filter(e => e.type === t).length;
-  const t1 = nodes.filter(n => n.tier === '1').length;
+  const t1 = nodes.filter(n => n.type === '1').length;
   const nColl = nodes.filter(n => n.kind === 'collection').length;
   if (!nColl) $('r-member-wrap').hidden = true;
-  // nothing in Tier 1 (e.g. a field list without tiers): show all tiers
+  // nothing in Type 1 (e.g. a field list without types): show all types
   if (!t1) for (const id of ['t-1', 't-2', 't-3', 't-0']) $(id).checked = true;
   const issueNodes = nodes.filter(n => n.issues.some(i => i[0] !== 'info')).length;
   $('stats').innerHTML = [
-    ['concepts', nodes.length - nColl], ...(nColl ? [['collections', nColl]] : []), ['Tier 1', t1], ['broader', cnt('broader')], ['isPartOf', cnt('isPartOf')],
+    ['concepts', nodes.length - nColl], ...(nColl ? [['collections', nColl]] : []), ['Type 1', t1], ['broader', cnt('broader')], ['isPartOf', cnt('isPartOf')],
     ['related', cnt('related')], ['links to missing concepts', dangling.length], ['concepts with issues', issueNodes]
   ].map(([k, v]) => `<span><b>${v}</b> ${k}</span>`).join('');
   if (sheets.length < 2) $('o-tab-wrap').hidden = true;
@@ -184,7 +184,7 @@ const DATA = /*__DATA__*/null;
   const st = { k: 1, ox: 0, oy: 0, sel: null, hover: null, alpha: 1 };
   const opt = () => ({
     types: Object.fromEntries(Object.entries(TYPES).map(([t, id]) => [t, $(id).checked])),
-    tiers: { '1': $('t-1').checked, '2': $('t-2').checked, '3': $('t-3').checked, '': $('t-0').checked, 'c': $('r-member').checked },
+    types: { '1': $('t-1').checked, '2': $('t-2').checked, '3': $('t-3').checked, '': $('t-0').checked, 'c': $('r-member').checked },
     hideIsolated: $('o-isolated').checked, issues: $('o-issues').checked, byTab: $('o-tab').checked,
     depth: +$('focus').value,
   });
@@ -193,7 +193,7 @@ const DATA = /*__DATA__*/null;
   const adjacency = (es) => { const m = new Map(); for (const e of es) { (m.get(e.a) || m.set(e.a, []).get(e.a)).push(e.b); (m.get(e.b) || m.set(e.b, []).get(e.b)).push(e.a); } return m; };
   function computeVisible() {
     O = opt();
-    let ns = nodes.filter(n => O.tiers[n.tier || '']);
+    let ns = nodes.filter(n => O.types[n.type || '']);
     const nsSet = new Set(ns);
     let es = edges.filter(e => O.types[e.type] && nsSet.has(e.a) && nsSet.has(e.b));
     if (O.hideIsolated) { const linked = new Set(es.flatMap(e => [e.a, e.b])); ns = ns.filter(n => linked.has(n)); }
@@ -246,7 +246,7 @@ const DATA = /*__DATA__*/null;
   const radius = n => 3.2 + Math.sqrt(n.deg) * 1.7 + (n === st.sel ? 2 : 0);
   const toScreen = (x, y) => [x * st.k + st.ox + W / 2, y * st.k + st.oy + H / 2];
   const toWorld = (sx, sy) => [(sx - W / 2 - st.ox) / st.k, (sy - H / 2 - st.oy) / st.k];
-  const nodeFill = n => n.kind === 'collection' ? C.member : O.byTab ? tabColour(sheets.indexOf(n.sheet)) : (C['t' + (n.tier || '0')] || C.t0);
+  const nodeFill = n => n.kind === 'collection' ? C.member : O.byTab ? tabColour(sheets.indexOf(n.sheet)) : (C['t' + (n.type || '0')] || C.t0);
   const sev = n => n.issues.some(i => i[0] === 'error') ? 'err' : n.issues.some(i => i[0] === 'warning') ? 'warn' : null;
 
   function arrow(x1, y1, x2, y2, r, size) {
@@ -330,15 +330,15 @@ const DATA = /*__DATA__*/null;
   function relList(title, sw, items) {
     if (!items.length) return '';
     return `<h3><span class="sw ${sw}"></span>${title} <span>(${items.length})</span></h3><ul>` + items.map(it =>
-      it.node ? `<li><a class="rel" data-id="${esc(it.node.id)}">${esc(lbl(it.node))}</a> ${it.node.kind === 'collection' ? '' : `<span class="chip${it.node.tier === '1' ? ' t1' : ''}">T${esc(it.node.tier || '–')}</span>`}</li>`
+      it.node ? `<li><a class="rel" data-id="${esc(it.node.id)}">${esc(lbl(it.node))}</a> ${it.node.kind === 'collection' ? '' : `<span class="chip${it.node.type === '1' ? ' t1' : ''}">T${esc(it.node.type || '–')}</span>`}</li>`
               : `<li class="missing">${esc(it.id)} · not in this workbook</li>`).join('') + '</ul>';
   }
   function renderPanel() {
     const p = $('panel'), n = st.sel;
     if (!n) {
-      const pool = nodes.filter(x => x.tier === '1'); const top = (pool.length ? pool : nodes.filter(x => x.kind !== 'collection')).sort((a, b) => b.degAll - a.degAll).slice(0, 8);
+      const pool = nodes.filter(x => x.type === '1'); const top = (pool.length ? pool : nodes.filter(x => x.kind !== 'collection')).sort((a, b) => b.degAll - a.degAll).slice(0, 8);
       p.innerHTML = `<div class="empty"><h2>Select a concept</h2><p>Click a node or search above. The panel shows its definition, all relations (also those hidden by filters) and validation findings.</p>
-        <h3>Most connected ${pool.length ? 'Tier 1 ' : ''}concepts</h3><ul>${top.map(x => `<li><a class="rel" data-id="${esc(x.id)}">${esc(lbl(x))}</a> <span class="note">${x.degAll} links</span></li>`).join('')}</ul>
+        <h3>Most connected ${pool.length ? 'Type 1 ' : ''}concepts</h3><ul>${top.map(x => `<li><a class="rel" data-id="${esc(x.id)}">${esc(lbl(x))}</a> <span class="note">${x.degAll} links</span></li>`).join('')}</ul>
         <h3>Reading the graph</h3><ul class="note"><li>Arrow points to the broader concept or the whole.</li>${nColl ? '<li>Squares are collections (from the scope note: «Inngår i samlingen …»).</li>' : ''}<li>Ring: <span style="color:var(--err)">error</span> or <span style="color:var(--warn)">warning</span> from validation.</li></ul></div>`;
       return;
     }
@@ -357,7 +357,7 @@ const DATA = /*__DATA__*/null;
     const langRows = LANGS.filter(t => (n.labels && n.labels[t]) || (n.alts && n.alts[t])).map(t =>
       `<tr><th>${esc(t)}</th><td>${esc((n.labels || {})[t] || '—')}</td><td class="note">${esc((n.alts || {})[t] || '')}</td></tr>`).join('');
     p.innerHTML = `<h2>${esc(lbl(n))}</h2>
-      <div class="idline"><span>${esc(n.id)}</span>${n.name ? `<span title="URI: ConceptScheme URI / name">/${esc(n.name)}</span>` : ''}<span class="chip${n.tier === '1' ? ' t1' : ''}">Tier ${esc(n.tier || '–')}</span>${sheets.length > 1 ? `<span>${esc(n.sheet)}</span>` : ''}</div>
+      <div class="idline"><span>${esc(n.id)}</span>${n.name ? `<span title="URI: ConceptScheme URI / name">/${esc(n.name)}</span>` : ''}<span class="chip${n.type === '1' ? ' t1' : ''}">Type ${esc(n.type || '–')}</span>${sheets.length > 1 ? `<span>${esc(n.sheet)}</span>` : ''}</div>
       ${LANGS.length > 1 ? `<table class="langs">${langRows}</table>` : (n.alt ? `<div class="note" style="margin-top:6px">Also: ${esc(n.alt)}</div>` : '')}
       <p class="def">${esc((n.defs || {})[LANG] || n.def || '—')}</p>
       ${Object.entries(n.defs || {}).filter(([t, d]) => d !== ((n.defs || {})[LANG] || n.def)).map(([t, d]) => `<p class="def note"><span class="chip">${esc(t)}</span> ${esc(d)}</p>`).join('')}
@@ -372,7 +372,7 @@ const DATA = /*__DATA__*/null;
       ${info.length ? `<p class="note">${info.map(i => esc(i[2])).join('; ')}</p>` : ''}`;
   }
   $('panel').addEventListener('click', ev => { const a = ev.target.closest('a.rel'); if (!a) return; const n = byId.get(a.dataset.id); if (!n) return;
-    if (!visN.has(n)) { $(n.kind === 'collection' ? 'r-member' : 't-' + (n.tier || '0')).checked = true; }
+    if (!visN.has(n)) { $(n.kind === 'collection' ? 'r-member' : 't-' + (n.type || '0')).checked = true; }
     select(n); });
 
   // ---------- search ----------
@@ -384,9 +384,9 @@ const DATA = /*__DATA__*/null;
     hitList = nodes.filter(n => hay(n).includes(s))
       .sort((a, b) => (norm(lbl(a)).startsWith(s) ? 0 : 1) - (norm(lbl(b)).startsWith(s) ? 0 : 1) || lbl(a).localeCompare(lbl(b))).slice(0, 10);
     hi = 0; hits.hidden = !hitList.length;
-    hits.innerHTML = hitList.map((n, i) => `<li data-i="${i}" class="${i === hi ? 'on' : ''}">${esc(lbl(n))}<span class="id">${esc(n.id)}${n.kind === 'collection' ? '' : ` · T${esc(n.tier || '–')}`}</span></li>`).join('');
+    hits.innerHTML = hitList.map((n, i) => `<li data-i="${i}" class="${i === hi ? 'on' : ''}">${esc(lbl(n))}<span class="id">${esc(n.id)}${n.kind === 'collection' ? '' : ` · T${esc(n.type || '–')}`}</span></li>`).join('');
   }
-  const choose = i => { const n = hitList[i]; if (!n) return; if (!O.tiers[n.tier || '']) $(n.kind === 'collection' ? 'r-member' : 't-' + (n.tier || '0')).checked = true; q.value = ''; hits.hidden = true; select(n); };
+  const choose = i => { const n = hitList[i]; if (!n) return; if (!O.types[n.type || '']) $(n.kind === 'collection' ? 'r-member' : 't-' + (n.type || '0')).checked = true; q.value = ''; hits.hidden = true; select(n); };
   q.addEventListener('input', showHits);
   q.addEventListener('keydown', ev => { if (ev.key === 'Enter') { choose(hi); } else if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') { ev.preventDefault(); hi = (hi + (ev.key === 'ArrowDown' ? 1 : -1) + hitList.length) % hitList.length; showHits.call(); [...hits.children].forEach((li, i) => li.classList.toggle('on', i === hi)); } else if (ev.key === 'Escape') hits.hidden = true; });
   hits.addEventListener('mousedown', ev => { const li = ev.target.closest('li'); if (li) choose(+li.dataset.i); });
