@@ -33,6 +33,16 @@ from .migrate import migrate
 
 
 def report_md(v, findings, summary) -> str:
+    """Markdown report of a check: summary per rule, then every error and warning.
+
+    Args:
+        v: the vocabulary that was checked.
+        findings: all findings from validate.validate.
+        summary: the result of validate.summarise(findings).
+
+    Returns:
+        The report as Markdown text.
+    """
     lines = [f"# Validation report: {v.path.name}", "",
              f"Template {v.version} · kortnavn `{v.kortnavn}` · {len(v.concepts)} concepts "
              f"(code lists not checked)", "",
@@ -48,6 +58,10 @@ def report_md(v, findings, summary) -> str:
 
 
 def cmd_check(a):
+    """`check`: run the VT rules; write <stem>-report.md, -report.json and -graph.html to --out.
+
+    Returns 1 if there are errors, else 0.
+    """
     v = read_workbook(a.workbook)
     findings = validate(v)
     summary = summarise(findings)
@@ -66,6 +80,7 @@ def cmd_check(a):
 
 
 def cmd_migrate(a):
+    """`migrate`: copy a v7 workbook into the v9 template; also writes <out>.namemap.json (v7 URI -> name)."""
     r = migrate(a.workbook, a.template, a.out, kortnavn=a.kortnavn)
     print(f"{r['concepts']} concepts -> {r['target']} (rows {r['rows']}, kortnavn {r['kortnavn']})")
     if r["unresolved_relations"]:
@@ -83,6 +98,10 @@ def cmd_migrate(a):
 
 
 def cmd_rdf(a):
+    """`rdf`: workbook -> LinkML data (.yaml) and Turtle (.ttl); LinkML and SHACL validation (-shacl-report.md).
+
+    Returns 1 if SHACL does not conform, else 0.
+    """
     import logging
     from collections import Counter
     logging.disable(logging.WARNING)
@@ -124,6 +143,7 @@ def cmd_rdf(a):
 
 
 def cmd_uri(a):
+    """`uri`: write concept names into empty cells of column B (--overwrite: all), from the main-language term."""
     import openpyxl
     from .reader import normalise_header
     from .template_ext import uri_as_value, fit_table, apply_formulas
@@ -149,6 +169,7 @@ def cmd_uri(a):
 
 
 def cmd_fit(a):
+    """`fit`: write the formulas, stretch the Excel table and write the value lists and dropdowns."""
     import openpyxl
     from .template_ext import fit_table, apply_formulas
     from .lists import save_workbook
@@ -161,6 +182,7 @@ def cmd_fit(a):
 
 
 def cmd_rename(a):
+    """`rename`: rename concepts (pairs OLD NEW) or, with --collection, one collection."""
     from .rename import rename, rename_collection
     if a.collection:
         if len(a.pairs) != 2:
@@ -177,6 +199,7 @@ def cmd_rename(a):
 
 
 def cmd_owl_import(a):
+    """`owl-import`: add the classes of OWL files as concepts; writes a JSON log of merges and conflicts."""
     import json
     from collections import Counter
     from .owl_import import owl_import
@@ -199,6 +222,7 @@ def cmd_owl_import(a):
 
 
 def cmd_extract(a):
+    """`extract prepare` (split the text, write prompts) or `extract collect` (check records, add concepts)."""
     from .extract import prepare, collect, report_md
     if a.step == "prepare":
         m = prepare(a.input, a.out, a.instructions, a.kortnavn, a.title, a.known or (), a.only, level=a.level,
@@ -223,6 +247,7 @@ def cmd_extract(a):
 
 
 def cmd_set_fields(a):
+    """`set-fields`: write reviewed values from a JSON file into concepts, by concept name."""
     from .set_fields import set_fields
     r = set_fields(a.workbook, a.values, a.out)
     print(f"{a.out or a.workbook}: {r['cells']} values written in {r['concepts']} concepts")
@@ -230,16 +255,34 @@ def cmd_set_fields(a):
 
 
 def main(argv=None):
-    p = argparse.ArgumentParser(prog="vocabtool")
+    """Parse the command line and run the command.
+
+    Args:
+        argv: arguments without the program name; None reads sys.argv.
+
+    Returns:
+        The exit code of the command (0 = success).
+    """
+    p = argparse.ArgumentParser(prog="vocabtool", description="Tools for SKOS vocabularies in the Excel template (v7, v8, v9).")
     sub = p.add_subparsers(dest="cmd", required=True)
-    c = sub.add_parser("check"); c.add_argument("workbook"); c.add_argument("--out", default="out"); c.set_defaults(fn=cmd_check)
-    m = sub.add_parser("migrate"); m.add_argument("workbook"); m.add_argument("--template", required=True)
-    m.add_argument("--out", required=True); m.add_argument("--kortnavn"); m.set_defaults(fn=cmd_migrate)
-    r = sub.add_parser("rdf"); r.add_argument("workbook"); r.add_argument("--out", default="out/rdf"); r.set_defaults(fn=cmd_rdf)
-    u = sub.add_parser("uri"); u.add_argument("workbook"); u.add_argument("--overwrite", action="store_true"); u.set_defaults(fn=cmd_uri)
-    rn = sub.add_parser("rename"); rn.add_argument("workbook"); rn.add_argument("pairs", nargs="+")
+    c = sub.add_parser("check", help="validate (VT rules); write report (.md, .json) and graph page (.html)")
+    c.add_argument("workbook"); c.add_argument("--out", default="out", help="output directory (default: out)")
+    c.set_defaults(fn=cmd_check)
+    m = sub.add_parser("migrate", help="copy a v7 workbook into the v9 template")
+    m.add_argument("workbook", help="the v7 workbook"); m.add_argument("--template", required=True, help="the v9 template")
+    m.add_argument("--out", required=True, help="workbook to write")
+    m.add_argument("--kortnavn", help="short name (default: from the v7 scheme URI)"); m.set_defaults(fn=cmd_migrate)
+    r = sub.add_parser("rdf", help="LinkML data (.yaml), SKOS Turtle (.ttl), LinkML and SHACL report")
+    r.add_argument("workbook"); r.add_argument("--out", default="out/rdf", help="output directory (default: out/rdf)")
+    r.set_defaults(fn=cmd_rdf)
+    u = sub.add_parser("uri", help="fill empty concept names (column B) from the main-language term")
+    u.add_argument("workbook"); u.add_argument("--overwrite", action="store_true", help="rewrite all names, not only empty ones")
+    u.set_defaults(fn=cmd_uri)
+    rn = sub.add_parser("rename", help="rename concepts and update relations and notes")
+    rn.add_argument("workbook"); rn.add_argument("pairs", nargs="+", help="OLD NEW [OLD NEW ...]")
     rn.add_argument("--collection", action="store_true", help="rename a collection, not a concept"); rn.set_defaults(fn=cmd_rename)
-    ft = sub.add_parser("fit"); ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
+    ft = sub.add_parser("fit", help="write formulas, stretch the Excel table, write value lists and dropdowns")
+    ft.add_argument("workbook"); ft.set_defaults(fn=cmd_fit)
     oi = sub.add_parser("owl-import", help="add OWL classes as concepts, merging with existing ones")
     oi.add_argument("workbook", help="v9 workbook (an empty template for a new vocabulary)")
     oi.add_argument("owl", nargs="+", help="OWL files (Turtle), imported in this order")

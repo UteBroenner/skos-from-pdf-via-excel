@@ -15,15 +15,29 @@ from .reader import Vocabulary, RELATION_FIELDS, label_fields, split_multi, sour
 from .uri import LOCAL_NAME_RE, expected_name
 from .samling import collections, sentence_problems
 
+# allowed values of euvoc:status (the template's statusliste)
 STATUS_VALUES = {"kandidat", "gjeldende", "utdatert", "forkastet"}
+# allowed values of the internal column type (1, 2, 3)
 TYPES = {"1", "2", "3"}
 SOURCE_RELATIONS = {"self-composed", "derived-from-source", "direct-from-source"}   # skosno:relationshipWithSource
+# a vok: prefix in a table cell (v8/v9 write the concept name only)
 PREFIX_RE = re.compile(r"(?<![\w-])vok:(?=[A-Za-z0-9])")
 KODE_RE = re.compile(r"(?<![\w-])kode:(?=[A-Za-z0-9])")     # code-list references: kept until code lists are decided
 
 
 @dataclass
 class Finding:
+    """One result of a check.
+
+    Attributes:
+        rule: rule ID, e.g. VT-REQ-DEF (see RULES).
+        severity: error, warning or info.
+        key: row key of the concept, or None for scheme-level findings.
+        sheet: sheet name.
+        row: row number in the sheet.
+        message: rule text, with details after a colon.
+        ref: reference to the instruction or source rule (e.g. S11), may be empty.
+    """
     rule: str
     severity: str
     key: str | None
@@ -33,9 +47,11 @@ class Finding:
     ref: str = ""
 
     def as_dict(self):
+        """The finding as a dict (for the JSON report)."""
         return asdict(self)
 
 
+# rule ID -> (severity, description, reference to the instruction or source rule)
 RULES = {
     "VT-ID-FORMAT": ("error", "column A must be <kortnavn>-<concept name> (formula in the template)", "template col A"),
     "VT-KORTNAVN": ("error", "kortnavn may only contain letters, digits and hyphens, starting with a letter or digit", "template v9"),
@@ -84,6 +100,7 @@ RULES = {
 
 
 def _f(rule, c=None, msg_extra=""):
+    """Finding for rule on concept c, with the rule text from RULES and optional details."""
     sev, msg, ref = RULES[rule]
     return Finding(rule, sev, c.key if c else None, c.sheet if c else None, c.row if c else None,
                    msg + (f": {msg_extra}" if msg_extra else ""), ref)
@@ -96,6 +113,7 @@ def _find_cycles(graph: dict[str, list[str]]) -> list[list[str]]:
     cycles, seen = [], set()
 
     def visit(n, stack):
+        """Depth-first visit; a grey (open) node reached again closes a cycle."""
         colour[n] = GREY
         stack.append(n)
         for m in graph.get(n, []):
@@ -119,6 +137,7 @@ def _find_cycles(graph: dict[str, list[str]]) -> list[list[str]]:
 
 
 def _ancestors(graph, start):
+    """All nodes reachable from start in graph ({node: [parents]})."""
     out, todo = set(), list(graph.get(start, []))
     while todo:
         n = todo.pop()
@@ -142,6 +161,17 @@ def _is_variant_pair(a: str, b: str) -> bool:
 
 
 def validate(v: Vocabulary) -> list[Finding]:
+    """Run all VT rules on a vocabulary.
+
+    The rules and their severities are listed in RULES and in the README. Checks that need the whole vocabulary
+    (cycles, broader/related clashes, collections, type-1 isolation) run after the per-concept checks.
+
+    Args:
+        v: the vocabulary from reader.read_workbook.
+
+    Returns:
+        The findings, in the order they were found.
+    """
     F: list[Finding] = []
     concepts = v.concepts
     LF, DF = v.label_field, v.def_field   # main-language label / definition
@@ -291,6 +321,7 @@ def _collection_findings(v: Vocabulary, by_key) -> list[Finding]:
     cols = collections(v)
     names = {(c.get("uri") or "").strip() for c in v.concepts}
     def coll(rule, col, extra):
+        """Finding for a collection rule, placed on the first member concept."""
         first = by_key[col.members[0]]
         return Finding(rule, RULES[rule][0], first.key, first.sheet, first.row,
                        f"{RULES[rule][1]}: {extra}", RULES[rule][2])
@@ -311,6 +342,7 @@ def _collection_findings(v: Vocabulary, by_key) -> list[Finding]:
 
 
 def summarise(findings: list[Finding]) -> dict:
+    """Counts of errors, warnings and info, and one entry per rule (severity, rule, count, description)."""
     by_rule = Counter((f.severity, f.rule) for f in findings)
     return {
         "errors": sum(1 for f in findings if f.severity == "error"),

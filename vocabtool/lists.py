@@ -22,6 +22,7 @@ from openpyxl.utils import get_column_letter
 
 from .reader import normalise_header, audience, source_relation
 
+# name of the hidden sheet with the value lists
 SHEET = "lister"
 
 # (property in the header row, named range, first column on the 'lister' sheet, headers, rows: label, code, URI)
@@ -74,6 +75,7 @@ def _to_label(prop, rows, value):
 
 
 def _header_row(ws):
+    """Row number of the property row (dct:identifier in column A), or None."""
     return next((r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier"), None)
 
 

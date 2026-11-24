@@ -27,16 +27,21 @@ from .lists import save_workbook
 # Appendices: "<word> B" on a line of its own, with sections "B.3", "B.3.1Armering…".
 # A line that ends in a page number is a table-of-contents entry, not a heading.
 HEADING_RE = re.compile(r"^(?P<num>\d{1,2}(?:\.\d{1,2}){0,4})\s?(?P<title>[A-ZÆØÅ][^\n]*[a-zæøå][^\n]*?)\s*$")
+# appendix section heading: letter and number (A.1, B.2.3)
 APPENDIX_SECTION_RE = re.compile(r"^(?P<num>[A-Z](?:\.\d{1,2}){1,4})\.?\s?(?P<title>[A-ZÆØÅ][^\n]*[a-zæøå][^\n]*?)\s*$")
+# a page number at the end of a line (table of contents entry)
 TOC_ENTRY_RE = re.compile(r"\s\d{1,4}\s*$")
+# words that start an appendix heading (default of --appendix-words)
 APPENDIX_WORDS = ("Tillegg", "Vedlegg", "Appendix", "Annex")
 
 
 def _depth(num: str) -> int:
+    """Heading depth of a section number: "5" -> 1, "5.2" -> 2."""
     return num.count(".") + 1
 
 
 def _num_key(num: str) -> tuple:
+    """Sort key for section numbers ("5.10" after "5.9"; letters for appendices)."""
     return tuple(int(x) if x.isdigit() else ord(x) for x in num.split("."))
 
 
@@ -114,6 +119,7 @@ def split_text(path, level: int = 1, appendix_words=APPENDIX_WORDS, start_line: 
 
 
 # ---------------------------------------------------------------- prompt
+# the fields of one agent record and what each must hold (also shown to the agent in the prompt)
 RECORD_FIELDS = {
     "term": "anbefalt term på hovedspråket, med liten forbokstav unntatt akronymer",
     "section": "avsnittsnummeret der begrepet defineres eller innføres, f.eks. 5.2 eller B.3.1",
@@ -130,6 +136,7 @@ RECORD_FIELDS = {
     "uncertain": "kort beskrivelse av det du er usikker på (type, relasjon, sammenslåing), ellers null",
 }
 
+# prompt template for one chunk; placeholders are filled by prepare (--prompt-template replaces it)
 PROMPT = """Du ekstraherer begreper fra ett kapittel av kilden «{title_doc}» (kortnavn {kortnavn}).
 Les bare kapitlet under. Følg feltinstruksene under. Du skal KUN ekstrahere – ikke mappe, validere eller konvertere.
 
@@ -197,6 +204,7 @@ def prepare(txt, out_dir, instructions, kortnavn, title_doc, known_workbooks=(),
 
 # ---------------------------------------------------------------- collect
 def _norm(s: str) -> str:
+    """Normalised text for the quote check: quotes, hyphenation at line breaks, whitespace and case do not matter."""
     s = s.replace(" ", " ").replace("«", '"').replace("»", '"').replace("“", '"').replace("”", '"').replace("’", "'")
     s = re.sub(r"(\w)-\s+(\w)", r"\1\2", s)          # hyphenation across line breaks
     return re.sub(r"\s+", " ", s).strip().lower()
@@ -208,6 +216,13 @@ def _key(term: str) -> str:
 
 
 def check_record(r: dict) -> list[str]:
+    """Check one agent record against RECORD_FIELDS.
+
+    Records written with the former field name tier are accepted (renamed to type).
+
+    Returns:
+        The problems found; an empty list means the record is valid.
+    """
     errs = []
     if "type" not in r and "tier" in r:          # records written before the rename
         r["type"] = r.pop("tier")
@@ -282,6 +297,7 @@ def collect(manifest_path, workbook, out, source, contact=None, kortnavn=None, t
     rows, batch, texts = [], {}, {}
 
     def where_of(r):
+        """Source reference for the editorial note: "<document> kap. <section>"."""
         return f"{man['title']} kap. {r['section']}"
 
     for ch in man["chapters"]:
@@ -385,6 +401,7 @@ def collect(manifest_path, workbook, out, source, contact=None, kortnavn=None, t
 
 
 def report_md(report: dict) -> str:
+    """Markdown report of extract collect: chapters, accepted, rejected, downgraded quotes, existing, links."""
     L = ["# Extraction report", "", "| Chapter | Status | Records | Accepted |", "| --- | --- | --- | --- |"]
     L += [f"| {c['id']} | {c['status']} | {c.get('records', '')} | {c.get('accepted', '')} |" for c in report["chapters"]]
     L += ["", f"## Accepted ({len(report['accepted'])})", ""] + [f"- {a['term']} ({a['concept']}, kap. {a['section']})" for a in report["accepted"]]

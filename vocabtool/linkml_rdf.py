@@ -23,8 +23,11 @@ from linkml_runtime.utils.schemaview import SchemaView
 
 from .reader import Vocabulary, read_workbook, split_multi, source_relation, audience
 
+# repository root
 ROOT = Path(__file__).resolve().parent.parent
+# the LinkML schema
 SCHEMA = ROOT / "schema" / "svv_vokabular.yaml"
+# hand-written SHACL-SPARQL rules across rows
 CROSS_ROW_SHAPES = ROOT / "schema" / "shapes" / "cross_row.shacl.ttl"
 
 # reader field -> schema slot
@@ -46,11 +49,14 @@ FIELD_TO_SLOT = {
     "label_es": "pref_label_es", "alt_en_us": "alt_label_en_us", "alt_en_gb": "alt_label_en_gb",
     "alt_de": "alt_label_de", "alt_es": "alt_label_es", "def_en_us": "definition_en_us", "scope_note_en_us": "scope_note_en_us",
 }
+# slots whose values are concept names, turned into concept URIs
 RELATION_SLOTS = {"broader", "is_part_of", "related"}
+# base of the ConceptScheme URIs
 BASE = "http://example.org/vegvesen/vokabular/"
 
 
 def schemaview() -> SchemaView:
+    """SchemaView of schema/svv_vokabular.yaml."""
     return SchemaView(str(SCHEMA))
 
 
@@ -107,6 +113,7 @@ def workbook_to_data(v: Vocabulary, sv: SchemaView | None = None) -> dict:
 
 
 # ---------------------------------------------------------------- data -> RDF
+# values accepted as IRIs in uri slots (http, https, urn); other values are reported, not written
 IRI_RE = __import__("re").compile(r"^(https?|urn):[^\s<>\"{}|\\^`]+$")
 
 
@@ -121,6 +128,7 @@ def data_to_graph(data: dict, sv: SchemaView | None = None, skipped: list | None
     g.bind("vokdata", Namespace(data["uri"] + "/"))
 
     def emit(subject: URIRef, cls: str, obj: dict):
+        """Add the triples of one LinkML object; values that are not valid IRIs where IRIs are required go to skipped."""
         g.add((subject, RDF.type, URIRef(sv.get_uri(sv.get_class(cls), expand=True))))
         for slot_name, value in obj.items():
             slot = sv.induced_slot(slot_name, cls)
@@ -135,6 +143,7 @@ def data_to_graph(data: dict, sv: SchemaView | None = None, skipped: list | None
                     g.add((subject, pred, node))
 
     def to_node(slot, v):
+        """RDF node for a slot value: IRI, enum meaning IRI, typed or language-tagged literal; None if invalid."""
         rng = slot.range
         if rng in sv.all_classes() or rng in ("uri", "uriorcurie"):
             return URIRef(str(v)) if IRI_RE.match(str(v)) else None
@@ -247,6 +256,11 @@ def build_shapes(generated_shacl: str | Path, sv: SchemaView | None = None) -> G
 
 
 def shacl_validate(data_graph: Graph, shapes: Graph):
+    """Validate a data graph with pySHACL (SHACL-SPARQL enabled, warnings allowed).
+
+    Returns:
+        (conforms, results), results as dicts: severity, focus, path, value, component, message.
+    """
     from pyshacl import validate
     conforms, report_graph, report_text = validate(data_graph, shacl_graph=shapes, inference="none",
                                                    advanced=True, allow_warnings=True)
@@ -264,4 +278,5 @@ def shacl_validate(data_graph: Graph, shapes: Graph):
 
 
 def write_yaml(data: dict, path: str | Path):
+    """Write LinkML data as YAML (UTF-8, key order kept)."""
     Path(path).write_text(yaml.safe_dump(data, allow_unicode=True, sort_keys=False, width=120), encoding="utf-8")

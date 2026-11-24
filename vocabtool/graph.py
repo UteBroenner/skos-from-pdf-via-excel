@@ -10,11 +10,23 @@ from .reader import Vocabulary, label_fields, split_multi
 from .validate import Finding
 from .samling import collections
 
+# the HTML page the data is embedded in
 TEMPLATE = Path(__file__).with_name("graph_template.html")
+# relation field -> edge type on the graph page
 EDGE_TYPE = {"broader": "broader", "is_part_of": "isPartOf", "related": "related"}
 
 
 def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
+    """Nodes, edges and findings for the graph page.
+
+    Args:
+        v: the vocabulary.
+        findings: findings to mark on the nodes.
+
+    Returns:
+        A dict with nodes (concepts and collections, with labels, definitions, type and issues), edges (broader,
+        isPartOf, related, member), dangling relation targets and metadata.
+    """
     by_key = v.by_key()
     issues: dict[str, list] = {}
     for f in findings:
@@ -69,6 +81,17 @@ def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
 
 
 def write_graph(v: Vocabulary, findings: list[Finding], dst: str | Path, title: str | None = None) -> Path:
+    """Write the self-contained graph page (vocabtool/graph_template.html with the data embedded).
+
+    Args:
+        v: the vocabulary.
+        findings: findings to mark.
+        dst: the .html file to write.
+        title: page title; default "<kortnavn> concept graph".
+
+    Returns:
+        The path written.
+    """
     data = graph_data(v, findings)
     page_title = title or f"{v.kortnavn or 'Vocabulary'} concept graph"
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")

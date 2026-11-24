@@ -11,7 +11,9 @@ The crochet example (`datasets/hekling/`) is described in its own README.
   - `schema/`: LinkML schema, generated artefacts and cross-row SHACL
   - `templates/`: empty templates for v9 (master), v9 with language extension, and v7
   - `datasets/hekling/`: example vocabulary
-- **Not in the repository:** Statens vegvesen vocabularies (N101, V440, V441, BRUTUS), their ontologies, the handbook
+  - `docs/`: this status and the API reference (`docs/api/`, generated from the docstrings by `tools/gen_api_docs.py`)
+  - `tests/`: tests; `.github/workflows/docs.yml` checks the API reference and runs the tests on every push
+- **Not in the repository:** Statens vegvesen vocabularies (N101, V440, V441, BRUTUS, DLVN), their ontologies, the handbook
   texts and all outputs. They are kept in
   `samples/` and `out/`, which are ignored by git, and were removed from the history. Upload them to a session when they are needed.
 
@@ -205,6 +207,11 @@ and the links to the graph pages are in `out/brutus-status.md` (local, not in gi
 - **DLVN** built from the shared definitions list (see *Vocabularies*).
 - **Methodology document:** first update to v9 as tracked changes with 24 comments (`out/method/PoV_Rekkverk-metodikk-v9.docx`,
   local); the owner is rewriting it. It should add DLVN, and say "type" instead of "Tier".
+
+- **Code documentation:** every module, class, function and constant has a docstring or comment (Google style);
+  `tools/gen_api_docs.py` writes the API reference to `docs/api/` (Markdown, renders and exports on GitHub), and the
+  GitHub workflow fails when it is out of date. README brought up to date (one section per command, documentation and
+  tests, layout).
 
 ## Instructions (not yet in the repository)
 
