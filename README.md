@@ -36,8 +36,10 @@ outputs are written to `out/`. Both folders are ignored by git.
 
 ## Installation
 
-Python 3.10 or later. Most commands need only `openpyxl`; `rdf` (LinkML, SHACL) and `owl-import` (rdflib) need
-everything in `requirements.txt`:
+Python 3.10 or later (tested with 3.12 and 3.13). Most commands need only `openpyxl`; `rdf` (LinkML, SHACL) and
+`owl-import` (rdflib) need everything in `requirements.txt`. The versions there are pinned to the ones the tools were
+tested with; LinkML changes between releases, and the project works around some of its gaps in its own code (see
+`schema/README.md`), so test the whole route (`check`, `rdf`, the tests) before raising a version:
 
 ```bash
 python -m venv .venv && .venv/bin/pip install -r requirements.txt

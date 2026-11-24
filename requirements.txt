@@ -1,5 +1,8 @@
-openpyxl>=3.1
-linkml>=1.12
-rdflib>=7
-pyshacl>=0.30
-PyYAML>=6
+# Pinned to the versions the tools were developed and tested with (Python 3.12/3.13).
+# Most commands need only openpyxl; rdf needs linkml, linkml-runtime, rdflib, pyshacl and PyYAML; owl-import needs rdflib.
+openpyxl==3.1.5
+linkml==1.12.1
+linkml-runtime==1.12.1
+rdflib==7.6.0
+pyshacl==0.40.2
+PyYAML==6.0.3
