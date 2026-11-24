@@ -207,11 +207,18 @@ and the links to the graph pages are in `out/brutus-status.md` (local, not in gi
 - **DLVN** built from the shared definitions list (see *Vocabularies*).
 - **Methodology document:** first update to v9 as tracked changes with 24 comments (`out/method/PoV_Rekkverk-metodikk-v9.docx`,
   local); the owner is rewriting it. It should add DLVN, and say "type" instead of "Tier".
-
-- **Code documentation:** every module, class, function and constant has a docstring or comment (Google style);
-  `tools/gen_api_docs.py` writes the API reference to `docs/api/` (Markdown, renders and exports on GitHub), and the
-  GitHub workflow fails when it is out of date. README brought up to date (one section per command, documentation and
-  tests, layout).
+- **Pull request #6 (merged):**
+  - **Code documentation:** every module, class, function and constant has a docstring or comment (Google style:
+    summary, Args, Returns, Raises, Attributes); every subcommand has a help text. No code changes otherwise.
+  - **API reference:** `tools/gen_api_docs.py` writes `docs/api/` (one Markdown page per module and an index) from
+    the docstrings; standard library only. The pages render and export on GitHub (or with pandoc).
+  - **GitHub workflow** `.github/workflows/docs.yml`: on every push and pull request, fails when `docs/api/` is out of
+    date and runs the tests. After a code change, run `python tools/gen_api_docs.py` and commit `docs/api/`.
+  - **Pinned dependencies** in `requirements.txt`: openpyxl 3.1.5, linkml and linkml-runtime 1.12.1, rdflib 7.6.0,
+    pyshacl 0.40.2, PyYAML 6.0.3. Tested in a clean environment. Test the whole route (`check`, `rdf`, tests) before
+    raising a version; LinkML gaps are worked around in project code.
+  - **README** reorganised: installation, commands table, one section per command, conventions, documentation and
+    tests, layout.
 
 ## Instructions (not yet in the repository)
 
