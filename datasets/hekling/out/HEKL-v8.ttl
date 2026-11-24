@@ -10,7 +10,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 vokdata:ChainSpace a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ChainSpace" ;
@@ -43,7 +43,7 @@ vokdata:ChainSpace a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:DoubleCrochetThreeTogether a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-DoubleCrochetThreeTogether" ;
@@ -67,7 +67,7 @@ vokdata:DoubleCrochetThreeTogether a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ExtendedHalfDoubleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ExtendedHalfDoubleCrochet" ;
@@ -88,7 +88,7 @@ vokdata:ExtendedHalfDoubleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ExtendedSingleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ExtendedSingleCrochet" ;
@@ -111,7 +111,7 @@ vokdata:ExtendedSingleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ForkedCluster a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ForkedCluster" ;
@@ -130,7 +130,7 @@ vokdata:ForkedCluster a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:FrontPostTrebleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-FrontPostTrebleCrochet" ;
@@ -154,7 +154,7 @@ vokdata:FrontPostTrebleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:HalfDoubleCrochetTwoTogether a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-HalfDoubleCrochetTwoTogether" ;
@@ -177,7 +177,7 @@ vokdata:HalfDoubleCrochetTwoTogether a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:InvisibleDecrease a skos:Concept ;
-    svv:tier 2 ;
+    svv:type 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-InvisibleDecrease" ;
@@ -197,7 +197,7 @@ vokdata:InvisibleDecrease a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:MagicRing a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-MagicRing" ;
@@ -218,7 +218,7 @@ vokdata:MagicRing a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ReverseSingleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ReverseSingleCrochet" ;
@@ -240,7 +240,7 @@ vokdata:ReverseSingleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SingleCrochetThreeTogether a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SingleCrochetThreeTogether" ;
@@ -265,7 +265,7 @@ vokdata:SingleCrochetThreeTogether a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SlantingCluster a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SlantingCluster" ;
@@ -283,7 +283,7 @@ vokdata:SlantingCluster a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SlipStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SlipStitch" ;
@@ -310,7 +310,7 @@ vokdata:SlipStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SpikeStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SpikeStitch" ;
@@ -328,7 +328,7 @@ vokdata:SpikeStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:TrebleCrochetThreeTogether a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-TrebleCrochetThreeTogether" ;
@@ -352,7 +352,7 @@ vokdata:TrebleCrochetThreeTogether a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:TrebleCrochetTwoTogether a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-TrebleCrochetTwoTogether" ;
@@ -376,7 +376,7 @@ vokdata:TrebleCrochetTwoTogether a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:TurningChain a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-TurningChain" ;
@@ -401,7 +401,7 @@ vokdata:TurningChain a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:YarnOver a skos:Concept ;
-    svv:tier 2 ;
+    svv:type 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-YarnOver" ;
@@ -427,7 +427,7 @@ vokdata:YarnOver a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:BackLoopOnly a skos:Concept ;
-    svv:tier 2 ;
+    svv:type 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-BackLoopOnly" ;
@@ -449,7 +449,7 @@ vokdata:BackLoopOnly a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:BackPostDoubleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-BackPostDoubleCrochet" ;
@@ -472,7 +472,7 @@ vokdata:BackPostDoubleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:CrossedDoubleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-CrossedDoubleCrochet" ;
@@ -492,7 +492,7 @@ vokdata:CrossedDoubleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:DoubleTrebleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-DoubleTrebleCrochet" ;
@@ -516,7 +516,7 @@ vokdata:DoubleTrebleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:FoundationChain a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-FoundationChain" ;
@@ -535,7 +535,7 @@ vokdata:FoundationChain a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:FrontPostDoubleTrebleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-FrontPostDoubleTrebleCrochet" ;
@@ -558,7 +558,7 @@ vokdata:FrontPostDoubleTrebleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Increase a skos:Concept ;
-    svv:tier 2 ;
+    svv:type 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Increase" ;
@@ -578,7 +578,7 @@ vokdata:Increase a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:PopcornStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-PopcornStitch" ;
@@ -599,7 +599,7 @@ vokdata:PopcornStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:PuffStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-PuffStitch" ;
@@ -619,7 +619,7 @@ vokdata:PuffStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SingleCrochetTwoTogether a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SingleCrochetTwoTogether" ;
@@ -642,7 +642,7 @@ vokdata:SingleCrochetTwoTogether a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Bobble a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Bobble" ;
@@ -663,7 +663,7 @@ vokdata:Bobble a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Chain a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Chain" ;
@@ -700,7 +700,7 @@ vokdata:Chain a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ClusterVStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ClusterVStitch" ;
@@ -716,7 +716,7 @@ vokdata:ClusterVStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:DoubleCrochetTwoTogether a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-DoubleCrochetTwoTogether" ;
@@ -739,7 +739,7 @@ vokdata:DoubleCrochetTwoTogether a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:FloretStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-FloretStitch" ;
@@ -755,7 +755,7 @@ vokdata:FloretStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:FrontLoopOnly a skos:Concept ;
-    svv:tier 2 ;
+    svv:type 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-FrontLoopOnly" ;
@@ -775,7 +775,7 @@ vokdata:FrontLoopOnly a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:GrannySquare a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-GrannySquare" ;
@@ -793,7 +793,7 @@ vokdata:GrannySquare a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:GritStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-GritStitch" ;
@@ -809,7 +809,7 @@ vokdata:GritStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:HalfDoubleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-HalfDoubleCrochet" ;
@@ -838,7 +838,7 @@ vokdata:HalfDoubleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Picot a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Picot" ;
@@ -855,7 +855,7 @@ vokdata:Picot a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:PikeStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-PikeStitch" ;
@@ -872,7 +872,7 @@ vokdata:PikeStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SedgeStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SedgeStitch" ;
@@ -888,7 +888,7 @@ vokdata:SedgeStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Shell a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Shell" ;
@@ -909,7 +909,7 @@ vokdata:Shell a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:TrebleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-TrebleCrochet" ;
@@ -938,7 +938,7 @@ vokdata:TrebleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:AlpineStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-AlpineStitch" ;
@@ -954,7 +954,7 @@ vokdata:AlpineStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:BlackberrySaladStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-BlackberrySaladStitch" ;
@@ -970,7 +970,7 @@ vokdata:BlackberrySaladStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:BraidedCrochetStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-BraidedCrochetStitch" ;
@@ -986,7 +986,7 @@ vokdata:BraidedCrochetStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:CrossedCableStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-CrossedCableStitch" ;
@@ -1003,7 +1003,7 @@ vokdata:CrossedCableStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:CrossedDoubleCrochet2 a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-CrossedDoubleCrochet2" ;
@@ -1021,7 +1021,7 @@ vokdata:CrossedDoubleCrochet2 a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ForkedClusterStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ForkedClusterStitch" ;
@@ -1037,7 +1037,7 @@ vokdata:ForkedClusterStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:FrontPostDoubleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-FrontPostDoubleCrochet" ;
@@ -1060,7 +1060,7 @@ vokdata:FrontPostDoubleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:IrisStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-IrisStitch" ;
@@ -1076,7 +1076,7 @@ vokdata:IrisStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ModifiedSiltStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ModifiedSiltStitch" ;
@@ -1092,7 +1092,7 @@ vokdata:ModifiedSiltStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:MossStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-MossStitch" ;
@@ -1111,7 +1111,7 @@ vokdata:MossStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:NubbyCrochetStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-NubbyCrochetStitch" ;
@@ -1127,7 +1127,7 @@ vokdata:NubbyCrochetStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:OffsetVStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-OffsetVStitch" ;
@@ -1143,7 +1143,7 @@ vokdata:OffsetVStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:RaisedHerringbone a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-RaisedHerringbone" ;
@@ -1159,7 +1159,7 @@ vokdata:RaisedHerringbone a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Round a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Round" ;
@@ -1182,7 +1182,7 @@ vokdata:Round a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Row a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Row" ;
@@ -1201,7 +1201,7 @@ vokdata:Row a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SiltStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SiltStitch" ;
@@ -1217,7 +1217,7 @@ vokdata:SiltStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SingleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SingleCrochet" ;
@@ -1261,7 +1261,7 @@ vokdata:SingleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ThistleStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ThistleStitch" ;
@@ -1277,7 +1277,7 @@ vokdata:ThistleStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:BoxedBeadStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-BoxedBeadStitch" ;
@@ -1293,7 +1293,7 @@ vokdata:BoxedBeadStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:DoubleCrochet a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-DoubleCrochet" ;
@@ -1342,7 +1342,7 @@ vokdata:DoubleCrochet a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:LazyWaveStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-LazyWaveStitch" ;
@@ -1358,7 +1358,7 @@ vokdata:LazyWaveStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:MiniButterflyStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-MiniButterflyStitch" ;
@@ -1374,7 +1374,7 @@ vokdata:MiniButterflyStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:PostStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-PostStitch" ;
@@ -1393,7 +1393,7 @@ vokdata:PostStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:SlantedSpikeStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-SlantedSpikeStitch" ;
@@ -1409,7 +1409,7 @@ vokdata:SlantedSpikeStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:TrinityStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-TrinityStitch" ;
@@ -1425,7 +1425,7 @@ vokdata:TrinityStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:VStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-VStitch" ;
@@ -1445,7 +1445,7 @@ vokdata:VStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:WattleStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-WattleStitch" ;
@@ -1461,7 +1461,7 @@ vokdata:WattleStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:HappyHearts a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-HappyHearts" ;
@@ -1477,7 +1477,7 @@ vokdata:HappyHearts a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ZigZagLozengeStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ZigZagLozengeStitch" ;
@@ -1493,7 +1493,7 @@ vokdata:ZigZagLozengeStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:ArcadeStitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-ArcadeStitch" ;
@@ -1509,7 +1509,7 @@ vokdata:ArcadeStitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Cluster a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Cluster" ;
@@ -1528,7 +1528,7 @@ vokdata:Cluster a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Decrease a skos:Concept ;
-    svv:tier 2 ;
+    svv:type 2 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Decrease" ;
@@ -1548,7 +1548,7 @@ vokdata:Decrease a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:WaveAndChevron a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-WaveAndChevron" ;
@@ -1564,7 +1564,7 @@ vokdata:WaveAndChevron a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:Stitch a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-Stitch" ;
@@ -1588,7 +1588,7 @@ vokdata:Stitch a skos:Concept ;
     dcat:contactPoint "https://github.com/UteBroenner" .
 
 vokdata:StitchPattern a skos:Concept ;
-    svv:tier 1 ;
+    svv:type 1 ;
     euvoc:status concept_status:CANDIDATE ;
     dct:created "2026-11-02"^^xsd:date ;
     dct:identifier "crochet-us-StitchPattern" ;

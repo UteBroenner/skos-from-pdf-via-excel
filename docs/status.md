@@ -22,7 +22,7 @@ v9 replaces v8 (23 November 2026). The columns are the same; the tools read v8 a
 - **Master:** `templates/SKOS-Excel-mal-v9-for-import.xlsx`, built from the owner's SharePoint v9 file.
   - Changes against v8: value lists on the hidden sheet `lister` with dropdowns in M (målgruppe), O (forhold til kilde)
     and AI (status); no `kodeverk` sheet (dropped for now); B21 says B is generated from the term.
-  - Kept from v8 (missing in the owner's file): formulas in A and B, `endringshash` (AN), AD = B16; `tier` in AO.
+  - Kept from v8 (missing in the owner's file): formulas in A and B, `endringshash` (AN), AD = B16; `type` in AO.
   - `dct:identifier` stays short (`N101-Rekkverk`); the URI is built in the RDF only. No numbered identifiers.
   - Scheme rows: B14 `kortnavn`, B15 title, B16 `dct:creator`, B17 publisher, B18 issued.
   - Requirement row 20, description row 21 (with merged cells), property row 23.
@@ -37,10 +37,10 @@ v9 replaces v8 (23 November 2026). The columns are the same; the tools read v8 a
   - `endringshash` = `TEXTJOIN` of the row content without ID, dates and persons; the column is not wrapped and is
     100 wide, so its long text does not make the rows tall
   - AD `opprettet_av` = B16 `dct:creator` for rows with a name (hidden)
-- **`tier`** is the last column, outside the table. It is internal and not imported. Its header (row 21) describes the
-  tiers: 1 = physical objects, spatial concepts and measurable properties; 2 = processes and states; 3 = normative requirements.
+- **`type`** (called `tier` until 24 November 2026; the values are unchanged) is the last column, outside the table.
+  It is internal and not imported. Its header (row 21) describes the types: 1 = physical objects, spatial concepts and measurable properties; 2 = processes and states; 3 = normative requirements.
 - **Value lists:** status, målgruppe and forhold til kilde, defined in `vocabtool/lists.py` and matching the schema
-  enums (`ConceptStatus`, `Audience`, `RelationshipWithSource`). The dropdowns (also `tier`: 1, 2, 3) hold their
+  enums (`ConceptStatus`, `Audience`, `RelationshipWithSource`). The dropdowns (also `type`: 1, 2, 3) hold their
   values directly, so they survive copying rows; the tools rewrite them on every save (openpyxl drops Excel's newer
   dropdown format). A value outside the list is a warning in Excel. Recognised values are written as the list label (`direct-from-source` → `sitat fra kilde`, `basert på kjelde` → `basert på kilde`). The checker reports
   unknown målgruppe values (`VT-AUDIENCE`); the RDF uses the audience-type URIs.
@@ -92,7 +92,7 @@ v9 replaces v8 (23 November 2026). The columns are the same; the tools read v8 a
 - **Size fields** (areal, bredde, lengde …): a field list uses the specific concepts per bridge category from V440
   (e.g. "areal, bru", "areal, ferjeleie"), not one general concept.
 - **Code lists:** one shared code-list scheme for all vocabularies (K2/V19). To be built; until then `kode:` references stay.
-- **Tier of imported OWL classes:** 1 (`owl-import --tier 1`); existing concepts keep their tier.
+- **Type of imported OWL classes:** 1 (`owl-import --type 1`); existing concepts keep their type.
 - **Concepts without a source definition** are flagged `[fagekspert]` in the editorial note for the expert.
 - **No JSON-LD output.**
 - **Duplicates and generic names:** keep one row per concept; a concept in several groups names all of them in the
@@ -108,7 +108,7 @@ Run as `python -m vocabtool <command>`. Details in the README.
 | `migrate` | v7 → v9; keeps the v7 names, relations become names. Only for real v7 files: workbooks are kept in the current format (v8 or v9), and `migrate` is not extended for mixed layouts |
 | `uri` | fills missing concept names |
 | `rename` | renames a concept and every relation and note that refers to it; `--collection` renames a collection |
-| `fit` | stretches the table, formatting and dropdowns; writes the formulas (A, B, `opprettet_av`, `endringshash`) and the tier description |
+| `fit` | stretches the table, formatting and dropdowns; writes the formulas (A, B, `opprettet_av`, `endringshash`) and the type description |
 | `rdf` | LinkML data, SKOS Turtle (with `skos:Collection`), LinkML and SHACL validation |
 | `owl-import` | adds OWL classes as concepts, merging with existing ones (label, or a reviewed merge map) |
 | `set-fields` | writes reviewed values (e.g. definitions from a handbook) into concepts by name, from JSON |
@@ -161,13 +161,13 @@ and the links to the graph pages are in `out/brutus-status.md` (local, not in gi
 - **Pull request #3 (merged):**
   - **Template v9** replaces v8 (same columns). It was built from the owner's SharePoint file. The formulas in A and B,
     `endringshash` and AD = B16 are kept. `dct:identifier` stays short. The `kodeverk` sheet is dropped for now.
-  - **Dropdowns** for status, målgruppe, forhold til kilde and `tier`, with the values in the dropdown itself. The tools
+  - **Dropdowns** for status, målgruppe, forhold til kilde and `type`, with the values in the dropdown itself. The tools
     rewrite them on every save.
   - **Column B** is generated from column C by a `LET` formula (Excel 365/2021).
   - **Persons** are not converted to RDF. The property row has AB `prov:Person` and AD `dct:creator`.
   - **Colours:** the tools colour only the columns they add. X is recoloured as anbefalt; the SVV colours (M–P, AG–AI)
     are deliberate.
-  - **`endringshash`** is wide and not wrapped. The tier descriptions are in the header.
+  - **`endringshash`** is wide and not wrapped. The type descriptions are in the header.
   - **Earlier in the pull request:** `extract prepare|collect` (one agent per chapter); `migrate` reads v7 in any column
     order.
 - **Checks:** V440, V441 and the Data governance files were rebuilt with v9, with the same checker findings as before.

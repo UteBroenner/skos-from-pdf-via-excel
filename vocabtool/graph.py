@@ -37,7 +37,7 @@ def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
                 alts[tag] = ", ".join(split_multi(c.get(fld)))
         for tag in labels:
             langs_seen[tag] = langs_seen.get(tag, 0) + 1
-        nodes.append({"id": c.key, "label": c.get(v.label_field) or c.key, "tier": c.tier or "",
+        nodes.append({"id": c.key, "label": c.get(v.label_field) or c.key, "type": c.type or "",
                       "sheet": c.sheet, "def": c.get(v.def_field) or "", "defs": defs,
                       "alt": "; ".join(f"{v} ({t})" for t, v in alts.items()),
                       "name": c.get("uri") or "", "labels": labels, "alts": alts,
@@ -55,7 +55,7 @@ def graph_data(v: Vocabulary, findings: list[Finding]) -> dict:
     # collections (from the scope-note sentence) as nodes of their own, linked to their members
     for col in collections(v).values():
         cid = f"samling/{col.name}"
-        nodes.append({"id": cid, "kind": "collection", "label": col.label, "tier": "c", "sheet": "samling",
+        nodes.append({"id": cid, "kind": "collection", "label": col.label, "type": "c", "sheet": "samling",
                       "def": "", "defs": {}, "alt": "", "name": cid, "labels": {v.main_lang: col.label}, "alts": {},
                       "notes": [], "issues": []})
         edges += [{"s": k, "t": cid, "type": "member"} for k in col.members]

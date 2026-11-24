@@ -120,14 +120,14 @@ RECORD_FIELDS = {
     "quote": "ordrett setning fra kapitlet som definerer eller innfører begrepet (kopier tegn for tegn)",
     "definition": "definisjon på hovedspråket, genus/differentia, liten forbokstav, uten punktum til slutt; tom hvis kilden ikke gir grunnlag",
     "definition_kind": "\"quote\" hvis definisjonen er ordrett fra kilden, \"paraphrase\" hvis omskrevet, \"none\" hvis tom",
-    "tier": "1, 2 eller 3",
+    "type": "1, 2 eller 3",
     "alt_labels": "liste med tillatte termer og akronymer fra kilden (kan være tom)",
     "notation": "kode fra kilden, ellers null",
     "broader": "liste med termer (ikke navn) for overbegreper, bare når kilden uttrykker det",
     "is_part_of": "liste med termer for helheter begrepet er del av, bare når kilden uttrykker det",
     "related": "liste med termer for relaterte begreper, bare når kilden kobler dem uttrykkelig",
     "cue": "ordene i kilden som begrunner relasjonene (f.eks. «omfatter», «består av»), ellers null",
-    "uncertain": "kort beskrivelse av det du er usikker på (tier, relasjon, sammenslåing), ellers null",
+    "uncertain": "kort beskrivelse av det du er usikker på (type, relasjon, sammenslåing), ellers null",
 }
 
 PROMPT = """Du ekstraherer begreper fra ett kapittel av kilden «{title_doc}» (kortnavn {kortnavn}).
@@ -209,13 +209,15 @@ def _key(term: str) -> str:
 
 def check_record(r: dict) -> list[str]:
     errs = []
-    for k in ("term", "section", "quote", "definition_kind", "tier"):
+    if "type" not in r and "tier" in r:          # records written before the rename
+        r["type"] = r.pop("tier")
+    for k in ("term", "section", "quote", "definition_kind", "type"):
         if r.get(k) in (None, ""):
             errs.append(f"missing {k}")
     if r.get("definition_kind") not in ("quote", "paraphrase", "none"):
         errs.append(f"definition_kind {r.get('definition_kind')!r}")
-    if str(r.get("tier")) not in ("1", "2", "3"):
-        errs.append(f"tier {r.get('tier')!r}")
+    if str(r.get("type")) not in ("1", "2", "3"):
+        errs.append(f"type {r.get('type')!r}")
     for k in ("alt_labels", "broader", "is_part_of", "related"):
         if r.get(k) is not None and not isinstance(r.get(k), list):
             errs.append(f"{k} is not a list")
@@ -368,7 +370,7 @@ def collect(manifest_path, workbook, out, source, contact=None, kortnavn=None, t
              "notation": r.get("notation") or None, "alt_" + LF[6:]: ", ".join(r.get("alt_labels") or []) or None,
              "broader": rel_names["broader"], "is_part_of": rel_names["is_part_of"], "related": rel_names["related"],
              "exact_match": exact, "source": src, "relationship_with_source": rel,
-             "editorial_note": note, "status": "kandidat", "contact_point": contact, "created": today, "tier": str(r["tier"])}
+             "editorial_note": note, "status": "kandidat", "contact_point": contact, "created": today, "type": str(r["type"])}
         next_row += 1
         for fld, val in f.items():
             if fld in col and val is not None:

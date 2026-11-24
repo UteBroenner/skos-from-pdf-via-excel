@@ -447,14 +447,14 @@ class Concept(ConfiguredBaseModel):
                          'requirement': {'tag': 'requirement', 'value': 'valgfri'}},
          'domain_of': ['Concept'],
          'slot_uri': 'skosno:valueRange'} })
-    tier: Optional[int] = Field(default=None, description="""1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes.""", ge=1, le=3, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column',
+    type: Optional[int] = Field(default=None, description="""1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only type 1 becomes OWL classes. Called tier before 24 November 2026.""", ge=1, le=3, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column',
                                           'value': 'AO (base template), AY (language '
                                                    'extension): always the last '
                                                    'column, outside the Excel table'},
-                         'excel_name': {'tag': 'excel_name', 'value': 'tier'},
+                         'excel_name': {'tag': 'excel_name', 'value': 'type'},
                          'requirement': {'tag': 'requirement', 'value': 'internt'}},
          'domain_of': ['Concept'],
-         'slot_uri': 'svv:tier'} })
+         'slot_uri': 'svv:type'} })
     pref_label_en_us: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'annotations': {'excel_column': {'tag': 'excel_column', 'value': 'AN'},
                          'excel_name': {'tag': 'excel_name',
                                         'value': 'anbefalt_term_engelsk_us'},

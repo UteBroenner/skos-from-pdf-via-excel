@@ -17,7 +17,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: stitch
   pref_label_en_gb: stitch
   pref_label_de: Masche
@@ -63,7 +63,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: chain
   pref_label_en_gb: chain
   pref_label_de: Luftmasche
@@ -97,7 +97,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: slip stitch
   pref_label_en_gb: slip stitch
   pref_label_de: Kettmasche
@@ -124,7 +124,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: magic ring
   pref_label_en_gb: magic ring
   pref_label_de: Fadenring
@@ -150,7 +150,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: foundation chain
   pref_label_en_gb: foundation chain
   pref_label_de: Luftmaschenkette
@@ -174,7 +174,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: turning chain
   pref_label_en_gb: turning chain
   pref_label_de: Wendeluftmasche
@@ -223,7 +223,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: single crochet
   pref_label_en_gb: double crochet
   pref_label_de: feste Masche
@@ -262,7 +262,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: half double crochet
   pref_label_en_gb: half treble crochet
   pref_label_de: halbes Stäbchen
@@ -318,7 +318,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: double crochet
   pref_label_en_gb: treble crochet
   pref_label_de: Stäbchen
@@ -359,7 +359,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: treble crochet
   pref_label_en_gb: double treble crochet
   pref_label_de: Doppelstäbchen
@@ -394,7 +394,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: double treble crochet
   pref_label_en_gb: triple treble crochet
   pref_label_de: dreifaches Stäbchen
@@ -423,7 +423,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: post stitch
   pref_label_en_gb: raised stitch
   pref_label_de: Reliefmasche
@@ -448,7 +448,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: front post double crochet
   pref_label_en_gb: front post treble crochet
   pref_label_de: Reliefstäbchen von vorne
@@ -479,7 +479,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: back post double crochet
   pref_label_en_gb: back post treble crochet
   pref_label_de: Reliefstäbchen von hinten
@@ -505,7 +505,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 2
+  type: 2
   pref_label_en_us: back loop only
   pref_label_en_gb: back loop only
   pref_label_de: nur ins hintere Maschenglied
@@ -527,7 +527,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 2
+  type: 2
   pref_label_en_us: front loop only
   pref_label_en_gb: front loop only
   pref_label_de: nur ins vordere Maschenglied
@@ -548,7 +548,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 2
+  type: 2
   pref_label_en_us: increase
   pref_label_en_gb: increase
   pref_label_de: Zunahme
@@ -572,7 +572,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 2
+  type: 2
   pref_label_en_us: decrease
   pref_label_en_gb: decrease
   pref_label_de: Abnahme
@@ -601,7 +601,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: single crochet two together
   pref_label_en_gb: double crochet two together
   pref_label_de: 2 feste Maschen zusammen abmaschen
@@ -631,7 +631,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: double crochet two together
   pref_label_en_gb: treble crochet two together
   pref_label_de: 2 Stäbchen zusammen abmaschen
@@ -661,7 +661,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 2
+  type: 2
   pref_label_en_us: invisible decrease
   pref_label_en_gb: invisible decrease
   pref_label_de: unsichtbare Abnahme
@@ -682,7 +682,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: cluster
   pref_label_en_gb: cluster
   pref_label_de: Büschelmasche
@@ -710,7 +710,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: bobble
   pref_label_en_gb: bobble
   pref_label_de: Noppe
@@ -732,7 +732,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: puff stitch
   pref_label_en_gb: puff stitch
   pref_label_de: Puffmasche
@@ -756,7 +756,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: popcorn stitch
   pref_label_en_gb: popcorn stitch
   pref_label_de: Popcornmasche
@@ -782,7 +782,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: shell
   pref_label_en_gb: shell
   pref_label_de: Fächer
@@ -805,7 +805,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: V-stitch
   pref_label_en_gb: V-stitch
   pref_label_de: V-Masche
@@ -828,7 +828,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: crossed double crochet
   pref_label_en_gb: crossed treble crochet
   pref_label_de: gekreuztes Stäbchen
@@ -851,7 +851,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: reverse single crochet
   pref_label_en_gb: crab stitch
   pref_label_de: Krebsmasche
@@ -871,7 +871,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: picot
   pref_label_en_gb: picot
   pref_label_de: Pikot
@@ -889,7 +889,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: row
   pref_label_en_gb: row
   pref_label_de: Reihe
@@ -910,7 +910,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: round
   pref_label_en_gb: round
   pref_label_de: Runde
@@ -936,7 +936,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: granny square
   pref_label_en_gb: granny square
   pref_label_de: Granny Square
@@ -962,7 +962,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 2
+  type: 2
   pref_label_en_us: yarn over
   pref_label_en_gb: yarn round hook
   pref_label_de: Umschlag
@@ -988,7 +988,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: moss stitch
   pref_label_en_gb: moss stitch
   pref_label_es: punto musgo
@@ -1015,7 +1015,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: spike stitch
   pref_label_en_gb: spike stitch
   alt_label_en_us:
@@ -1039,7 +1039,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: extended single crochet
   pref_label_en_gb: extended double crochet
   pref_label_de: verlängerte feste Masche
@@ -1064,7 +1064,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: extended half double crochet
   pref_label_en_gb: extended half treble crochet
   pref_label_de: verlängertes halbes Stäbchen
@@ -1094,7 +1094,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: single crochet three together
   pref_label_en_gb: double crochet three together
   pref_label_de: 3 feste Maschen zusammen abmaschen
@@ -1125,7 +1125,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: treble crochet two together
   pref_label_en_gb: double treble crochet two together
   pref_label_de: 2 Doppelstäbchen zusammen abmaschen
@@ -1157,7 +1157,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: treble crochet three together
   pref_label_en_gb: double treble crochet three together
   pref_label_de: 3 Doppelstäbchen zusammen abmaschen
@@ -1189,7 +1189,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: double crochet three together
   pref_label_en_gb: treble crochet three together
   pref_label_de: 3 Stäbchen zusammen abmaschen
@@ -1222,7 +1222,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: half double crochet two together
   pref_label_en_gb: half treble crochet two together
   pref_label_de: 2 halbe Stäbchen zusammen abmaschen
@@ -1252,7 +1252,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: front post double treble crochet
   pref_label_en_gb: front post triple treble crochet
   alt_label_en_us:
@@ -1288,7 +1288,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: chain space
   pref_label_en_gb: chain space
   pref_label_de: Luftmaschenbogen
@@ -1317,7 +1317,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: stitch pattern
   pref_label_en_gb: stitch pattern
   pref_label_de: Muster
@@ -1341,7 +1341,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: floret stitch
   pref_label_en_gb: floret stitch
   definition_en_us: stitch pattern in which rows of alternating double crochets and slip stitches alternate with rows of double
@@ -1359,7 +1359,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: sedge stitch
   pref_label_en_gb: sedge stitch
   definition_en_us: stitch pattern in which one single crochet and two double crochets are worked into the same stitch, skipping
@@ -1377,7 +1377,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: blackberry salad stitch
   pref_label_en_gb: blackberry salad stitch
   definition_en_us: stitch pattern in which rows of double crochets alternate with rows of single crochets with a bobble in
@@ -1396,7 +1396,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: arcade stitch
   pref_label_en_gb: arcade stitch
   definition_en_us: stitch pattern of single crochets and three-chain spaces in which a shell of five double crochets is worked
@@ -1414,7 +1414,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: wattle stitch
   pref_label_en_gb: wattle stitch
   definition_en_us: stitch pattern in which one single crochet, one chain and one double crochet are worked into the same
@@ -1433,7 +1433,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: wave and chevron
   pref_label_en_gb: wave and chevron
   definition_en_us: two-colour stitch pattern in which rows of stitches of rising and falling height form waves, and rows
@@ -1452,7 +1452,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: trinity stitch
   pref_label_en_gb: trinity stitch
   definition_en_us: stitch pattern of single crochet three together clusters, each starting in the same stitch as the last
@@ -1470,7 +1470,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: iris stitch
   pref_label_en_gb: iris stitch
   definition_en_us: stitch pattern in which groups of two double crochets, one chain and two double crochets are worked into
@@ -1489,7 +1489,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: happy hearts
   pref_label_en_gb: happy hearts
   definition_en_us: two-colour stitch pattern in which groups of five double crochets and back post double crochets around
@@ -1508,7 +1508,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: zig zag lozenge stitch
   pref_label_en_gb: zig zag lozenge stitch
   definition_en_us: two-colour stitch pattern in which rows of paired half double crochets separated by one chain alternate
@@ -1527,7 +1527,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: crossed double crochet
   pref_label_en_gb: crossed treble crochet
   definition_en_us: stitch pattern in which rows of crossed double crochets alternate with rows of single crochets
@@ -1546,7 +1546,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: nubby crochet stitch
   pref_label_en_gb: nubby crochet stitch
   definition_en_us: stitch pattern in which rows of alternating single crochets and treble crochets, which form nubs, alternate
@@ -1565,7 +1565,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: raised herringbone
   pref_label_en_gb: raised herringbone
   definition_en_us: stitch pattern of half double crochets in which pairs of front post double treble crochets around stitches
@@ -1584,7 +1584,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: slanted spike stitch
   pref_label_en_gb: slanted spike stitch
   definition_en_us: stitch pattern of single crochets in which elongated single crochets are worked into chain spaces three
@@ -1606,7 +1606,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: forked cluster
   pref_label_en_gb: forked cluster
   alt_label_en_us:
@@ -1629,7 +1629,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: slanting cluster
   pref_label_en_gb: slanting cluster
   alt_label_en_us:
@@ -1656,7 +1656,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: front post treble crochet
   pref_label_en_gb: front post double treble crochet
   alt_label_en_us:
@@ -1684,7 +1684,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: cluster V-stitch
   pref_label_en_gb: cluster V-stitch
   definition_en_us: 'V-stitch in which each double crochet is replaced by a double crochet two together: dc2tog, chain 1,
@@ -1702,7 +1702,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: forked cluster stitch
   pref_label_en_gb: forked cluster stitch
   definition_en_us: stitch pattern in which rows of forked clusters alternate with rows of single crochets
@@ -1720,7 +1720,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: thistle stitch
   pref_label_en_gb: thistle stitch
   definition_en_us: stitch pattern in which shells of five double crochets and pairs of double crochets are worked into the
@@ -1739,7 +1739,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: silt stitch
   pref_label_en_gb: silt stitch
   definition_en_us: stitch pattern in which a row of groups of one single crochet and two double crochets lies between rows
@@ -1757,7 +1757,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: modified silt stitch
   pref_label_en_gb: modified silt stitch
   definition_en_us: silt stitch in which the double crochet rows are worked in the back loop only
@@ -1775,7 +1775,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: braided crochet stitch
   pref_label_en_gb: braided crochet stitch
   definition_en_us: stitch pattern in which rows of half double crochets alternate with rows of double crochets worked in
@@ -1796,7 +1796,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: pike stitch
   pref_label_en_gb: pike stitch
   definition_en_us: stitch pattern of alternating extended single crochets and chains in which the extended single crochets
@@ -1815,7 +1815,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: boxed bead stitch
   pref_label_en_gb: boxed bead stitch
   definition_en_us: stitch pattern in which extended single crochets, single crochets, double crochets and slanting clusters
@@ -1834,7 +1834,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: lazy wave stitch
   pref_label_en_gb: lazy wave stitch
   definition_en_us: stitch pattern in which basic stitches are worked in rising and falling height one after the other across
@@ -1853,7 +1853,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: alpine stitch
   pref_label_en_gb: alpine stitch
   definition_en_us: stitch pattern in which rows of alternating double crochets and front post treble crochets around double
@@ -1872,7 +1872,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: mini butterfly stitch
   pref_label_en_gb: mini butterfly stitch
   definition_en_us: stitch pattern in which chain loops are gathered in the middle by a single crochet worked from a later
@@ -1890,7 +1890,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: grit stitch
   pref_label_en_gb: grit stitch
   definition_en_us: stitch pattern in which one single crochet and one double crochet are worked into the same stitch, skipping
@@ -1912,7 +1912,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: crossed cable stitch
   pref_label_en_gb: crossed cable stitch
   definition_en_us: stitch pattern in which a long double crochet is worked into a skipped stitch across the front of three
@@ -1931,7 +1931,7 @@ concepts:
   contact_point: https://github.com/UteBroenner
   created: '2026-11-02'
   status: kandidat
-  tier: 1
+  type: 1
   pref_label_en_us: offset V-stitch
   pref_label_en_gb: offset V-stitch
   definition_en_us: stitch pattern of V-stitches in which each V-stitch is worked into a double crochet of the row below instead

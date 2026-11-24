@@ -54,7 +54,8 @@ PROPERTY_MAP = {
     "euvoc:endDate": "end_date",
     "skosno:dataStructureLabel": "data_structure_label",
     "skosno:valueRange": "value_range",
-    "tier": "tier",
+    "type": "type",
+    "tier": "type",                     # before 24 November 2026 the column was called tier
     "endringshash": "change_hash",      # system column, formula over the row content
 }
 # columns whose property row holds no property (v8/v9): mapped by the technical name in the row below
@@ -161,8 +162,8 @@ class Concept:
         return self.fields.get(name, default)
 
     @property
-    def tier(self) -> str | None:
-        t = self.fields.get("tier")
+    def type(self) -> str | None:
+        t = self.fields.get("type")
         if t is None:
             return None
         t = str(t).strip()

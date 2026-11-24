@@ -16,7 +16,7 @@ from .uri import LOCAL_NAME_RE, expected_name
 from .samling import collections, sentence_problems
 
 STATUS_VALUES = {"kandidat", "gjeldende", "utdatert", "forkastet"}
-TIERS = {"1", "2", "3"}
+TYPES = {"1", "2", "3"}
 SOURCE_RELATIONS = {"self-composed", "derived-from-source", "direct-from-source"}   # skosno:relationshipWithSource
 PREFIX_RE = re.compile(r"(?<![\w-])vok:(?=[A-Za-z0-9])")
 KODE_RE = re.compile(r"(?<![\w-])kode:(?=[A-Za-z0-9])")     # code-list references: kept until code lists are decided
@@ -54,10 +54,10 @@ RULES = {
     "VT-CYCLE-BROADER": ("error", "cycle in skos:broader", "SKOS"),
     "VT-CYCLE-PARTOF": ("error", "cycle in xkos:isPartOf", ""),
     "VT-RELATED-CLASH": ("error", "skos:related to a concept that is also a broader/narrower ancestor", "SKOS S27"),
-    "VT-TIER-INVALID": ("warning", "tier is not 1, 2 or 3", ""),
-    "VT-TIER-EMPTY": ("info", "tier empty (expected only for source concepts)", "O0"),
-    "VT-T1-ISOLATED": ("warning", "Tier 1 concept has no broader, isPartOf or related link (in or out)", ""),
-    "VT-T1-BROADER-NON-T1": ("warning", "Tier 1 concept has a broader concept that is not Tier 1 (affects OWL subClassOf)", "O4"),
+    "VT-TYPE-INVALID": ("warning", "type is not 1, 2 or 3", ""),
+    "VT-TYPE-EMPTY": ("info", "type empty (expected only for source concepts)", "O0"),
+    "VT-TYPE1-ISOLATED": ("warning", "Type 1 concept has no broader, isPartOf or related link (in or out)", ""),
+    "VT-TYPE1-BROADER-NON-TYPE1": ("warning", "Type 1 concept has a broader concept that is not Type 1 (affects OWL subClassOf)", "O4"),
     "VT-LABEL-DUPLICATE": ("warning", "same main-language prefLabel on more than one concept", "V11/V12"),
     "VT-LABEL-HOMONYM": ("warning", "same term (label or abbreviation) used for different concepts", "V11/V12"),
     "VT-LABEL-NOTED": ("info", "label clash documented in a scope note that names the other concept", ""),
@@ -185,10 +185,10 @@ def validate(v: Vocabulary) -> list[Finding]:
             F.append(_f("VT-DEF-DERIVED", c))
         if v.main_lang == "nb" and (not c.get("label_nn") or not c.get("def_nn")):
             F.append(_f("VT-NN-MISSING", c))
-        if not c.tier:
-            F.append(_f("VT-TIER-EMPTY", c))
-        elif c.tier not in TIERS:
-            F.append(_f("VT-TIER-INVALID", c, repr(c.tier)))
+        if not c.type:
+            F.append(_f("VT-TYPE-EMPTY", c))
+        elif c.type not in TYPES:
+            F.append(_f("VT-TYPE-INVALID", c, repr(c.type)))
         raw_st = (c.get("status") or "").strip()
         st = raw_st.lower()
         lit = re.fullmatch(r'"([^"]*)"@\w+', raw_st)
@@ -270,12 +270,12 @@ def validate(v: Vocabulary) -> list[Finding]:
                     linked.add(c.key)
                     linked.add(t)
     for c in concepts:
-        if c.tier == "1":
+        if c.type == "1":
             if c.key not in linked:
-                F.append(_f("VT-T1-ISOLATED", c, c.get(LF) or ""))
+                F.append(_f("VT-TYPE1-ISOLATED", c, c.get(LF) or ""))
             for t in broader[c.key]:
-                if by_key[t].tier != "1":
-                    F.append(_f("VT-T1-BROADER-NON-T1", c, f"{t} (tier {by_key[t].tier})"))
+                if by_key[t].type != "1":
+                    F.append(_f("VT-TYPE1-BROADER-NON-TYPE1", c, f"{t} (type {by_key[t].type})"))
         lab = (c.get(LF) or "").lower()
         n_parts = lab.count(",") + lab.count(" og ") + lab.count(" eller ")
         if n_parts >= 1 and " og " in lab and narrower_count[c.key] >= 2:

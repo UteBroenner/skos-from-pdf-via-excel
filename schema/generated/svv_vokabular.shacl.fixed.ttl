@@ -53,20 +53,20 @@ svv:CrossRowErrors a sh:NodeShape ;
 svv:CrossRowWarnings a sh:NodeShape ;
     sh:severity sh:Warning ;
     sh:sparql [ a sh:SPARQLConstraint ;
-            sh:message "VT-T1-BROADER-NON-T1: Tier 1 concept has a broader concept that is not Tier 1" ;
+            sh:message "VT-TYPE1-BROADER-NON-TYPE1: Type 1 concept has a broader concept that is not Type 1" ;
             sh:prefixes svv:prefixes ;
             sh:select """
             SELECT $this ?value WHERE {
-              $this svv:tier 1 ; skos:broader ?value .
+              $this svv:type 1 ; skos:broader ?value .
               ?value a skos:Concept .
-              FILTER NOT EXISTS { ?value svv:tier 1 }
+              FILTER NOT EXISTS { ?value svv:type 1 }
             }""" ],
         [ a sh:SPARQLConstraint ;
-            sh:message "VT-T1-ISOLATED: Tier 1 concept has no broader, isPartOf or related link (in or out)" ;
+            sh:message "VT-TYPE1-ISOLATED: Type 1 concept has no broader, isPartOf or related link (in or out)" ;
             sh:prefixes svv:prefixes ;
             sh:select """
             SELECT $this WHERE {
-              $this svv:tier 1 .
+              $this svv:type 1 .
               FILTER NOT EXISTS {
                 $this skos:broader|xkos:isPartOf|skos:related|^skos:broader|^xkos:isPartOf|^skos:related ?x .
                 ?x a skos:Concept .
@@ -163,10 +163,6 @@ skos:Collection a sh:NodeShape ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
-        [ sh:name "pref_label_de" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
         [ sh:name "pref_label_en_gb" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
@@ -176,20 +172,24 @@ skos:Collection a sh:NodeShape ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
                     sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:prefLabel ],
         [ sh:name "pref_label_nb" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "pref_label_es" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
         [ sh:name "pref_label_en_us" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:prefLabel ],
+        [ sh:name "pref_label_de" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
+        [ sh:name "pref_label_es" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
         [ sh:class skos:Concept ;
             sh:description "Concepts whose main-language scope note names the collection." ;
             sh:minCount 1 ;
@@ -214,86 +214,86 @@ skos:Concept a sh:NodeShape ;
     rdfs:comment "One row in the vokabular sheet (row 23 onwards)." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:name "pref_label_nb" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "definition_en_us" ;
-            sh:path skos:definition ;
+    sh:property [ sh:name "scope_note_en_us" ;
+            sh:path skos:scopeNote ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:languageIn ( "en-US" "nb" ) ;
-            sh:path skos:scopeNote ],
-        [ sh:name "definition_nn" ;
-            sh:path skos:definition ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
         [ sh:maxCount 1 ;
             sh:path dct:creator ],
-        [ sh:name "alt_label_de" ;
-            sh:path skos:altLabel ],
-        [ sh:name "alt_label_nn" ;
-            sh:path skos:altLabel ],
-        [ sh:name "alt_label_en_us" ;
-            sh:path skos:altLabel ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:altLabel ],
-        [ sh:name "pref_label_es" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
-        [ sh:name "scope_note" ;
-            sh:path skos:scopeNote ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "created_by" ;
-            sh:path dct:creator ],
-        [ sh:name "alt_label_en" ;
-            sh:path skos:altLabel ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
-            sh:path skos:prefLabel ],
-        [ sh:name "pref_label_de" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
-        [ sh:name "pref_label_en" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
-                    sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
-        [ sh:languageIn ( "nb" "en" "nn" "en-US" ) ;
-            sh:path skos:definition ],
-        [ sh:name "alt_label_nb" ;
-            sh:path skos:altLabel ],
-        [ sh:name "scope_note_en_us" ;
-            sh:path skos:scopeNote ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
-        [ sh:name "definition_nb" ;
-            sh:path skos:definition ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
-        [ sh:name "pref_label_nn" ;
-            sh:path skos:prefLabel ;
-            sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
-        [ sh:name "alt_label_en_gb" ;
-            sh:path skos:altLabel ],
-        [ sh:name "alt_label_es" ;
-            sh:path skos:altLabel ],
         [ sh:name "pref_label_en_us" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
+        [ sh:name "pref_label_en_gb" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
+        [ sh:name "alt_label_nb" ;
+            sh:path skos:altLabel ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:altLabel ],
+        [ sh:name "definition_nb" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
+        [ sh:name "alt_label_de" ;
+            sh:path skos:altLabel ],
+        [ sh:name "alt_label_es" ;
+            sh:path skos:altLabel ],
         [ sh:name "definition_en" ;
             sh:path skos:definition ;
             sh:qualifiedMaxCount 1 ;
             sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
                     sh:not [ sh:languageIn ( "en-US" ) ] ] ],
-        [ sh:name "pref_label_en_gb" ;
+        [ sh:name "alt_label_nn" ;
+            sh:path skos:altLabel ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" ) ;
+            sh:path skos:definition ],
+        [ sh:name "alt_label_en_us" ;
+            sh:path skos:altLabel ],
+        [ sh:name "created_by" ;
+            sh:path dct:creator ],
+        [ sh:name "alt_label_en" ;
+            sh:path skos:altLabel ],
+        [ sh:name "pref_label_nn" ;
             sh:path skos:prefLabel ;
             sh:qualifiedMaxCount 1 ;
-            sh:qualifiedValueShape [ sh:languageIn ( "en-GB" ) ] ],
+            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
+        [ sh:name "pref_label_de" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "de" ) ] ],
+        [ sh:name "definition_en_us" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en-US" ) ] ],
+        [ sh:name "alt_label_en_gb" ;
+            sh:path skos:altLabel ],
+        [ sh:name "pref_label_nb" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
+        [ sh:languageIn ( "nb" "en" "nn" "en-US" "en-GB" "de" "es" ) ;
+            sh:path skos:prefLabel ],
+        [ sh:name "definition_nn" ;
+            sh:path skos:definition ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nn" ) ] ],
+        [ sh:name "scope_note" ;
+            sh:path skos:scopeNote ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "nb" ) ] ],
+        [ sh:languageIn ( "en-US" "nb" ) ;
+            sh:path skos:scopeNote ],
+        [ sh:name "pref_label_es" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "es" ) ] ],
+        [ sh:name "pref_label_en" ;
+            sh:path skos:prefLabel ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedValueShape [ sh:languageIn ( "en" ) ;
+                    sh:not [ sh:languageIn ( "en-US" "en-GB" ) ] ] ],
         [ sh:datatype rdf:langString ;
             sh:description "Discouraged term, e.g. a common misspelling."@nb ;
             sh:languageIn ( "nb" ) ;
@@ -327,14 +327,6 @@ skos:Concept a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 36 ;
             sh:path euvoc:endDate ],
-        [ sh:datatype xsd:integer ;
-            sh:description "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only Tier 1 becomes OWL classes." ;
-            sh:maxCount 1 ;
-            sh:maxInclusive 3 ;
-            sh:minInclusive 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 39 ;
-            sh:path svv:tier ],
         [ sh:description "Concept or scheme URI. For concepts: <scheme URI>/<concept name>, where column B of the workbook holds only the CamelCase concept name (e.g. Rekkverk) and the tools build the URI." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -366,6 +358,14 @@ skos:Concept a sh:NodeShape ;
             sh:order 1 ;
             sh:path dct:identifier ;
             sh:pattern "^[A-Za-z0-9][A-Za-z0-9-]*$" ],
+        [ sh:datatype xsd:integer ;
+            sh:description "1 = physical objects, spatial concepts, measurable properties; 2 = processes and states; 3 = normative requirements. Only type 1 becomes OWL classes. Called tier before 24 November 2026." ;
+            sh:maxCount 1 ;
+            sh:maxInclusive 3 ;
+            sh:minInclusive 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 39 ;
+            sh:path svv:type ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;

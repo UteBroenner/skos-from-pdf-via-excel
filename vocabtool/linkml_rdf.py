@@ -40,7 +40,7 @@ FIELD_TO_SLOT = {
     "created": "created", "modified": "modified",
     "version_info": "version_info", "version_notes": "version_notes", "status": "status",
     "start_date": "start_date", "end_date": "end_date", "data_structure_label": "data_structure_label",
-    "value_range": "value_range", "tier": "tier",
+    "value_range": "value_range", "type": "type",
     # language extension (lang-ext template)
     "label_en_us": "pref_label_en_us", "label_en_gb": "pref_label_en_gb", "label_de": "pref_label_de",
     "label_es": "pref_label_es", "alt_en_us": "alt_label_en_us", "alt_en_gb": "alt_label_en_gb",

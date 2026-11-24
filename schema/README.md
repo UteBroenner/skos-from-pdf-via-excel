@@ -45,11 +45,11 @@ Each item below was tested here. None of it is assumed from documentation.
 | SHACL generator: several slots on one property each get `sh:maxCount 1` | a concept with `@nb` and `@nn` labels fails | Replaced by qualified shapes per language (`sh:qualifiedValueShape [sh:languageIn ("nb")]`) |
 | SHACL generator sets `sh:datatype xsd:string` on language slots | every `"…"@nb` value fails | Replaced by `rdf:langString` + `sh:languageIn` |
 | SHACL generator: container slots `concepts`, `collections` | none; the RDF writer emits `skos:inScheme` on concepts and writes collections as resources of their own | `rdf_skip` annotation |
-| Cross-row rules (cycles, S27, Tier 1 isolated) | not expressible in LinkML | Hand-written SHACL-SPARQL in `shapes/cross_row.shacl.ttl` |
+| Cross-row rules (cycles, S27, type 1 isolated) | not expressible in LinkML | Hand-written SHACL-SPARQL in `shapes/cross_row.shacl.ttl` |
 | `sh:languageIn ("en")` also matches `en-US` / `en-GB` (language-range matching) | "max one English label" fails when US and UK labels exist | qualified shape for `en` excludes the more specific tags (`sh:not [sh:languageIn ("en-US" "en-GB")]`) |
 
 Negative test: a hand-made graph with duplicate nb labels, a German definition, a broader cycle,
-a bad ID, a non-vegvesen e-mail, status as text and tier 7 was checked, and every one of these errors was reported.
+a bad ID, a non-vegvesen e-mail, status as text and tier (now type) 7 was checked, and every one of these errors was reported.
 
 ## Main language
 
@@ -70,4 +70,4 @@ concept must have a prefLabel and a definition. LinkML cannot make "required" de
 4. **Column AB `begrepseier`** has no property in row 21, so it is not modelled.
 5. **`skosno` namespace:** the template uses `https://data.norge.no/vocabulary/skosno#`. The LinkML linter
    expects `http://data.norge.no/skosno#`. Check this against the current SKOS-AP-NO before publishing.
-6. **`svv:tier` and `svv:kortnavn`** are project properties in a placeholder namespace (`http://example.org/vegvesen/vokabular/def#`), like the vocabulary URIs themselves.
+6. **`svv:type` (formerly `svv:tier`) and `svv:kortnavn`** are project properties in a placeholder namespace (`http://example.org/vegvesen/vokabular/def#`), like the vocabulary URIs themselves.

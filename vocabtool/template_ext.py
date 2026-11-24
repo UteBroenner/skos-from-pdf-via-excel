@@ -57,13 +57,13 @@ def extend_template(src: str | Path, dst: str | Path, langs: list[str], def_lang
     tech, req, desc = hdr + 1, hdr - 3, hdr - 2
     existing = {normalise_header(c.value) for c in ws[hdr]}
     col = ws.max_column + 1
-    # keep 'tier' (internal, not imported) as the last column, outside the Excel table:
+    # keep 'type' (internal, not imported) as the last column, outside the Excel table:
     # new columns are inserted in front of it
-    tier_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "tier"), None)
+    type_col = next((c.column for c in ws[hdr] if normalise_header(c.value) in TYPE_HEADERS), None)
     hash_col = next((c.column for c in ws[hdr + 1] if c.value == "endringshash"), None)
     n_new = sum(1 for kind_langs in (langs, langs, def_langs, scope_langs) for lang in kind_langs)
-    # new columns go in front of endringshash (the last table column) or, without it, in front of tier
-    at = hash_col or (tier_col if tier_col and tier_col == max(c.column for c in ws[hdr] if c.value not in (None, "")) else None)
+    # new columns go in front of endringshash (the last table column) or, without it, in front of type
+    at = hash_col or (type_col if type_col and type_col == max(c.column for c in ws[hdr] if c.value not in (None, "")) else None)
     if at and n_new:
         widths = {k: ws.column_dimensions[get_column_letter(k)].width for k in range(at, ws.max_column + 1)}
         ws.insert_cols(at, n_new)
@@ -175,7 +175,7 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
     to the last used row (ID in column A) and the last header column.
 
     Power Automate reads only rows and columns inside the table, so rows below the
-    template's 102 prepared rows, and columns added after AN (tier, language extension),
+    template's 102 prepared rows, and columns added after AN (type, language extension),
     must be inside it.
     """
     from copy import copy as _copy
@@ -187,8 +187,8 @@ def fit_table(wb, sheet: str = "vokabular") -> dict:
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
     tech, first = hdr + 1, hdr + 2
     last_col = max(c.column for c in ws[hdr] if c.value not in (None, ""))
-    if normalise_header(ws.cell(hdr, last_col).value) == "tier":
-        last_col -= 1          # tier is internal: not in the table, not imported
+    if normalise_header(ws.cell(hdr, last_col).value) in TYPE_HEADERS:
+        last_col -= 1          # type is internal: not in the table, not imported
     # never shrink: last row with an ID, with prepared formulas (template rows), or the current table end
     formula_rows = [r for r in range(first, ws.max_row + 1)
                     if any(isinstance(c.value, str) and c.value.startswith("=") for c in ws[r])]
@@ -255,7 +255,8 @@ def hide_column(wb, technical_name: str, sheet: str = "vokabular") -> str | None
 
 HASH_COLUMN = "endringshash"
 HASH_WIDTH = 100
-TIER_DESCRIPTION = ("1 = fysiske objekter, romlige begreper og målbare egenskaper; 2 = prosesser og tilstander; "
+TYPE_HEADERS = ("type", "tier")      # the internal column was called tier before 24 November 2026
+TYPE_DESCRIPTION = ("1 = fysiske objekter, romlige begreper og målbare egenskaper; 2 = prosesser og tilstander; "
                     "3 = normative krav. Internt, importeres ikke.")
 GOVERNANCE = {"intern_identifikator", "dato_opprettet", "opprettet_av", "dato_sist_endret", "sist_endret_av", HASH_COLUMN}
 
@@ -279,24 +280,24 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
     - opprettet_av = dct:creator of the scheme (cell B of the row 'dct:creator'), for rows with a concept name
     - endringshash = TEXTJOIN of the row content (all table columns except ID, created/modified
       date and person, and the hash itself); Power Automate compares it with the List to find changed rows.
-    The endringshash column is added before a trailing 'tier' if the template has none.
+    The endringshash column is added before a trailing 'type' if the template has none.
     """
     ws = wb[sheet]
     hdr = next(r for r in range(1, 40) if normalise_header(ws.cell(r, 1).value) == "dct:identifier")
     tech, first = hdr + 1, hdr + 2
     k_row = next(r for r in range(1, hdr) if normalise_header(ws.cell(r, 1).value).startswith("kortnavn"))
-    # make sure the hash column exists, inside the table, before a trailing tier
+    # make sure the hash column exists, inside the table, before a trailing type
     hash_col = next((c.column for c in ws[tech] if c.value == HASH_COLUMN), None)
     if hash_col is None:
         last = max(c.column for c in ws[hdr] if c.value not in (None, ""))
         hash_col = last + 1
-        if normalise_header(ws.cell(hdr, last).value) == "tier":
+        if normalise_header(ws.cell(hdr, last).value) in TYPE_HEADERS:
             width = ws.column_dimensions[get_column_letter(last)].width
             ws.insert_cols(last, 1)
             ws.column_dimensions[get_column_letter(last + 1)].width = width or 10
             hash_col = last
-        model = hash_col + 1 if normalise_header(ws.cell(hdr, hash_col + 1).value) == "tier" else 3
-        for r in (hdr, tech, hdr - 3, hdr - 2):     # systemgenerert: same style as the internal tier column
+        model = hash_col + 1 if normalise_header(ws.cell(hdr, hash_col + 1).value) in TYPE_HEADERS else 3
+        for r in (hdr, tech, hdr - 3, hdr - 2):     # systemgenerert: same style as the internal type column
             ws.cell(r, hash_col)._style = copy.copy(ws.cell(r, model)._style)
         ws.cell(hdr, hash_col).value = HASH_COLUMN
         ws.cell(tech, hash_col).value = HASH_COLUMN
@@ -306,10 +307,11 @@ def apply_formulas(wb, sheet: str = "vokabular") -> dict:
     ws.cell(hdr - 2, hash_col).value = ("formel: radens innhold uten ID, datoer og personer; brukes av Power Automate "
                                         "for å finne endrede begreper – ikke rediger")
     ws.cell(hdr - 2, 1).value = "genereres: <kortnavn>-<begrepsnavn>, f.eks. N101-Rekkverk – ikke rediger"
-    tier_col = next((c.column for c in ws[hdr] if normalise_header(c.value) == "tier"), None)
-    if tier_col:
-        ws.cell(hdr - 2, tier_col).value = TIER_DESCRIPTION
-        dim = ws.column_dimensions[get_column_letter(tier_col)]
+    type_col = next((c.column for c in ws[hdr] if normalise_header(c.value) in TYPE_HEADERS), None)
+    if type_col:
+        ws.cell(hdr, type_col).value = "type"              # former name: tier
+        ws.cell(hdr - 2, type_col).value = TYPE_DESCRIPTION
+        dim = ws.column_dimensions[get_column_letter(type_col)]
         dim.width = max(dim.width or 0, 30)
     t = next(iter(ws.tables.values()))
     end_col = openpyxl.utils.column_index_from_string(re.match(r"[A-Z]+", t.ref.split(":")[1]).group(0))
